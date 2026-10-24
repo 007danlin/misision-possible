@@ -1,20 +1,42 @@
 import base64, hashlib, hmac, json, os, struct, subprocess, time, urllib.request, urllib.error
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+from readiness import wait_for
 os.chdir(Path(__file__).resolve().parents[1])
 base=os.environ.get('SMOKE_BASE_URL','http://localhost')
 compose=['docker','compose','-f','infra/docker-compose.dev.yml']
-def command(*args):
- return subprocess.check_output(compose+list(args),text=True).strip()
-def request(path,data=None,token=None,status=200):
+def command(*args, timeout=15):
+ return subprocess.check_output(compose+list(args),text=True,timeout=timeout,stderr=subprocess.PIPE).strip()
+def request(path,data=None,token=None,status=200,timeout=15):
  headers={'Content-Type':'application/json'}
  if token: headers['Authorization']='Bearer '+token
  req=urllib.request.Request(base+path,data=None if data is None else json.dumps(data).encode(),headers=headers)
  try:
-  with urllib.request.urlopen(req,timeout=15) as resp: actual=resp.status;body=resp.read()
+  with urllib.request.urlopen(req,timeout=timeout) as resp: actual=resp.status;body=resp.read()
  except urllib.error.HTTPError as exc:actual=exc.code;body=exc.read()
  assert actual in (status if isinstance(status,tuple) else (status,)),(path,actual,body.decode())
  return json.loads(body) if body else {}
+# Probe dependencies before any state-changing smoke requests.
+wait_for('PostgreSQL', lambda timeout: command('exec','-T','postgres','pg_isready','-U','app','-d','users',timeout=timeout))
+wait_for('Redis', lambda timeout: command('exec','-T','redis','redis-cli','PING',timeout=timeout) == 'PONG')
+wait_for('Auth via Traefik', lambda timeout: request('/api/auth/users/me',status=401,timeout=timeout))
+wait_for('Core via Traefik', lambda timeout: request('/api/core/handle',{},status=401,timeout=timeout))
+agent_probe = """
+import grpc
+from proto import predict_pb2, predict_pb2_grpc
+with grpc.insecure_channel('agent:50051') as channel:
+    reply = predict_pb2_grpc.PredictorStub(channel).Predict(
+        predict_pb2.PredictRequest(name='readiness', caller='readiness'), timeout=3)
+    assert reply.message == 'hello readiness from agent' and reply.caller == 'readiness'
+"""
+wait_for('Agent gRPC', lambda timeout: command('exec','-T','agent','python','-c',agent_probe,timeout=timeout))
+subscription_probe = """
+import json, urllib.request
+with urllib.request.urlopen('http://nats:8222/subsz?subs=1', timeout=3) as response:
+    subjects = {s['subject'] for s in json.load(response)['subscriptions_list']}
+assert {'auth.user.registered', 'auth.user.email_change_requested'} <= subjects
+"""
+wait_for('Notif subscriptions in NATS', lambda timeout: command('exec','-T','agent','python','-c',subscription_probe,timeout=timeout))
 # Never send test verification codes to external addresses.
 assert command('exec','-T','notif','sh','-c','if [ -n "$SMTP_USER" ]; then echo configured; else echo stub; fi') == 'stub', 'Smoke check requires SMTP stub mode'
 username='smoke_' +str(int(time.time()))
@@ -38,8 +60,10 @@ request('/api/auth/users/me/change-email/confirm',{'code':pending['code']},token
 assert request('/api/auth/users/me',token=token)['email']==newmail
 print('PASS email change')
 # Verify NATS subscriber processed both verification and email-change events.
-logs=command('logs','--no-color','notif')
-assert email in logs and 'auth.user.email_change_requested' in logs and newmail in logs
+def notifications_received(timeout):
+ logs=command('logs','--no-color','notif',timeout=timeout)
+ return email in logs and 'auth.user.email_change_requested' in logs and newmail in logs
+wait_for('notification delivery', notifications_received)
 print('PASS NATS notifications for registration and email change (SMTP stub)')
 request('/api/auth/auth/logout',{},token=token)
 request('/api/core/handle',{'name':'Alice'},token=token,status=401);print('PASS revoked token rejected by Core')
