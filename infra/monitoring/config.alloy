@@ -1,0 +1,47 @@
+// Application metrics, without user IDs or tokens in labels.
+prometheus.scrape "services" {
+  targets = [
+    {"__address__" = "auth:8080", "service_name" = "auth"},
+    {"__address__" = "core:8081", "service_name" = "core"},
+  ]
+  forward_to = [prometheus.remote_write.lgtm.receiver]
+}
+prometheus.remote_write "lgtm" {
+  endpoint {
+    url = "http://lgtm:9090/api/v1/write"
+  }
+}
+discovery.docker "containers" {
+  host = "unix:///var/run/docker.sock"
+}
+discovery.relabel "containers" {
+  targets = discovery.docker.containers.targets
+  rule {
+    source_labels = ["__meta_docker_container_label_com_docker_compose_project"]
+    regex = sys.env("COMPOSE_PROJECT")
+    action = "keep"
+  }
+  rule {
+    source_labels = ["__meta_docker_container_label_com_docker_compose_service"]
+    target_label = "service_name"
+  }
+}
+loki.source.docker "containers" {
+  host = "unix:///var/run/docker.sock"
+  targets = discovery.relabel.containers.output
+  forward_to = [loki.process.recent.receiver]
+}
+loki.write "lgtm" {
+  endpoint {
+    url = "http://lgtm:3100/loki/api/v1/push"
+  }
+}
+
+// Existing containers may retain logs from earlier runs beyond Loki's window.
+loki.process "recent" {
+  stage.drop {
+    older_than = "168h"
+    drop_counter_reason = "too_old"
+  }
+  forward_to = [loki.write.lgtm.receiver]
+}

@@ -1,0 +1,90 @@
+name: Backend CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  GOEXPERIMENT: runtimesecret
+  GOTOOLCHAIN: local
+
+jobs:
+  format:
+    name: Formatting / ${{ matrix.service }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        service: [auth, core, notif, chat]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: backend/${{ matrix.service }}/go.mod
+          cache-dependency-path: backend/${{ matrix.service }}/go.sum
+      - name: Formatting
+        run: sh scripts/check-go.sh format "${{ matrix.service }}"
+
+  vet:
+    name: Static analysis / ${{ matrix.service }}
+    needs: format
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        service: [auth, core, notif, chat]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: backend/${{ matrix.service }}/go.mod
+          cache-dependency-path: backend/${{ matrix.service }}/go.sum
+      - name: Static analysis
+        run: sh scripts/check-go.sh vet "${{ matrix.service }}"
+
+  test:
+    name: Race tests / ${{ matrix.service }}
+    needs: vet
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        service: [auth, core, notif, chat]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: backend/${{ matrix.service }}/go.mod
+          cache-dependency-path: backend/${{ matrix.service }}/go.sum
+      - name: Race tests
+        run: sh scripts/check-go.sh test "${{ matrix.service }}"
+
+  build:
+    name: Build / ${{ matrix.service }}
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        service: [auth, core, notif, chat]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: backend/${{ matrix.service }}/go.mod
+          cache-dependency-path: backend/${{ matrix.service }}/go.sum
+      - name: Build
+        run: sh scripts/check-go.sh build "${{ matrix.service }}"
+

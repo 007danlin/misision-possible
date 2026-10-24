@@ -1,0 +1,56 @@
+name: Agent CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: agent-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Python lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: agent
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version-file: agent/.python-version
+      - name: Install linter
+        run: python -m pip install ruff==0.14.2
+      - name: Lint source and tests
+        run: python -m ruff check main.py tests
+
+  test:
+    name: gRPC tests
+    needs: lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: agent
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version-file: agent/.python-version
+          cache: pip
+          cache-dependency-path: agent/pyproject.toml
+      - name: Install agent dependencies
+        run: python -m pip install .
+      - name: Check dependencies
+        run: python -m pip check
+      - name: Check shared protobuf contract
+        # go_package affects Go code generation, not the wire contract.
+        run: diff -B -I '^option go_package = ' -u ../backend/core/proto/predict.proto proto/predict.proto
+      - name: Test over gRPC
+        run: python -m unittest discover -s tests -v

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package model;
+
+service Predictor {
+  rpc Predict(PredictRequest) returns (PredictReply);
+}
+
+message PredictRequest {
+  string name = 1;
+  string caller = 2;
+}
+
+message PredictReply {
+  string message = 1;
+  string caller = 2;
+}

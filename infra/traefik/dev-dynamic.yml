@@ -1,0 +1,24 @@
+http:
+  routers:
+    auth:
+      entryPoints:
+        - web
+      rule: Host(`localhost`) && PathPrefix(`/api/auth`)
+      service: auth-svc
+
+    core:
+      entryPoints:
+        - web
+      rule: Host(`localhost`) && PathPrefix(`/api/core`)
+      service: core-svc
+
+  services:
+    auth-svc:
+      loadBalancer:
+        servers:
+          - url: http://auth:8080
+
+    core-svc:
+      loadBalancer:
+        servers:
+          - url: http://core:8081
