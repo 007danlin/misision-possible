@@ -235,6 +235,7 @@ function renderSuggestions() {
   if (hotelMode) {
     if(working || pending) return;
     const spec=state.trip_spec||{},t=spec.travellers||{};
+    const budgetTarget=spec.include_transport&&spec.budget_scope!=='hotel'?'на всю поездку':'на отель';
     let prompts=[];
     if(state.selected_hotel && state.status==='hotel_checkout') {
       $('suggestions').append(button('Даты и гости',()=>editHotelStay(),'suggestion'),button('Другой отель',()=>act('clear_hotel_selection'),'suggestion'));return;
@@ -245,9 +246,10 @@ function renderSuggestions() {
     else if(!t.adults)prompts=[['Один взрослый','1 взрослый'],['Двое взрослых','2 взрослых'],['С детьми','2 взрослых и ']];
     else if(t.children?.some(a=>a==null))prompts=[['Возраст '+t.children.length+' детей','Возраст детей: '],['Изменить число детей','Поедет ']];
     else if(!spec.dates&&!spec.stay_nights)prompts=[['3 ночи','На 3 ночи'],['5 ночей','На 5 ночей'],['Неделя','На 7 ночей']];
-    else if(!spec.budget)prompts=[['До 30 000 ₽','Бюджет 30 тысяч рублей на отель за весь отдых'],['До 50 000 ₽','Бюджет 50 тысяч рублей на отель за весь отдых'],['Другая сумма','Бюджет на отель — ']];
+    else if(!spec.budget)prompts=[['До 30 000 ₽','Бюджет 30 тысяч рублей '+budgetTarget+' за весь отдых'],['До 50 000 ₽','Бюджет 50 тысяч рублей '+budgetTarget+' за весь отдых'],['Другая сумма','Бюджет '+budgetTarget+' — ']];
+    else if(state.status==='needs_input'&&spec.budget_scope==='whole_trip'&&!spec.expense_reserve)prompts=[['Без отдельного резерва','Резерв на личные расходы 0 рублей'],['Оставить 10 000 ₽','Резерв на личные расходы 10 тысяч рублей'],['Другая сумма','Резерв на личные расходы — ']];
     else if(state.status==='no_solution'){
-      prompts=[['Изменить бюджет','Мой бюджет на отель теперь '],['Другие даты','Хочу изменить даты на ']];
+      prompts=[['Изменить бюджет','Мой бюджет '+budgetTarget+' теперь '],['Другие даты','Хочу изменить даты на ']];
       if(spec.hotel_preferences?.pool)prompts.push(['Без бассейна','Бассейн больше не обязателен']);
       else if(spec.hotel_preferences?.max_center_m)prompts.push(['Можно дальше','Теперь можно далеко от центра']);
     } else if(state.hotel_options?.length)prompts=[['Подешевле','Найди подешевле, остальные условия сохрани'],['Почему эти?','Объясни, почему выбрал эти отели'],['Другие даты','Хочу изменить даты на ']];

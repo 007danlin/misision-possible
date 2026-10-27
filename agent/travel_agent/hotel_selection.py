@@ -37,7 +37,7 @@ def select_hotels(candidates, spec, cheaper=False, include_conflicts=False):
     prefs = spec.hotel_preferences
     for original in candidates:
         hotel = dict(original)
-        reasons, failures = [], []
+        reasons, failures, budget_failures = [], [], []
         codes = hotel.get('amenity_codes', [])
         if spec.travel_setting in {'forest', 'nature', 'mountains'}:
             # Public catalogue does not prove wild forest on the property. Restrict
@@ -75,8 +75,12 @@ def select_hotels(candidates, spec, cheaper=False, include_conflicts=False):
                 hotel['journey'] = trip
                 value = trip['total_minor']
                 if not include_conflicts:
-                    failures.extend(c['message'] for c in trip['checks'] if c['blocking'] and c['status'] == 'fail')
-        if not failures and value is not None: base_prices.append(value)
+                    for c in trip['checks']:
+                        if not c['blocking'] or c['status']!='fail':continue
+                        if c['code'] in {'budget','hotel_budget'}:budget_failures.append('общий бюджет' if c['code']=='budget' else 'бюджет на отель')
+                        else:failures.append(c['message'])
+        if not failures and 'бюджет на отель' not in budget_failures and value is not None: base_prices.append(value)
+        failures.extend(budget_failures)
         if spec.budget and not journey.enabled(spec):
             if value is None: failures.append('не хватает данных для цены')
             elif value > spec.budget.amount_minor:
@@ -134,10 +138,13 @@ def response_text(hotels, info, spec, patch, cheaper=False):
     intro=('Учёл '+', '.join(changed)+'. ') if changed else ('Сравнил варианты по цене. ' if cheaper else 'Проверил ваши условия. ')
     if not hotels:
         text=intro+f'Среди {info["considered"]} отелей сейчас нет варианта, который проходит все условия. '
-        if info['min_budget_minor'] and spec.budget and info['min_budget_minor']>spec.budget.amount_minor:
+        ceiling=(spec.trip_budget or spec.budget) if info.get('journey_mode') else spec.budget
+        reserve=spec.expense_reserve.amount_minor if info.get('journey_mode') and spec.expense_reserve else 0
+        if info['min_budget_minor'] and ceiling and info['min_budget_minor']+reserve>ceiling.amount_minor:
             text+='Самый доступный вариант с остальными пожеланиями — '+rub(info['min_budget_minor'])+(' за всю поездку' if info.get('journey_mode') else ' за ночь' if spec.budget_period=='night' else ' за проживание')+'. '
+            if reserve:text+='С учётом личных расходов потребуется '+rub(info['min_budget_minor']+reserve)+'. '
         elif info['rejected']:text+='Не подошли по условиям: '+', '.join(list(info['rejected'])[:4])+'. '
-        return text+'Что готовы изменить? Самостоятельно условия не ослабляю.'
+        return text+'Можно изменить бюджет, даты или пожелания — остальные условия сохранятся.'
     first=hotels[0]
     text=intro+f'Сравнил {info["considered"]} отелей, вашим условиям соответствуют {info["matched"]}. '
     text+=('Сначала более доступные. ' if cheaper else 'Показываю лучшие по соответствию и оценкам гостей. ')
