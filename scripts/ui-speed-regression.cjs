@@ -1,0 +1,25 @@
+// Real browser/Core/Qwen/public catalogue. Assertions are about meaning, never speed alone.
+const fs=require('fs'),path=require('path'),assert=require('assert/strict');
+const root=path.resolve(__dirname,'..'),{chromium}=require(path.join(root,'.runtime/browser/node_modules/playwright-core'));
+(async()=>{
+ const browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+ const page=await browser.newPage({viewport:{width:1440,height:1000}});page.setDefaultTimeout(120000);
+ const report={turns:[],errors:[],failedRequests:[]};page.on('pageerror',e=>report.errors.push(e.message));page.on('requestfailed',r=>report.failedRequests.push({url:r.url(),error:r.failure()?.errorText}));
+ const save=()=>fs.writeFileSync(path.join(root,'.runtime/latency-final-browser.json'),JSON.stringify(report,null,2));
+ async function turn(name,message){
+  await page.locator('#message').fill(message);const reply=page.waitForResponse(r=>r.url().endsWith('/turns')&&r.request().method()==='POST');const t=Date.now();await page.locator('#send').click();const response=await reply,s=await response.json();await page.waitForFunction(()=>!document.querySelector('#send').disabled);
+  report.turns.push({name,message,seconds:(Date.now()-t)/1000,http:response.status(),status:s.status,spec:s.trip_spec,answer:s.assistant_message,hotels:s.hotel_options?.map(h=>({id:h.id,total:h.quote?.total_minor})),session:s.session_id});console.log(JSON.stringify(report.turns.at(-1)));save();assert.equal(response.status(),200);assert.notEqual(s.status,'error',s.assistant_message);return s;
+ }
+ async function fresh(){await page.locator('#new').click();await page.locator('.inspiration').waitFor();}
+ try{
+  await page.goto('http://127.0.0.1:18080/plan.html');await page.locator('.inspiration').waitFor();
+  let s=await turn('complex_family','Едем в Казань на пять ночей: нас трое взрослых и пятеро детей. Дети любят воду, поэтому бассейн обязателен, ещё нужна парковка. На проживание всей компанией — максимум 180 тысяч рублей. Хотелось бы тихий номер, подальше от лифта.');
+  assert.equal(s.trip_spec.travellers.adults,3);assert.deepEqual(s.trip_spec.travellers.children,[null,null,null,null,null]);assert.equal(s.trip_spec.stay_nights,5);assert.equal(s.trip_spec.budget.amount_minor,18000000);assert.ok(s.trip_spec.hotel_preferences.pool&&s.trip_spec.hotel_preferences.parking);assert.match(s.trip_spec.preferences.join(' '),/лифт/);assert.match(s.trip_spec.preferences.join(' '),/тих|тишин/);
+  s=await turn('ages','Им 3, 5, 7, 10 и 12 лет.');assert.deepEqual(s.trip_spec.travellers.children,[3,5,7,10,12]);assert.ok(s.hotel_options.length);await page.locator('.hotel-card').first().waitFor();const wishes=[...s.trip_spec.preferences];
+  s=await turn('compound_edit','Бассейн больше не обязателен, зато завтрак обязателен. Бюджет снизим до 120 тысяч рублей на всё проживание. Остальные пожелания сохрани.');assert.equal(s.trip_spec.hotel_preferences.pool,null);assert.ok(s.trip_spec.hotel_preferences.breakfast&&s.trip_spec.hotel_preferences.parking);assert.equal(s.trip_spec.budget.amount_minor,12000000);assert.deepEqual(s.trip_spec.preferences,wishes);assert.deepEqual(s.trip_spec.travellers.children,[3,5,7,10,12]);assert.equal(s.trip_spec.travellers.adults,3);assert.ok(s.hotel_options.length);const ids=s.hotel_options.map(h=>h.id);
+  s=await turn('explain','Почему ты выбрал второй отель?');assert.deepEqual(s.hotel_options.map(h=>h.id),ids);assert.deepEqual(s.trip_spec.preferences,wishes);
+  await fresh();s=await turn('exact_dates','В Казани нас будет трое взрослых, нужен завтрак и парковка. С 12 по 16 ноября 2026, бюджет 45 тысяч рублей за всё проживание.');assert.equal(s.trip_spec.dates.start,'2026-11-12');assert.equal(s.trip_spec.dates.end,'2026-11-16');assert.equal(s.trip_spec.travellers.adults,3);assert.ok(s.trip_spec.hotel_preferences.breakfast&&s.trip_spec.hotel_preferences.parking);assert.equal(s.trip_spec.budget.amount_minor,4500000);assert.ok(s.hotel_options.length);
+  await fresh();s=await turn('forest','Уедем вдвоём подальше от города, хочется леса и уединения. На семь ночей, максимум 60 тысяч за жильё, с собакой.');assert.equal(s.trip_spec.travel_setting,'forest');assert.equal(s.trip_spec.travellers.adults,2);assert.equal(s.trip_spec.stay_nights,7);assert.equal(s.trip_spec.budget.amount_minor,6000000);assert.ok(s.trip_spec.hard_constraints.pets);assert.equal(s.destination_options.length,3);assert.ok(s.trip_spec.preferences.includes('подальше от города'));assert.match(s.trip_spec.preferences.join(' '),/уединени/);
+  assert.deepEqual(report.errors,[]);report.passed=true;console.log('PASS: all wishes retained, full public selection');
+ }catch(e){report.failure=String(e);report.ui=await page.evaluate(()=>({working,pending,error:document.querySelector('#error')?.innerText})).catch(()=>null);await page.screenshot({path:path.join(root,'.runtime/speed-regression-failure.png'),fullPage:true}).catch(()=>{});process.exitCode=1;console.error(e);}finally{save();await browser.close();}
+})().catch(e=>{console.error(e);process.exit(1)});
