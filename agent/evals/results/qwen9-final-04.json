@@ -1,0 +1,177 @@
+{
+  "generated_at": "2026-10-24T16:09:52.686547+00:00",
+  "warmup_ms": null,
+  "results": [
+    {
+      "case_id": "04_dates",
+      "input_message": "Мы с девушкой хотим куда-нибудь на 4 дня в ноябре. До 40 тысяч рублей на двоих, красивые места и недолгая дорога.",
+      "expected_outcome": {
+        "status": "needs_input",
+        "fields": {
+          "dates": null,
+          "travellers.adults": 2,
+          "duration_days": 4
+        }
+      },
+      "observed_outcome": {
+        "schema_version": "0.2",
+        "based_on_revision": 0,
+        "status": "needs_input",
+        "trip_spec": {
+          "origin": null,
+          "destination": null,
+          "country": null,
+          "dates": null,
+          "duration_days": 4,
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 4000000,
+            "currency": "RUB"
+          },
+          "budget_scope": null,
+          "expense_reserve": null,
+          "hard_constraints": {
+            "no_night_flights": false,
+            "free_cancellation": false,
+            "pets": false,
+            "other": []
+          },
+          "preferences": [
+            "красиво",
+            "недолгая дорога"
+          ],
+          "locked_component_ids": []
+        },
+        "patch": {
+          "duration_days": 4,
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 4000000,
+            "currency": "RUB"
+          },
+          "preferences": [
+            "красиво",
+            "недолгая дорога"
+          ]
+        },
+        "assistant_message": "Можно начать с направлений из каталога. Цены поездки потребуют уточнения условий.",
+        "questions": [
+          "Из какого города отправляетесь?",
+          "Какие точные даты поездки?",
+          "Бюджет на всю поездку, только бронируемые услуги или только отель?"
+        ],
+        "destination_options": [
+          {
+            "id": "sochi",
+            "name": "Сочи",
+            "reason": "Море и прогулки",
+            "availability": "synthetic_fixture_only",
+            "evidence": [
+              {
+                "id": "demo:destination:sochi",
+                "subject": "destination:sochi",
+                "source_kind": "synthetic",
+                "source_url": null,
+                "checked_at": "2026-10-24T16:09:52.686052+00:00",
+                "scope": "Учебный набор, не рыночная цена или реальная доступность"
+              }
+            ]
+          },
+          {
+            "id": "kazan",
+            "name": "Казань",
+            "reason": "Город, архитектура и прогулки",
+            "availability": "synthetic_fixture_only",
+            "evidence": [
+              {
+                "id": "demo:destination:kazan",
+                "subject": "destination:kazan",
+                "source_kind": "synthetic",
+                "source_url": null,
+                "checked_at": "2026-10-24T16:09:52.686109+00:00",
+                "scope": "Учебный набор, не рыночная цена или реальная доступность"
+              }
+            ]
+          },
+          {
+            "id": "vladimir",
+            "name": "Владимир",
+            "reason": "Исторический город; природа требует отдельного маршрута",
+            "availability": "synthetic_fixture_only",
+            "evidence": [
+              {
+                "id": "demo:destination:vladimir",
+                "subject": "destination:vladimir",
+                "source_kind": "synthetic",
+                "source_url": null,
+                "checked_at": "2026-10-24T16:09:52.686125+00:00",
+                "scope": "Учебный набор, не рыночная цена или реальная доступность"
+              }
+            ]
+          }
+        ],
+        "options": [],
+        "change_preview": null,
+        "checkout_allowed": false,
+        "booking": null,
+        "error_code": null,
+        "data_mode": "synthetic",
+        "telemetry": {
+          "model": "qwen3.5-9b",
+          "provider": "llama_cpp",
+          "prompt_version": "odin-request-4.2",
+          "model_calls": 2,
+          "tool_calls": [
+            "get_destination_options"
+          ],
+          "first_useful_ms": 27803,
+          "total_ms": 27803,
+          "usage": {
+            "completion_tokens": 324,
+            "prompt_tokens": 2697,
+            "total_tokens": 3021
+          },
+          "cost": null
+        }
+      },
+      "pass": true,
+      "constraint_errors": [],
+      "model": "qwen3.5-9b",
+      "provider": "llama_cpp",
+      "prompt_version": "odin-request-4.2",
+      "model_calls": 2,
+      "tool_calls": [
+        "get_destination_options"
+      ],
+      "first_useful_ms": 27803,
+      "total_ms": 27803,
+      "usage": {
+        "completion_tokens": 324,
+        "prompt_tokens": 2697,
+        "total_tokens": 3021
+      },
+      "cost": null,
+      "evaluation_mode": "live_qwen_synthetic_tools",
+      "prompt_sha256": "23662b59449e8d25dda33b9a79fb5ae3208001ec5dcb81c0e013c3d44b5100d1",
+      "configuration": {
+        "provider": "llama_cpp",
+        "model": "qwen3.5-9b",
+        "timeout_seconds": 45.0,
+        "temperature": 0,
+        "code_sha256": {
+          "domain.py": "4712ad37783639f40801e2639f1bcb38c38c673d7c8499c61ca275eabdb085b5",
+          "demo_tools.py": "e5bb9773fac1dc61dbefcf8c8592d97b9344f5763e25c5effa079f0cacb0e456",
+          "model.py": "65cdcb6361bd7a3a28be16d66ea5fcb427c00316dad866541f1ad108b7193de8",
+          "runner.py": "b65d3499a14319413eb80b14fed7c0a238d42d8336cedbc331e067819962c2cf",
+          "tools.py": "1b57034eb9db2444347d7a849f7ae96fc9e2a77d3f44c2b9a768a389a9613986"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,1167 @@
+{
+  "$defs": {
+    "ChangePreview": {
+      "additionalProperties": false,
+      "properties": {
+        "baseline_plan_id": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Baseline Plan Id",
+          "type": "string"
+        },
+        "proposed_plan": {
+          "$ref": "#/$defs/Plan"
+        },
+        "changed": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Changed",
+          "type": "array"
+        },
+        "preserved": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Preserved",
+          "type": "array"
+        },
+        "price_delta": {
+          "title": "Price Delta",
+          "type": "integer"
+        },
+        "tradeoffs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Tradeoffs",
+          "type": "array"
+        },
+        "based_on_revision": {
+          "title": "Based On Revision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "baseline_plan_id",
+        "proposed_plan",
+        "changed",
+        "preserved",
+        "price_delta",
+        "tradeoffs",
+        "based_on_revision"
+      ],
+      "title": "ChangePreview",
+      "type": "object"
+    },
+    "Check": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Code",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "pass",
+            "fail",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "message": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "status",
+        "message"
+      ],
+      "title": "Check",
+      "type": "object"
+    },
+    "Constraints": {
+      "additionalProperties": false,
+      "properties": {
+        "no_connections": {
+          "default": false,
+          "title": "No Connections",
+          "type": "boolean"
+        },
+        "no_night_travel": {
+          "default": false,
+          "title": "No Night Travel",
+          "type": "boolean"
+        },
+        "no_night_flights": {
+          "default": false,
+          "title": "No Night Flights",
+          "type": "boolean"
+        },
+        "free_cancellation": {
+          "default": false,
+          "title": "Free Cancellation",
+          "type": "boolean"
+        },
+        "pets": {
+          "default": false,
+          "title": "Pets",
+          "type": "boolean"
+        },
+        "other": {
+          "items": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Other",
+          "type": "array"
+        }
+      },
+      "title": "Constraints",
+      "type": "object"
+    },
+    "Dates": {
+      "additionalProperties": false,
+      "properties": {
+        "start": {
+          "format": "date",
+          "title": "Start",
+          "type": "string"
+        },
+        "end": {
+          "format": "date",
+          "title": "End",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "title": "Dates",
+      "type": "object"
+    },
+    "DemoBooking": {
+      "additionalProperties": false,
+      "properties": {
+        "demo_booking_id": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Demo Booking Id",
+          "type": "string"
+        },
+        "plan_id": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Plan Id",
+          "type": "string"
+        },
+        "total": {
+          "$ref": "#/$defs/Money"
+        },
+        "is_demo": {
+          "const": true,
+          "default": true,
+          "title": "Is Demo",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "demo_booking_id",
+        "plan_id",
+        "total"
+      ],
+      "title": "DemoBooking",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "subject": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Subject",
+          "type": "string"
+        },
+        "source_kind": {
+          "enum": [
+            "verified_public",
+            "synthetic",
+            "live",
+            "unknown"
+          ],
+          "title": "Source Kind",
+          "type": "string"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Url"
+        },
+        "checked_at": {
+          "title": "Checked At",
+          "type": "string"
+        },
+        "scope": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "subject",
+        "source_kind",
+        "checked_at",
+        "scope"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "HotelPreferences": {
+      "additionalProperties": false,
+      "properties": {
+        "pool": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pool"
+        },
+        "parking": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parking"
+        },
+        "spa": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Spa"
+        },
+        "fitness": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fitness"
+        },
+        "breakfast": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Breakfast"
+        },
+        "max_center_m": {
+          "anyOf": [
+            {
+              "maximum": 100000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Center M"
+        },
+        "max_beach_m": {
+          "anyOf": [
+            {
+              "maximum": 100000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Beach M"
+        },
+        "min_rating": {
+          "anyOf": [
+            {
+              "maximum": 10,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min Rating"
+        },
+        "min_stars": {
+          "anyOf": [
+            {
+              "maximum": 5,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min Stars"
+        }
+      },
+      "title": "HotelPreferences",
+      "type": "object"
+    },
+    "Money": {
+      "additionalProperties": false,
+      "properties": {
+        "amount_minor": {
+          "maximum": 1000000000000,
+          "minimum": 0,
+          "title": "Amount Minor",
+          "type": "integer"
+        },
+        "currency": {
+          "const": "RUB",
+          "default": "RUB",
+          "title": "Currency",
+          "type": "string"
+        }
+      },
+      "required": [
+        "amount_minor"
+      ],
+      "title": "Money",
+      "type": "object"
+    },
+    "OwnedTransport": {
+      "additionalProperties": false,
+      "properties": {
+        "arrival": {
+          "format": "date-time",
+          "title": "Arrival",
+          "type": "string"
+        },
+        "departure": {
+          "format": "date-time",
+          "title": "Departure",
+          "type": "string"
+        },
+        "terminal": {
+          "default": "station",
+          "enum": [
+            "airport",
+            "station"
+          ],
+          "title": "Terminal",
+          "type": "string"
+        },
+        "paid_total_minor": {
+          "anyOf": [
+            {
+              "maximum": 1000000000000,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Paid Total Minor"
+        }
+      },
+      "required": [
+        "arrival",
+        "departure"
+      ],
+      "title": "OwnedTransport",
+      "type": "object"
+    },
+    "Plan": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "dates": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Dates"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "component_ids": {
+          "items": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Component Ids",
+          "type": "array"
+        },
+        "breakdown": {
+          "additionalProperties": {
+            "$ref": "#/$defs/Money"
+          },
+          "title": "Breakdown",
+          "type": "object"
+        },
+        "total": {
+          "$ref": "#/$defs/Money"
+        },
+        "checks": {
+          "items": {
+            "$ref": "#/$defs/Check"
+          },
+          "title": "Checks",
+          "type": "array"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/Evidence"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "tradeoffs": {
+          "items": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Tradeoffs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "component_ids",
+        "breakdown",
+        "total",
+        "checks",
+        "evidence"
+      ],
+      "title": "Plan",
+      "type": "object"
+    },
+    "Telemetry": {
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "title": "Model",
+          "type": "string"
+        },
+        "provider": {
+          "title": "Provider",
+          "type": "string"
+        },
+        "prompt_version": {
+          "title": "Prompt Version",
+          "type": "string"
+        },
+        "model_calls": {
+          "default": 0,
+          "title": "Model Calls",
+          "type": "integer"
+        },
+        "tool_calls": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Tool Calls",
+          "type": "array"
+        },
+        "first_useful_ms": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "First Useful Ms"
+        },
+        "total_ms": {
+          "default": 0,
+          "title": "Total Ms",
+          "type": "integer"
+        },
+        "usage": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Usage",
+          "type": "object"
+        },
+        "cost": {
+          "default": null,
+          "title": "Cost",
+          "type": "null"
+        }
+      },
+      "required": [
+        "model",
+        "provider",
+        "prompt_version"
+      ],
+      "title": "Telemetry",
+      "type": "object"
+    },
+    "Travellers": {
+      "additionalProperties": false,
+      "properties": {
+        "adults": {
+          "anyOf": [
+            {
+              "maximum": 20,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Adults"
+        },
+        "children": {
+          "items": {
+            "anyOf": [
+              {
+                "maximum": 17,
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "maxItems": 10,
+          "title": "Children",
+          "type": "array"
+        }
+      },
+      "title": "Travellers",
+      "type": "object"
+    },
+    "TripSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "transfer_provider": {
+          "default": "estimate",
+          "enum": [
+            "estimate",
+            "hotel"
+          ],
+          "title": "Transfer Provider",
+          "type": "string"
+        },
+        "transport_mode": {
+          "default": "auto",
+          "enum": [
+            "auto",
+            "flight",
+            "train",
+            "car"
+          ],
+          "title": "Transport Mode",
+          "type": "string"
+        },
+        "transport_owned": {
+          "default": false,
+          "title": "Transport Owned",
+          "type": "boolean"
+        },
+        "owned_transport": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/OwnedTransport"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "excluded_hotel_ids": {
+          "items": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Excluded Hotel Ids",
+          "type": "array"
+        },
+        "keep_hotel": {
+          "default": false,
+          "title": "Keep Hotel",
+          "type": "boolean"
+        },
+        "locked_hotel_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Locked Hotel Id"
+        },
+        "include_transport": {
+          "default": false,
+          "title": "Include Transport",
+          "type": "boolean"
+        },
+        "trip_budget": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Money"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "hotel_budget": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Money"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "travel_setting": {
+          "default": "any",
+          "enum": [
+            "forest",
+            "nature",
+            "mountains",
+            "sea",
+            "city",
+            "any"
+          ],
+          "title": "Travel Setting",
+          "type": "string"
+        },
+        "hotel_preferences": {
+          "$ref": "#/$defs/HotelPreferences"
+        },
+        "stay_nights": {
+          "anyOf": [
+            {
+              "maximum": 60,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Stay Nights"
+        },
+        "budget_period": {
+          "default": "stay",
+          "enum": [
+            "stay",
+            "night"
+          ],
+          "title": "Budget Period",
+          "type": "string"
+        },
+        "origin": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Origin"
+        },
+        "destination": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Destination"
+        },
+        "country": {
+          "anyOf": [
+            {
+              "maxLength": 500,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Country"
+        },
+        "dates": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Dates"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "duration_days": {
+          "anyOf": [
+            {
+              "maximum": 365,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duration Days"
+        },
+        "travellers": {
+          "$ref": "#/$defs/Travellers"
+        },
+        "budget": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Money"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "budget_scope": {
+          "anyOf": [
+            {
+              "enum": [
+                "booking",
+                "whole_trip",
+                "hotel"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Budget Scope"
+        },
+        "expense_reserve": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Money"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "hard_constraints": {
+          "$ref": "#/$defs/Constraints"
+        },
+        "preferences": {
+          "items": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 30,
+          "title": "Preferences",
+          "type": "array"
+        },
+        "locked_component_ids": {
+          "items": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Locked Component Ids",
+          "type": "array"
+        }
+      },
+      "title": "TripSpec",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "share": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Share"
+    },
+    "transfer_addon_preview": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transfer Addon Preview"
+    },
+    "journey_recovery": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Journey Recovery"
+    },
+    "journey_preview": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Journey Preview"
+    },
+    "messages": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "maxItems": 100,
+      "title": "Messages",
+      "type": "array"
+    },
+    "search_title": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Search Title"
+    },
+    "selected_hotel": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Selected Hotel"
+    },
+    "hotel_booking": {
+      "anyOf": [
+        {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hotel Booking"
+    },
+    "selection": {
+      "additionalProperties": true,
+      "title": "Selection",
+      "type": "object"
+    },
+    "search_mode": {
+      "default": "trip",
+      "enum": [
+        "trip",
+        "hotels"
+      ],
+      "title": "Search Mode",
+      "type": "string"
+    },
+    "hotel_options": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Hotel Options",
+      "type": "array"
+    },
+    "search_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Search Url"
+    },
+    "schema_version": {
+      "const": "0.2",
+      "default": "0.2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "session_id": {
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Session Id",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 0,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "request_id": {
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Request Id",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "needs_input",
+        "choosing",
+        "ready",
+        "no_solution",
+        "error",
+        "booked_demo",
+        "hotel_checkout",
+        "hotel_booked"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "trip_spec": {
+      "$ref": "#/$defs/TripSpec"
+    },
+    "assistant_message": {
+      "title": "Assistant Message",
+      "type": "string"
+    },
+    "questions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Questions",
+      "type": "array"
+    },
+    "destination_options": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Destination Options",
+      "type": "array"
+    },
+    "options": {
+      "items": {
+        "$ref": "#/$defs/Plan"
+      },
+      "title": "Options",
+      "type": "array"
+    },
+    "selected_plan": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Plan"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "change_preview": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ChangePreview"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "checkout_allowed": {
+      "default": false,
+      "title": "Checkout Allowed",
+      "type": "boolean"
+    },
+    "booking": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/DemoBooking"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "data_mode": {
+      "title": "Data Mode",
+      "type": "string"
+    },
+    "history": {
+      "items": {
+        "maxLength": 500,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 10,
+      "title": "History",
+      "type": "array"
+    },
+    "telemetry": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Telemetry"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "error_code": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Error Code"
+    }
+  },
+  "required": [
+    "session_id",
+    "revision",
+    "request_id",
+    "status",
+    "trip_spec",
+    "assistant_message",
+    "data_mode"
+  ],
+  "title": "Snapshot",
+  "type": "object"
+}

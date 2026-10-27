@@ -39,6 +39,16 @@ class PredictorStub(object):
                 request_serializer=proto_dot_predict__pb2.PredictRequest.SerializeToString,
                 response_deserializer=proto_dot_predict__pb2.PredictReply.FromString,
                 _registered_method=True)
+        self.RunTurn = channel.unary_unary(
+                '/model.Predictor/RunTurn',
+                request_serializer=proto_dot_predict__pb2.TurnRequest.SerializeToString,
+                response_deserializer=proto_dot_predict__pb2.TurnReply.FromString,
+                _registered_method=True)
+        self.Evaluate = channel.unary_unary(
+                '/model.Predictor/Evaluate',
+                request_serializer=proto_dot_predict__pb2.EvaluateRequest.SerializeToString,
+                response_deserializer=proto_dot_predict__pb2.TurnReply.FromString,
+                _registered_method=True)
 
 
 class PredictorServicer(object):
@@ -50,6 +60,20 @@ class PredictorServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def RunTurn(self, request, context):
+        """Stateless proposal only. Core owns sessions, revisions and booking actions.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Evaluate(self, request, context):
+        """Deterministic catalogue search/validation for explicit backend actions.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_PredictorServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -57,6 +81,16 @@ def add_PredictorServicer_to_server(servicer, server):
                     servicer.Predict,
                     request_deserializer=proto_dot_predict__pb2.PredictRequest.FromString,
                     response_serializer=proto_dot_predict__pb2.PredictReply.SerializeToString,
+            ),
+            'RunTurn': grpc.unary_unary_rpc_method_handler(
+                    servicer.RunTurn,
+                    request_deserializer=proto_dot_predict__pb2.TurnRequest.FromString,
+                    response_serializer=proto_dot_predict__pb2.TurnReply.SerializeToString,
+            ),
+            'Evaluate': grpc.unary_unary_rpc_method_handler(
+                    servicer.Evaluate,
+                    request_deserializer=proto_dot_predict__pb2.EvaluateRequest.FromString,
+                    response_serializer=proto_dot_predict__pb2.TurnReply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -86,6 +120,60 @@ class Predictor(object):
             '/model.Predictor/Predict',
             proto_dot_predict__pb2.PredictRequest.SerializeToString,
             proto_dot_predict__pb2.PredictReply.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def RunTurn(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/model.Predictor/RunTurn',
+            proto_dot_predict__pb2.TurnRequest.SerializeToString,
+            proto_dot_predict__pb2.TurnReply.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def Evaluate(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/model.Predictor/Evaluate',
+            proto_dot_predict__pb2.EvaluateRequest.SerializeToString,
+            proto_dot_predict__pb2.TurnReply.FromString,
             options,
             channel_credentials,
             insecure,

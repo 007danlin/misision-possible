@@ -1,0 +1,2187 @@
+{
+  "generated_at": "2026-10-27T09:13:55.258721+00:00",
+  "suite": "holdout-20261027",
+  "warmup_ms": null,
+  "results": [
+    {
+      "case_id": "h01_yaroslavl_four_nights",
+      "input_message": "Два взрослых, из Москвы в Ярославль. Заезд 3 ноября 2026, выезд 7 ноября 2026. Лимит 50 тысяч рублей на дорогу, гостиницу, трансферы и сборы.",
+      "expected_outcome": {
+        "status": "choosing",
+        "fields": {
+          "destination": "Ярославль",
+          "dates.start": "2026-11-03",
+          "dates.end": "2026-11-07",
+          "budget.amount_minor": 5000000,
+          "budget_scope": "booking",
+          "travellers.adults": 2
+        }
+      },
+      "observed_outcome": {
+        "schema_version": "0.2",
+        "based_on_revision": 0,
+        "status": "choosing",
+        "trip_spec": {
+          "origin": "Москва",
+          "destination": "Ярославль",
+          "country": null,
+          "dates": {
+            "start": "2026-11-03",
+            "end": "2026-11-07"
+          },
+          "duration_days": null,
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 5000000,
+            "currency": "RUB"
+          },
+          "budget_scope": "booking",
+          "expense_reserve": null,
+          "hard_constraints": {
+            "no_night_flights": false,
+            "free_cancellation": false,
+            "pets": false,
+            "other": []
+          },
+          "preferences": [],
+          "locked_component_ids": []
+        },
+        "patch": {
+          "origin": "Москва",
+          "destination": "Ярославль",
+          "dates": {
+            "start": "2026-11-03",
+            "end": "2026-11-07"
+          },
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 5000000,
+            "currency": "RUB"
+          },
+          "budget_scope": "booking"
+        },
+        "assistant_message": "Найдены варианты, соответствующие указанным условиям. Сравните состав цены, условия отмены и происхождение данных.",
+        "questions": [],
+        "destination_options": [],
+        "options": [
+          {
+            "id": "yaroslavl:2026-11-03:2026-11-07:A",
+            "dates": {
+              "start": "2026-11-03",
+              "end": "2026-11-07"
+            },
+            "component_ids": [
+              "yaroslavl:2026-11-03:2026-11-07:transport:A",
+              "yaroslavl:2026-11-03:2026-11-07:hotel:A",
+              "yaroslavl:2026-11-03:2026-11-07:transfers:shared",
+              "yaroslavl:2026-11-03:2026-11-07:fees:A"
+            ],
+            "breakdown": {
+              "transport": {
+                "amount_minor": 700000,
+                "currency": "RUB"
+              },
+              "hotel": {
+                "amount_minor": 1280000,
+                "currency": "RUB"
+              },
+              "transfers": {
+                "amount_minor": 200000,
+                "currency": "RUB"
+              },
+              "fees": {
+                "amount_minor": 100000,
+                "currency": "RUB"
+              }
+            },
+            "total": {
+              "amount_minor": 2280000,
+              "currency": "RUB"
+            },
+            "checks": [
+              {
+                "code": "catalogue",
+                "status": "pass",
+                "message": "Состав, цена и условия заново получены из учебного каталога по ID."
+              },
+              {
+                "code": "budget",
+                "status": "pass",
+                "message": "Услуги поездки: 22 800 ₽ при допустимом лимите 50 000 ₽."
+              },
+              {
+                "code": "dates",
+                "status": "pass",
+                "message": "Даты сверены с учебным каталогом: ноябрь–декабрь 2026, от 1 до 14 ночей; выезд не позднее 31 декабря."
+              },
+              {
+                "code": "duration",
+                "status": "pass",
+                "message": "Длительность в календарных днях должна совпадать с точными датами; ночи считаются отдельно."
+              },
+              {
+                "code": "travellers",
+                "status": "pass",
+                "message": "Тариф только для двух взрослых."
+              },
+              {
+                "code": "transport",
+                "status": "pass",
+                "message": "Учебный путь туда-обратно, оба трансфера и сборы включены."
+              },
+              {
+                "code": "locks",
+                "status": "pass",
+                "message": "Закреплённые компоненты должны сохраниться."
+              },
+              {
+                "code": "no_night_flights",
+                "status": "pass",
+                "message": "Учебные рейсы: туда 10:00–12:00, обратно 15:00–17:00, UTC+03:00; ночных интервалов нет."
+              },
+              {
+                "code": "free_cancellation",
+                "status": "pass",
+                "message": "Тариф B невозвратный; A и C — учебная бесплатная отмена."
+              }
+            ],
+            "evidence": [
+              {
+                "id": "demo:yaroslavl:2026-11-03:2026-11-07:A:price_and_terms",
+                "subject": "yaroslavl:2026-11-03:2026-11-07:A:price_and_terms",
+                "source_kind": "synthetic",
+                "source_url": null,
+                "checked_at": "2026-10-27T09:12:04.618128+00:00",
+                "scope": "synthetic-russia-v2: учебный набор, не рыночная цена или реальная доступность"
+              }
+            ],
+            "tradeoffs": [
+              "Все цены, расписание и свойства — учебные."
+            ]
+          },
+          {
+            "id": "yaroslavl:2026-11-03:2026-11-07:B",
+            "dates": {
+              "start": "2026-11-03",
+              "end": "2026-11-07"
+            },
+            "component_ids": [
+              "yaroslavl:2026-11-03:2026-11-07:transport:B",
+              "yaroslavl:2026-11-03:2026-11-07:hotel:B",
+              "yaroslavl:2026-11-03:2026-11-07:transfers:shared",
+              "yaroslavl:2026-11-03:2026-11-07:fees:B"
+            ],
+            "breakdown": {
+              "transport": {
+                "amount_minor": 600000,
+                "currency": "RUB"
+              },
+              "hotel": {
+                "amount_minor": 1040000,
+                "currency": "RUB"
+              },
+              "transfers": {
+                "amount_minor": 200000,
+                "currency": "RUB"
+              },
+              "fees": {
+                "amount_minor": 100000,
+                "currency": "RUB"
+              }
+            },
+            "total": {
+              "amount_minor": 1940000,
+              "currency": "RUB"
+            },
+            "checks": [
+              {
+                "code": "catalogue",
+                "status": "pass",
+                "message": "Состав, цена и условия заново получены из учебного каталога по ID."
+              },
+              {
+                "code": "budget",
+                "status": "pass",
+                "message": "Услуги поездки: 19 400 ₽ при допустимом лимите 50 000 ₽."
+              },
+              {
+                "code": "dates",
+                "status": "pass",
+                "message": "Даты сверены с учебным каталогом: ноябрь–декабрь 2026, от 1 до 14 ночей; выезд не позднее 31 декабря."
+              },
+              {
+                "code": "duration",
+                "status": "pass",
+                "message": "Длительность в календарных днях должна совпадать с точными датами; ночи считаются отдельно."
+              },
+              {
+                "code": "travellers",
+                "status": "pass",
+                "message": "Тариф только для двух взрослых."
+              },
+              {
+                "code": "transport",
+                "status": "pass",
+                "message": "Учебный путь туда-обратно, оба трансфера и сборы включены."
+              },
+              {
+                "code": "locks",
+                "status": "pass",
+                "message": "Закреплённые компоненты должны сохраниться."
+              },
+              {
+                "code": "no_night_flights",
+                "status": "pass",
+                "message": "Учебные рейсы: туда 10:00–12:00, обратно 15:00–17:00, UTC+03:00; ночных интервалов нет."
+              },
+              {
+                "code": "free_cancellation",
+                "status": "pass",
+                "message": "Тариф B невозвратный; A и C — учебная бесплатная отмена."
+              }
+            ],
+            "evidence": [
+              {
+                "id": "demo:yaroslavl:2026-11-03:2026-11-07:B:price_and_terms",
+                "subject": "yaroslavl:2026-11-03:2026-11-07:B:price_and_terms",
+                "source_kind": "synthetic",
+                "source_url": null,
+                "checked_at": "2026-10-27T09:12:04.618405+00:00",
+                "scope": "synthetic-russia-v2: учебный набор, не рыночная цена или реальная доступность"
+              }
+            ],
+            "tradeoffs": [
+              "Все цены, расписание и свойства — учебные.",
+              "Невозвратный тариф: бесплатная отмена отсутствует."
+            ]
+          },
+          {
+            "id": "yaroslavl:2026-11-03:2026-11-07:C",
+            "dates": {
+              "start": "2026-11-03",
+              "end": "2026-11-07"
+            },
+            "component_ids": [
+              "yaroslavl:2026-11-03:2026-11-07:transport:C",
+              "yaroslavl:2026-11-03:2026-11-07:hotel:C",
+              "yaroslavl:2026-11-03:2026-11-07:transfers:shared",
+              "yaroslavl:2026-11-03:2026-11-07:fees:C"
+            ],
+            "breakdown": {
+              "transport": {
+                "amount_minor": 800000,
+                "currency": "RUB"
+              },
+              "hotel": {
+                "amount_minor": 1520000,
+                "currency": "RUB"
+              },
+              "transfers": {
+                "amount_minor": 200000,
+                "currency": "RUB"
+              },
+              "fees": {
+                "amount_minor": 100000,
+                "currency": "RUB"
+              }
+            },
+            "total": {
+              "amount_minor": 2620000,
+              "currency": "RUB"
+            },
+            "checks": [
+              {
+                "code": "catalogue",
+                "status": "pass",
+                "message": "Состав, цена и условия заново получены из учебного каталога по ID."
+              },
+              {
+                "code": "budget",
+                "status": "pass",
+                "message": "Услуги поездки: 26 200 ₽ при допустимом лимите 50 000 ₽."
+              },
+              {
+                "code": "dates",
+                "status": "pass",
+                "message": "Даты сверены с учебным каталогом: ноябрь–декабрь 2026, от 1 до 14 ночей; выезд не позднее 31 декабря."
+              },
+              {
+                "code": "duration",
+                "status": "pass",
+                "message": "Длительность в календарных днях должна совпадать с точными датами; ночи считаются отдельно."
+              },
+              {
+                "code": "travellers",
+                "status": "pass",
+                "message": "Тариф только для двух взрослых."
+              },
+              {
+                "code": "transport",
+                "status": "pass",
+                "message": "Учебный путь туда-обратно, оба трансфера и сборы включены."
+              },
+              {
+                "code": "locks",
+                "status": "pass",
+                "message": "Закреплённые компоненты должны сохраниться."
+              },
+              {
+                "code": "no_night_flights",
+                "status": "pass",
+                "message": "Учебные рейсы: туда 10:00–12:00, обратно 15:00–17:00, UTC+03:00; ночных интервалов нет."
+              },
+              {
+                "code": "free_cancellation",
+                "status": "pass",
+                "message": "Тариф B невозвратный; A и C — учебная бесплатная отмена."
+              }
+            ],
+            "evidence": [
+              {
+                "id": "demo:yaroslavl:2026-11-03:2026-11-07:C:price_and_terms",
+                "subject": "yaroslavl:2026-11-03:2026-11-07:C:price_and_terms",
+                "source_kind": "synthetic",
+                "source_url": null,
+                "checked_at": "2026-10-27T09:12:04.618559+00:00",
+                "scope": "synthetic-russia-v2: учебный набор, не рыночная цена или реальная доступность"
+              }
+            ],
+            "tradeoffs": [
+              "Все цены, расписание и свойства — учебные."
+            ]
+          }
+        ],
+        "change_preview": null,
+        "checkout_allowed": false,
+        "booking": null,
+        "error_code": null,
+        "data_mode": "synthetic",
+        "telemetry": {
+          "model": "qwen3.5-4b",
+          "provider": "llama_cpp",
+          "prompt_version": "odin-request-4.2",
+          "model_calls": 2,
+          "tool_calls": [
+            "search_packages"
+          ],
+          "first_useful_ms": 45086,
+          "total_ms": 45086,
+          "usage": {
+            "completion_tokens": 279,
+            "prompt_tokens": 2726,
+            "total_tokens": 3005
+          },
+          "cost": null
+        }
+      },
+      "pass": true,
+      "constraint_errors": [],
+      "model": "qwen3.5-4b",
+      "provider": "llama_cpp",
+      "prompt_version": "odin-request-4.2",
+      "model_calls": 2,
+      "tool_calls": [
+        "search_packages"
+      ],
+      "first_useful_ms": 45086,
+      "total_ms": 45086,
+      "usage": {
+        "completion_tokens": 279,
+        "prompt_tokens": 2726,
+        "total_tokens": 3005
+      },
+      "cost": null,
+      "evaluation_mode": "live_qwen_synthetic_tools",
+      "prompt_sha256": "23662b59449e8d25dda33b9a79fb5ae3208001ec5dcb81c0e013c3d44b5100d1",
+      "configuration": {
+        "provider": "llama_cpp",
+        "model": "qwen3.5-4b",
+        "timeout_seconds": 90.0,
+        "temperature": 0,
+        "code_sha256": {
+          "domain.py": "ec2115c59d6746e3149f6debe668efdbd56c09a5e720c0419acd60f244ed0811",
+          "demo_tools.py": "5ee1960291ee2955f92d6de4da38c418f7fbb0b176a5088bfb0b9ee72c9bdcee",
+          "model.py": "a886121af2b841e774aa7c2407396b5027e976716ffbf7a0879dc51a7442cc09",
+          "runner.py": "f7f42003435ac4d4af0bf88e5ac79e53850b920ba974f2414a7d94527e4350ff",
+          "tools.py": "1b57034eb9db2444347d7a849f7ae96fc9e2a77d3f44c2b9a768a389a9613986"
+        }
+      }
+    },
+    {
+      "case_id": "h02_december",
+      "input_message": "Мы вдвоём отправимся из Москвы в Казань с 8 по 11 декабря 2026. На билеты туда и обратно, отель, трансферы и сборы выделяем 45 тысяч рублей.",
+      "expected_outcome": {
+        "status": "choosing",
+        "fields": {
+          "origin": "Москва",
+          "destination": "Казань",
+          "dates.start": "2026-12-08",
+          "dates.end": "2026-12-11",
+          "budget.amount_minor": 4500000,
+          "travellers.adults": 2
+        }
+      },
+      "observed_outcome": {
+        "schema_version": "0.2",
+        "based_on_revision": 0,
+        "status": "needs_input",
+        "trip_spec": {
+          "origin": "Москва",
+          "destination": "Казань",
+          "country": null,
+          "dates": {
+            "start": "2026-12-08",
+            "end": "2026-12-11"
+          },
+          "duration_days": null,
+          "travellers": {
+            "adults": null,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 4500000,
+            "currency": "RUB"
+          },
+          "budget_scope": "booking",
+          "expense_reserve": null,
+          "hard_constraints": {
+            "no_night_flights": false,
+            "free_cancellation": false,
+            "pets": false,
+            "other": []
+          },
+          "preferences": [],
+          "locked_component_ids": []
+        },
+        "patch": {
+          "origin": "Москва",
+          "destination": "Казань",
+          "dates": {
+            "start": "2026-12-08",
+            "end": "2026-12-11"
+          },
+          "budget": {
+            "amount_minor": 4500000,
+            "currency": "RUB"
+          },
+          "budget_scope": "booking"
+        },
+        "assistant_message": "Уточним условия для расчёта поездки.",
+        "questions": [
+          "Сколько взрослых поедет?"
+        ],
+        "destination_options": [],
+        "options": [],
+        "change_preview": null,
+        "checkout_allowed": false,
+        "booking": null,
+        "error_code": null,
+        "data_mode": "synthetic",
+        "telemetry": {
+          "model": "qwen3.5-4b",
+          "provider": "llama_cpp",
+          "prompt_version": "odin-request-4.2",
+          "model_calls": 1,
+          "tool_calls": [],
+          "first_useful_ms": 15382,
+          "total_ms": 15382,
+          "usage": {
+            "completion_tokens": 124,
+            "prompt_tokens": 1222,
+            "total_tokens": 1346
+          },
+          "cost": null
+        }
+      },
+      "pass": false,
+      "constraint_errors": [
+        "travellers.adults: expected 2, got None",
+        "status: expected choosing, got needs_input"
+      ],
+      "model": "qwen3.5-4b",
+      "provider": "llama_cpp",
+      "prompt_version": "odin-request-4.2",
+      "model_calls": 1,
+      "tool_calls": [],
+      "first_useful_ms": 15382,
+      "total_ms": 15382,
+      "usage": {
+        "completion_tokens": 124,
+        "prompt_tokens": 1222,
+        "total_tokens": 1346
+      },
+      "cost": null,
+      "evaluation_mode": "live_qwen_synthetic_tools",
+      "prompt_sha256": "23662b59449e8d25dda33b9a79fb5ae3208001ec5dcb81c0e013c3d44b5100d1",
+      "configuration": {
+        "provider": "llama_cpp",
+        "model": "qwen3.5-4b",
+        "timeout_seconds": 90.0,
+        "temperature": 0,
+        "code_sha256": {
+          "domain.py": "ec2115c59d6746e3149f6debe668efdbd56c09a5e720c0419acd60f244ed0811",
+          "demo_tools.py": "5ee1960291ee2955f92d6de4da38c418f7fbb0b176a5088bfb0b9ee72c9bdcee",
+          "model.py": "a886121af2b841e774aa7c2407396b5027e976716ffbf7a0879dc51a7442cc09",
+          "runner.py": "f7f42003435ac4d4af0bf88e5ac79e53850b920ba974f2414a7d94527e4350ff",
+          "tools.py": "1b57034eb9db2444347d7a849f7ae96fc9e2a77d3f44c2b9a768a389a9613986"
+        }
+      }
+    },
+    {
+      "case_id": "h03_no_scope",
+      "input_message": "Из Москвы во Владимир с 20 по 23 ноября 2026, два взрослых, 35 тысяч рублей.",
+      "expected_outcome": {
+        "status": "needs_input",
+        "fields": {
+          "destination": "Владимир",
+          "budget_scope": null,
+          "dates.start": "2026-11-20",
+          "dates.end": "2026-11-23"
+        }
+      },
+      "observed_outcome": {
+        "schema_version": "0.2",
+        "based_on_revision": 0,
+        "status": "needs_input",
+        "trip_spec": {
+          "origin": "Москва",
+          "destination": "Владимир",
+          "country": null,
+          "dates": {
+            "start": "2026-11-20",
+            "end": "2026-11-23"
+          },
+          "duration_days": null,
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 3500000,
+            "currency": "RUB"
+          },
+          "budget_scope": null,
+          "expense_reserve": null,
+          "hard_constraints": {
+            "no_night_flights": false,
+            "free_cancellation": false,
+            "pets": false,
+            "other": []
+          },
+          "preferences": [],
+          "locked_component_ids": []
+        },
+        "patch": {
+          "origin": "Москва",
+          "destination": "Владимир",
+          "dates": {
+            "start": "2026-11-20",
+            "end": "2026-11-23"
+          },
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 3500000,
+            "currency": "RUB"
+          }
+        },
+        "assistant_message": "Уточним условия для расчёта поездки.",
+        "questions": [
+          "Бюджет на всю поездку, только бронируемые услуги или только отель?"
+        ],
+        "destination_options": [],
+        "options": [],
+        "change_preview": null,
+        "checkout_allowed": false,
+        "booking": null,
+        "error_code": null,
+        "data_mode": "synthetic",
+        "telemetry": {
+          "model": "qwen3.5-4b",
+          "provider": "llama_cpp",
+          "prompt_version": "odin-request-4.2",
+          "model_calls": 1,
+          "tool_calls": [],
+          "first_useful_ms": 15516,
+          "total_ms": 15516,
+          "usage": {
+            "completion_tokens": 116,
+            "prompt_tokens": 1201,
+            "total_tokens": 1317
+          },
+          "cost": null
+        }
+      },
+      "pass": true,
+      "constraint_errors": [],
+      "model": "qwen3.5-4b",
+      "provider": "llama_cpp",
+      "prompt_version": "odin-request-4.2",
+      "model_calls": 1,
+      "tool_calls": [],
+      "first_useful_ms": 15516,
+      "total_ms": 15516,
+      "usage": {
+        "completion_tokens": 116,
+        "prompt_tokens": 1201,
+        "total_tokens": 1317
+      },
+      "cost": null,
+      "evaluation_mode": "live_qwen_synthetic_tools",
+      "prompt_sha256": "23662b59449e8d25dda33b9a79fb5ae3208001ec5dcb81c0e013c3d44b5100d1",
+      "configuration": {
+        "provider": "llama_cpp",
+        "model": "qwen3.5-4b",
+        "timeout_seconds": 90.0,
+        "temperature": 0,
+        "code_sha256": {
+          "domain.py": "ec2115c59d6746e3149f6debe668efdbd56c09a5e720c0419acd60f244ed0811",
+          "demo_tools.py": "5ee1960291ee2955f92d6de4da38c418f7fbb0b176a5088bfb0b9ee72c9bdcee",
+          "model.py": "a886121af2b841e774aa7c2407396b5027e976716ffbf7a0879dc51a7442cc09",
+          "runner.py": "f7f42003435ac4d4af0bf88e5ac79e53850b920ba974f2414a7d94527e4350ff",
+          "tools.py": "1b57034eb9db2444347d7a849f7ae96fc9e2a77d3f44c2b9a768a389a9613986"
+        }
+      }
+    },
+    {
+      "case_id": "h04_whole_reserve",
+      "input_message": "На весь отдых теперь 130 тысяч рублей. Из них 20 тысяч рублей оставим на питание и прочие расходы вне бронирования.",
+      "expected_outcome": {
+        "status": "choosing",
+        "fields": {
+          "budget.amount_minor": 13000000,
+          "budget_scope": "whole_trip",
+          "expense_reserve.amount_minor": 2000000,
+          "destination": "Сочи"
+        }
+      },
+      "observed_outcome": {
+        "schema_version": "0.2",
+        "based_on_revision": 3,
+        "status": "choosing",
+        "trip_spec": {
+          "origin": "Москва",
+          "destination": "Сочи",
+          "country": null,
+          "dates": {
+            "start": "2026-11-10",
+            "end": "2026-11-15"
+          },
+          "duration_days": null,
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 13000000,
+            "currency": "RUB"
+          },
+          "budget_scope": "whole_trip",
+          "expense_reserve": {
+            "amount_minor": 2000000,
+            "currency": "RUB"
+          },
+          "hard_constraints": {
+            "no_night_flights": true,
+            "free_cancellation": false,
+            "pets": false,
+            "other": []
+          },
+          "preferences": [],
+          "locked_component_ids": []
+        },
+        "patch": {
+          "budget": {
+            "amount_minor": 13000000,
+            "currency": "RUB"
+          },
+          "budget_scope": "whole_trip",
+          "expense_reserve": {
+            "amount_minor": 2000000,
+            "currency": "RUB"
+          }
+        },
+        "assistant_message": "Подготовлено изменение поездки. Предыдущий выбор сохранён. Проверьте и примите изменения перед учебным оформлением.",
+        "questions": [],
+        "destination_options": [],
+        "options": [
+          {
+            "id": "sochi:2026-11-10:A",
+            "dates": {
+              "start": "2026-11-10",
+              "end": "2026-11-15"
+            },
+            "component_ids": [
+              "sochi:2026-11-10:transport:A",
+              "sochi:2026-11-10:hotel:A",
+              "sochi:2026-11-10:transfers:shared",
+              "sochi:2026-11-10:fees:A"
+            ],
+            "breakdown": {
+              "transport": {
+                "amount_minor": 5200000,
+                "currency": "RUB"
+              },
+              "hotel": {
+                "amount_minor": 5000000,
+                "currency": "RUB"
+              },
+              "transfers": {
+                "amount_minor": 500000,
+                "currency": "RUB"
+              },
+              "fees": {
+                "amount_minor": 200000,
+                "currency": "RUB"
+              }
+            },
+            "total": {
+              "amount_minor": 10900000,
+              "currency": "RUB"
+            },
+            "checks": [
+              {
+                "code": "catalogue",
+                "status": "pass",
+                "message": "Состав, цена и условия заново получены из учебного каталога по ID."
+              },
+              {
+                "code": "budget",
+                "status": "pass",
+                "message": "Услуги поездки: 109 000 ₽ при допустимом лимите 110 000 ₽."
+              },
+              {
+                "code": "dates",
+                "status": "pass",
+                "message": "Даты сверены с учебным каталогом: ноябрь–декабрь 2026, от 1 до 14 ночей; выезд не позднее 31 декабря."
+              },
+              {
+                "code": "duration",
+                "status": "pass",
+                "message": "Длительность в календарных днях должна совпадать с точными датами; ночи считаются отдельно."
+              },
+              {
+                "code": "travellers",
+                "status": "pass",
+                "message": "Тариф только для двух взрослых."
+              },
+              {
+                "code": "transport",
+                "status": "pass",
+                "message": "Учебный путь туда-обратно, оба трансфера и сборы включены."
+              },
+              {
+                "code": "locks",
+                "status": "pass",
+                "message": "Закреплённые компоненты должны сохраниться."
+              },
+              {
+                "code": "no_night_flights",
+                "status": "pass",
+                "message": "Учебные рейсы: туда 10:00–12:00, обратно 15:00–17:00, UTC+03:00; ночных интервалов нет."
+              },
+              {
+                "code": "free_cancellation",
+                "status": "pass",
+                "message": "Тариф B невозвратный; A и C — учебная бесплатная отмена."
+              }
+            ],
+            "evidence": [
+              {
+                "id": "demo:sochi:2026-11-10:A:price_and_terms",
+                "subject": "sochi:2026-11-10:A:price_and_terms",
+                "source_kind": "synthetic",
+                "source_url": null,
+                "checked_at": "2026-10-27T09:12:45.652998+00:00",
+                "scope": "synthetic-russia-v2: учебный набор, не рыночная цена или реальная доступность"
+              }
+            ],
+            "tradeoffs": [
+              "Все цены, расписание и свойства — учебные."
+            ]
+          }
+        ],
+        "change_preview": {
+          "baseline_plan_id": "sochi:2026-11-10:A",
+          "proposed_plan": {
+            "id": "sochi:2026-11-10:A",
+            "dates": {
+              "start": "2026-11-10",
+              "end": "2026-11-15"
+            },
+            "component_ids": [
+              "sochi:2026-11-10:transport:A",
+              "sochi:2026-11-10:hotel:A",
+              "sochi:2026-11-10:transfers:shared",
+              "sochi:2026-11-10:fees:A"
+            ],
+            "breakdown": {
+              "transport": {
+                "amount_minor": 5200000,
+                "currency": "RUB"
+              },
+              "hotel": {
+                "amount_minor": 5000000,
+                "currency": "RUB"
+              },
+              "transfers": {
+                "amount_minor": 500000,
+                "currency": "RUB"
+              },
+              "fees": {
+                "amount_minor": 200000,
+                "currency": "RUB"
+              }
+            },
+            "total": {
+              "amount_minor": 10900000,
+              "currency": "RUB"
+            },
+            "checks": [
+              {
+                "code": "catalogue",
+                "status": "pass",
+                "message": "Состав, цена и условия заново получены из учебного каталога по ID."
+              },
+              {
+                "code": "budget",
+                "status": "pass",
+                "message": "Услуги поездки: 109 000 ₽ при допустимом лимите 110 000 ₽."
+              },
+              {
+                "code": "dates",
+                "status": "pass",
+                "message": "Даты сверены с учебным каталогом: ноябрь–декабрь 2026, от 1 до 14 ночей; выезд не позднее 31 декабря."
+              },
+              {
+                "code": "duration",
+                "status": "pass",
+                "message": "Длительность в календарных днях должна совпадать с точными датами; ночи считаются отдельно."
+              },
+              {
+                "code": "travellers",
+                "status": "pass",
+                "message": "Тариф только для двух взрослых."
+              },
+              {
+                "code": "transport",
+                "status": "pass",
+                "message": "Учебный путь туда-обратно, оба трансфера и сборы включены."
+              },
+              {
+                "code": "locks",
+                "status": "pass",
+                "message": "Закреплённые компоненты должны сохраниться."
+              },
+              {
+                "code": "no_night_flights",
+                "status": "pass",
+                "message": "Учебные рейсы: туда 10:00–12:00, обратно 15:00–17:00, UTC+03:00; ночных интервалов нет."
+              },
+              {
+                "code": "free_cancellation",
+                "status": "pass",
+                "message": "Тариф B невозвратный; A и C — учебная бесплатная отмена."
+              }
+            ],
+            "evidence": [
+              {
+                "id": "demo:sochi:2026-11-10:A:price_and_terms",
+                "subject": "sochi:2026-11-10:A:price_and_terms",
+                "source_kind": "synthetic",
+                "source_url": null,
+                "checked_at": "2026-10-27T09:12:45.652998+00:00",
+                "scope": "synthetic-russia-v2: учебный набор, не рыночная цена или реальная доступность"
+              }
+            ],
+            "tradeoffs": [
+              "Все цены, расписание и свойства — учебные."
+            ]
+          },
+          "changed": [],
+          "preserved": [
+            "sochi:2026-11-10:fees:A",
+            "sochi:2026-11-10:hotel:A",
+            "sochi:2026-11-10:transfers:shared",
+            "sochi:2026-11-10:transport:A",
+            "origin",
+            "destination",
+            "country",
+            "dates",
+            "duration_days",
+            "travellers",
+            "hard_constraints",
+            "preferences",
+            "locked_component_ids"
+          ],
+          "price_delta": 0,
+          "tradeoffs": [
+            "Все цены, расписание и свойства — учебные."
+          ],
+          "based_on_revision": 3
+        },
+        "checkout_allowed": false,
+        "booking": null,
+        "error_code": null,
+        "data_mode": "synthetic",
+        "telemetry": {
+          "model": "qwen3.5-4b",
+          "provider": "llama_cpp",
+          "prompt_version": "odin-request-4.2",
+          "model_calls": 1,
+          "tool_calls": [
+            "propose_change",
+            "validate_plan"
+          ],
+          "first_useful_ms": 10119,
+          "total_ms": 10119,
+          "usage": {
+            "completion_tokens": 76,
+            "prompt_tokens": 1268,
+            "total_tokens": 1344
+          },
+          "cost": null
+        }
+      },
+      "pass": true,
+      "constraint_errors": [],
+      "model": "qwen3.5-4b",
+      "provider": "llama_cpp",
+      "prompt_version": "odin-request-4.2",
+      "model_calls": 1,
+      "tool_calls": [
+        "propose_change",
+        "validate_plan"
+      ],
+      "first_useful_ms": 10119,
+      "total_ms": 10119,
+      "usage": {
+        "completion_tokens": 76,
+        "prompt_tokens": 1268,
+        "total_tokens": 1344
+      },
+      "cost": null,
+      "evaluation_mode": "live_qwen_synthetic_tools",
+      "prompt_sha256": "23662b59449e8d25dda33b9a79fb5ae3208001ec5dcb81c0e013c3d44b5100d1",
+      "configuration": {
+        "provider": "llama_cpp",
+        "model": "qwen3.5-4b",
+        "timeout_seconds": 90.0,
+        "temperature": 0,
+        "code_sha256": {
+          "domain.py": "ec2115c59d6746e3149f6debe668efdbd56c09a5e720c0419acd60f244ed0811",
+          "demo_tools.py": "5ee1960291ee2955f92d6de4da38c418f7fbb0b176a5088bfb0b9ee72c9bdcee",
+          "model.py": "a886121af2b841e774aa7c2407396b5027e976716ffbf7a0879dc51a7442cc09",
+          "runner.py": "f7f42003435ac4d4af0bf88e5ac79e53850b920ba974f2414a7d94527e4350ff",
+          "tools.py": "1b57034eb9db2444347d7a849f7ae96fc9e2a77d3f44c2b9a768a389a9613986"
+        }
+      }
+    },
+    {
+      "case_id": "h05_one_day_later",
+      "input_message": "Перенеси выезд и возвращение на один день позже, всё остальное сохрани.",
+      "expected_outcome": {
+        "status": "choosing",
+        "fields": {
+          "dates.start": "2026-11-11",
+          "dates.end": "2026-11-16",
+          "destination": "Сочи",
+          "travellers.adults": 2
+        }
+      },
+      "observed_outcome": {
+        "schema_version": "0.2",
+        "based_on_revision": 3,
+        "status": "choosing",
+        "trip_spec": {
+          "origin": "Москва",
+          "destination": "Сочи",
+          "country": null,
+          "dates": {
+            "start": "2026-11-11",
+            "end": "2026-11-16"
+          },
+          "duration_days": null,
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 12000000,
+            "currency": "RUB"
+          },
+          "budget_scope": "booking",
+          "expense_reserve": null,
+          "hard_constraints": {
+            "no_night_flights": true,
+            "free_cancellation": false,
+            "pets": false,
+            "other": []
+          },
+          "preferences": [],
+          "locked_component_ids": []
+        },
+        "patch": {
+          "dates": {
+            "start": "2026-11-11",
+            "end": "2026-11-16"
+          }
+        },
+        "assistant_message": "Подготовлено изменение поездки. Предыдущий выбор сохранён. Проверьте и примите изменения перед учебным оформлением.",
+        "questions": [],
+        "destination_options": [],
+        "options": [
+          {
+            "id": "sochi:2026-11-11:A",
+            "dates": {
+              "start": "2026-11-11",
+              "end": "2026-11-16"
+            },
+            "component_ids": [
+              "sochi:2026-11-11:transport:A",
+              "sochi:2026-11-11:hotel:A",
+              "sochi:2026-11-11:transfers:shared",
+              "sochi:2026-11-11:fees:A"
+            ],
+            "breakdown": {
+              "transport": {
+                "amount_minor": 5300000,
+                "currency": "RUB"
+              },
+              "hotel": {
+                "amount_minor": 5000000,
+                "currency": "RUB"
+              },
+              "transfers": {
+                "amount_minor": 500000,
+                "currency": "RUB"
+              },
+              "fees": {
+                "amount_minor": 200000,
+                "currency": "RUB"
+              }
+            },
+            "total": {
+              "amount_minor": 11000000,
+              "currency": "RUB"
+            },
+            "checks": [
+              {
+                "code": "catalogue",
+                "status": "pass",
+                "message": "Состав, цена и условия заново получены из учебного каталога по ID."
+              },
+              {
+                "code": "budget",
+                "status": "pass",
+                "message": "Услуги поездки: 110 000 ₽ при допустимом лимите 120 000 ₽."
+              },
+              {
+                "code": "dates",
+                "status": "pass",
+                "message": "Даты сверены с учебным каталогом: ноябрь–декабрь 2026, от 1 до 14 ночей; выезд не позднее 31 декабря."
+              },
+              {
+                "code": "duration",
+                "status": "pass",
+                "message": "Длительность в календарных днях должна совпадать с точными датами; ночи считаются отдельно."
+              },
+              {
+                "code": "travellers",
+                "status": "pass",
+                "message": "Тариф только для двух взрослых."
+              },
+              {
+                "code": "transport",
+                "status": "pass",
+                "message": "Учебный путь туда-обратно, оба трансфера и сборы включены."
+              },
+              {
+                "code": "locks",
+                "status": "pass",
+                "message": "Закреплённые компоненты должны сохраниться."
+              },
+              {
+                "code": "no_night_flights",
+                "status": "pass",
+                "message": "Учебные рейсы: туда 10:00–12:00, обратно 15:00–17:00, UTC+03:00; ночных интервалов нет."
+              },
+              {
+                "code": "free_cancellation",
+                "status": "pass",
+                "message": "Тариф B невозвратный; A и C — учебная бесплатная отмена."
+              }
+            ],
+            "evidence": [
+              {
+                "id": "demo:sochi:2026-11-11:A:price_and_terms",
+                "subject": "sochi:2026-11-11:A:price_and_terms",
+                "source_kind": "synthetic",
+                "source_url": null,
+                "checked_at": "2026-10-27T09:12:53.081607+00:00",
+                "scope": "synthetic-russia-v2: учебный набор, не рыночная цена или реальная доступность"
+              }
+            ],
+            "tradeoffs": [
+              "Все цены, расписание и свойства — учебные."
+            ]
+          }
+        ],
+        "change_preview": {
+          "baseline_plan_id": "sochi:2026-11-10:A",
+          "proposed_plan": {
+            "id": "sochi:2026-11-11:A",
+            "dates": {
+              "start": "2026-11-11",
+              "end": "2026-11-16"
+            },
+            "component_ids": [
+              "sochi:2026-11-11:transport:A",
+              "sochi:2026-11-11:hotel:A",
+              "sochi:2026-11-11:transfers:shared",
+              "sochi:2026-11-11:fees:A"
+            ],
+            "breakdown": {
+              "transport": {
+                "amount_minor": 5300000,
+                "currency": "RUB"
+              },
+              "hotel": {
+                "amount_minor": 5000000,
+                "currency": "RUB"
+              },
+              "transfers": {
+                "amount_minor": 500000,
+                "currency": "RUB"
+              },
+              "fees": {
+                "amount_minor": 200000,
+                "currency": "RUB"
+              }
+            },
+            "total": {
+              "amount_minor": 11000000,
+              "currency": "RUB"
+            },
+            "checks": [
+              {
+                "code": "catalogue",
+                "status": "pass",
+                "message": "Состав, цена и условия заново получены из учебного каталога по ID."
+              },
+              {
+                "code": "budget",
+                "status": "pass",
+                "message": "Услуги поездки: 110 000 ₽ при допустимом лимите 120 000 ₽."
+              },
+              {
+                "code": "dates",
+                "status": "pass",
+                "message": "Даты сверены с учебным каталогом: ноябрь–декабрь 2026, от 1 до 14 ночей; выезд не позднее 31 декабря."
+              },
+              {
+                "code": "duration",
+                "status": "pass",
+                "message": "Длительность в календарных днях должна совпадать с точными датами; ночи считаются отдельно."
+              },
+              {
+                "code": "travellers",
+                "status": "pass",
+                "message": "Тариф только для двух взрослых."
+              },
+              {
+                "code": "transport",
+                "status": "pass",
+                "message": "Учебный путь туда-обратно, оба трансфера и сборы включены."
+              },
+              {
+                "code": "locks",
+                "status": "pass",
+                "message": "Закреплённые компоненты должны сохраниться."
+              },
+              {
+                "code": "no_night_flights",
+                "status": "pass",
+                "message": "Учебные рейсы: туда 10:00–12:00, обратно 15:00–17:00, UTC+03:00; ночных интервалов нет."
+              },
+              {
+                "code": "free_cancellation",
+                "status": "pass",
+                "message": "Тариф B невозвратный; A и C — учебная бесплатная отмена."
+              }
+            ],
+            "evidence": [
+              {
+                "id": "demo:sochi:2026-11-11:A:price_and_terms",
+                "subject": "sochi:2026-11-11:A:price_and_terms",
+                "source_kind": "synthetic",
+                "source_url": null,
+                "checked_at": "2026-10-27T09:12:53.081607+00:00",
+                "scope": "synthetic-russia-v2: учебный набор, не рыночная цена или реальная доступность"
+              }
+            ],
+            "tradeoffs": [
+              "Все цены, расписание и свойства — учебные."
+            ]
+          },
+          "changed": [
+            "sochi:2026-11-10:fees:A",
+            "sochi:2026-11-10:hotel:A",
+            "sochi:2026-11-10:transfers:shared",
+            "sochi:2026-11-10:transport:A",
+            "sochi:2026-11-11:fees:A",
+            "sochi:2026-11-11:hotel:A",
+            "sochi:2026-11-11:transfers:shared",
+            "sochi:2026-11-11:transport:A"
+          ],
+          "preserved": [
+            "origin",
+            "destination",
+            "country",
+            "duration_days",
+            "travellers",
+            "budget",
+            "budget_scope",
+            "expense_reserve",
+            "hard_constraints",
+            "preferences",
+            "locked_component_ids"
+          ],
+          "price_delta": 100000,
+          "tradeoffs": [
+            "Все цены, расписание и свойства — учебные."
+          ],
+          "based_on_revision": 3
+        },
+        "checkout_allowed": false,
+        "booking": null,
+        "error_code": null,
+        "data_mode": "synthetic",
+        "telemetry": {
+          "model": "qwen3.5-4b",
+          "provider": "llama_cpp",
+          "prompt_version": "odin-request-4.2",
+          "model_calls": 1,
+          "tool_calls": [
+            "propose_change",
+            "validate_plan"
+          ],
+          "first_useful_ms": 7424,
+          "total_ms": 7424,
+          "usage": {
+            "completion_tokens": 28,
+            "prompt_tokens": 1259,
+            "total_tokens": 1287
+          },
+          "cost": null
+        }
+      },
+      "pass": true,
+      "constraint_errors": [],
+      "model": "qwen3.5-4b",
+      "provider": "llama_cpp",
+      "prompt_version": "odin-request-4.2",
+      "model_calls": 1,
+      "tool_calls": [
+        "propose_change",
+        "validate_plan"
+      ],
+      "first_useful_ms": 7424,
+      "total_ms": 7424,
+      "usage": {
+        "completion_tokens": 28,
+        "prompt_tokens": 1259,
+        "total_tokens": 1287
+      },
+      "cost": null,
+      "evaluation_mode": "live_qwen_synthetic_tools",
+      "prompt_sha256": "23662b59449e8d25dda33b9a79fb5ae3208001ec5dcb81c0e013c3d44b5100d1",
+      "configuration": {
+        "provider": "llama_cpp",
+        "model": "qwen3.5-4b",
+        "timeout_seconds": 90.0,
+        "temperature": 0,
+        "code_sha256": {
+          "domain.py": "ec2115c59d6746e3149f6debe668efdbd56c09a5e720c0419acd60f244ed0811",
+          "demo_tools.py": "5ee1960291ee2955f92d6de4da38c418f7fbb0b176a5088bfb0b9ee72c9bdcee",
+          "model.py": "a886121af2b841e774aa7c2407396b5027e976716ffbf7a0879dc51a7442cc09",
+          "runner.py": "f7f42003435ac4d4af0bf88e5ac79e53850b920ba974f2414a7d94527e4350ff",
+          "tools.py": "1b57034eb9db2444347d7a849f7ae96fc9e2a77d3f44c2b9a768a389a9613986"
+        }
+      }
+    },
+    {
+      "case_id": "h06_cancel_and_cheaper",
+      "input_message": "Сделай дешевле, но бесплатная отмена обязательна.",
+      "expected_outcome": {
+        "status": "choosing",
+        "fields": {
+          "hard_constraints.free_cancellation": true,
+          "budget.amount_minor": 12000000,
+          "hard_constraints.no_night_flights": true
+        }
+      },
+      "observed_outcome": {
+        "schema_version": "0.2",
+        "based_on_revision": 3,
+        "status": "choosing",
+        "trip_spec": {
+          "origin": "Москва",
+          "destination": "Сочи",
+          "country": null,
+          "dates": {
+            "start": "2026-11-10",
+            "end": "2026-11-15"
+          },
+          "duration_days": null,
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 12000000,
+            "currency": "RUB"
+          },
+          "budget_scope": "booking",
+          "expense_reserve": null,
+          "hard_constraints": {
+            "no_night_flights": true,
+            "free_cancellation": true,
+            "pets": false,
+            "other": []
+          },
+          "preferences": [],
+          "locked_component_ids": []
+        },
+        "patch": {
+          "hard_constraints": {
+            "no_night_flights": true,
+            "free_cancellation": true,
+            "pets": false,
+            "other": []
+          }
+        },
+        "assistant_message": "В доступном каталоге нет варианта дешевле выбранного. Текущая поездка соответствует условиям; её можно подтвердить заново.",
+        "questions": [],
+        "destination_options": [],
+        "options": [
+          {
+            "id": "sochi:2026-11-10:A",
+            "dates": {
+              "start": "2026-11-10",
+              "end": "2026-11-15"
+            },
+            "component_ids": [
+              "sochi:2026-11-10:transport:A",
+              "sochi:2026-11-10:hotel:A",
+              "sochi:2026-11-10:transfers:shared",
+              "sochi:2026-11-10:fees:A"
+            ],
+            "breakdown": {
+              "transport": {
+                "amount_minor": 5200000,
+                "currency": "RUB"
+              },
+              "hotel": {
+                "amount_minor": 5000000,
+                "currency": "RUB"
+              },
+              "transfers": {
+                "amount_minor": 500000,
+                "currency": "RUB"
+              },
+              "fees": {
+                "amount_minor": 200000,
+                "currency": "RUB"
+              }
+            },
+            "total": {
+              "amount_minor": 10900000,
+              "currency": "RUB"
+            },
+            "checks": [
+              {
+                "code": "catalogue",
+                "status": "pass",
+                "message": "Состав, цена и условия заново получены из учебного каталога по ID."
+              },
+              {
+                "code": "budget",
+                "status": "pass",
+                "message": "Услуги поездки: 109 000 ₽ при допустимом лимите 120 000 ₽."
+              },
+              {
+                "code": "dates",
+                "status": "pass",
+                "message": "Даты сверены с учебным каталогом: ноябрь–декабрь 2026, от 1 до 14 ночей; выезд не позднее 31 декабря."
+              },
+              {
+                "code": "duration",
+                "status": "pass",
+                "message": "Длительность в календарных днях должна совпадать с точными датами; ночи считаются отдельно."
+              },
+              {
+                "code": "travellers",
+                "status": "pass",
+                "message": "Тариф только для двух взрослых."
+              },
+              {
+                "code": "transport",
+                "status": "pass",
+                "message": "Учебный путь туда-обратно, оба трансфера и сборы включены."
+              },
+              {
+                "code": "locks",
+                "status": "pass",
+                "message": "Закреплённые компоненты должны сохраниться."
+              },
+              {
+                "code": "no_night_flights",
+                "status": "pass",
+                "message": "Учебные рейсы: туда 10:00–12:00, обратно 15:00–17:00, UTC+03:00; ночных интервалов нет."
+              },
+              {
+                "code": "free_cancellation",
+                "status": "pass",
+                "message": "Тариф B невозвратный; A и C — учебная бесплатная отмена."
+              }
+            ],
+            "evidence": [
+              {
+                "id": "demo:sochi:2026-11-10:A:price_and_terms",
+                "subject": "sochi:2026-11-10:A:price_and_terms",
+                "source_kind": "synthetic",
+                "source_url": null,
+                "checked_at": "2026-10-27T09:12:57.779400+00:00",
+                "scope": "synthetic-russia-v2: учебный набор, не рыночная цена или реальная доступность"
+              }
+            ],
+            "tradeoffs": [
+              "Все цены, расписание и свойства — учебные."
+            ]
+          }
+        ],
+        "change_preview": null,
+        "checkout_allowed": false,
+        "booking": null,
+        "error_code": null,
+        "data_mode": "synthetic",
+        "telemetry": {
+          "model": "qwen3.5-4b",
+          "provider": "llama_cpp",
+          "prompt_version": "odin-request-4.2",
+          "model_calls": 1,
+          "tool_calls": [
+            "propose_change",
+            "validate_plan"
+          ],
+          "first_useful_ms": 4695,
+          "total_ms": 4695,
+          "usage": {
+            "completion_tokens": 44,
+            "prompt_tokens": 1252,
+            "total_tokens": 1296
+          },
+          "cost": null
+        }
+      },
+      "pass": true,
+      "constraint_errors": [],
+      "model": "qwen3.5-4b",
+      "provider": "llama_cpp",
+      "prompt_version": "odin-request-4.2",
+      "model_calls": 1,
+      "tool_calls": [
+        "propose_change",
+        "validate_plan"
+      ],
+      "first_useful_ms": 4695,
+      "total_ms": 4695,
+      "usage": {
+        "completion_tokens": 44,
+        "prompt_tokens": 1252,
+        "total_tokens": 1296
+      },
+      "cost": null,
+      "evaluation_mode": "live_qwen_synthetic_tools",
+      "prompt_sha256": "23662b59449e8d25dda33b9a79fb5ae3208001ec5dcb81c0e013c3d44b5100d1",
+      "configuration": {
+        "provider": "llama_cpp",
+        "model": "qwen3.5-4b",
+        "timeout_seconds": 90.0,
+        "temperature": 0,
+        "code_sha256": {
+          "domain.py": "ec2115c59d6746e3149f6debe668efdbd56c09a5e720c0419acd60f244ed0811",
+          "demo_tools.py": "5ee1960291ee2955f92d6de4da38c418f7fbb0b176a5088bfb0b9ee72c9bdcee",
+          "model.py": "a886121af2b841e774aa7c2407396b5027e976716ffbf7a0879dc51a7442cc09",
+          "runner.py": "f7f42003435ac4d4af0bf88e5ac79e53850b920ba974f2414a7d94527e4350ff",
+          "tools.py": "1b57034eb9db2444347d7a849f7ae96fc9e2a77d3f44c2b9a768a389a9613986"
+        }
+      }
+    },
+    {
+      "case_id": "h07_unsupported_city",
+      "input_message": "Поменяем направление на Томск. Остальное пусть останется.",
+      "expected_outcome": {
+        "status": "no_solution",
+        "fields": {
+          "destination": "Томск",
+          "origin": "Москва",
+          "dates.start": "2026-11-10"
+        }
+      },
+      "observed_outcome": {
+        "schema_version": "0.2",
+        "based_on_revision": 3,
+        "status": "no_solution",
+        "trip_spec": {
+          "origin": "Москва",
+          "destination": "Томск",
+          "country": null,
+          "dates": {
+            "start": "2026-11-10",
+            "end": "2026-11-15"
+          },
+          "duration_days": null,
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 12000000,
+            "currency": "RUB"
+          },
+          "budget_scope": "booking",
+          "expense_reserve": null,
+          "hard_constraints": {
+            "no_night_flights": true,
+            "free_cancellation": false,
+            "pets": false,
+            "other": []
+          },
+          "preferences": [],
+          "locked_component_ids": []
+        },
+        "patch": {
+          "destination": "Томск"
+        },
+        "assistant_message": "В доступном каталоге нет варианта, подтверждающего все условия. Для указанного направления, дат и состава гостей в каталоге нет данных. Можно обсудить другие даты, бюджет или требования; я их не менял.",
+        "questions": [],
+        "destination_options": [],
+        "options": [],
+        "change_preview": null,
+        "checkout_allowed": false,
+        "booking": null,
+        "error_code": null,
+        "data_mode": "synthetic",
+        "telemetry": {
+          "model": "qwen3.5-4b",
+          "provider": "llama_cpp",
+          "prompt_version": "odin-request-4.2",
+          "model_calls": 1,
+          "tool_calls": [
+            "propose_change"
+          ],
+          "first_useful_ms": 2034,
+          "total_ms": 2034,
+          "usage": {
+            "completion_tokens": 21,
+            "prompt_tokens": 1254,
+            "total_tokens": 1275
+          },
+          "cost": null
+        }
+      },
+      "pass": true,
+      "constraint_errors": [],
+      "model": "qwen3.5-4b",
+      "provider": "llama_cpp",
+      "prompt_version": "odin-request-4.2",
+      "model_calls": 1,
+      "tool_calls": [
+        "propose_change"
+      ],
+      "first_useful_ms": 2034,
+      "total_ms": 2034,
+      "usage": {
+        "completion_tokens": 21,
+        "prompt_tokens": 1254,
+        "total_tokens": 1275
+      },
+      "cost": null,
+      "evaluation_mode": "live_qwen_synthetic_tools",
+      "prompt_sha256": "23662b59449e8d25dda33b9a79fb5ae3208001ec5dcb81c0e013c3d44b5100d1",
+      "configuration": {
+        "provider": "llama_cpp",
+        "model": "qwen3.5-4b",
+        "timeout_seconds": 90.0,
+        "temperature": 0,
+        "code_sha256": {
+          "domain.py": "ec2115c59d6746e3149f6debe668efdbd56c09a5e720c0419acd60f244ed0811",
+          "demo_tools.py": "5ee1960291ee2955f92d6de4da38c418f7fbb0b176a5088bfb0b9ee72c9bdcee",
+          "model.py": "a886121af2b841e774aa7c2407396b5027e976716ffbf7a0879dc51a7442cc09",
+          "runner.py": "f7f42003435ac4d4af0bf88e5ac79e53850b920ba974f2414a7d94527e4350ff",
+          "tools.py": "1b57034eb9db2444347d7a849f7ae96fc9e2a77d3f44c2b9a768a389a9613986"
+        }
+      }
+    },
+    {
+      "case_id": "h08_january",
+      "input_message": "Теперь даты с 10 по 15 января 2027 года, остальные условия прежние.",
+      "expected_outcome": {
+        "status": "no_solution",
+        "fields": {
+          "dates.start": "2027-01-10",
+          "dates.end": "2027-01-15",
+          "destination": "Сочи"
+        }
+      },
+      "observed_outcome": {
+        "schema_version": "0.2",
+        "based_on_revision": 3,
+        "status": "no_solution",
+        "trip_spec": {
+          "origin": "Москва",
+          "destination": "Сочи",
+          "country": null,
+          "dates": {
+            "start": "2027-01-10",
+            "end": "2027-01-15"
+          },
+          "duration_days": null,
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 12000000,
+            "currency": "RUB"
+          },
+          "budget_scope": "booking",
+          "expense_reserve": null,
+          "hard_constraints": {
+            "no_night_flights": true,
+            "free_cancellation": false,
+            "pets": false,
+            "other": []
+          },
+          "preferences": [],
+          "locked_component_ids": []
+        },
+        "patch": {
+          "dates": {
+            "start": "2027-01-10",
+            "end": "2027-01-15"
+          }
+        },
+        "assistant_message": "В доступном каталоге нет варианта, подтверждающего все условия. Для указанного направления, дат и состава гостей в каталоге нет данных. Можно обсудить другие даты, бюджет или требования; я их не менял.",
+        "questions": [],
+        "destination_options": [],
+        "options": [],
+        "change_preview": null,
+        "checkout_allowed": false,
+        "booking": null,
+        "error_code": null,
+        "data_mode": "synthetic",
+        "telemetry": {
+          "model": "qwen3.5-4b",
+          "provider": "llama_cpp",
+          "prompt_version": "odin-request-4.2",
+          "model_calls": 1,
+          "tool_calls": [
+            "propose_change"
+          ],
+          "first_useful_ms": 5693,
+          "total_ms": 5693,
+          "usage": {
+            "completion_tokens": 55,
+            "prompt_tokens": 1264,
+            "total_tokens": 1319
+          },
+          "cost": null
+        }
+      },
+      "pass": true,
+      "constraint_errors": [],
+      "model": "qwen3.5-4b",
+      "provider": "llama_cpp",
+      "prompt_version": "odin-request-4.2",
+      "model_calls": 1,
+      "tool_calls": [
+        "propose_change"
+      ],
+      "first_useful_ms": 5693,
+      "total_ms": 5693,
+      "usage": {
+        "completion_tokens": 55,
+        "prompt_tokens": 1264,
+        "total_tokens": 1319
+      },
+      "cost": null,
+      "evaluation_mode": "live_qwen_synthetic_tools",
+      "prompt_sha256": "23662b59449e8d25dda33b9a79fb5ae3208001ec5dcb81c0e013c3d44b5100d1",
+      "configuration": {
+        "provider": "llama_cpp",
+        "model": "qwen3.5-4b",
+        "timeout_seconds": 90.0,
+        "temperature": 0,
+        "code_sha256": {
+          "domain.py": "ec2115c59d6746e3149f6debe668efdbd56c09a5e720c0419acd60f244ed0811",
+          "demo_tools.py": "5ee1960291ee2955f92d6de4da38c418f7fbb0b176a5088bfb0b9ee72c9bdcee",
+          "model.py": "a886121af2b841e774aa7c2407396b5027e976716ffbf7a0879dc51a7442cc09",
+          "runner.py": "f7f42003435ac4d4af0bf88e5ac79e53850b920ba974f2414a7d94527e4350ff",
+          "tools.py": "1b57034eb9db2444347d7a849f7ae96fc9e2a77d3f44c2b9a768a389a9613986"
+        }
+      }
+    },
+    {
+      "case_id": "h09_child_age",
+      "input_message": "Ещё возьмём с собой ребёнка семи лет.",
+      "expected_outcome": {
+        "status": "no_solution",
+        "fields": {
+          "travellers.adults": 2,
+          "travellers.children": [
+            7
+          ]
+        }
+      },
+      "observed_outcome": {
+        "schema_version": "0.2",
+        "based_on_revision": 3,
+        "status": "no_solution",
+        "trip_spec": {
+          "origin": "Москва",
+          "destination": "Сочи",
+          "country": null,
+          "dates": {
+            "start": "2026-11-10",
+            "end": "2026-11-15"
+          },
+          "duration_days": null,
+          "travellers": {
+            "adults": 2,
+            "children": [
+              7
+            ]
+          },
+          "budget": {
+            "amount_minor": 12000000,
+            "currency": "RUB"
+          },
+          "budget_scope": "booking",
+          "expense_reserve": null,
+          "hard_constraints": {
+            "no_night_flights": true,
+            "free_cancellation": false,
+            "pets": false,
+            "other": []
+          },
+          "preferences": [],
+          "locked_component_ids": []
+        },
+        "patch": {
+          "travellers": {
+            "adults": 2,
+            "children": [
+              7
+            ]
+          }
+        },
+        "assistant_message": "В доступном каталоге нет варианта, подтверждающего все условия. Тариф только для двух взрослых. Можно обсудить другие даты, бюджет или требования; я их не менял.",
+        "questions": [],
+        "destination_options": [],
+        "options": [],
+        "change_preview": null,
+        "checkout_allowed": false,
+        "booking": null,
+        "error_code": null,
+        "data_mode": "synthetic",
+        "telemetry": {
+          "model": "qwen3.5-4b",
+          "provider": "llama_cpp",
+          "prompt_version": "odin-request-4.2",
+          "model_calls": 1,
+          "tool_calls": [
+            "propose_change"
+          ],
+          "first_useful_ms": 7897,
+          "total_ms": 7897,
+          "usage": {
+            "completion_tokens": 28,
+            "prompt_tokens": 1250,
+            "total_tokens": 1278
+          },
+          "cost": null
+        }
+      },
+      "pass": true,
+      "constraint_errors": [],
+      "model": "qwen3.5-4b",
+      "provider": "llama_cpp",
+      "prompt_version": "odin-request-4.2",
+      "model_calls": 1,
+      "tool_calls": [
+        "propose_change"
+      ],
+      "first_useful_ms": 7897,
+      "total_ms": 7897,
+      "usage": {
+        "completion_tokens": 28,
+        "prompt_tokens": 1250,
+        "total_tokens": 1278
+      },
+      "cost": null,
+      "evaluation_mode": "live_qwen_synthetic_tools",
+      "prompt_sha256": "23662b59449e8d25dda33b9a79fb5ae3208001ec5dcb81c0e013c3d44b5100d1",
+      "configuration": {
+        "provider": "llama_cpp",
+        "model": "qwen3.5-4b",
+        "timeout_seconds": 90.0,
+        "temperature": 0,
+        "code_sha256": {
+          "domain.py": "ec2115c59d6746e3149f6debe668efdbd56c09a5e720c0419acd60f244ed0811",
+          "demo_tools.py": "5ee1960291ee2955f92d6de4da38c418f7fbb0b176a5088bfb0b9ee72c9bdcee",
+          "model.py": "a886121af2b841e774aa7c2407396b5027e976716ffbf7a0879dc51a7442cc09",
+          "runner.py": "f7f42003435ac4d4af0bf88e5ac79e53850b920ba974f2414a7d94527e4350ff",
+          "tools.py": "1b57034eb9db2444347d7a849f7ae96fc9e2a77d3f44c2b9a768a389a9613986"
+        }
+      }
+    },
+    {
+      "case_id": "h10_hotel_scope",
+      "input_message": "На сам отель готовы потратить максимум 45 тысяч рублей, остальные условия сохраняем.",
+      "expected_outcome": {
+        "status": "choosing",
+        "fields": {
+          "budget_scope": "hotel",
+          "budget.amount_minor": 4500000,
+          "dates.start": "2026-11-10"
+        }
+      },
+      "observed_outcome": {
+        "schema_version": "0.2",
+        "based_on_revision": 3,
+        "status": "error",
+        "trip_spec": {
+          "origin": "Москва",
+          "destination": "Сочи",
+          "country": null,
+          "dates": {
+            "start": "2026-11-10",
+            "end": "2026-11-15"
+          },
+          "duration_days": null,
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 12000000,
+            "currency": "RUB"
+          },
+          "budget_scope": "booking",
+          "expense_reserve": null,
+          "hard_constraints": {
+            "no_night_flights": true,
+            "free_cancellation": false,
+            "pets": false,
+            "other": []
+          },
+          "preferences": [],
+          "locked_component_ids": []
+        },
+        "patch": {},
+        "assistant_message": "Не удалось разобрать запрос с помощью модели. Попробуйте ещё раз. Выбранная поездка сохранена; оформление по непроверенным условиям недоступно.",
+        "questions": [],
+        "destination_options": [],
+        "options": [],
+        "change_preview": null,
+        "checkout_allowed": false,
+        "booking": null,
+        "error_code": "model_invalid_json",
+        "data_mode": "synthetic",
+        "telemetry": {
+          "model": "qwen3.5-4b",
+          "provider": "llama_cpp",
+          "prompt_version": "odin-request-4.2",
+          "model_calls": 2,
+          "tool_calls": [],
+          "first_useful_ms": null,
+          "total_ms": 11891,
+          "usage": {
+            "completion_tokens": 108,
+            "prompt_tokens": 2669,
+            "total_tokens": 2777
+          },
+          "cost": null
+        }
+      },
+      "pass": false,
+      "constraint_errors": [
+        "budget_scope: expected 'hotel', got 'booking'",
+        "budget.amount_minor: expected 4500000, got 12000000",
+        "status: expected choosing, got error"
+      ],
+      "model": "qwen3.5-4b",
+      "provider": "llama_cpp",
+      "prompt_version": "odin-request-4.2",
+      "model_calls": 2,
+      "tool_calls": [],
+      "first_useful_ms": null,
+      "total_ms": 11891,
+      "usage": {
+        "completion_tokens": 108,
+        "prompt_tokens": 2669,
+        "total_tokens": 2777
+      },
+      "cost": null,
+      "evaluation_mode": "live_qwen_synthetic_tools",
+      "prompt_sha256": "23662b59449e8d25dda33b9a79fb5ae3208001ec5dcb81c0e013c3d44b5100d1",
+      "configuration": {
+        "provider": "llama_cpp",
+        "model": "qwen3.5-4b",
+        "timeout_seconds": 90.0,
+        "temperature": 0,
+        "code_sha256": {
+          "domain.py": "ec2115c59d6746e3149f6debe668efdbd56c09a5e720c0419acd60f244ed0811",
+          "demo_tools.py": "5ee1960291ee2955f92d6de4da38c418f7fbb0b176a5088bfb0b9ee72c9bdcee",
+          "model.py": "a886121af2b841e774aa7c2407396b5027e976716ffbf7a0879dc51a7442cc09",
+          "runner.py": "f7f42003435ac4d4af0bf88e5ac79e53850b920ba974f2414a7d94527e4350ff",
+          "tools.py": "1b57034eb9db2444347d7a849f7ae96fc9e2a77d3f44c2b9a768a389a9613986"
+        }
+      }
+    },
+    {
+      "case_id": "h11_no_exact_days",
+      "input_message": "Из Москвы в Казань на пять дней в декабре, двое взрослых. До 50 тысяч рублей на дорогу, гостиницу, трансферы и сборы.",
+      "expected_outcome": {
+        "status": "needs_input",
+        "fields": {
+          "dates": null,
+          "duration_days": 5,
+          "destination": "Казань",
+          "travellers.adults": 2
+        }
+      },
+      "observed_outcome": {
+        "schema_version": "0.2",
+        "based_on_revision": 0,
+        "status": "needs_input",
+        "trip_spec": {
+          "origin": "Москва",
+          "destination": "Казань",
+          "country": null,
+          "dates": null,
+          "duration_days": 5,
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 5000000,
+            "currency": "RUB"
+          },
+          "budget_scope": "booking",
+          "expense_reserve": null,
+          "hard_constraints": {
+            "no_night_flights": false,
+            "free_cancellation": false,
+            "pets": false,
+            "other": []
+          },
+          "preferences": [],
+          "locked_component_ids": []
+        },
+        "patch": {
+          "origin": "Москва",
+          "destination": "Казань",
+          "duration_days": 5,
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 5000000,
+            "currency": "RUB"
+          },
+          "budget_scope": "booking"
+        },
+        "assistant_message": "Уточним условия для расчёта поездки.",
+        "questions": [
+          "Какие точные даты поездки?"
+        ],
+        "destination_options": [],
+        "options": [],
+        "change_preview": null,
+        "checkout_allowed": false,
+        "booking": null,
+        "error_code": null,
+        "data_mode": "synthetic",
+        "telemetry": {
+          "model": "qwen3.5-4b",
+          "provider": "llama_cpp",
+          "prompt_version": "odin-request-4.2",
+          "model_calls": 1,
+          "tool_calls": [],
+          "first_useful_ms": 17285,
+          "total_ms": 17285,
+          "usage": {
+            "completion_tokens": 112,
+            "prompt_tokens": 1210,
+            "total_tokens": 1322
+          },
+          "cost": null
+        }
+      },
+      "pass": true,
+      "constraint_errors": [],
+      "model": "qwen3.5-4b",
+      "provider": "llama_cpp",
+      "prompt_version": "odin-request-4.2",
+      "model_calls": 1,
+      "tool_calls": [],
+      "first_useful_ms": 17285,
+      "total_ms": 17285,
+      "usage": {
+        "completion_tokens": 112,
+        "prompt_tokens": 1210,
+        "total_tokens": 1322
+      },
+      "cost": null,
+      "evaluation_mode": "live_qwen_synthetic_tools",
+      "prompt_sha256": "23662b59449e8d25dda33b9a79fb5ae3208001ec5dcb81c0e013c3d44b5100d1",
+      "configuration": {
+        "provider": "llama_cpp",
+        "model": "qwen3.5-4b",
+        "timeout_seconds": 90.0,
+        "temperature": 0,
+        "code_sha256": {
+          "domain.py": "ec2115c59d6746e3149f6debe668efdbd56c09a5e720c0419acd60f244ed0811",
+          "demo_tools.py": "5ee1960291ee2955f92d6de4da38c418f7fbb0b176a5088bfb0b9ee72c9bdcee",
+          "model.py": "a886121af2b841e774aa7c2407396b5027e976716ffbf7a0879dc51a7442cc09",
+          "runner.py": "f7f42003435ac4d4af0bf88e5ac79e53850b920ba974f2414a7d94527e4350ff",
+          "tools.py": "1b57034eb9db2444347d7a849f7ae96fc9e2a77d3f44c2b9a768a389a9613986"
+        }
+      }
+    },
+    {
+      "case_id": "h12_no_budget_relaxation",
+      "input_message": "На дорогу, проживание, трансферы и сборы теперь только 20 тысяч рублей. Направление и даты не меняй.",
+      "expected_outcome": {
+        "status": "no_solution",
+        "fields": {
+          "budget.amount_minor": 2000000,
+          "destination": "Сочи",
+          "dates.start": "2026-11-10",
+          "dates.end": "2026-11-15"
+        }
+      },
+      "observed_outcome": {
+        "schema_version": "0.2",
+        "based_on_revision": 3,
+        "status": "no_solution",
+        "trip_spec": {
+          "origin": "Москва",
+          "destination": "Сочи",
+          "country": null,
+          "dates": {
+            "start": "2026-11-10",
+            "end": "2026-11-15"
+          },
+          "duration_days": null,
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 2000000,
+            "currency": "RUB"
+          },
+          "budget_scope": "booking",
+          "expense_reserve": null,
+          "hard_constraints": {
+            "no_night_flights": true,
+            "free_cancellation": false,
+            "pets": false,
+            "other": []
+          },
+          "preferences": [],
+          "locked_component_ids": []
+        },
+        "patch": {
+          "budget": {
+            "amount_minor": 2000000,
+            "currency": "RUB"
+          }
+        },
+        "assistant_message": "В доступном каталоге нет варианта, подтверждающего все условия. Услуги поездки: 109 000 ₽ при допустимом лимите 20 000 ₽. Услуги поездки: 97 000 ₽ при допустимом лимите 20 000 ₽. Услуги поездки: 118 000 ₽ при допустимом лимите 20 000 ₽. Можно обсудить другие даты, бюджет или требования; я их не менял.",
+        "questions": [],
+        "destination_options": [],
+        "options": [],
+        "change_preview": null,
+        "checkout_allowed": false,
+        "booking": null,
+        "error_code": null,
+        "data_mode": "synthetic",
+        "telemetry": {
+          "model": "qwen3.5-4b",
+          "provider": "llama_cpp",
+          "prompt_version": "odin-request-4.2",
+          "model_calls": 1,
+          "tool_calls": [
+            "propose_change"
+          ],
+          "first_useful_ms": 12657,
+          "total_ms": 12657,
+          "usage": {
+            "completion_tokens": 60,
+            "prompt_tokens": 1265,
+            "total_tokens": 1325
+          },
+          "cost": null
+        }
+      },
+      "pass": true,
+      "constraint_errors": [],
+      "model": "qwen3.5-4b",
+      "provider": "llama_cpp",
+      "prompt_version": "odin-request-4.2",
+      "model_calls": 1,
+      "tool_calls": [
+        "propose_change"
+      ],
+      "first_useful_ms": 12657,
+      "total_ms": 12657,
+      "usage": {
+        "completion_tokens": 60,
+        "prompt_tokens": 1265,
+        "total_tokens": 1325
+      },
+      "cost": null,
+      "evaluation_mode": "live_qwen_synthetic_tools",
+      "prompt_sha256": "23662b59449e8d25dda33b9a79fb5ae3208001ec5dcb81c0e013c3d44b5100d1",
+      "configuration": {
+        "provider": "llama_cpp",
+        "model": "qwen3.5-4b",
+        "timeout_seconds": 90.0,
+        "temperature": 0,
+        "code_sha256": {
+          "domain.py": "ec2115c59d6746e3149f6debe668efdbd56c09a5e720c0419acd60f244ed0811",
+          "demo_tools.py": "5ee1960291ee2955f92d6de4da38c418f7fbb0b176a5088bfb0b9ee72c9bdcee",
+          "model.py": "a886121af2b841e774aa7c2407396b5027e976716ffbf7a0879dc51a7442cc09",
+          "runner.py": "f7f42003435ac4d4af0bf88e5ac79e53850b920ba974f2414a7d94527e4350ff",
+          "tools.py": "1b57034eb9db2444347d7a849f7ae96fc9e2a77d3f44c2b9a768a389a9613986"
+        }
+      }
+    }
+  ]
+}

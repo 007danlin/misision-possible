@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13proto/predict.proto\x12\x05model\".\n\x0ePredictRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06\x63\x61ller\x18\x02 \x01(\t\"/\n\x0cPredictReply\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\x0e\n\x06\x63\x61ller\x18\x02 \x01(\t2B\n\tPredictor\x12\x35\n\x07Predict\x12\x15.model.PredictRequest\x1a\x13.model.PredictReplyb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13proto/predict.proto\x12\x05model\".\n\x0ePredictRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06\x63\x61ller\x18\x02 \x01(\t\"/\n\x0cPredictReply\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\x0e\n\x06\x63\x61ller\x18\x02 \x01(\t\"B\n\x0bTurnRequest\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\x12\n\nstate_json\x18\x02 \x01(\t\x12\x0e\n\x06\x63\x61ller\x18\x03 \x01(\t\".\n\tTurnReply\x12\x11\n\tturn_json\x18\x01 \x01(\t\x12\x0e\n\x06\x63\x61ller\x18\x02 \x01(\t\"F\n\x0f\x45valuateRequest\x12\x12\n\nstate_json\x18\x01 \x01(\t\x12\x0f\n\x07plan_id\x18\x02 \x01(\t\x12\x0e\n\x06\x63\x61ller\x18\x03 \x01(\t2\xa9\x01\n\tPredictor\x12\x35\n\x07Predict\x12\x15.model.PredictRequest\x1a\x13.model.PredictReply\x12/\n\x07RunTurn\x12\x12.model.TurnRequest\x1a\x10.model.TurnReply\x12\x34\n\x08\x45valuate\x12\x16.model.EvaluateRequest\x1a\x10.model.TurnReplyb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -35,6 +35,12 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_PREDICTREQUEST']._serialized_end=76
   _globals['_PREDICTREPLY']._serialized_start=78
   _globals['_PREDICTREPLY']._serialized_end=125
-  _globals['_PREDICTOR']._serialized_start=127
-  _globals['_PREDICTOR']._serialized_end=193
+  _globals['_TURNREQUEST']._serialized_start=127
+  _globals['_TURNREQUEST']._serialized_end=193
+  _globals['_TURNREPLY']._serialized_start=195
+  _globals['_TURNREPLY']._serialized_end=241
+  _globals['_EVALUATEREQUEST']._serialized_start=243
+  _globals['_EVALUATEREQUEST']._serialized_end=313
+  _globals['_PREDICTOR']._serialized_start=316
+  _globals['_PREDICTOR']._serialized_end=485
 # @@protoc_insertion_point(module_scope)

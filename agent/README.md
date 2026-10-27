@@ -1,24 +1,20 @@
-# Agent
+# Qwen-agent «О!дин запрос»
 
-Отдельный Python gRPC-сервис. Пока `Predict` возвращает демонстрационное
-приветствие; здесь можно реализовать вызов модели или логику агента.
+Существующий Python gRPC agent расширен разбором поездок, сохранением условий и ToolRegistry.
+Core управляет сессией и учебной покупкой; LLM не назначает цены и не пишет в хранилище.
 
-```sh
-python3 -m venv .venv
-. .venv/bin/activate
-python -m pip install .
-python main.py
-```
-
-Порт задаётся через `AGENT_PORT`, по умолчанию 50051. Core передаёт `name`
-и `caller` (ID проверенного пользователя), ожидает `message` в ответе.
-Контракт: `proto/predict.proto`; копия и Go bindings — в `backend/core/proto/`.
-Namespace `model.Predictor` сохранён для совместимости протокола.
-
-После изменения контракта пересоздайте Python bindings (нужен grpcio-tools):
+**Запуск всего приложения:** `python3 scripts/local.py start` из корня репозитория.
+Модель и runtime находятся в `.runtime/` проекта. Общая Ollama не используется.
+[Подробности автономного запуска](../docs/local-setup.md).
 
 ```sh
-python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. proto/predict.proto
+.venv/bin/python -m unittest discover -s tests -v
+.venv/bin/python -m evals.run --output evals/results/qwen-project-local.json
 ```
 
-Dockerfile выполняет генерацию автоматически при сборке.
+Первая команда проверяет код с подставной моделью, вторая реально вызывает локальную Qwen.
+Для hosted endpoint задайте LLM_PROVIDER=dashscope/openai_compatible, LLM_BASE_URL,
+LLM_MODEL, LLM_API_KEY; ключ не коммитится. Скрытого fallback на фикстуры нет.
+
+gRPC: Predict (инфраструктурный smoke), RunTurn (Qwen), Evaluate (кодовая проверка действий).
+[Контракт и ограничения](../docs/agent.md).

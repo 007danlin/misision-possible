@@ -1,0 +1,1009 @@
+{
+  "version": "journey-scenarios-v1",
+  "source_kind": "synthetic",
+  "notice": "Сценарный каталог: объекты, отзывы, расписания и тарифы вымышлены для показа пути поездки.",
+  "origin": "Москва",
+  "start": "2026-11-01",
+  "end": "2026-12-31",
+  "timezone": "Europe/Moscow",
+  "routes": {
+    "Сочи": {
+      "id": "sochi",
+      "kind": "flight",
+      "label": "Самолёт",
+      "origin_terminal": "Москва · аэропорт",
+      "terminal": "Сочи · аэропорт",
+      "out_departure": "09:00",
+      "out_minutes": 240,
+      "return_departure": "18:00",
+      "return_minutes": 240,
+      "roundtrip_minor": 1800000,
+      "airport_buffer": 120
+    },
+    "Казань": {
+      "id": "kazan",
+      "kind": "train",
+      "label": "Поезд",
+      "origin_terminal": "Москва · вокзал",
+      "terminal": "Казань · вокзал",
+      "out_departure": "07:00",
+      "out_minutes": 390,
+      "return_departure": "16:00",
+      "return_minutes": 390,
+      "roundtrip_minor": 700000,
+      "airport_buffer": 45
+    },
+    "Ярославль": {
+      "id": "yaroslavl",
+      "kind": "train",
+      "label": "Поезд",
+      "origin_terminal": "Москва · вокзал",
+      "terminal": "Ярославль · вокзал",
+      "out_departure": "08:00",
+      "out_minutes": 210,
+      "return_departure": "17:00",
+      "return_minutes": 210,
+      "roundtrip_minor": 350000,
+      "airport_buffer": 45
+    },
+    "Сортавала": {
+      "id": "sortavala",
+      "kind": "train",
+      "label": "Поезд",
+      "origin_terminal": "Москва · вокзал",
+      "terminal": "Сортавала · вокзал",
+      "out_departure": "06:00",
+      "out_minutes": 660,
+      "return_departure": "07:00",
+      "return_minutes": 660,
+      "roundtrip_minor": 900000,
+      "airport_buffer": 45
+    }
+  },
+  "hotels": [
+    {
+      "id": "sample-sochi-1",
+      "name": "Сосновый берег",
+      "address": "Сочи · зелёный район",
+      "image_url": "/assets/stay-a.webp",
+      "images": [
+        "/assets/stay-a.webp"
+      ],
+      "destination": "Сочи",
+      "source_kind": "synthetic",
+      "checked_at": "2026-10-27T00:00:00+03:00",
+      "rating": 8.7,
+      "reviews": 3,
+      "stars": 4,
+      "distance_m": 4200,
+      "beach_m": 600,
+      "property_kind": "HOTEL",
+      "amenity_codes": [
+        "has_internet",
+        "has_parking",
+        "has_kids",
+        "has_pool",
+        "has_spa"
+      ],
+      "amenities": [
+        "Wi-Fi",
+        "Парковка",
+        "Для детей",
+        "Бассейн",
+        "Спа"
+      ],
+      "reference_nightly_minor": 480000,
+      "content": {
+        "source_kind": "synthetic",
+        "description": "Небольшой отель в зелёном районе. Подойдёт для спокойного отдыха с бассейном.",
+        "room": "Семейный номер",
+        "room_capacity": 3,
+        "beds": "Двуспальная кровать и дополнительное место",
+        "checkin_from": "14:00",
+        "checkin_until": "23:00",
+        "checkout_until": "12:00",
+        "children_allowed": true,
+        "pets_allowed": false,
+        "breakfast_available": true,
+        "transfer_minutes": 35,
+        "transfer_oneway_minor": 220000,
+        "vehicle_capacity": 3,
+        "baggage": "1 чемодан и ручная кладь на гостя",
+        "child_seats": true
+      },
+      "review_items": [
+        {
+          "id": "sample-sochi-1-r0",
+          "theme": "Чистота",
+          "rating": 9,
+          "text": "В номере чисто, постель удобная. Уборка была каждый день.",
+          "traveller": "семья",
+          "date": "2026-09-14",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-sochi-1-r1",
+          "theme": "Питание",
+          "rating": 9,
+          "text": "Завтрак понравился, но утром в выходные приходилось немного ждать.",
+          "traveller": "пара",
+          "date": "2026-09-22",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-sochi-1-r2",
+          "theme": "Тишина",
+          "rating": 8,
+          "text": "Вечером слышны соседи в коридоре. Для чувствительного сна лучше номер подальше от лифта.",
+          "traveller": "пара",
+          "date": "2026-10-02",
+          "source_kind": "synthetic"
+        }
+      ]
+    },
+    {
+      "id": "sample-sochi-2",
+      "name": "Городской сад",
+      "address": "Сочи · рядом с центром",
+      "image_url": "/assets/stay-b.jpg",
+      "images": [
+        "/assets/stay-b.jpg"
+      ],
+      "destination": "Сочи",
+      "source_kind": "synthetic",
+      "checked_at": "2026-10-27T00:00:00+03:00",
+      "rating": 8.3,
+      "reviews": 3,
+      "stars": 3,
+      "distance_m": 800,
+      "beach_m": 1500,
+      "property_kind": "HOTEL",
+      "amenity_codes": [
+        "has_internet",
+        "has_parking",
+        "has_kids",
+        "has_pool",
+        "has_spa"
+      ],
+      "amenities": [
+        "Wi-Fi",
+        "Парковка",
+        "Для детей",
+        "Бассейн",
+        "Спа"
+      ],
+      "reference_nightly_minor": 360000,
+      "content": {
+        "source_kind": "synthetic",
+        "description": "Удобная база для прогулок: центр и транспорт рядом.",
+        "room": "Стандартный номер",
+        "room_capacity": 2,
+        "beds": "Двуспальная кровать",
+        "checkin_from": "14:00",
+        "checkin_until": "23:00",
+        "checkout_until": "12:00",
+        "children_allowed": true,
+        "pets_allowed": false,
+        "breakfast_available": true,
+        "transfer_minutes": 20,
+        "transfer_oneway_minor": 140000,
+        "vehicle_capacity": 3,
+        "baggage": "1 чемодан и ручная кладь на гостя",
+        "child_seats": true
+      },
+      "review_items": [
+        {
+          "id": "sample-sochi-2-r0",
+          "theme": "Чистота",
+          "rating": 9,
+          "text": "В номере чисто, постель удобная. Уборка была каждый день.",
+          "traveller": "семья",
+          "date": "2026-09-14",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-sochi-2-r1",
+          "theme": "Питание",
+          "rating": 8,
+          "text": "Завтрак понравился, но утром в выходные приходилось немного ждать.",
+          "traveller": "пара",
+          "date": "2026-09-22",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-sochi-2-r2",
+          "theme": "Тишина",
+          "rating": 8,
+          "text": "Вечером слышны соседи в коридоре. Для чувствительного сна лучше номер подальше от лифта.",
+          "traveller": "пара",
+          "date": "2026-10-02",
+          "source_kind": "synthetic"
+        }
+      ]
+    },
+    {
+      "id": "sample-sochi-3",
+      "name": "Тихая бухта",
+      "address": "Сочи · за городом",
+      "image_url": "/assets/stay-c.jpg",
+      "images": [
+        "/assets/stay-c.jpg"
+      ],
+      "destination": "Сочи",
+      "source_kind": "synthetic",
+      "checked_at": "2026-10-27T00:00:00+03:00",
+      "rating": 7.7,
+      "reviews": 3,
+      "stars": 3,
+      "distance_m": 18000,
+      "beach_m": 700,
+      "property_kind": "HOTEL",
+      "amenity_codes": [
+        "has_internet",
+        "has_parking",
+        "has_kids"
+      ],
+      "amenities": [
+        "Wi-Fi",
+        "Парковка",
+        "Для детей"
+      ],
+      "reference_nightly_minor": 280000,
+      "content": {
+        "source_kind": "synthetic",
+        "description": "Более доступное проживание вдали от центра; дорога до объекта дольше.",
+        "room": "Стандартный номер",
+        "room_capacity": 2,
+        "beds": "Двуспальная кровать",
+        "checkin_from": "14:00",
+        "checkin_until": "23:00",
+        "checkout_until": "12:00",
+        "children_allowed": true,
+        "pets_allowed": false,
+        "breakfast_available": true,
+        "transfer_minutes": 90,
+        "transfer_oneway_minor": 650000,
+        "vehicle_capacity": 3,
+        "baggage": "1 чемодан и ручная кладь на гостя",
+        "child_seats": true
+      },
+      "review_items": [
+        {
+          "id": "sample-sochi-3-r0",
+          "theme": "Чистота",
+          "rating": 8,
+          "text": "В номере чисто, постель удобная. Уборка была каждый день.",
+          "traveller": "семья",
+          "date": "2026-09-14",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-sochi-3-r1",
+          "theme": "Питание",
+          "rating": 8,
+          "text": "Завтрак понравился, но утром в выходные приходилось немного ждать.",
+          "traveller": "пара",
+          "date": "2026-09-22",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-sochi-3-r2",
+          "theme": "Тишина",
+          "rating": 7,
+          "text": "Вечером слышны соседи в коридоре. Для чувствительного сна лучше номер подальше от лифта.",
+          "traveller": "пара",
+          "date": "2026-10-02",
+          "source_kind": "synthetic"
+        }
+      ]
+    },
+    {
+      "id": "sample-kazan-1",
+      "name": "Сосновый берег",
+      "address": "Казань · зелёный район",
+      "image_url": "/assets/stay-a.webp",
+      "images": [
+        "/assets/stay-a.webp"
+      ],
+      "destination": "Казань",
+      "source_kind": "synthetic",
+      "checked_at": "2026-10-27T00:00:00+03:00",
+      "rating": 8.7,
+      "reviews": 3,
+      "stars": 4,
+      "distance_m": 4200,
+      "beach_m": null,
+      "property_kind": "HOTEL",
+      "amenity_codes": [
+        "has_internet",
+        "has_parking",
+        "has_kids",
+        "has_pool",
+        "has_spa"
+      ],
+      "amenities": [
+        "Wi-Fi",
+        "Парковка",
+        "Для детей",
+        "Бассейн",
+        "Спа"
+      ],
+      "reference_nightly_minor": 480000,
+      "content": {
+        "source_kind": "synthetic",
+        "description": "Небольшой отель в зелёном районе. Подойдёт для спокойного отдыха с бассейном.",
+        "room": "Семейный номер",
+        "room_capacity": 3,
+        "beds": "Двуспальная кровать и дополнительное место",
+        "checkin_from": "14:00",
+        "checkin_until": "23:00",
+        "checkout_until": "12:00",
+        "children_allowed": true,
+        "pets_allowed": false,
+        "breakfast_available": true,
+        "transfer_minutes": 35,
+        "transfer_oneway_minor": 220000,
+        "vehicle_capacity": 3,
+        "baggage": "1 чемодан и ручная кладь на гостя",
+        "child_seats": true
+      },
+      "review_items": [
+        {
+          "id": "sample-kazan-1-r0",
+          "theme": "Чистота",
+          "rating": 9,
+          "text": "В номере чисто, постель удобная. Уборка была каждый день.",
+          "traveller": "семья",
+          "date": "2026-09-14",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-kazan-1-r1",
+          "theme": "Питание",
+          "rating": 9,
+          "text": "Завтрак понравился, но утром в выходные приходилось немного ждать.",
+          "traveller": "пара",
+          "date": "2026-09-22",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-kazan-1-r2",
+          "theme": "Тишина",
+          "rating": 8,
+          "text": "Вечером слышны соседи в коридоре. Для чувствительного сна лучше номер подальше от лифта.",
+          "traveller": "пара",
+          "date": "2026-10-02",
+          "source_kind": "synthetic"
+        }
+      ]
+    },
+    {
+      "id": "sample-kazan-2",
+      "name": "Городской сад",
+      "address": "Казань · рядом с центром",
+      "image_url": "/assets/stay-b.jpg",
+      "images": [
+        "/assets/stay-b.jpg"
+      ],
+      "destination": "Казань",
+      "source_kind": "synthetic",
+      "checked_at": "2026-10-27T00:00:00+03:00",
+      "rating": 8.3,
+      "reviews": 3,
+      "stars": 3,
+      "distance_m": 800,
+      "beach_m": null,
+      "property_kind": "HOTEL",
+      "amenity_codes": [
+        "has_internet",
+        "has_parking",
+        "has_kids",
+        "has_pool",
+        "has_spa"
+      ],
+      "amenities": [
+        "Wi-Fi",
+        "Парковка",
+        "Для детей",
+        "Бассейн",
+        "Спа"
+      ],
+      "reference_nightly_minor": 360000,
+      "content": {
+        "source_kind": "synthetic",
+        "description": "Удобная база для прогулок: центр и транспорт рядом.",
+        "room": "Стандартный номер",
+        "room_capacity": 2,
+        "beds": "Двуспальная кровать",
+        "checkin_from": "14:00",
+        "checkin_until": "23:00",
+        "checkout_until": "12:00",
+        "children_allowed": true,
+        "pets_allowed": false,
+        "breakfast_available": true,
+        "transfer_minutes": 20,
+        "transfer_oneway_minor": 140000,
+        "vehicle_capacity": 3,
+        "baggage": "1 чемодан и ручная кладь на гостя",
+        "child_seats": true
+      },
+      "review_items": [
+        {
+          "id": "sample-kazan-2-r0",
+          "theme": "Чистота",
+          "rating": 9,
+          "text": "В номере чисто, постель удобная. Уборка была каждый день.",
+          "traveller": "семья",
+          "date": "2026-09-14",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-kazan-2-r1",
+          "theme": "Питание",
+          "rating": 8,
+          "text": "Завтрак понравился, но утром в выходные приходилось немного ждать.",
+          "traveller": "пара",
+          "date": "2026-09-22",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-kazan-2-r2",
+          "theme": "Тишина",
+          "rating": 8,
+          "text": "Вечером слышны соседи в коридоре. Для чувствительного сна лучше номер подальше от лифта.",
+          "traveller": "пара",
+          "date": "2026-10-02",
+          "source_kind": "synthetic"
+        }
+      ]
+    },
+    {
+      "id": "sample-kazan-3",
+      "name": "Тихая бухта",
+      "address": "Казань · за городом",
+      "image_url": "/assets/stay-c.jpg",
+      "images": [
+        "/assets/stay-c.jpg"
+      ],
+      "destination": "Казань",
+      "source_kind": "synthetic",
+      "checked_at": "2026-10-27T00:00:00+03:00",
+      "rating": 7.7,
+      "reviews": 3,
+      "stars": 3,
+      "distance_m": 18000,
+      "beach_m": null,
+      "property_kind": "HOTEL",
+      "amenity_codes": [
+        "has_internet",
+        "has_parking",
+        "has_kids"
+      ],
+      "amenities": [
+        "Wi-Fi",
+        "Парковка",
+        "Для детей"
+      ],
+      "reference_nightly_minor": 280000,
+      "content": {
+        "source_kind": "synthetic",
+        "description": "Более доступное проживание вдали от центра; дорога до объекта дольше.",
+        "room": "Стандартный номер",
+        "room_capacity": 2,
+        "beds": "Двуспальная кровать",
+        "checkin_from": "14:00",
+        "checkin_until": "23:00",
+        "checkout_until": "12:00",
+        "children_allowed": true,
+        "pets_allowed": false,
+        "breakfast_available": true,
+        "transfer_minutes": 90,
+        "transfer_oneway_minor": 650000,
+        "vehicle_capacity": 3,
+        "baggage": "1 чемодан и ручная кладь на гостя",
+        "child_seats": true
+      },
+      "review_items": [
+        {
+          "id": "sample-kazan-3-r0",
+          "theme": "Чистота",
+          "rating": 8,
+          "text": "В номере чисто, постель удобная. Уборка была каждый день.",
+          "traveller": "семья",
+          "date": "2026-09-14",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-kazan-3-r1",
+          "theme": "Питание",
+          "rating": 8,
+          "text": "Завтрак понравился, но утром в выходные приходилось немного ждать.",
+          "traveller": "пара",
+          "date": "2026-09-22",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-kazan-3-r2",
+          "theme": "Тишина",
+          "rating": 7,
+          "text": "Вечером слышны соседи в коридоре. Для чувствительного сна лучше номер подальше от лифта.",
+          "traveller": "пара",
+          "date": "2026-10-02",
+          "source_kind": "synthetic"
+        }
+      ]
+    },
+    {
+      "id": "sample-yaroslavl-1",
+      "name": "Сосновый берег",
+      "address": "Ярославль · зелёный район",
+      "image_url": "/assets/stay-a.webp",
+      "images": [
+        "/assets/stay-a.webp"
+      ],
+      "destination": "Ярославль",
+      "source_kind": "synthetic",
+      "checked_at": "2026-10-27T00:00:00+03:00",
+      "rating": 8.7,
+      "reviews": 3,
+      "stars": 4,
+      "distance_m": 4200,
+      "beach_m": null,
+      "property_kind": "HOTEL",
+      "amenity_codes": [
+        "has_internet",
+        "has_parking",
+        "has_kids",
+        "has_pool",
+        "has_spa"
+      ],
+      "amenities": [
+        "Wi-Fi",
+        "Парковка",
+        "Для детей",
+        "Бассейн",
+        "Спа"
+      ],
+      "reference_nightly_minor": 480000,
+      "content": {
+        "source_kind": "synthetic",
+        "description": "Небольшой отель в зелёном районе. Подойдёт для спокойного отдыха с бассейном.",
+        "room": "Семейный номер",
+        "room_capacity": 3,
+        "beds": "Двуспальная кровать и дополнительное место",
+        "checkin_from": "14:00",
+        "checkin_until": "23:00",
+        "checkout_until": "12:00",
+        "children_allowed": true,
+        "pets_allowed": false,
+        "breakfast_available": true,
+        "transfer_minutes": 35,
+        "transfer_oneway_minor": 220000,
+        "vehicle_capacity": 3,
+        "baggage": "1 чемодан и ручная кладь на гостя",
+        "child_seats": true
+      },
+      "review_items": [
+        {
+          "id": "sample-yaroslavl-1-r0",
+          "theme": "Чистота",
+          "rating": 9,
+          "text": "В номере чисто, постель удобная. Уборка была каждый день.",
+          "traveller": "семья",
+          "date": "2026-09-14",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-yaroslavl-1-r1",
+          "theme": "Питание",
+          "rating": 9,
+          "text": "Завтрак понравился, но утром в выходные приходилось немного ждать.",
+          "traveller": "пара",
+          "date": "2026-09-22",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-yaroslavl-1-r2",
+          "theme": "Тишина",
+          "rating": 8,
+          "text": "Вечером слышны соседи в коридоре. Для чувствительного сна лучше номер подальше от лифта.",
+          "traveller": "пара",
+          "date": "2026-10-02",
+          "source_kind": "synthetic"
+        }
+      ]
+    },
+    {
+      "id": "sample-yaroslavl-2",
+      "name": "Городской сад",
+      "address": "Ярославль · рядом с центром",
+      "image_url": "/assets/stay-b.jpg",
+      "images": [
+        "/assets/stay-b.jpg"
+      ],
+      "destination": "Ярославль",
+      "source_kind": "synthetic",
+      "checked_at": "2026-10-27T00:00:00+03:00",
+      "rating": 8.3,
+      "reviews": 3,
+      "stars": 3,
+      "distance_m": 800,
+      "beach_m": null,
+      "property_kind": "HOTEL",
+      "amenity_codes": [
+        "has_internet",
+        "has_parking",
+        "has_kids",
+        "has_pool",
+        "has_spa"
+      ],
+      "amenities": [
+        "Wi-Fi",
+        "Парковка",
+        "Для детей",
+        "Бассейн",
+        "Спа"
+      ],
+      "reference_nightly_minor": 360000,
+      "content": {
+        "source_kind": "synthetic",
+        "description": "Удобная база для прогулок: центр и транспорт рядом.",
+        "room": "Стандартный номер",
+        "room_capacity": 2,
+        "beds": "Двуспальная кровать",
+        "checkin_from": "14:00",
+        "checkin_until": "23:00",
+        "checkout_until": "12:00",
+        "children_allowed": true,
+        "pets_allowed": false,
+        "breakfast_available": true,
+        "transfer_minutes": 20,
+        "transfer_oneway_minor": 140000,
+        "vehicle_capacity": 3,
+        "baggage": "1 чемодан и ручная кладь на гостя",
+        "child_seats": true
+      },
+      "review_items": [
+        {
+          "id": "sample-yaroslavl-2-r0",
+          "theme": "Чистота",
+          "rating": 9,
+          "text": "В номере чисто, постель удобная. Уборка была каждый день.",
+          "traveller": "семья",
+          "date": "2026-09-14",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-yaroslavl-2-r1",
+          "theme": "Питание",
+          "rating": 8,
+          "text": "Завтрак понравился, но утром в выходные приходилось немного ждать.",
+          "traveller": "пара",
+          "date": "2026-09-22",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-yaroslavl-2-r2",
+          "theme": "Тишина",
+          "rating": 8,
+          "text": "Вечером слышны соседи в коридоре. Для чувствительного сна лучше номер подальше от лифта.",
+          "traveller": "пара",
+          "date": "2026-10-02",
+          "source_kind": "synthetic"
+        }
+      ]
+    },
+    {
+      "id": "sample-yaroslavl-3",
+      "name": "Тихая бухта",
+      "address": "Ярославль · за городом",
+      "image_url": "/assets/stay-c.jpg",
+      "images": [
+        "/assets/stay-c.jpg"
+      ],
+      "destination": "Ярославль",
+      "source_kind": "synthetic",
+      "checked_at": "2026-10-27T00:00:00+03:00",
+      "rating": 7.7,
+      "reviews": 3,
+      "stars": 3,
+      "distance_m": 18000,
+      "beach_m": null,
+      "property_kind": "HOTEL",
+      "amenity_codes": [
+        "has_internet",
+        "has_parking",
+        "has_kids"
+      ],
+      "amenities": [
+        "Wi-Fi",
+        "Парковка",
+        "Для детей"
+      ],
+      "reference_nightly_minor": 280000,
+      "content": {
+        "source_kind": "synthetic",
+        "description": "Более доступное проживание вдали от центра; дорога до объекта дольше.",
+        "room": "Стандартный номер",
+        "room_capacity": 2,
+        "beds": "Двуспальная кровать",
+        "checkin_from": "14:00",
+        "checkin_until": "23:00",
+        "checkout_until": "12:00",
+        "children_allowed": true,
+        "pets_allowed": false,
+        "breakfast_available": true,
+        "transfer_minutes": 90,
+        "transfer_oneway_minor": 650000,
+        "vehicle_capacity": 3,
+        "baggage": "1 чемодан и ручная кладь на гостя",
+        "child_seats": true
+      },
+      "review_items": [
+        {
+          "id": "sample-yaroslavl-3-r0",
+          "theme": "Чистота",
+          "rating": 8,
+          "text": "В номере чисто, постель удобная. Уборка была каждый день.",
+          "traveller": "семья",
+          "date": "2026-09-14",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-yaroslavl-3-r1",
+          "theme": "Питание",
+          "rating": 8,
+          "text": "Завтрак понравился, но утром в выходные приходилось немного ждать.",
+          "traveller": "пара",
+          "date": "2026-09-22",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-yaroslavl-3-r2",
+          "theme": "Тишина",
+          "rating": 7,
+          "text": "Вечером слышны соседи в коридоре. Для чувствительного сна лучше номер подальше от лифта.",
+          "traveller": "пара",
+          "date": "2026-10-02",
+          "source_kind": "synthetic"
+        }
+      ]
+    },
+    {
+      "id": "sample-sortavala-1",
+      "name": "Дом у сосен",
+      "address": "Сортавала · зелёный район",
+      "image_url": "/assets/stay-a.webp",
+      "images": [
+        "/assets/stay-a.webp"
+      ],
+      "destination": "Сортавала",
+      "source_kind": "synthetic",
+      "checked_at": "2026-10-27T00:00:00+03:00",
+      "rating": 8.7,
+      "reviews": 3,
+      "stars": 4,
+      "distance_m": 4200,
+      "beach_m": null,
+      "property_kind": "COTTAGE",
+      "amenity_codes": [
+        "has_internet",
+        "has_parking",
+        "has_kids",
+        "has_pool",
+        "has_spa"
+      ],
+      "amenities": [
+        "Wi-Fi",
+        "Парковка",
+        "Для детей",
+        "Бассейн",
+        "Спа"
+      ],
+      "reference_nightly_minor": 480000,
+      "content": {
+        "source_kind": "synthetic",
+        "description": "Небольшой отель в зелёном районе. Подойдёт для спокойного отдыха с бассейном.",
+        "room": "Семейный номер",
+        "room_capacity": 3,
+        "beds": "Двуспальная кровать и дополнительное место",
+        "checkin_from": "14:00",
+        "checkin_until": "23:00",
+        "checkout_until": "12:00",
+        "children_allowed": true,
+        "pets_allowed": false,
+        "breakfast_available": true,
+        "transfer_minutes": 35,
+        "transfer_oneway_minor": 220000,
+        "vehicle_capacity": 3,
+        "baggage": "1 чемодан и ручная кладь на гостя",
+        "child_seats": true
+      },
+      "review_items": [
+        {
+          "id": "sample-sortavala-1-r0",
+          "theme": "Чистота",
+          "rating": 9,
+          "text": "В номере чисто, постель удобная. Уборка была каждый день.",
+          "traveller": "семья",
+          "date": "2026-09-14",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-sortavala-1-r1",
+          "theme": "Питание",
+          "rating": 9,
+          "text": "Завтрак понравился, но утром в выходные приходилось немного ждать.",
+          "traveller": "пара",
+          "date": "2026-09-22",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-sortavala-1-r2",
+          "theme": "Тишина",
+          "rating": 8,
+          "text": "Вечером слышны соседи в коридоре. Для чувствительного сна лучше номер подальше от лифта.",
+          "traveller": "пара",
+          "date": "2026-10-02",
+          "source_kind": "synthetic"
+        }
+      ]
+    },
+    {
+      "id": "sample-sortavala-2",
+      "name": "Лесная станция",
+      "address": "Сортавала · рядом с центром",
+      "image_url": "/assets/stay-b.jpg",
+      "images": [
+        "/assets/stay-b.jpg"
+      ],
+      "destination": "Сортавала",
+      "source_kind": "synthetic",
+      "checked_at": "2026-10-27T00:00:00+03:00",
+      "rating": 8.3,
+      "reviews": 3,
+      "stars": 3,
+      "distance_m": 800,
+      "beach_m": null,
+      "property_kind": "COTTAGE",
+      "amenity_codes": [
+        "has_internet",
+        "has_parking",
+        "has_kids",
+        "has_pool",
+        "has_spa"
+      ],
+      "amenities": [
+        "Wi-Fi",
+        "Парковка",
+        "Для детей",
+        "Бассейн",
+        "Спа"
+      ],
+      "reference_nightly_minor": 360000,
+      "content": {
+        "source_kind": "synthetic",
+        "description": "Удобная база для прогулок: центр и транспорт рядом.",
+        "room": "Стандартный номер",
+        "room_capacity": 2,
+        "beds": "Двуспальная кровать",
+        "checkin_from": "14:00",
+        "checkin_until": "23:00",
+        "checkout_until": "12:00",
+        "children_allowed": true,
+        "pets_allowed": false,
+        "breakfast_available": true,
+        "transfer_minutes": 20,
+        "transfer_oneway_minor": 140000,
+        "vehicle_capacity": 3,
+        "baggage": "1 чемодан и ручная кладь на гостя",
+        "child_seats": true
+      },
+      "review_items": [
+        {
+          "id": "sample-sortavala-2-r0",
+          "theme": "Чистота",
+          "rating": 9,
+          "text": "В номере чисто, постель удобная. Уборка была каждый день.",
+          "traveller": "семья",
+          "date": "2026-09-14",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-sortavala-2-r1",
+          "theme": "Питание",
+          "rating": 8,
+          "text": "Завтрак понравился, но утром в выходные приходилось немного ждать.",
+          "traveller": "пара",
+          "date": "2026-09-22",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-sortavala-2-r2",
+          "theme": "Тишина",
+          "rating": 8,
+          "text": "Вечером слышны соседи в коридоре. Для чувствительного сна лучше номер подальше от лифта.",
+          "traveller": "пара",
+          "date": "2026-10-02",
+          "source_kind": "synthetic"
+        }
+      ]
+    },
+    {
+      "id": "sample-sortavala-3",
+      "name": "Озёрный дом",
+      "address": "Сортавала · за городом",
+      "image_url": "/assets/stay-c.jpg",
+      "images": [
+        "/assets/stay-c.jpg"
+      ],
+      "destination": "Сортавала",
+      "source_kind": "synthetic",
+      "checked_at": "2026-10-27T00:00:00+03:00",
+      "rating": 7.7,
+      "reviews": 3,
+      "stars": 3,
+      "distance_m": 18000,
+      "beach_m": null,
+      "property_kind": "COTTAGE",
+      "amenity_codes": [
+        "has_internet",
+        "has_parking",
+        "has_kids"
+      ],
+      "amenities": [
+        "Wi-Fi",
+        "Парковка",
+        "Для детей"
+      ],
+      "reference_nightly_minor": 280000,
+      "content": {
+        "source_kind": "synthetic",
+        "description": "Более доступное проживание вдали от центра; дорога до объекта дольше.",
+        "room": "Стандартный номер",
+        "room_capacity": 2,
+        "beds": "Двуспальная кровать",
+        "checkin_from": "14:00",
+        "checkin_until": "23:00",
+        "checkout_until": "12:00",
+        "children_allowed": true,
+        "pets_allowed": false,
+        "breakfast_available": true,
+        "transfer_minutes": 90,
+        "transfer_oneway_minor": 650000,
+        "vehicle_capacity": 3,
+        "baggage": "1 чемодан и ручная кладь на гостя",
+        "child_seats": true
+      },
+      "review_items": [
+        {
+          "id": "sample-sortavala-3-r0",
+          "theme": "Чистота",
+          "rating": 8,
+          "text": "В номере чисто, постель удобная. Уборка была каждый день.",
+          "traveller": "семья",
+          "date": "2026-09-14",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-sortavala-3-r1",
+          "theme": "Питание",
+          "rating": 8,
+          "text": "Завтрак понравился, но утром в выходные приходилось немного ждать.",
+          "traveller": "пара",
+          "date": "2026-09-22",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-sortavala-3-r2",
+          "theme": "Тишина",
+          "rating": 7,
+          "text": "Вечером слышны соседи в коридоре. Для чувствительного сна лучше номер подальше от лифта.",
+          "traveller": "пара",
+          "date": "2026-10-02",
+          "source_kind": "synthetic"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,417 @@
+{
+  "generated_at": "2026-10-27T08:51:15.053891+00:00",
+  "suite": "holdout-20261027",
+  "warmup_ms": null,
+  "results": [
+    {
+      "case_id": "h01_yaroslavl_four_nights",
+      "input_message": "Два взрослых, из Москвы в Ярославль. Заезд 3 ноября 2026, выезд 7 ноября 2026. Лимит 50 тысяч рублей на дорогу, гостиницу, трансферы и сборы.",
+      "expected_outcome": {
+        "status": "choosing",
+        "fields": {
+          "destination": "Ярославль",
+          "dates.start": "2026-11-03",
+          "dates.end": "2026-11-07",
+          "budget.amount_minor": 5000000,
+          "budget_scope": "booking",
+          "travellers.adults": 2
+        }
+      },
+      "observed_outcome": {
+        "schema_version": "0.2",
+        "based_on_revision": 0,
+        "status": "choosing",
+        "trip_spec": {
+          "origin": "Москва",
+          "destination": "Ярославль",
+          "country": null,
+          "dates": {
+            "start": "2026-11-03",
+            "end": "2026-11-07"
+          },
+          "duration_days": null,
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 5000000,
+            "currency": "RUB"
+          },
+          "budget_scope": "booking",
+          "expense_reserve": null,
+          "hard_constraints": {
+            "no_night_flights": false,
+            "free_cancellation": false,
+            "pets": false,
+            "other": []
+          },
+          "preferences": [],
+          "locked_component_ids": []
+        },
+        "patch": {
+          "origin": "Москва",
+          "destination": "Ярославль",
+          "dates": {
+            "start": "2026-11-03",
+            "end": "2026-11-07"
+          },
+          "travellers": {
+            "adults": 2,
+            "children": []
+          },
+          "budget": {
+            "amount_minor": 5000000,
+            "currency": "RUB"
+          },
+          "budget_scope": "booking"
+        },
+        "assistant_message": "Найдены варианты, соответствующие указанным условиям. Сравните состав цены, условия отмены и происхождение данных.",
+        "questions": [],
+        "destination_options": [],
+        "options": [
+          {
+            "id": "yaroslavl:2026-11-03:2026-11-07:A",
+            "dates": {
+              "start": "2026-11-03",
+              "end": "2026-11-07"
+            },
+            "component_ids": [
+              "yaroslavl:2026-11-03:2026-11-07:transport:A",
+              "yaroslavl:2026-11-03:2026-11-07:hotel:A",
+              "yaroslavl:2026-11-03:2026-11-07:transfers:shared",
+              "yaroslavl:2026-11-03:2026-11-07:fees:A"
+            ],
+            "breakdown": {
+              "transport": {
+                "amount_minor": 700000,
+                "currency": "RUB"
+              },
+              "hotel": {
+                "amount_minor": 1280000,
+                "currency": "RUB"
+              },
+              "transfers": {
+                "amount_minor": 200000,
+                "currency": "RUB"
+              },
+              "fees": {
+                "amount_minor": 100000,
+                "currency": "RUB"
+              }
+            },
+            "total": {
+              "amount_minor": 2280000,
+              "currency": "RUB"
+            },
+            "checks": [
+              {
+                "code": "catalogue",
+                "status": "pass",
+                "message": "Состав, цена и условия заново получены из учебного каталога по ID."
+              },
+              {
+                "code": "budget",
+                "status": "pass",
+                "message": "Услуги поездки: 22 800 ₽ при допустимом лимите 50 000 ₽."
+              },
+              {
+                "code": "dates",
+                "status": "pass",
+                "message": "Даты сверены с учебным каталогом: ноябрь–декабрь 2026, от 1 до 14 ночей; выезд не позднее 31 декабря."
+              },
+              {
+                "code": "duration",
+                "status": "pass",
+                "message": "Длительность в календарных днях должна совпадать с точными датами; ночи считаются отдельно."
+              },
+              {
+                "code": "travellers",
+                "status": "pass",
+                "message": "Тариф только для двух взрослых."
+              },
+              {
+                "code": "transport",
+                "status": "pass",
+                "message": "Учебный путь туда-обратно, оба трансфера и сборы включены."
+              },
+              {
+                "code": "locks",
+                "status": "pass",
+                "message": "Закреплённые компоненты должны сохраниться."
+              },
+              {
+                "code": "no_night_flights",
+                "status": "pass",
+                "message": "Учебные рейсы: туда 10:00–12:00, обратно 15:00–17:00, UTC+03:00; ночных интервалов нет."
+              },
+              {
+                "code": "free_cancellation",
+                "status": "pass",
+                "message": "Тариф B невозвратный; A и C — учебная бесплатная отмена."
+              }
+            ],
+            "evidence": [
+              {
+                "id": "demo:yaroslavl:2026-11-03:2026-11-07:A:price_and_terms",
+                "subject": "yaroslavl:2026-11-03:2026-11-07:A:price_and_terms",
+                "source_kind": "synthetic",
+                "source_url": null,
+                "checked_at": "2026-10-27T08:51:15.051098+00:00",
+                "scope": "synthetic-russia-v2: учебный набор, не рыночная цена или реальная доступность"
+              }
+            ],
+            "tradeoffs": [
+              "Все цены, расписание и свойства — учебные."
+            ]
+          },
+          {
+            "id": "yaroslavl:2026-11-03:2026-11-07:B",
+            "dates": {
+              "start": "2026-11-03",
+              "end": "2026-11-07"
+            },
+            "component_ids": [
+              "yaroslavl:2026-11-03:2026-11-07:transport:B",
+              "yaroslavl:2026-11-03:2026-11-07:hotel:B",
+              "yaroslavl:2026-11-03:2026-11-07:transfers:shared",
+              "yaroslavl:2026-11-03:2026-11-07:fees:B"
+            ],
+            "breakdown": {
+              "transport": {
+                "amount_minor": 600000,
+                "currency": "RUB"
+              },
+              "hotel": {
+                "amount_minor": 1040000,
+                "currency": "RUB"
+              },
+              "transfers": {
+                "amount_minor": 200000,
+                "currency": "RUB"
+              },
+              "fees": {
+                "amount_minor": 100000,
+                "currency": "RUB"
+              }
+            },
+            "total": {
+              "amount_minor": 1940000,
+              "currency": "RUB"
+            },
+            "checks": [
+              {
+                "code": "catalogue",
+                "status": "pass",
+                "message": "Состав, цена и условия заново получены из учебного каталога по ID."
+              },
+              {
+                "code": "budget",
+                "status": "pass",
+                "message": "Услуги поездки: 19 400 ₽ при допустимом лимите 50 000 ₽."
+              },
+              {
+                "code": "dates",
+                "status": "pass",
+                "message": "Даты сверены с учебным каталогом: ноябрь–декабрь 2026, от 1 до 14 ночей; выезд не позднее 31 декабря."
+              },
+              {
+                "code": "duration",
+                "status": "pass",
+                "message": "Длительность в календарных днях должна совпадать с точными датами; ночи считаются отдельно."
+              },
+              {
+                "code": "travellers",
+                "status": "pass",
+                "message": "Тариф только для двух взрослых."
+              },
+              {
+                "code": "transport",
+                "status": "pass",
+                "message": "Учебный путь туда-обратно, оба трансфера и сборы включены."
+              },
+              {
+                "code": "locks",
+                "status": "pass",
+                "message": "Закреплённые компоненты должны сохраниться."
+              },
+              {
+                "code": "no_night_flights",
+                "status": "pass",
+                "message": "Учебные рейсы: туда 10:00–12:00, обратно 15:00–17:00, UTC+03:00; ночных интервалов нет."
+              },
+              {
+                "code": "free_cancellation",
+                "status": "pass",
+                "message": "Тариф B невозвратный; A и C — учебная бесплатная отмена."
+              }
+            ],
+            "evidence": [
+              {
+                "id": "demo:yaroslavl:2026-11-03:2026-11-07:B:price_and_terms",
+                "subject": "yaroslavl:2026-11-03:2026-11-07:B:price_and_terms",
+                "source_kind": "synthetic",
+                "source_url": null,
+                "checked_at": "2026-10-27T08:51:15.051344+00:00",
+                "scope": "synthetic-russia-v2: учебный набор, не рыночная цена или реальная доступность"
+              }
+            ],
+            "tradeoffs": [
+              "Все цены, расписание и свойства — учебные.",
+              "Невозвратный тариф: бесплатная отмена отсутствует."
+            ]
+          },
+          {
+            "id": "yaroslavl:2026-11-03:2026-11-07:C",
+            "dates": {
+              "start": "2026-11-03",
+              "end": "2026-11-07"
+            },
+            "component_ids": [
+              "yaroslavl:2026-11-03:2026-11-07:transport:C",
+              "yaroslavl:2026-11-03:2026-11-07:hotel:C",
+              "yaroslavl:2026-11-03:2026-11-07:transfers:shared",
+              "yaroslavl:2026-11-03:2026-11-07:fees:C"
+            ],
+            "breakdown": {
+              "transport": {
+                "amount_minor": 800000,
+                "currency": "RUB"
+              },
+              "hotel": {
+                "amount_minor": 1520000,
+                "currency": "RUB"
+              },
+              "transfers": {
+                "amount_minor": 200000,
+                "currency": "RUB"
+              },
+              "fees": {
+                "amount_minor": 100000,
+                "currency": "RUB"
+              }
+            },
+            "total": {
+              "amount_minor": 2620000,
+              "currency": "RUB"
+            },
+            "checks": [
+              {
+                "code": "catalogue",
+                "status": "pass",
+                "message": "Состав, цена и условия заново получены из учебного каталога по ID."
+              },
+              {
+                "code": "budget",
+                "status": "pass",
+                "message": "Услуги поездки: 26 200 ₽ при допустимом лимите 50 000 ₽."
+              },
+              {
+                "code": "dates",
+                "status": "pass",
+                "message": "Даты сверены с учебным каталогом: ноябрь–декабрь 2026, от 1 до 14 ночей; выезд не позднее 31 декабря."
+              },
+              {
+                "code": "duration",
+                "status": "pass",
+                "message": "Длительность в календарных днях должна совпадать с точными датами; ночи считаются отдельно."
+              },
+              {
+                "code": "travellers",
+                "status": "pass",
+                "message": "Тариф только для двух взрослых."
+              },
+              {
+                "code": "transport",
+                "status": "pass",
+                "message": "Учебный путь туда-обратно, оба трансфера и сборы включены."
+              },
+              {
+                "code": "locks",
+                "status": "pass",
+                "message": "Закреплённые компоненты должны сохраниться."
+              },
+              {
+                "code": "no_night_flights",
+                "status": "pass",
+                "message": "Учебные рейсы: туда 10:00–12:00, обратно 15:00–17:00, UTC+03:00; ночных интервалов нет."
+              },
+              {
+                "code": "free_cancellation",
+                "status": "pass",
+                "message": "Тариф B невозвратный; A и C — учебная бесплатная отмена."
+              }
+            ],
+            "evidence": [
+              {
+                "id": "demo:yaroslavl:2026-11-03:2026-11-07:C:price_and_terms",
+                "subject": "yaroslavl:2026-11-03:2026-11-07:C:price_and_terms",
+                "source_kind": "synthetic",
+                "source_url": null,
+                "checked_at": "2026-10-27T08:51:15.051455+00:00",
+                "scope": "synthetic-russia-v2: учебный набор, не рыночная цена или реальная доступность"
+              }
+            ],
+            "tradeoffs": [
+              "Все цены, расписание и свойства — учебные."
+            ]
+          }
+        ],
+        "change_preview": null,
+        "checkout_allowed": false,
+        "booking": null,
+        "error_code": null,
+        "data_mode": "synthetic",
+        "telemetry": {
+          "model": "qwen3.5-9b",
+          "provider": "llama_cpp",
+          "prompt_version": "odin-request-4.2",
+          "model_calls": 1,
+          "tool_calls": [
+            "search_packages"
+          ],
+          "first_useful_ms": 35779,
+          "total_ms": 35779,
+          "usage": {
+            "completion_tokens": 233,
+            "prompt_tokens": 1227,
+            "total_tokens": 1460
+          },
+          "cost": null
+        }
+      },
+      "pass": true,
+      "constraint_errors": [],
+      "model": "qwen3.5-9b",
+      "provider": "llama_cpp",
+      "prompt_version": "odin-request-4.2",
+      "model_calls": 1,
+      "tool_calls": [
+        "search_packages"
+      ],
+      "first_useful_ms": 35779,
+      "total_ms": 35779,
+      "usage": {
+        "completion_tokens": 233,
+        "prompt_tokens": 1227,
+        "total_tokens": 1460
+      },
+      "cost": null,
+      "evaluation_mode": "live_qwen_synthetic_tools",
+      "prompt_sha256": "23662b59449e8d25dda33b9a79fb5ae3208001ec5dcb81c0e013c3d44b5100d1",
+      "configuration": {
+        "provider": "llama_cpp",
+        "model": "qwen3.5-9b",
+        "timeout_seconds": 180.0,
+        "temperature": 0,
+        "code_sha256": {
+          "domain.py": "ec2115c59d6746e3149f6debe668efdbd56c09a5e720c0419acd60f244ed0811",
+          "demo_tools.py": "5ee1960291ee2955f92d6de4da38c418f7fbb0b176a5088bfb0b9ee72c9bdcee",
+          "model.py": "a886121af2b841e774aa7c2407396b5027e976716ffbf7a0879dc51a7442cc09",
+          "runner.py": "f7f42003435ac4d4af0bf88e5ac79e53850b920ba974f2414a7d94527e4350ff",
+          "tools.py": "1b57034eb9db2444347d7a849f7ae96fc9e2a77d3f44c2b9a768a389a9613986"
+        }
+      }
+    }
+  ]
+}
