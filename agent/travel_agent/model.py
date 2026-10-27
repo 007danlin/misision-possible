@@ -85,6 +85,25 @@ def compact_state(value):
     return value
 
 
+def hotel_reference_state(spec, message):
+    """Keep values needed to resolve relative edits, never the whole old plan."""
+    import re
+    keep = {"preferences", "locked_component_ids"}
+    text = message.casefold().replace("ё", "е")
+    for clause in re.split(r"[.!?;,]", text):
+        if not re.search(r"еще|добав|присоедин|плюс|минус|больше|меньше|увелич|уменьш|сниз|повыс|продл|сократ|дольше|короче", clause):
+            continue
+        if re.search(r"взросл|человек|ребен|дет|\bнас\b", clause):
+            keep.add("travellers")
+        if re.search(r"бюджет|руб|тысяч|\d\s*к\b", clause):
+            keep.update({"budget", "budget_period", "budget_scope"})
+        if re.search(r"ноч|день|дней|суток|срок", clause):
+            keep.update({"dates", "stay_nights", "duration_days"})
+    if re.search(r"(?:том|того|тот) же месяц|следующ\w* месяц", text):
+        keep.add("dates")
+    return {k: v for k, v in spec.items() if k in keep}
+
+
 class ModelError(Exception):
     def __init__(self, code: str):
         self.code = code
@@ -220,9 +239,8 @@ class QwenModel:
                 # into the complete TripSpec. Old dates, guests and money invite
                 # small models to copy them and waste CPU on unchanged facts.
                 # Retain references needed for explicit removal and locking.
-                state["trip_spec"] = {k: v for k, v in state["trip_spec"].items()
-                                      if k in {"preferences", "locked_component_ids"}}
-        wire = self.settings.provider == "llama_cpp" and context.get("search_mode") == "hotels" and not repair and 0 < len(context["message"]) <= 500 and os.getenv("HOTEL_COMPACT_WIRE", "0") == "1"
+                state["trip_spec"] = hotel_reference_state(state["trip_spec"], context["message"])
+        wire = self.settings.provider == "llama_cpp" and context.get("search_mode") == "hotels" and 0 < len(context["message"]) <= 500 and os.getenv("HOTEL_COMPACT_WIRE", "0") == "1"
         instructions = COMPACT_HOTEL_PROMPT if context.get("search_mode") == "hotels" else SYSTEM_PROMPT
         if wire:
             from .compact_wire import prompt, encode
@@ -238,12 +256,16 @@ class QwenModel:
             messages = [{"role": "system", "content": instructions + "\n" + reference},
                         {"role": "user", "content": context["message"]}]
         if repair:
+            repair_instruction = ("Исправь полный разбор исходного сообщения в том же компактном формате с e:0. "
+                                  "Не копируй поля старой поездки. Сохрани остальные верные изменения."
+                                  if wire else
+                                  "Исправь эти ошибки и верни ПОЛНЫЙ JSON разбора исходного сообщения путешественника. "
+                                  "Сохрани остальные верные поля. Цитаты evidence копируй дословно из исходного сообщения; "
+                                  "не меняй окончания слов. Это исправление ответа, не новое желание путешественника.")
             messages.extend([
                 {"role": "assistant", "content": repair["previous_output"]},
                 {"role": "user", "content": "Ответ не прошёл проверку: " + repair["validation_error"]
-                 + "\nИсправь эти ошибки и верни ПОЛНЫЙ JSON разбора исходного сообщения путешественника. "
-                 "Сохрани остальные верные поля. Цитаты evidence копируй дословно из исходного сообщения; "
-                 "не меняй окончания слов. Это исправление ответа, не новое желание путешественника."},
+                 + "\n" + repair_instruction},
             ])
         payload = {
             "model": self.settings.model, "messages": messages, "temperature": 0,

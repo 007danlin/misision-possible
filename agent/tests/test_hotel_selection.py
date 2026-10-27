@@ -16,6 +16,21 @@ def hotel(id,price=500000,pool=True,rating=9,center=500):
 
 
 class SelectionTests(unittest.TestCase):
+    def test_whole_trip_budget_failure_reports_a_useful_minimum(self):
+        from test_public_content import base, spec as trip_spec
+        from travel_agent.hotel_selection import response_text
+        candidate=base()
+        baseline=trip_spec()
+        matching,_=select_hotels([candidate],baseline)
+        self.assertTrue(matching)
+        minimum=matching[0]['journey']['total_minor']
+        limited=baseline.model_copy(update={'budget':baseline.budget.model_copy(update={'amount_minor':500000})})
+        choices,info=select_hotels([candidate],limited)
+        self.assertFalse(choices)
+        self.assertEqual(info['min_budget_minor'],minimum)
+        self.assertIn('общий бюджет',info['rejected'])
+        self.assertIn('Самый доступный вариант',response_text(choices,info,limited,{}))
+
     def test_later_matching_candidate_beats_first_three(self):
         candidates=[hotel('expensive',900000),hotel('no-pool',pool=False),hotel('far',center=8000),hotel('match')]
         results,info=select_hotels(candidates,spec(hotel_preferences={'pool':True,'max_center_m':2000}))

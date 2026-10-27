@@ -76,7 +76,7 @@ async def run_turn(state: State, message: str, tools: ToolRegistry, model=None, 
                 "last_questions": state.questions,
                 "displayed_hotels": [{"position": i+1, "name": h.get("name"), "reasons": h.get("reasons", [])} for i,h in enumerate(state.hotel_options)],
             }
-            from .fast_intent import fast_intent, protect_child_count, protect_stay_length, protect_adult_count, protect_explicit_forest, protect_hotel_budget_scope, protect_explicit_polarity, protect_hotel_question, protect_journey_language
+            from .fast_intent import fast_intent, protect_child_count, protect_added_children, protect_stay_length, protect_adult_count, protect_explicit_forest, protect_hotel_budget_scope, protect_explicit_polarity, protect_hotel_question, protect_journey_language
             direct = fast_intent(state, message) if state.search_mode == "hotels" and isinstance(model, QwenModel) else None
             repair = None
             for attempt in range(2):
@@ -95,6 +95,7 @@ async def run_turn(state: State, message: str, tools: ToolRegistry, model=None, 
                     intent = Intent.model_validate_json(canonical_intent(raw, message if state.search_mode == "hotels" else None))
                     intent = protect_child_count(intent, message, state.trip_spec)
                     if state.search_mode == "hotels":
+                        intent = protect_added_children(intent, message, state.trip_spec)
                         intent = protect_stay_length(intent, message, state.trip_spec)
                         intent = protect_adult_count(intent, message)
                         intent = protect_explicit_forest(intent, message)
@@ -157,7 +158,13 @@ async def run_turn(state: State, message: str, tools: ToolRegistry, model=None, 
                                   destination_options=directions, **updates)
                 questions = missing_hotel_questions(spec)
                 if questions:
-                    return result("needs_input", (f"В поездке {str(spec.travellers.adults)+" взрослых и " if spec.travellers.adults else ""}{len(spec.travellers.children)} детей. " if any(age is None for age in spec.travellers.children) else "Учёл ваши пожелания. ") + questions[0], **updates)
+                    intro='Учёл ваши пожелания. '
+                    if any(age is None for age in spec.travellers.children):
+                        count=len(spec.travellers.children)
+                        children='ребёнок' if count==1 else 'ребёнка' if count in {2,3,4} else 'детей'
+                        adults=(str(spec.travellers.adults)+(' взрослый' if spec.travellers.adults==1 else ' взрослых')+' и ') if spec.travellers.adults else ''
+                        intro=f'В поездке {adults}{count} {children}. '
+                    return result("needs_input",intro+questions[0], **updates)
                 # Reprice the chosen hotel for incremental edits; replacing it is an explicit search.
                 road_change=bool(state.selected_hotel and spec.destination==state.trip_spec.destination
                     and spec.country==state.trip_spec.country and intent.action not in {'replace_options','restore_options'}

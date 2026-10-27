@@ -155,6 +155,17 @@ def has_nightly_evidence(quote: str) -> bool:
     return bool(re.search(r"за\s+(?:одну\s+|1\s+)?ночь|за\s+сутки|в\s+сутки|в\s+день|/\s*(?:ночь|сутки)|кажд\w*\s+ночь|per\s+night", quote, re.IGNORECASE))
 
 
+def has_calendar_reference(message: str) -> bool:
+    """Gate calendar output; nights, a month or a budget alone cannot supply dates."""
+    if re.search(r"\b\d{4}-\d{2}-\d{2}\b|\b\d{1,2}[./]\d{1,2}(?:[./]\d{2,4})?\b", message):
+        return True
+    month = r"(?:январ\w*|феврал\w*|март\w*|апрел\w*|ма[йяе]|июн\w*|июл\w*|август\w*|сентябр\w*|октябр\w*|ноябр\w*|декабр\w*)"
+    day = r"(?<!\d)(?:3[01]|[12]\d|0?[1-9])(?!\d)"
+    ordinal = r"(?:перв|втор|треть|четв[её]рт|пят|шест|седьм|восьм|девят|десят|\w+надцат|двадцат|тридцат)\w*"
+    return bool(re.search(rf"(?:{day}|{ordinal})\s+{month}\b|\b{month}\s+{day}", message, re.I)
+                or (re.search(month, message, re.I) and re.search(rf"\bс\s+{day}\s*(?:по|до|[-–—])\s*{day}", message, re.I)))
+
+
 def explicit_ruble_amount(quote: str) -> int | None:
     """Independent check for one numeric rouble amount, not a language-model parser."""
     pattern = r"(?<![\w.,])(\d(?:[\d \u00a0]*\d)?(?:[.,]\d+)?)\s*(тыс(?:яч[а-я]*)?\.?|млн\.?|миллион[а-я]*|[kк](?![а-яa-z])|руб[а-я]*|₽)"

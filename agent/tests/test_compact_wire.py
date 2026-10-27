@@ -63,10 +63,16 @@ class CompactProtocolTests(unittest.IsolatedAsyncioTestCase):
   (raw,_),payload=await self.invoke()
   self.assertEqual(json.loads(raw),{'destination':'Сочи','evidence':'Хочу в Сочи'})
   self.assertIn('grammar',payload);self.assertNotIn('response_format',payload)
- async def test_long_messages_and_repairs_keep_full_protocol(self):
-  for message,repair in [('x'*501,None),('Хочу в Сочи',{'previous_output':'{}','validation_error':'invalid'})]:
-   (_, _),payload=await self.invoke(message,repair)
-   self.assertNotIn('grammar',payload);self.assertEqual(payload['response_format']['type'],'json_schema')
+ async def test_long_messages_keep_full_protocol(self):
+  (_, _),payload=await self.invoke('x'*501)
+  self.assertNotIn('grammar',payload);self.assertEqual(payload['response_format']['type'],'json_schema')
+ async def test_repair_reuses_stable_wire_prefix(self):
+  _,initial=await self.invoke()
+  (raw,_),repaired=await self.invoke(repair={'previous_output':'{}','validation_error':'missing city'})
+  self.assertEqual(initial['messages'][0],repaired['messages'][0])
+  self.assertIn('grammar',repaired);self.assertNotIn('response_format',repaired)
+  self.assertIn('missing city',repaired['messages'][-1]['content'])
+  self.assertEqual(json.loads(raw)['destination'],'Сочи')
  async def test_invalid_wire_goes_to_existing_validation_retry(self):
   (raw,_),_=await self.invoke(raw='{"e":3,"to":"Сочи"}')
   self.assertIn('wire_error',json.loads(raw))
@@ -85,3 +91,11 @@ class GroundedGrammarTests(unittest.TestCase):
   from travel_agent.compact_wire import grammar
   for text in ('20 тысяч за ночь','5000 рублей в сутки','4000 / ночь'):
    self.assertIn('night_rub',grammar(text))
+
+ def test_calendar_output_needs_calendar_reference(self):
+  from travel_agent.compact_wire import grammar
+  date_key=json.dumps('"d":')
+  for text in ('На четыре ночи до 40 тысяч рублей','На 5 ночей в ноябре 2026','Вдвоем до 20 тысяч рублей за ночь'):
+   self.assertNotIn(date_key,grammar(text).splitlines()[1])
+  for text in ('С 10 по 15 ноября 2026','2026-11-10 — 2026-11-15','12.11.2026 — 15.11.2026','С первого по пятое ноября'):
+   self.assertIn(date_key,grammar(text).splitlines()[1])

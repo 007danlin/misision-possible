@@ -117,7 +117,7 @@ def missing_hotel_questions(spec):
     from . import journey
     if not spec.destination: return ['В каком городе ищем отель?']
     if not spec.travellers.adults: return ['Сколько взрослых поедет? Будут ли дети?']
-    if any(age is None for age in spec.travellers.children): return [f'Сколько лет каждому из {len(spec.travellers.children)} детей? Укажите возраста списком.']
+    if any(age is None for age in spec.travellers.children): return ['Сколько лет ребёнку?'] if len(spec.travellers.children)==1 else [f'Сколько лет каждому из {len(spec.travellers.children)} детей? Укажите возраста списком.']
     if not spec.dates and not spec.stay_nights: return ['На какие даты или на сколько ночей ищем отель?']
     if journey.enabled(spec):
         missing = journey.questions(spec)

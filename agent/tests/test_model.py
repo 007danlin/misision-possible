@@ -83,6 +83,23 @@ class ModelTests(unittest.IsolatedAsyncioTestCase):
         for field in ("origin","destination","travellers","budget","hotel_preferences","hard_constraints","preferences"):
             self.assertEqual(getattr(result,field),getattr(old,field))
 
+    def test_relative_edits_retain_the_needed_reference(self):
+        from travel_agent.model import hotel_reference_state
+        old = {"destination":"Казань", "travellers":{"adults":2},
+               "budget":{"amount_minor":12000000}, "budget_scope":"whole_trip",
+               "dates":{"start":"2026-11-10","end":"2026-11-15"},
+               "hotel_preferences":{"pool":True}, "preferences":["тихо"]}
+        for message, needed in (("Добавь еще одного взрослого", "travellers"),
+                                ("Увеличь бюджет на 10 тысяч рублей", "budget"),
+                                ("Продли поездку на две ночи", "dates")):
+            reference = hotel_reference_state(old, message)
+            self.assertEqual(reference[needed], old[needed])
+            self.assertNotIn("destination", reference)
+            self.assertNotIn("hotel_preferences", reference)
+        reference = hotel_reference_state(old, "Бассейн больше не нужен. Бюджет 90 тысяч рублей.")
+        self.assertNotIn("budget", reference)
+        self.assertTrue(old["hotel_preferences"]["pool"])
+
     async def test_dashscope_requires_configuration(self):
         with self.assertRaises(ModelError) as error:
             await self.invoke(Settings(provider="dashscope", base_url="https://example.invalid/v1"))

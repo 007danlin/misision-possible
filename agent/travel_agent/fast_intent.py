@@ -40,6 +40,40 @@ def protect_child_count(intent, message, previous):
     data.setdefault('evidence',{})['travellers']=message[:500] if len(message)<=500 else quote
     return Intent.model_validate(data)
 
+
+def protect_added_children(intent, message, previous):
+    """An explicit addition is a delta; preserve known guests and never invent ages."""
+    text=message.lower().replace('ё','е')
+    pattern=r'\b(?:добавь|добавим|добавить)\s+(?:(?:еще|пожалуйста)\s+)?(?:(?P<count>'+COUNT+r')\s+)?(?P<noun>ребенка|ребенок|детей)\b'
+    matches=list(re.finditer(pattern,text))
+    if len(matches)!=1:return intent
+    match=matches[0]
+    start=max(text.rfind(c,0,match.start()) for c in '.!?;')+1
+    end=min([p for c in '.!?;' if (p:=text.find(c,match.end()))>=0] or [len(text)])
+    clause=text[start:end]
+    if re.search(r'\b(?:если|или|либо)\b',clause) or re.search(r'\bне\s+(?:(?:хочу|нужно|надо|будем)\s+)?$',text[start:match.start()]):return intent
+    if not match['count'] and match['noun']=='детей':return intent
+    count=number(match['count']) if match['count'] else 1
+    ages=list(previous.travellers.children)
+    if len(ages)+count>10:
+        return Intent(action='clarify',questions=['В одной поездке можно указать не более 10 детей. Сколько детей поедет всего?'])
+    tail=text[match.end():end]
+    age=re.match(r'\s+(?:в\s+возрасте\s+)?(\d{1,2})\s*(?:лет|года?|годик(?:а|ов)?)\b',tail)
+    if age is None and count==1:
+        age=re.search(r'\b(?:ему|ей|ребенку)\s+(\d{1,2})\s*(?:лет|года?)\b',tail)
+    if age is None and re.search(r'\d+\s*(?:лет|года?)\b',tail):return intent
+    value=int(age[1]) if age else None
+    if value is not None and value>17:
+        return Intent(action='clarify',questions=['Сколько лет ребёнку? Для детского размещения укажите возраст от 0 до 17 лет.'])
+    data=intent.model_dump(exclude_unset=True)
+    data.setdefault('patch',{}).setdefault('travellers',{})['children']=ages+[value]*count
+    data.setdefault('evidence',{})['travellers']=message[:500]
+    # A standard missing-age question is handled after the explicit count is saved.
+    if data.get('questions') and all(re.search(r'возраст|сколько\s+лет',q,re.I) for q in data['questions']):
+        data['questions']=[]
+    data['action']='change'
+    return Intent.model_validate(data)
+
 def fast_intent(state,message):
     clarification = clarify_ambiguous_request(message)
     if clarification:
@@ -54,8 +88,9 @@ def fast_intent(state,message):
         evidence.update({k:message for k in extra if k not in {'action','hotel_reference'}})
         return Intent.model_validate(dict(patch=patch or {},evidence=evidence,**extra))
     # Incremental family edits must not replace known children or invent an age.
-    m=re.fullmatch(r'(?:добавь|добавим|добавить)\s+(?:(?:еще|пожалуйста)\s+)?(?:(?P<count>' + COUNT + r')\s+)?(?:ребенка|ребенок|детей)(?:\s+(?P<age>\d{1,2})\s*(?:лет|года?|годик(?:а|ов)?))?',text)
+    m=re.fullmatch(r'(?:добавь|добавим|добавить)\s+(?:(?:еще|пожалуйста)\s+)?(?:(?P<count>' + COUNT + r')\s+)?(?P<noun>ребенка|ребенок|детей)(?:\s+(?P<age>\d{1,2})\s*(?:лет|года?|годик(?:а|ов)?))?(?:\s*[,;]\s*возраст\s+(?:уточню|скажу|сообщу)\s+(?:позже|потом))?',text)
     if m:
+        if not m['count'] and m['noun']=='детей':return Intent(action='clarify',questions=['Сколько детей добавим в поездку?'])
         count=number(m['count']) if m['count'] else 1
         age=int(m['age']) if m['age'] is not None else None
         if age is not None and age>17 or count+len(state.trip_spec.travellers.children)>10:
