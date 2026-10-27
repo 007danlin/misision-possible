@@ -1,0 +1,27 @@
+{
+  "at": "2026-10-27T20:21:10.446973+00:00",
+  "host_os": "Darwin",
+  "host_arch": "arm64",
+  "cpu": "Apple M4",
+  "ram_bytes": "34359738368",
+  "swap": "vm.swapusage: total = 18432.00M  used = 17080.62M  free = 1351.38M  (encrypted)",
+  "virtual_memory": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                   232071.\nPages active:                                 483270.\nPages inactive:                               474927.\nPages speculative:                              7355.\nPages throttled:                                   0.\nPages wired down:                             290089.\nPages purgeable:                                6771.\n\"Translation faults\":                     9723081283.\nPages copy-on-write:                       186547556.\nPages zero filled:                       10236105919.\nPages reactivated:                        2346024958.\nPages purged:                              283262906.\nFile-backed pages:                            352609.\nAnonymous pages:                              612943.\nPages stored in compressor:                   879538.\nPages occupied by compressor:                 556875.\nDecompressions:                           2587920061.\nCompressions:                             2921157274.\nPageins:                                   755971181.\nPageouts:                                    1975005.\nSwapins:                                   117536295.\nSwapouts:                                  138926484.",
+  "memory_pressure": "The system has 34359738368 (2097152 pages with a page size of 16384).\nSystem-wide memory free percentage: 58%",
+  "thermal": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+  "docker": {
+    "Architecture": "aarch64",
+    "NCPU": 10,
+    "MemTotal": 8321712128,
+    "ServerVersion": "29.4.0",
+    "KernelVersion": "6.12.76-linuxkit"
+  },
+  "container": {
+    "image": "sha256:bab8b24661ac496fc3e95f92e04bc43f8052aa579068867fce822b4be0c57802",
+    "state": "exited",
+    "oom_killed": false,
+    "Memory": 5368709120,
+    "MemorySwap": 5368709120,
+    "CpusetCpus": "0-3",
+    "NanoCpus": 0
+  }
+}

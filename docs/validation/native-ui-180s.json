@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "times": {
+    "first_turn_ms": 63872,
+    "change_turn_ms": 13700
+  },
+  "errors": [],
+  "url": "http://127.0.0.1:18080"
+}

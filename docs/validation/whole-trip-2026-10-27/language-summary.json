@@ -1,0 +1,7 @@
+{
+  "cases": 95,
+  "passed": 95,
+  "failed": [],
+  "environment": "local Qwen3.5-9B, native Metal, direct extraction without shortcuts",
+  "prompt_version": "odin-request-9.0"
+}

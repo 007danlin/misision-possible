@@ -1,0 +1,20 @@
+[
+  {
+    "label": "initial",
+    "cycle": 0,
+    "model": "qwen3.5-9b",
+    "endpoint": "http://127.0.0.1:18083/v1",
+    "compact_wire": "0",
+    "output": "{\n  \"evidence\": \"Из Москвы в Сочи с 10 по 15 ноября 2026 года, двое взрослых. 150 тысяч рублей на отель, дорогу и оба трансфера. Нужен бассейн.\",\n  \"origin\": \"Москва\",\n  \"destination\": \"Сочи\",\n  \"dates\": {\n    \"start\": \"2026-11-10\",\n    \"end\": \"2026-11-15\"\n  },\n  \"stay_nights\": 5,\n  \"travellers\": {\n    \"adults\": 2\n  },\n  \"budget\": {\n    \"amount_minor\": 1500000,\n    \"currency\": \"RUB\"\n  },\n  \"budget_scope\": \"whole_trip\",\n  \"include_transport\": true,\n  \"hotel_preferences\": {\n    \"pool\": true\n  }\n}",
+    "usage": {
+      "completion_tokens": 209,
+      "prompt_tokens": 1215,
+      "total_tokens": 1424,
+      "prompt_ms": 177444,
+      "generation_ms": 56558,
+      "cached_tokens": 0,
+      "evaluated_prompt_tokens": 1215
+    },
+    "seconds": 236.688
+  }
+]

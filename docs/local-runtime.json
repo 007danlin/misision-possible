@@ -1,0 +1,19 @@
+{
+  "runtime": "llama.cpp b11853",
+  "runtime_asset": "llama-b11853-bin-macos-arm64.tar.gz",
+  "runtime_sha256": "83902b6f1779a95b0009d07f780e4a2b0cfe4c517ceb94f8553c148a0d1936e7",
+  "base_model": "Qwen/Qwen3.5-9B",
+  "quantization_repository": "unsloth/Qwen3.5-9B-GGUF",
+  "alias": "qwen3.5-9b",
+  "model_directory": "qwen3.5-9b",
+  "model_entry": "Qwen3.5-9B-Q4_K_M.gguf",
+  "model_revision": "3885219b6810b007914f3a7950a8d1b469d598a5",
+  "license": "Apache-2.0",
+  "model_files": [
+    {
+      "file": "Qwen3.5-9B-Q4_K_M.gguf",
+      "size_bytes": 5680522464,
+      "sha256": "03b74727a860a56338e042c4420bb3f04b2fec5734175f4cb9fa853daf52b7e8"
+    }
+  ]
+}

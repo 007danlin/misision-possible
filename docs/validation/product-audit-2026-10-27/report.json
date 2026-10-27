@@ -1,0 +1,199 @@
+{
+  "checked_at": "2026-10-27T14:59:36.761Z",
+  "base": "http://127.0.0.1:18080",
+  "steps": [
+    {
+      "message": "Из Москвы в Сочи, 10–15 ноября 2026, двое взрослых. Бюджет 120 тысяч рублей на всю поездку: дорогу, отель и трансферы. Без ночных рейсов.",
+      "elapsed_ms": 61101,
+      "http_status": 200,
+      "status": "needs_input",
+      "answer": "Сохранил ваши пожелания. Какая часть бюджета предназначена именно для отеля? Например: «40 тысяч рублей только на отель».",
+      "trip_spec": {
+        "budget": {
+          "amount_minor": 12000000,
+          "currency": "RUB"
+        },
+        "budget_period": "stay",
+        "budget_scope": "booking",
+        "country": null,
+        "dates": {
+          "end": "2026-11-15",
+          "start": "2026-11-10"
+        },
+        "destination": "Сочи",
+        "duration_days": null,
+        "expense_reserve": null,
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_night_flights": true,
+          "other": [],
+          "pets": false
+        },
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": null,
+          "spa": null
+        },
+        "locked_component_ids": [],
+        "origin": "Москва",
+        "preferences": [],
+        "stay_nights": null,
+        "travel_setting": "any",
+        "travellers": {
+          "adults": 2,
+          "children": []
+        }
+      },
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 60816,
+        "model": "qwen3.5-9b",
+        "model_calls": 1,
+        "prompt_version": "odin-request-5.1",
+        "provider": "llama_cpp",
+        "tool_calls": [],
+        "total_ms": 60816,
+        "usage": {
+          "completion_tokens": 253,
+          "prompt_tokens": 2274,
+          "total_tokens": 2527
+        }
+      },
+      "hotel_count": 0
+    },
+    {
+      "message": "На отель 40 тысяч рублей, обязательно бассейн и бесплатная отмена. Остальные условия оставь.",
+      "elapsed_ms": 63538,
+      "http_status": 200,
+      "status": "choosing",
+      "answer": "Учёл бюджет, пожелания к отелю, обязательные условия. Сравнил 20 отелей, вашим условиям соответствуют 8. Показываю лучшие по соответствию и оценкам гостей. Спа-отель Грейс Арли — бассейн в отеле; в вашем бюджете; бесплатная отмена.",
+      "trip_spec": {
+        "budget": {
+          "amount_minor": 4000000,
+          "currency": "RUB"
+        },
+        "budget_period": "stay",
+        "budget_scope": "hotel",
+        "country": null,
+        "dates": {
+          "end": "2026-11-15",
+          "start": "2026-11-10"
+        },
+        "destination": "Сочи",
+        "duration_days": null,
+        "expense_reserve": null,
+        "hard_constraints": {
+          "free_cancellation": true,
+          "no_night_flights": true,
+          "other": [],
+          "pets": false
+        },
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": true,
+          "spa": null
+        },
+        "locked_component_ids": [],
+        "origin": "Москва",
+        "preferences": [],
+        "stay_nights": null,
+        "travel_setting": "any",
+        "travellers": {
+          "adults": 2,
+          "children": []
+        }
+      },
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 62545,
+        "model": "qwen3.5-9b",
+        "model_calls": 1,
+        "prompt_version": "odin-request-5.1",
+        "provider": "llama_cpp",
+        "tool_calls": [
+          "ostrovok_public_search"
+        ],
+        "total_ms": 62545,
+        "usage": {
+          "completion_tokens": 115,
+          "prompt_tokens": 2350,
+          "total_tokens": 2465
+        }
+      },
+      "hotel_count": 3,
+      "first_hotel": {
+        "address": "улица Ленина, д.219 Д, Сочи",
+        "amenities": [
+          "Wi-Fi",
+          "Бассейн",
+          "Парковка",
+          "Спа",
+          "Для детей"
+        ],
+        "amenity_codes": [
+          "has_internet",
+          "has_airport_transfer",
+          "has_parking",
+          "has_kids",
+          "has_pool",
+          "has_meal",
+          "has_spa",
+          "beach",
+          "air-conditioning"
+        ],
+        "beach_m": 135,
+        "checked_at": "2026-10-27T15:01:40.965566+00:00",
+        "distance_m": 18741,
+        "id": "otel_arli",
+        "image_url": "https://cdn.ostrovok.ru/t/640x400/extranet/74/e3/74e36f1e6a9c1513b4faa09a0eaa1b01d61120c5.PNG",
+        "images": [
+          "https://cdn.ostrovok.ru/t/640x400/extranet/74/e3/74e36f1e6a9c1513b4faa09a0eaa1b01d61120c5.PNG",
+          "https://cdn.ostrovok.ru/t/640x400/extranet/83/00/830040c0a5de967fb3bce1196f7a560be0f2fdb9.png",
+          "https://cdn.ostrovok.ru/t/640x400/extranet/03/c1/03c19c66235906a86e71d70e5a83ad2dc43fa1be.JPEG"
+        ],
+        "match_score": 99.42,
+        "name": "Спа-отель Грейс Арли",
+        "property_kind": "HOTEL",
+        "quote": {
+          "breakfast": false,
+          "currency": "RUB",
+          "explanation": "Демонстрационный тариф для прототипа, рассчитан от справочной цены каталога. Наличие и стоимость на выбранные даты не подтверждены Островком.",
+          "free_cancellation": true,
+          "nightly_minor": 270000,
+          "nights": 5,
+          "rooms": 1,
+          "source_kind": "demo",
+          "total_minor": 1350000
+        },
+        "rating": 9.3,
+        "reasons": [
+          "Бассейн в отеле",
+          "В вашем бюджете",
+          "Бесплатная отмена",
+          "Оценка гостей 9.3/10"
+        ],
+        "reviews": 614,
+        "source_url": "https://ostrovok.ru/hotel/russia/sochi/?language=ru",
+        "stars": 3,
+        "unverified": [],
+        "url": "https://ostrovok.ru/hotel/russia/sochi/mid8105660/otel_arli/?language=ru&dates=10.11.2026-15.11.2026&guests=2"
+      }
+    }
+  ],
+  "errors": [],
+  "detail_text": "← К подборке\nСпа-отель Грейс Арли\n\nулица Ленина, д.219 Д, Сочи\n\n9,3\n614 отзывов\n18,7 км до центра\nWi-Fi\nБассейн\nПарковка\nСпа\nДля детей\nБассейн в отеле\nВ вашем бюджете\nБесплатная отмена\nВаше размещение\n\n10 нояб — 15 нояб\n\n13 500 ₽\nза 5 ночей · 1 номер\nПерейти к оформлению\n\nИсточник: публичный каталог Островка. Получено 27.10.2026, 18:01:40",
+  "checkout_text": "✓\nВыбор отеля\n2\nОформление\n3\nГотово\n← Выбрать другой отель\n\nВаш выбор\n\nОстался один шаг\n\nПроверьте детали поездки и укажите имя гостя.\n\nДаты и гости\nЗаезд\n\nВыезд 15 нояб · 5 ночей\n\n2 взрослых\n\nИзменить даты или гостей в чате\nКто поедет?\nИмя и фамилия гостя\nВ стоимость входит\n\n1 номер · 2 взрослых\n\nБез питания\n\nБесплатная отмена до заезда\n\nБез дополнительных сборов\n\nПоказ прототипа: без оплаты и реального бронирования.\nПодтвердить поездку\nСпа-отель Грейс Арли\n\nулица Ленина, д.219 Д, Сочи\n\n10 нояб — 15 нояб\n\n2 взрослых\n\n13 500 ₽\nза 5 ночей · 1 номер\nИтого\n13 500 ₽",
+  "mobile_overflow": false
+}

@@ -1,0 +1,21 @@
+{
+  "assistant_message": "Не удалось разобрать запрос с помощью модели. Поездка сохранена; попробуйте ещё раз.",
+  "booking": null,
+  "change_preview": null,
+  "checkout_allowed": false,
+  "data_mode": "synthetic",
+  "destination_options": [],
+  "error_code": "model_unavailable",
+  "history": [
+    "Из Москвы в Сочи, двое взрослых"
+  ],
+  "options": [],
+  "questions": [],
+  "request_id": "17e4175d94e8129887856cdabe162b04",
+  "revision": 1,
+  "schema_version": "0.2",
+  "selected_plan": null,
+  "session_id": "03939c413f638d1ccad91ec38a6c3fbd",
+  "status": "error",
+  "trip_spec": {}
+}

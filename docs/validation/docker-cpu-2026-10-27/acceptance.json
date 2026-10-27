@@ -1,0 +1,1 @@
+{"target":"4 CPU, maximum 6 GiB for the application stack, no GPU","quality":"95/95 existing language regressions and end-to-end UI passes; no removal of assertions","warm_latency_goal_seconds":{"p95":30,"max":90},"cold_start_goal_seconds":600,"notes":"Target for this test machine; a CPU quota does not emulate an older CPU or guarantee identical performance."}

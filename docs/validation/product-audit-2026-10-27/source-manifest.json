@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-10-27T15:10:00.464547+00:00",
+  "served_comparison": {
+    "app.js": {
+      "source_sha256": "d6fc6e3c06719277f4334977278c2a2daf81651ca52504f1d1c4dd260612aaa6",
+      "served_sha256": "d6fc6e3c06719277f4334977278c2a2daf81651ca52504f1d1c4dd260612aaa6",
+      "same": true
+    },
+    "hotel-checkout.js": {
+      "source_sha256": "ee9aaec235109425b276684239ee39e8bf825b96b086f48081853f5eef95c513",
+      "served_sha256": "ee9aaec235109425b276684239ee39e8bf825b96b086f48081853f5eef95c513",
+      "same": true
+    }
+  },
+  "source_files": {
+    "agent/travel_agent/runner.py": "15c0f7ec2dd4324b1f2ccaad6be1f5d38467c866b528b3532547550c0ad19915",
+    "agent/travel_agent/ostrovok.py": "28fb896590acab05c612af05d5afb03ae93c50d8386e23b6bfa9cbcdd6efd64f",
+    "agent/travel_agent/hotel_selection.py": "3dd7d2382e44094e68cce18c1bfc2a92f7bb9418ee05bc6c5b762d446ae4177a",
+    "agent/travel_agent/demo_tools.py": "5ee1960291ee2955f92d6de4da38c418f7fbb0b176a5088bfb0b9ee72c9bdcee",
+    "agent/travel_agent/inspiration.py": "f8e3f4b25f36990594e006b75e8cac385aae511f2d46aff09664a7838815e496",
+    "backend/core/web/app.js": "d6fc6e3c06719277f4334977278c2a2daf81651ca52504f1d1c4dd260612aaa6",
+    "backend/core/web/hotel-checkout.js": "ee9aaec235109425b276684239ee39e8bf825b96b086f48081853f5eef95c513",
+    "backend/core/hotel_booking.go": "435cb642a879b268cc65596267be68b11eba03809f1063d4722da572da5f6f97",
+    "backend/core/hotel_edit.go": "70d86e46525a08a6628de5cc8fa4c84a075412f794d3286d7eaa3e6005496278",
+    "docker-compose.yml": "05220ee1f5c0c7fc00f0fc5b9f21d15a8b9f1c45ede8b8ae0371ad4c653b85b6",
+    ".env.example": "a540d1d99aca3b263b4235c8d4d84cc5ed919c5bc9684eafd9227a34ca0921d4"
+  },
+  "documentation_note": "README link added after source audit; product source hashes reflect the audit snapshot."
+}

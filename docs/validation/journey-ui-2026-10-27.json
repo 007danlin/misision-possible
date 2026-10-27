@@ -1,0 +1,58 @@
+{
+  "steps": [
+    {
+      "message": "Из Москвы в Сочи, 10–15 ноября 2026, двое взрослых. 120 тысяч рублей на дорогу, отель и оба трансфера. Без ночных рейсов, нужен бассейн.",
+      "status": "needs_input",
+      "answer": "Учёл ваши пожелания. Сколько из общего бюджета оставить на питание и личные расходы? Можно написать «резерв 0 рублей».",
+      "elapsed_ms": 6425,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 6343,
+        "model": "qwen3.5-9b",
+        "model_calls": 1,
+        "prompt_version": "odin-request-7.0",
+        "provider": "llama_cpp",
+        "tool_calls": [],
+        "total_ms": 6343,
+        "usage": {
+          "completion_tokens": 67,
+          "prompt_tokens": 1145,
+          "total_tokens": 1212
+        }
+      }
+    },
+    {
+      "message": "Резерв на личные расходы 0 рублей.",
+      "status": "choosing",
+      "answer": "Проверил ваши условия. Сравнил 3 отелей, вашим условиям соответствуют 2. Показываю лучшие по соответствию и оценкам гостей. Сосновый берег — дорога и оба трансфера включены; бассейн в отеле; оценка гостей 8.7/10. В итог входят проживание, дорога туда-обратно и оба трансфера. Время прибытия и заселения сверено.",
+      "elapsed_ms": 61,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 1,
+        "model": "qwen3.5-9b",
+        "model_calls": 0,
+        "prompt_version": "odin-request-7.0",
+        "provider": "llama_cpp",
+        "tool_calls": [
+          "journey_catalogue"
+        ],
+        "total_ms": 1,
+        "usage": {}
+      }
+    }
+  ],
+  "errors": [],
+  "first_total": 6440000,
+  "booking_total": 7400000,
+  "booking_id": "OP-DB0C0EB4",
+  "checked_on": "2026-10-27",
+  "environment": "macOS, native Metal Qwen3.5-9B, local Core and agent, Chrome headless",
+  "python_tests": 115,
+  "go_checks": [
+    "go test -race ./...",
+    "go vet ./..."
+  ],
+  "ui_result": "passed",
+  "docker_cpu_end_to_end": "not_verified_by_this_run",
+  "data_source": "journey_catalogue.json: synthetic hotels, reviews, prices and schedules"
+}

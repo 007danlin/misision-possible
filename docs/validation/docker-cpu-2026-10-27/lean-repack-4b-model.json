@@ -1,0 +1,59 @@
+[
+  {
+    "source_hashes": {
+      "model.py": "b7a54334e5d02cea70b2d6e370ed443c8ddd7a607b8d04de6871cfe4f805b8b2",
+      "compact_wire.py": "e733afdd7f3d4fe58fcb5c34098d09f5dc539c9b42be551f75bf4148167aeaaf"
+    },
+    "label": "initial",
+    "cycle": 0,
+    "model": "qwen3.5-4b",
+    "endpoint": "http://127.0.0.1:18083/v1",
+    "compact_wire": "1",
+    "error": "model_timeout",
+    "seconds": 300.353
+  },
+  {
+    "source_hashes": {
+      "model.py": "b7a54334e5d02cea70b2d6e370ed443c8ddd7a607b8d04de6871cfe4f805b8b2",
+      "compact_wire.py": "e733afdd7f3d4fe58fcb5c34098d09f5dc539c9b42be551f75bf4148167aeaaf"
+    },
+    "label": "change",
+    "cycle": 0,
+    "model": "qwen3.5-4b",
+    "endpoint": "http://127.0.0.1:18083/v1",
+    "compact_wire": "1",
+    "output": "{\"evidence\":\"Отель оставь, но лучше поездом. Без ночных переездов.\",\"transport_mode\":\"train\",\"hard_constraints\":{\"no_night_flights\":true},\"include_transport\":true}",
+    "usage": {
+      "completion_tokens": 19,
+      "prompt_tokens": 1426,
+      "total_tokens": 1445,
+      "prompt_ms": 30377,
+      "generation_ms": 23007,
+      "cached_tokens": 1336,
+      "evaluated_prompt_tokens": 90
+    },
+    "seconds": 55.731
+  },
+  {
+    "source_hashes": {
+      "model.py": "b7a54334e5d02cea70b2d6e370ed443c8ddd7a607b8d04de6871cfe4f805b8b2",
+      "compact_wire.py": "e733afdd7f3d4fe58fcb5c34098d09f5dc539c9b42be551f75bf4148167aeaaf"
+    },
+    "label": "complex",
+    "cycle": 0,
+    "model": "qwen3.5-4b",
+    "endpoint": "http://127.0.0.1:18083/v1",
+    "compact_wire": "1",
+    "output": "{\"evidence\":\"Бассейн больше не обязателен, зато нужны завтрак и парковка. Бюджет 90 тысяч рублей на всю поездку, остальные условия сохрани.\",\"remove_hotel_preferences\":[\"pool\"],\"hotel_preferences\":{\"breakfast\":true,\"parking\":true},\"budget_scope\":\"hotel\",\"budget\":{\"amount_minor\":9000000,\"currency\":\"RUB\"}}",
+    "usage": {
+      "completion_tokens": 32,
+      "prompt_tokens": 1445,
+      "total_tokens": 1477,
+      "prompt_ms": 15750,
+      "generation_ms": 35836,
+      "cached_tokens": 1336,
+      "evaluated_prompt_tokens": 109
+    },
+    "seconds": 51.74
+  }
+]

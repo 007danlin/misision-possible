@@ -1,0 +1,17 @@
+{
+  "assistant_message": "Расскажите, куда и когда хотите поехать. Можно начать с идеи отдыха.",
+  "booking": null,
+  "change_preview": null,
+  "checkout_allowed": false,
+  "data_mode": "synthetic",
+  "destination_options": [],
+  "options": [],
+  "questions": [],
+  "request_id": "149bc36615e9545dbf54c8c42cd63f7b",
+  "revision": 0,
+  "schema_version": "0.2",
+  "selected_plan": null,
+  "session_id": "0026aa0962a1bf122372a7092a1cee83",
+  "status": "needs_input",
+  "trip_spec": {}
+}

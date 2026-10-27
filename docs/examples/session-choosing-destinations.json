@@ -1,0 +1,114 @@
+{
+  "assistant_message": "Можно начать с направлений из каталога. Цены поездки потребуют уточнения условий.",
+  "booking": null,
+  "change_preview": null,
+  "checkout_allowed": false,
+  "data_mode": "synthetic",
+  "destination_options": [
+    {
+      "availability": "synthetic_fixture_only",
+      "evidence": [
+        {
+          "checked_at": "2026-10-24T15:55:32.132799+00:00",
+          "id": "demo:destination:sochi",
+          "scope": "Учебный набор, не рыночная цена или реальная доступность",
+          "source_kind": "synthetic",
+          "source_url": null,
+          "subject": "destination:sochi"
+        }
+      ],
+      "id": "sochi",
+      "name": "Сочи",
+      "reason": "Море и прогулки"
+    },
+    {
+      "availability": "synthetic_fixture_only",
+      "evidence": [
+        {
+          "checked_at": "2026-10-24T15:55:32.132833+00:00",
+          "id": "demo:destination:kazan",
+          "scope": "Учебный набор, не рыночная цена или реальная доступность",
+          "source_kind": "synthetic",
+          "source_url": null,
+          "subject": "destination:kazan"
+        }
+      ],
+      "id": "kazan",
+      "name": "Казань",
+      "reason": "Город, архитектура и прогулки"
+    },
+    {
+      "availability": "synthetic_fixture_only",
+      "evidence": [
+        {
+          "checked_at": "2026-10-24T15:55:32.132839+00:00",
+          "id": "demo:destination:vladimir",
+          "scope": "Учебный набор, не рыночная цена или реальная доступность",
+          "source_kind": "synthetic",
+          "source_url": null,
+          "subject": "destination:vladimir"
+        }
+      ],
+      "id": "vladimir",
+      "name": "Владимир",
+      "reason": "Исторический город; природа требует отдельного маршрута"
+    }
+  ],
+  "error_code": null,
+  "history": [
+    "Из Москвы 10–15 ноября 2026, двое взрослых. До 40 тысяч рублей на дорогу, отель, трансферы и сборы. Направление пока не выбрали."
+  ],
+  "options": [],
+  "questions": [],
+  "request_id": "98da92cae0b74f8a46ec050c5ba52d33",
+  "revision": 1,
+  "schema_version": "0.2",
+  "selected_plan": null,
+  "session_id": "a33b9608755b6b762e40a92153679391",
+  "status": "choosing",
+  "telemetry": {
+    "cost": null,
+    "first_useful_ms": 16358,
+    "model": "qwen3.5-9b",
+    "model_calls": 1,
+    "prompt_version": "odin-request-4.2",
+    "provider": "llama_cpp",
+    "tool_calls": [
+      "get_destination_options"
+    ],
+    "total_ms": 16358,
+    "usage": {
+      "completion_tokens": 204,
+      "prompt_tokens": 1214,
+      "total_tokens": 1418
+    }
+  },
+  "trip_spec": {
+    "budget": {
+      "amount_minor": 4000000,
+      "currency": "RUB"
+    },
+    "budget_scope": "booking",
+    "country": null,
+    "dates": {
+      "end": "2026-11-15",
+      "start": "2026-11-10"
+    },
+    "destination": null,
+    "duration_days": null,
+    "expense_reserve": null,
+    "hard_constraints": {
+      "free_cancellation": false,
+      "no_night_flights": false,
+      "other": [],
+      "pets": false
+    },
+    "locked_component_ids": [],
+    "origin": "Москва",
+    "preferences": [],
+    "travellers": {
+      "adults": 2,
+      "children": []
+    }
+  }
+}

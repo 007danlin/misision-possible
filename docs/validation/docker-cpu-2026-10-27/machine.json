@@ -1,0 +1,14 @@
+{
+  "machine": "MacBook Air M4",
+  "host_ram_gib": 32,
+  "host_cores": 10,
+  "performance_cores": 4,
+  "efficiency_cores": 6,
+  "docker_cpu": 10,
+  "docker_ram_bytes": 8321712128,
+  "docker_architecture": "aarch64",
+  "docker_version": "29.4.0",
+  "kernel": "6.12.76-linuxkit",
+  "other_containers": "existing development infra left running; approximately 1.1 GiB RAM",
+  "gpu": "disabled; n_gpu_layers=0"
+}

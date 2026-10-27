@@ -1,0 +1,203 @@
+{
+  "passed": true,
+  "javascript_errors": [],
+  "map_tiles_loaded": true,
+  "initial": {
+    "id": "otel_arli",
+    "name": "Спа-отель Грейс Арли",
+    "total": 2654800,
+    "weather": {
+      "checked_at": "2026-10-27T18:06:10.105733+00:00",
+      "days": [
+        {
+          "date": "2026-10-31",
+          "max": 16.1,
+          "min": 15.2
+        },
+        {
+          "date": "2026-11-01",
+          "max": 17.9,
+          "min": 12.4
+        },
+        {
+          "date": "2026-11-02",
+          "max": 21.1,
+          "min": 11.5
+        },
+        {
+          "date": "2026-11-03",
+          "max": 17.6,
+          "min": 13.5
+        }
+      ],
+      "forecast_updated_at": "2026-10-27T17:17:16Z",
+      "kind": "forecast",
+      "source_label": "MET Norway · CC BY 4.0",
+      "source_url": "https://api.met.no/",
+      "text": "Диапазон температуры по доступным часам прогноза. Показана только доступная часть поездки."
+    },
+    "nearby": [
+      {
+        "category": "С детьми",
+        "distance_kind": "straight",
+        "distance_m": 22,
+        "lat": 43.4726676940918,
+        "lng": 39.89590072631836,
+        "name": "Океанариум Sochi Discovery World Aquarium",
+        "reason": "Можно рассмотреть для семейного досуга; часы работы и билеты уточняются.",
+        "region_id": 6292571,
+        "score": 0.9977776307264435,
+        "source_url": "https://ostrovok.ru/hotel/russia/sochi/mid8105660/otel_arli/?language=ru&dates=31.10.2026-03.11.2026&guests=2",
+        "type": "ZOOS_AND_AQUARIUMS"
+      },
+      {
+        "category": "Прогулки",
+        "distance_kind": "straight",
+        "distance_m": 8768,
+        "lat": 43.40626907348633,
+        "lng": 39.95451736450195,
+        "name": "Олимпийский парк",
+        "reason": "Природная точка для прогулки; доступность троп нужно уточнить.",
+        "region_id": 965826459,
+        "score": 0.1232180358603937,
+        "source_url": "https://ostrovok.ru/hotel/russia/sochi/mid8105660/otel_arli/?language=ru&dates=31.10.2026-03.11.2026&guests=2",
+        "type": "ARENAS_AND_STADIUMS"
+      },
+      {
+        "category": "Впечатления",
+        "distance_kind": "straight",
+        "distance_m": 9694,
+        "lat": 43.55086135864258,
+        "lng": 39.84273147583008,
+        "name": "Смотровая башня горы Ахун",
+        "reason": "Местная достопримечательность для прогулочной программы.",
+        "region_id": 6118759,
+        "score": 0.030599999018230628,
+        "source_url": "https://ostrovok.ru/hotel/russia/sochi/mid8105660/otel_arli/?language=ru&dates=31.10.2026-03.11.2026&guests=2",
+        "type": "VIEWPOINT"
+      },
+      {
+        "category": "Море",
+        "distance_kind": "straight",
+        "distance_m": 288,
+        "lat": 43.471866607666016,
+        "lng": 39.89279556274414,
+        "name": "Пляж Фрегат",
+        "reason": "Место для прогулки у воды; условия купания зависят от сезона.",
+        "region_id": 965855591,
+        "score": -0.02879605098524285,
+        "source_url": "https://ostrovok.ru/hotel/russia/sochi/mid8105660/otel_arli/?language=ru&dates=31.10.2026-03.11.2026&guests=2",
+        "type": "BEACH"
+      },
+      {
+        "category": "Море",
+        "distance_kind": "straight",
+        "distance_m": 362,
+        "lat": 43.470130920410156,
+        "lng": 39.89350509643555,
+        "name": "Пляж Пирс",
+        "reason": "Место для прогулки у воды; условия купания зависят от сезона.",
+        "region_id": 966301275,
+        "score": -0.036172446698982154,
+        "source_url": "https://ostrovok.ru/hotel/russia/sochi/mid8105660/otel_arli/?language=ru&dates=31.10.2026-03.11.2026&guests=2",
+        "type": "BEACH"
+      }
+    ],
+    "transport": [
+      {
+        "id": "flight",
+        "source": "Aviasales / Travelpayouts · кэш прямых перелётов",
+        "cost": 3484400
+      },
+      {
+        "id": "train",
+        "source": "Туту / Travelpayouts · кэш без проверки даты",
+        "cost": 2654800
+      },
+      {
+        "id": "car",
+        "source": "OSRM · © OpenStreetMap contributors",
+        "cost": 2660000
+      }
+    ]
+  },
+  "steps": [
+    {
+      "message": "В Сочи с 31 октября по 3 ноября 2026 года. Двое взрослых, 150 тысяч рублей на отель, дорогу туда-обратно и оба трансфера. Нужен бассейн.",
+      "status": "needs_input",
+      "preview": false,
+      "total_minor": null
+    },
+    {
+      "message": "Резерв на личные расходы 0 рублей.",
+      "status": "choosing",
+      "preview": false,
+      "total_minor": 2654800
+    },
+    {
+      "message": "покажи другие отели",
+      "status": "choosing",
+      "preview": false,
+      "total_minor": 2954800
+    },
+    {
+      "message": "отель оставь, поменяй дорогу",
+      "status": "hotel_checkout",
+      "preview": false,
+      "total_minor": 2954800
+    },
+    {
+      "message": "лучше поездом",
+      "status": "choosing",
+      "preview": true,
+      "total_minor": 2954800
+    },
+    {
+      "message": "без пересадок",
+      "status": "choosing",
+      "preview": true,
+      "total_minor": 2850000
+    },
+    {
+      "message": "лучше поездом",
+      "status": "choosing",
+      "preview": true,
+      "total_minor": 2954800
+    },
+    {
+      "message": "хочу интересное рядом",
+      "status": "hotel_checkout",
+      "preview": false,
+      "total_minor": 3050000
+    },
+    {
+      "message": "Пересадки теперь допустимы, остальные условия сохрани.",
+      "status": "choosing",
+      "preview": true,
+      "total_minor": 3050000
+    },
+    {
+      "message": "билеты уже куплены",
+      "status": "needs_input",
+      "preview": false,
+      "total_minor": null
+    }
+  ],
+  "saved_total_minor": 3320000,
+  "checked": [
+    "missing origin",
+    "geolocation confirmation",
+    "three transport modes",
+    "replace all hotels",
+    "preserve selected hotel and pool",
+    "preview before accept",
+    "car removes transfers",
+    "unknown train connections block strict request",
+    "origin changes route and price",
+    "real nearby map",
+    "390px no horizontal overflow",
+    "owned tickets price counted once",
+    "saved booking survives reload",
+    "PDF downloaded"
+  ]
+}

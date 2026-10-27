@@ -1,0 +1,11 @@
+{
+  "milestones_seconds": {
+    "model": 282.214
+  },
+  "build_requested": false,
+  "project": "odin-request",
+  "compose_up_seconds": 2.094,
+  "exit_code": 0,
+  "ready_seconds": 282.22,
+  "success": true
+}

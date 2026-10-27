@@ -1,0 +1,158 @@
+{
+  "assistant_message": "В доступном каталоге нет варианта, подтверждающего все условия. Услуги поездки: 109 000 ₽ при допустимом лимите 30 000 ₽. Услуги поездки: 97 000 ₽ при допустимом лимите 30 000 ₽. Услуги поездки: 118 000 ₽ при допустимом лимите 30 000 ₽. Можно обсудить другие даты, бюджет или требования; я их не менял.",
+  "booking": null,
+  "change_preview": null,
+  "checkout_allowed": false,
+  "data_mode": "synthetic",
+  "destination_options": [],
+  "error_code": null,
+  "history": [
+    "Из Москвы в Сочи, 10–15 ноября 2026, двое взрослых, до 120 тысяч рублей на дорогу, отель и трансферы со сборами, без ночных рейсов.",
+    "select_plan",
+    "Теперь максимум 100 тысяч, остальное оставь",
+    "Теперь бюджет 30 тысяч рублей, остальное оставь"
+  ],
+  "options": [],
+  "questions": [],
+  "request_id": "31db774de29d239e42a19fc708f0ba1e",
+  "revision": 4,
+  "schema_version": "0.2",
+  "selected_plan": {
+    "breakdown": {
+      "fees": {
+        "amount_minor": 200000,
+        "currency": "RUB"
+      },
+      "hotel": {
+        "amount_minor": 5000000,
+        "currency": "RUB"
+      },
+      "transfers": {
+        "amount_minor": 500000,
+        "currency": "RUB"
+      },
+      "transport": {
+        "amount_minor": 5200000,
+        "currency": "RUB"
+      }
+    },
+    "checks": [
+      {
+        "code": "catalogue",
+        "message": "Состав, цена и условия заново получены из учебного каталога по ID.",
+        "status": "pass"
+      },
+      {
+        "code": "budget",
+        "message": "Услуги поездки: 109 000 ₽ при допустимом лимите 120 000 ₽.",
+        "status": "pass"
+      },
+      {
+        "code": "dates",
+        "message": "Учебное окно: 10–15 или 12–17 ноября 2026, пять ночей.",
+        "status": "pass"
+      },
+      {
+        "code": "duration",
+        "message": "Длительность в календарных днях должна совпадать с точными датами; ночи считаются отдельно.",
+        "status": "pass"
+      },
+      {
+        "code": "travellers",
+        "message": "Тариф только для двух взрослых.",
+        "status": "pass"
+      },
+      {
+        "code": "transport",
+        "message": "Учебный путь туда-обратно, оба трансфера и сборы включены.",
+        "status": "pass"
+      },
+      {
+        "code": "locks",
+        "message": "Закреплённые компоненты должны сохраниться.",
+        "status": "pass"
+      },
+      {
+        "code": "no_night_flights",
+        "message": "Учебные рейсы: туда 10:00–12:00, обратно 15:00–17:00, UTC+03:00; ночных интервалов нет.",
+        "status": "pass"
+      },
+      {
+        "code": "free_cancellation",
+        "message": "Тариф B невозвратный; A и C — учебная бесплатная отмена.",
+        "status": "pass"
+      }
+    ],
+    "component_ids": [
+      "sochi:2026-11-10:transport:A",
+      "sochi:2026-11-10:hotel:A",
+      "sochi:2026-11-10:transfers:shared",
+      "sochi:2026-11-10:fees:A"
+    ],
+    "evidence": [
+      {
+        "checked_at": "2026-10-24T15:54:35.176891+00:00",
+        "id": "demo:sochi:2026-11-10:A:price_and_terms",
+        "scope": "Учебный набор, не рыночная цена или реальная доступность",
+        "source_kind": "synthetic",
+        "source_url": null,
+        "subject": "sochi:2026-11-10:A:price_and_terms"
+      }
+    ],
+    "id": "sochi:2026-11-10:A",
+    "total": {
+      "amount_minor": 10900000,
+      "currency": "RUB"
+    },
+    "tradeoffs": [
+      "Все цены, расписание и свойства — учебные."
+    ]
+  },
+  "session_id": "0026aa0962a1bf122372a7092a1cee83",
+  "status": "no_solution",
+  "telemetry": {
+    "cost": null,
+    "first_useful_ms": 8009,
+    "model": "qwen3.5-9b",
+    "model_calls": 1,
+    "prompt_version": "odin-request-4.2",
+    "provider": "llama_cpp",
+    "tool_calls": [
+      "propose_change"
+    ],
+    "total_ms": 8009,
+    "usage": {
+      "completion_tokens": 72,
+      "prompt_tokens": 1319,
+      "total_tokens": 1391
+    }
+  },
+  "trip_spec": {
+    "budget": {
+      "amount_minor": 3000000,
+      "currency": "RUB"
+    },
+    "budget_scope": "booking",
+    "country": null,
+    "dates": {
+      "end": "2026-11-15",
+      "start": "2026-11-10"
+    },
+    "destination": "Сочи",
+    "duration_days": null,
+    "expense_reserve": null,
+    "hard_constraints": {
+      "free_cancellation": false,
+      "no_night_flights": true,
+      "other": [],
+      "pets": false
+    },
+    "locked_component_ids": [],
+    "origin": "Москва",
+    "preferences": [],
+    "travellers": {
+      "adults": 2,
+      "children": []
+    }
+  }
+}

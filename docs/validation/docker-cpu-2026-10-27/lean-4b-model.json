@@ -1,0 +1,11 @@
+[
+  {
+    "label": "initial",
+    "cycle": 0,
+    "model": "qwen3.5-4b",
+    "endpoint": "http://127.0.0.1:18083/v1",
+    "compact_wire": "1",
+    "error": "model_timeout",
+    "seconds": 300.506
+  }
+]

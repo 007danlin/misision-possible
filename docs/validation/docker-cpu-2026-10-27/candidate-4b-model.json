@@ -1,0 +1,110 @@
+[
+  {
+    "label": "initial",
+    "cycle": 0,
+    "model": "qwen3.5-4b",
+    "endpoint": "http://127.0.0.1:18083/v1",
+    "compact_wire": "1",
+    "output": "{\"evidence\":\"Из Москвы в Сочи с 10 по 15 ноября 2026 года, двое взрослых. 150 тысяч рублей на отель, дорогу и оба трансфера. Нужен бассейн.\",\"destination\":\"Сочи\",\"origin\":\"Москва\",\"country\":\"ru\",\"travel_setting\":\"sea\",\"travellers\":{\"adults\":2,\"children\":[]},\"dates\":{\"start\":\"2026-11-10\",\"end\":\"2026-11-15\"},\"stay_nights\":5,\"duration_days\":5,\"shift_days\":0,\"budget\":{\"amount_minor\":15000000,\"currency\":\"RUB\"},\"budget_scope\":\"whole_trip\",\"expense_reserve\":{\"amount_minor\":0,\"currency\":\"RUB\"},\"hotel_preferences\":{\"pool\":true,\"max_center_m\":0,\"max_beach_m\":0,\"min_rating\":0,\"min_stars\":0},\"hard_constraints\":{\"pets\":false,\"free_cancellation\":false,\"no_night_flights\":false,\"other\":[],\"no_connections\":false,\"no_night_travel\":false},\"add_preferences\":[],\"remove_preferences\":[],\"optimization\":\"cheaper\",\"hotel_reference\":0,\"action\":\"search\",\"transport_mode\":\"car\",\"transport_owned\":false,\"keep_hotel\":false,\"include_transport\":true,\"add_locks\":[],\"remove_locks\":[]}",
+    "usage": {
+      "completion_tokens": 174,
+      "prompt_tokens": 1342,
+      "total_tokens": 1516,
+      "prompt_ms": 140548,
+      "generation_ms": 88701,
+      "cached_tokens": 0,
+      "evaluated_prompt_tokens": 1342
+    },
+    "seconds": 232.796
+  },
+  {
+    "label": "change",
+    "cycle": 0,
+    "model": "qwen3.5-4b",
+    "endpoint": "http://127.0.0.1:18083/v1",
+    "compact_wire": "1",
+    "output": "{\"evidence\":\"Отель оставь, но лучше поездом. Без ночных переездов.\",\"transport_mode\":\"train\",\"hard_constraints\":{\"no_night_flights\":true},\"include_transport\":true}",
+    "usage": {
+      "completion_tokens": 19,
+      "prompt_tokens": 1318,
+      "total_tokens": 1337,
+      "prompt_ms": 11060,
+      "generation_ms": 4485,
+      "cached_tokens": 1228,
+      "evaluated_prompt_tokens": 90
+    },
+    "seconds": 15.651
+  },
+  {
+    "label": "complex",
+    "cycle": 0,
+    "model": "qwen3.5-4b",
+    "endpoint": "http://127.0.0.1:18083/v1",
+    "compact_wire": "1",
+    "output": "{\"evidence\":\"Бассейн больше не обязателен, зато нужны завтрак и парковка. Бюджет 90 тысяч рублей на всю поездку, остальные условия сохрани.\",\"remove_hotel_preferences\":[\"pool\"],\"hotel_preferences\":{\"breakfast\":true,\"parking\":true},\"budget_scope\":\"hotel\",\"budget\":{\"amount_minor\":9000000,\"currency\":\"RUB\"}}",
+    "usage": {
+      "completion_tokens": 32,
+      "prompt_tokens": 1337,
+      "total_tokens": 1369,
+      "prompt_ms": 12278,
+      "generation_ms": 21574,
+      "cached_tokens": 1228,
+      "evaluated_prompt_tokens": 109
+    },
+    "seconds": 34.001
+  },
+  {
+    "label": "initial",
+    "cycle": 1,
+    "model": "qwen3.5-4b",
+    "endpoint": "http://127.0.0.1:18083/v1",
+    "compact_wire": "1",
+    "output": "{\"evidence\":\"Из Москвы в Сочи с 10 по 15 ноября 2026 года, двое взрослых. 150 тысяч рублей на отель, дорогу и оба трансфера. Нужен бассейн.\",\"destination\":\"Сочи\",\"origin\":\"Москва\",\"country\":\"ru\",\"travel_setting\":\"sea\",\"travellers\":{\"adults\":2,\"children\":[]},\"dates\":{\"start\":\"2026-11-10\",\"end\":\"2026-11-15\"},\"stay_nights\":5,\"duration_days\":5,\"shift_days\":0,\"budget\":{\"amount_minor\":15000000,\"currency\":\"RUB\"},\"budget_scope\":\"whole_trip\",\"expense_reserve\":{\"amount_minor\":0,\"currency\":\"RUB\"},\"hotel_preferences\":{\"pool\":true,\"max_center_m\":0,\"max_beach_m\":0,\"min_rating\":0,\"min_stars\":0},\"hard_constraints\":{\"pets\":false,\"free_cancellation\":false,\"no_night_flights\":false,\"other\":[],\"no_connections\":false,\"no_night_travel\":false},\"add_preferences\":[],\"remove_preferences\":[],\"optimization\":\"cheaper\",\"hotel_reference\":0,\"action\":\"search\",\"transport_mode\":\"car\",\"transport_owned\":false,\"keep_hotel\":false,\"include_transport\":true,\"add_locks\":[],\"remove_locks\":[]}",
+    "usage": {
+      "completion_tokens": 174,
+      "prompt_tokens": 1342,
+      "total_tokens": 1516,
+      "prompt_ms": 15776,
+      "generation_ms": 61463,
+      "cached_tokens": 1228,
+      "evaluated_prompt_tokens": 114
+    },
+    "seconds": 77.327
+  },
+  {
+    "label": "change",
+    "cycle": 1,
+    "model": "qwen3.5-4b",
+    "endpoint": "http://127.0.0.1:18083/v1",
+    "compact_wire": "1",
+    "output": "{\"evidence\":\"Отель оставь, но лучше поездом. Без ночных переездов.\",\"transport_mode\":\"train\",\"hard_constraints\":{\"no_night_flights\":true},\"include_transport\":true}",
+    "usage": {
+      "completion_tokens": 19,
+      "prompt_tokens": 1318,
+      "total_tokens": 1337,
+      "prompt_ms": 5346,
+      "generation_ms": 3757,
+      "cached_tokens": 1228,
+      "evaluated_prompt_tokens": 90
+    },
+    "seconds": 9.161
+  },
+  {
+    "label": "complex",
+    "cycle": 1,
+    "model": "qwen3.5-4b",
+    "endpoint": "http://127.0.0.1:18083/v1",
+    "compact_wire": "1",
+    "output": "{\"evidence\":\"Бассейн больше не обязателен, зато нужны завтрак и парковка. Бюджет 90 тысяч рублей на всю поездку, остальные условия сохрани.\",\"remove_hotel_preferences\":[\"pool\"],\"hotel_preferences\":{\"breakfast\":true,\"parking\":true},\"budget_scope\":\"hotel\",\"budget\":{\"amount_minor\":9000000,\"currency\":\"RUB\"}}",
+    "usage": {
+      "completion_tokens": 32,
+      "prompt_tokens": 1337,
+      "total_tokens": 1369,
+      "prompt_ms": 7659,
+      "generation_ms": 17080,
+      "cached_tokens": 1228,
+      "evaluated_prompt_tokens": 109
+    },
+    "seconds": 24.779
+  }
+]

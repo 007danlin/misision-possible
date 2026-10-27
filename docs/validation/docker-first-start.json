@@ -1,0 +1,8 @@
+{
+  "start_unix": 1793090388.914316,
+  "platform": "linux/arm64",
+  "model_volume_initially_empty": true,
+  "image_cache": "built earlier in this session",
+  "app_started_unix": 1793090833.24596,
+  "start_to_app_seconds": 444.33
+}

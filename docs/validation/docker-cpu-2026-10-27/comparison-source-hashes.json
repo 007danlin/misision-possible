@@ -1,0 +1,7 @@
+{
+  "agent/travel_agent/model.py": "b7a54334e5d02cea70b2d6e370ed443c8ddd7a607b8d04de6871cfe4f805b8b2",
+  "agent/travel_agent/compact_wire.py": "e733afdd7f3d4fe58fcb5c34098d09f5dc539c9b42be551f75bf4148167aeaaf",
+  "agent/evals/language_cases_20261027.py": "a4684667b862a8a79c527acfecd80a9a65713a7a1bb87c437efa70f354a8d87c",
+  "scripts/eval-language.py": "fc390341740777e1c6df0070c3c2bdcb3e455c08b77aed5ef1fe41cc2ca74ccb",
+  "scripts/bench-cpu-model.py": "d3a9381cb5a9ed90e762b320ddb255d5072f83b503e101e4d636516e25d87b8d"
+}
