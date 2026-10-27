@@ -1,0 +1,15 @@
+/* Keep one highlight on the active date segment. On macOS the native
+   segment focus ring otherwise overlaps its selection background. */
+input[type="date"]::-webkit-datetime-edit-day-field:focus,
+input[type="date"]::-webkit-datetime-edit-month-field:focus,
+input[type="date"]::-webkit-datetime-edit-year-field:focus,
+input[type="time"]::-webkit-datetime-edit-hour-field:focus,
+input[type="time"]::-webkit-datetime-edit-minute-field:focus,
+input[type="time"]::-webkit-datetime-edit-ampm-field:focus {
+  outline: none;
+  box-shadow: none;
+  background-color: #0a4fec;
+  color: #fff;
+  border-radius: 2px;
+}
+

@@ -1,0 +1,42 @@
+.travel-window{min-height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:35px;padding:44px 24px 70px;background:radial-gradient(ellipse at 50% 42%,#f5f7ef 0%,#fff 65%);border-radius:24px}.ow-mark{width:300px;height:300px;position:relative;flex-shrink:0;animation:ow-wake .5s cubic-bezier(.2,.8,.2,1) both}.ow-ring{position:absolute;left:8px;top:0;width:245px;height:300px;border:23px solid #1551e9;border-radius:48%;overflow:hidden;background:#fff2cd;box-shadow:inset 5px 5px 8px #06359b44,5px 9px 0 #123fb4,9px 18px 25px #184cb519;isolation:isolate}.ow-exclaim{position:absolute;right:0;bottom:23px;color:#a7df7c;font:500 132px/.95 Spoof,Root,sans-serif;transform:rotate(8deg);text-shadow:3px 5px #80c65c}.ow-landscape,.ow-landscape svg{width:100%;height:100%;display:block}.ow-landscape{position:absolute;inset:0}.ow-warmth{position:absolute;inset:0;background:#ffe6a6;opacity:.35;animation:ow-light 1s ease both;transition:opacity .7s}.opened .ow-warmth{opacity:0;animation:none}.ow-copy{text-align:center;max-width:440px}.ow-status{font:500 22px/1.3 Spoof,Root,sans-serif;letter-spacing:-.35px}.ow-chips{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;min-height:31px;margin-top:18px}.ow-chips .chip{animation:ow-chip .35s ease both;background:#f0f4eb;font-size:12px;border:0;padding:6px 10px;border-radius:7px}.ow-hint{font-size:12px;color:#81868b;margin-top:15px;min-height:18px}.ow-cloud{animation:ow-drift 13s ease-in-out infinite alternate}.ow-boat{transform-origin:130px 173px;animation:ow-bob 5s ease-in-out infinite}.ow-glint{animation:ow-glimmer 6s ease-in-out infinite}.ow-bird{animation:ow-drift 17s ease-in-out infinite alternate}.ow-morph{position:fixed;z-index:50;pointer-events:none;border:23px solid #1551e9;overflow:hidden;background:#eef3ee;box-sizing:border-box}.ow-morph>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.travel-window.compact{min-height:110px;flex-direction:row;justify-content:flex-start;gap:22px;padding:10px 18px;margin-bottom:16px;background:#f8faf5;border-radius:16px}.compact .ow-mark{width:78px;height:80px;transform:scale(.26);transform-origin:left top;margin-right:-56px;margin-bottom:-220px;animation:none}.compact .ow-copy{text-align:left;max-width:none;margin-left:56px}.compact .ow-status{font:500 15px Root;letter-spacing:0}.compact .ow-chips{justify-content:flex-start;margin-top:7px;min-height:0}.compact .ow-hint{margin-top:5px;min-height:0}.direction-visual{height:155px;position:relative;overflow:hidden;background:#eef3ee}.direction-visual .ow-landscape svg{object-fit:cover}.direction-card h3{margin-bottom:8px}.direction-card .card-body{display:flex;flex-direction:column;gap:8px}.direction-card p{font-size:14px;color:#626971}.direction-card .primary{margin-top:auto}
+@keyframes ow-wake{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}@keyframes ow-light{from{opacity:0}to{opacity:.35}}@keyframes ow-drift{to{transform:translateX(20px)}}@keyframes ow-bob{50%{transform:translateY(3px) rotate(2deg)}}@keyframes ow-glimmer{0%,100%{opacity:.3}50%{opacity:.85}}@keyframes ow-chip{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+@media(max-width:760px){.travel-window{min-height:430px;padding:25px 10px;gap:25px}.ow-mark{transform:scale(.85);margin:-22px;animation:ow-wake .5s both}.ow-status{font-size:20px}.travel-window.compact{min-height:105px;padding:12px;gap:12px}.compact .ow-mark{transform:scale(.22);margin:0 -56px -220px 0}.compact .ow-copy{margin-left:45px}.compact .ow-status{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.ow-mark,.ow-cloud,.ow-boat,.ow-glint,.ow-bird,.ow-chips .chip{animation:none!important}}
+
+.travel-window.compact .ow-mark{width:300px;height:300px;transform:scale(.26);margin:0 -222px -220px 0}.travel-window.compact .ow-copy{margin-left:0}@media(max-width:760px){.travel-window.compact .ow-mark{transform:scale(.23);margin-right:-231px;margin-bottom:-231px}}
+
+/* The O is a window frame; the landscape remains visible from the first moment. */
+.ow-ring{border:17px solid #1952df;background:#eff1e7;box-shadow:inset 0 0 0 3px #082a9d,3px 5px 0 #1039a9,6px 10px 0 #1644c0,12px 19px 30px #20458b20}
+.ow-reveal{position:absolute;inset:0;border:9px solid #e9e6d8;border-top-color:#c9c9c1;border-left-color:#d3d5d1;border-bottom:14px solid #fff9e8;border-radius:45%;box-shadow:inset 5px 9px 15px #294a7940,inset -2px -3px 5px #fff8ddaa;pointer-events:none}
+.ow-ground{position:absolute;left:8px;bottom:-23px;width:262px;height:21px;border-radius:50%;background:radial-gradient(ellipse,#b5c6d73b,transparent 70%)}
+.ow-dawn{position:absolute;inset:0;background:linear-gradient(150deg,#233d6e99,#a6b8c033);animation:ow-morning 2.8s ease-out both;pointer-events:none}
+.ow-warmth{inset:0;background:linear-gradient(140deg,transparent 40%,#ffe3a844 60%,transparent 80%);opacity:1;animation:ow-sunbeam 8s ease-in-out infinite;pointer-events:none}
+.opened .ow-warmth{opacity:1;animation:ow-sunbeam 8s ease-in-out infinite}
+.ow-landscape{animation:ow-view-in .75s ease both}
+.ow-cloud{animation:ow-cloud-pass 18s linear infinite alternate}
+.ow-boat{transform-origin:130px 173px;animation:ow-sailing 18s ease-in-out infinite alternate}
+.ow-glint{animation:ow-water 9s ease-in-out infinite}
+.ow-plant{transform-origin:42px 286px;animation:ow-leaf 12s ease-in-out infinite}
+.ow-flyby{animation:ow-flyby 16s linear infinite}
+.ow-bird{animation:none}
+@keyframes ow-morning{0%{opacity:1}100%{opacity:0}}
+@keyframes ow-view-in{from{opacity:.5}to{opacity:1}}
+
+
+
+
+
+@keyframes ow-sunbeam{0%,25%,100%{opacity:.3}45%,65%{opacity:.9}}
+@media(prefers-reduced-motion:reduce){.ow-landscape,.ow-dawn,.ow-warmth,.ow-cloud,.ow-boat,.ow-glint,.ow-plant,.ow-flyby{animation:none!important}.ow-dawn,.ow-flyby{opacity:0}}
+/* One small event follows the next; no competing decorative movements. */
+.ow-cloud{animation:ow-cloud-pass 18s ease-in-out infinite}
+.ow-boat{animation:ow-sailing 18s ease-in-out infinite}
+.ow-glint{animation:ow-water 18s ease-in-out infinite}
+.ow-plant{animation:ow-leaf 18s ease-in-out infinite}
+.ow-flyby{animation:ow-flyby 18s linear infinite}
+.ow-warmth,.opened .ow-warmth{opacity:.5;animation:none}
+@keyframes ow-cloud-pass{0%{transform:translateX(-24px)}35%,95%{transform:translateX(32px)}100%{transform:translateX(-24px)}}
+@keyframes ow-sailing{0%{transform:translate(-18px,0) rotate(-1deg)}20%{transform:translate(0,2px) rotate(1deg)}40%,95%{transform:translate(28px,0) rotate(-1deg)}100%{transform:translate(-18px,0) rotate(-1deg)}}
+@keyframes ow-water{0%,38%,60%,100%{opacity:.15;transform:translateX(-6px)}46%,52%{opacity:.85;transform:translateX(10px)}}
+@keyframes ow-leaf{0%,54%,75%,100%{transform:rotate(0)}60%{transform:rotate(-8deg)}67%{transform:rotate(4deg)}71%{transform:rotate(-2deg)}}
+@keyframes ow-flyby{0%,74%{opacity:0;transform:translate(-90px,22px)}76%{opacity:1}94%{opacity:1;transform:translate(210px,-25px)}96%,100%{opacity:0;transform:translate(240px,-28px)}}

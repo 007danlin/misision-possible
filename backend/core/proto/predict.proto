@@ -6,6 +6,10 @@ option go_package = "core/proto";
 
 service Predictor {
   rpc Predict(PredictRequest) returns (PredictReply);
+  // Stateless proposal only. Core owns sessions, revisions and booking actions.
+  rpc RunTurn(TurnRequest) returns (TurnReply);
+  // Deterministic catalogue search/validation for explicit backend actions.
+  rpc Evaluate(EvaluateRequest) returns (TurnReply);
 }
 
 message PredictRequest {
@@ -16,4 +20,21 @@ message PredictRequest {
 message PredictReply {
   string message = 1;
   string caller = 2;
+}
+
+message TurnRequest {
+  string message = 1;
+  string state_json = 2;
+  string caller = 3;
+}
+
+message TurnReply {
+  string turn_json = 1;
+  string caller = 2;
+}
+
+message EvaluateRequest {
+  string state_json = 1;
+  string plan_id = 2;
+  string caller = 3;
 }

@@ -31,6 +31,7 @@ type API struct {
 	authClient *http.Client
 	agent      pb.PredictorClient
 	metrics    metrics
+	trips      *TripStore
 }
 
 func NewAPI(authURL string, client *http.Client, agent pb.PredictorClient) *API {

@@ -1,0 +1,40 @@
+/* Use one explicit focus indicator instead of platform-dependent auto rings. */
+:root { --control-focus: #0a4fec; }
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible),
+summary:focus:not(:focus-visible) { outline: none; }
+button:focus-visible,
+a:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--control-focus);
+  outline-offset: 2px;
+}
+input:not([type="checkbox"]):not([type="radio"]):focus,
+select:focus,
+textarea:not(#message):focus {
+  outline: 2px solid var(--control-focus);
+  outline-offset: 2px;
+}
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible {
+  outline: 2px solid var(--control-focus);
+  outline-offset: 2px;
+}
+/* Focus lands here after rendering; do not frame the entire results pane. */
+#results:focus, .plans:focus { outline: none; }
+/* The composer already indicates focus on its containing form. */
+#message:focus { outline: none; }
+/* Keep the ring inside the thumbnail so the scrolling strip cannot clip it. */
+.hotel-gallery button:focus-visible {
+  border-color: transparent;
+  outline-offset: -4px;
+}
+.stay-dialog textarea {
+  border: 1px solid #d9e1e9;
+  border-radius: 9px;
+  background: #fff;
+  color: var(--ink);
+}
+
+/* Homepage dialogs use content-box sizing inherited from the archived page. */
+.archive-dialog input { box-sizing: border-box; }

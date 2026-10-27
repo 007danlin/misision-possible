@@ -1,0 +1,7 @@
+.date-field { position: relative; display: block; width: 100%; min-width: 0; }
+.date-field .date-text { display: block; width: 100%; min-width: 0; padding-right: 38px; box-sizing: border-box; }
+.date-field .date-native { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; pointer-events: none; margin: 0; }
+.date-field .date-calendar { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 28px; height: 28px; padding: 4px; border: 0; border-radius: 5px; background: transparent; color: inherit; cursor: pointer; }
+.date-calendar svg { width: 20px; height: 20px; }
+.archive-native-date.date-text { padding-right: 32px; }
+.archive-native-date.date-text + .date-calendar { right: 0; }

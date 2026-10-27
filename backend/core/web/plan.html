@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="robots" content="noindex,nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#acef81">
+  <title>О!План — ваша поездка с Островком</title>
+  <link rel="icon" href="/assets/ostrovok.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/travel-window.css">
+  <link rel="stylesheet" href="/journey.css">
+  <link rel="stylesheet" href="/date-input.css">
+  <script src="/journey-ui.js" defer></script>
+  <link rel="stylesheet" href="/vendor/leaflet.css">
+  <script src="/vendor/leaflet.js" defer></script>
+  <script src="/hotel-extras.js" defer></script>
+  <script src="/transport-ui.js" defer></script>
+  <script src="/trip-extras.js" defer></script>
+  <script src="/travel-window.js" defer></script>
+  <script src="/trip-pdf.js?v=20261027-rounded" defer></script>
+  <script src="/hotel-checkout.js" defer></script>
+  <script src="/app.js?v=20261027-photos" defer></script>
+<link rel="stylesheet" href="/focus.css"><link rel="stylesheet" href="/mobile.css"><link rel="stylesheet" href="/desktop.css"><link rel="stylesheet" href="/date-fields.css"><script src="/date-fields.js" defer></script></head>
+<body>
+  <a class="skip" href="#results">К вариантам поездки</a>
+  <header class="top">
+    <a class="brand" href="/" aria-label="Островок — ваша поездка"><img src="/assets/ostrovok.svg" alt="Островок!" width="153" height="36"></a>
+    <span class="topnav">Поездка с ИИ</span>
+    <div class="topright"><button id="about" class="text-button">Как это работает</button><button id="history" class="text-button" aria-label="История поисков">История</button><button id="new" class="new-button" data-mutation>Новая поездка <span aria-hidden="true">＋</span></button></div>
+  </header>
+  <div class="searchbar">
+    <div id="summary" class="search-summary" aria-label="Условия поездки"><span>Ваша поездка по России</span></div>
+    <button id="edit" class="text-button">Изменить условия</button>
+    <span class="demo-tag">Учебный каталог</span>
+  </div>
+  <nav class="mobile-tabs" aria-label="Рабочая область"><button id="mobile-chat" aria-pressed="true">Диалог</button><button id="mobile-results" aria-pressed="false">Варианты <span id="option-count"></span></button></nav>
+  <main class="workspace" data-mobile-view="chat">
+    <aside class="assistant" aria-label="Помощник для поездки">
+      <div class="assistant-heading"><span class="o-mark" aria-hidden="true">О!</span><div><h2>О!План</h2><p>Поможем выбрать и спланировать</p></div></div>
+      <div id="chat" class="chat" role="log" aria-label="Переписка с помощником" aria-live="polite" aria-relevant="additions"></div>
+      <div id="progress" class="progress-panel" hidden>
+        <div class="progress-heading" role="status"><span class="spinner" aria-hidden="true"></span><h3 id="progress-title"></h3></div>
+        <p id="progress-detail"></p><div class="progress-meta"><span id="progress-elapsed" role="timer" aria-live="off"></span><span id="progress-hint"></span></div>
+      </div>
+      <div class="composer">
+        <div id="suggestions" class="suggestions" aria-label="Подсказки для запроса"></div>
+        <form id="form">
+          <label class="sr-only" for="message">Ваша поездка — своими словами</label>
+          <textarea id="message" rows="2" placeholder="Куда хочется, когда и на какой бюджет?" required maxlength="12000"></textarea>
+          <div class="form-bottom"><span id="busy" role="status">Можно написать своими словами</span><button id="send" type="submit" aria-label="Отправить сообщение" data-mutation><span aria-hidden="true">↑</span></button></div>
+        </form>
+        <div id="error" class="error" role="alert" hidden></div>
+        <button id="retry" class="retry text-button" hidden>Повторить запрос</button>
+        <p class="helper">Демо: без оплаты и реального бронирования</p>
+      </div>
+    </aside>
+    <section class="plans" aria-label="Результаты подбора" tabindex="-1">
+      <div id="spec" class="criteria" aria-label="Учтённые пожелания"></div>
+      <div id="results" tabindex="-1"></div>
+    </section>
+  </main>
+  <dialog id="about-dialog" aria-labelledby="about-title">
+    <div class="dialog-heading"><h2 id="about-title">Как работает О!План</h2><button id="close-about" class="icon-button" aria-label="Закрыть">×</button></div>
+    <p>Расскажите о поездке. Помощник уточнит недостающие детали, подберёт варианты и пересчитает их, если планы изменятся.</p>
+    <ol><li>Сравните полную стоимость дороги, проживания, трансферов и сборов.</li><li>Откройте подробности и выберите поездку.</li><li>Меняйте бюджет или даты в диалоге. Каждое изменение подтверждается отдельно.</li></ol>
+    <div class="info-box"><strong>Сейчас это учебный каталог</strong><p>Из Москвы в Сочи, Казань, Владимир и Ярославль. Двое взрослых, 1–14 ночей, ноябрь–декабрь 2026 года, выезд до 31 декабря. Цены, наличие и расписания условные. Фотографии иллюстрируют отдых и не относятся к конкретным предложениям.</p></div>
+    <p>Учебное оформление сохраняет поездку. Настоящей брони и списания денег нет.</p>
+    <details><summary>О модели и данных</summary><p>Запрос обрабатывает настроенная в агенте модель. Цены и проверки приходят из каталога через бэкенд. Ответы интерфейса не подменяются заготовками.</p><p id="model-info">После первого запроса здесь появится информация о модели.</p></details>
+    <button id="start-about" class="primary">Понятно, начнём</button>
+  </dialog>
+</body>
+</html>

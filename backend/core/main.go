@@ -2,12 +2,12 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net"
 	"net/http"
 	"os"
 	"os/signal"
+	"strconv"
 	"syscall"
 	"time"
 
@@ -25,15 +25,28 @@ func envOrDefault(key, fallback string) string {
 	return fallback
 }
 
+func agentTimeout() time.Duration {
+	seconds, err := strconv.Atoi(os.Getenv("AGENT_TURN_TIMEOUT_SECONDS"))
+	if err != nil || seconds < 1 || seconds > 300 {
+		seconds = 45
+	}
+	return time.Duration(seconds) * time.Second
+}
+
 func (s *API) Handler() http.Handler {
 	r := chi.NewRouter()
 	r.Use(s.metrics.middleware)
 	r.Post("/api/core/handle", s.HandleRequest)
+	r.Post("/api/core/agent/turn", s.AgentTurn)
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		_, _ = w.Write([]byte("ok"))
+		_, _ = w.Write([]byte(`{"status":"ok"}`))
 	})
-	return r
+	if s.trips != nil {
+		s.mountLocalTrips(r, s.trips)
+	}
+	return s.startupHandler(r)
 }
 
 func run() error {
@@ -47,11 +60,25 @@ func run() error {
 	defer transport.CloseIdleConnections()
 	api := NewAPI(envOrDefault("AUTH_URL", "http://localhost:8080"), &http.Client{Timeout: 3 * time.Second, Transport: transport}, pb.NewPredictorClient(conn))
 
+	if os.Getenv("LOCAL_DEMO_MODE") == "true" {
+		dir := envOrDefault("TRIP_DATA_DIR", "./data/trips")
+		if err := os.MkdirAll(dir, 0700); err != nil {
+			return err
+		}
+		api.trips = &TripStore{dir: dir}
+	}
+	host := ""
+	if api.trips != nil {
+		host = "127.0.0.1"
+	}
+	// Container demo binds internally to all interfaces; Compose publishes only
+	// on the host loopback. The native launcher keeps its loopback default.
+	host = envOrDefault("BIND_HOST", host)
 	server := &http.Server{
-		Addr:              fmt.Sprintf(":%s", port),
+		Addr:              net.JoinHostPort(host, port),
 		Handler:           api.Handler(),
 		ReadHeaderTimeout: 5 * time.Second, ReadTimeout: 15 * time.Second,
-		WriteTimeout: 15 * time.Second,
+		WriteTimeout: agentTimeout() + 5*time.Second,
 		IdleTimeout:  30 * time.Second,
 	}
 
@@ -60,6 +87,9 @@ func run() error {
 	done := make(chan error, 1)
 	go func() { done <- server.ListenAndServe() }()
 	log.Printf("core listening on :%s", port)
+	if os.Getenv("MODEL_STATUS_FILE") != "" {
+		log.Printf("О!План: откройте http://localhost:%s — здесь виден прогресс подготовки модели", port)
+	}
 	select {
 	case err := <-done:
 		if err != nil && err != http.ErrServerClosed {

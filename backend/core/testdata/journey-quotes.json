@@ -1,0 +1,486 @@
+{
+  "original": {
+    "spec": {
+      "keep_hotel": false,
+      "locked_hotel_id": null,
+      "include_transport": true,
+      "trip_budget": null,
+      "hotel_budget": null,
+      "travel_setting": "any",
+      "hotel_preferences": {
+        "pool": null,
+        "parking": null,
+        "spa": null,
+        "fitness": null,
+        "breakfast": null,
+        "max_center_m": null,
+        "max_beach_m": null,
+        "min_rating": null,
+        "min_stars": null
+      },
+      "stay_nights": null,
+      "budget_period": "stay",
+      "origin": "Москва",
+      "destination": "Сочи",
+      "country": null,
+      "dates": {
+        "start": "2026-11-10",
+        "end": "2026-11-15"
+      },
+      "duration_days": null,
+      "travellers": {
+        "adults": 2,
+        "children": []
+      },
+      "budget": {
+        "amount_minor": 12000000,
+        "currency": "RUB"
+      },
+      "budget_scope": "booking",
+      "expense_reserve": null,
+      "hard_constraints": {
+        "no_night_flights": false,
+        "free_cancellation": false,
+        "pets": false,
+        "other": []
+      },
+      "preferences": [],
+      "locked_component_ids": []
+    },
+    "hotel": {
+      "id": "sample-sochi-1",
+      "name": "Сосновый берег",
+      "address": "Сочи · зелёный район",
+      "image_url": "/assets/stay-a.webp",
+      "images": [
+        "/assets/stay-a.webp"
+      ],
+      "destination": "Сочи",
+      "source_kind": "synthetic",
+      "checked_at": "2026-10-27T00:00:00+03:00",
+      "rating": 8.7,
+      "reviews": 3,
+      "stars": 4,
+      "distance_m": 4200,
+      "beach_m": 600,
+      "property_kind": "HOTEL",
+      "amenity_codes": [
+        "has_internet",
+        "has_parking",
+        "has_kids",
+        "has_pool",
+        "has_spa"
+      ],
+      "amenities": [
+        "Wi-Fi",
+        "Парковка",
+        "Для детей",
+        "Бассейн",
+        "Спа"
+      ],
+      "content": {
+        "source_kind": "synthetic",
+        "description": "Небольшой отель в зелёном районе. Подойдёт для спокойного отдыха с бассейном.",
+        "room": "Семейный номер",
+        "room_capacity": 3,
+        "beds": "Двуспальная кровать и дополнительное место",
+        "checkin_from": "14:00",
+        "checkin_until": "23:00",
+        "checkout_until": "12:00",
+        "children_allowed": true,
+        "pets_allowed": false,
+        "breakfast_available": true,
+        "transfer_minutes": 35,
+        "transfer_oneway_minor": 220000,
+        "vehicle_capacity": 3,
+        "baggage": "1 чемодан и ручная кладь на гостя",
+        "child_seats": true
+      },
+      "review_items": [
+        {
+          "id": "sample-sochi-1-r0",
+          "theme": "Чистота",
+          "rating": 9,
+          "text": "В номере чисто, постель удобная. Уборка была каждый день.",
+          "traveller": "семья",
+          "date": "2026-09-14",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-sochi-1-r1",
+          "theme": "Питание",
+          "rating": 9,
+          "text": "Завтрак понравился, но утром в выходные приходилось немного ждать.",
+          "traveller": "пара",
+          "date": "2026-09-22",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-sochi-1-r2",
+          "theme": "Тишина",
+          "rating": 8,
+          "text": "Вечером слышны соседи в коридоре. Для чувствительного сна лучше номер подальше от лифта.",
+          "traveller": "пара",
+          "date": "2026-10-02",
+          "source_kind": "synthetic"
+        }
+      ],
+      "journey": {
+        "version": "journey-scenarios-v1",
+        "source_kind": "synthetic",
+        "currency": "RUB",
+        "total_minor": 6440000,
+        "breakdown": {
+          "hotel": 2400000,
+          "transport": 3600000,
+          "transfers": 440000,
+          "fees": 0
+        },
+        "reserve_minor": 0,
+        "budget_minor": 12000000,
+        "segments": [
+          {
+            "kind": "flight",
+            "label": "Самолёт туда",
+            "origin": "Москва · аэропорт",
+            "destination": "Сочи · аэропорт",
+            "departure": "2026-11-10T09:00:00+03:00",
+            "arrival": "2026-11-10T13:00:00+03:00",
+            "timezone": "Europe/Moscow",
+            "duration_minutes": 240
+          },
+          {
+            "kind": "transfer",
+            "label": "Трансфер в отель",
+            "origin": "Сочи · аэропорт",
+            "destination": "Сосновый берег",
+            "departure": "2026-11-10T13:45:00+03:00",
+            "arrival": "2026-11-10T14:20:00+03:00",
+            "timezone": "Europe/Moscow",
+            "duration_minutes": 35
+          },
+          {
+            "kind": "transfer",
+            "label": "Обратный трансфер",
+            "origin": "Сосновый берег",
+            "destination": "Сочи · аэропорт",
+            "departure": "2026-11-15T12:00:00+03:00",
+            "arrival": "2026-11-15T12:35:00+03:00",
+            "timezone": "Europe/Moscow",
+            "duration_minutes": 35
+          },
+          {
+            "kind": "flight",
+            "label": "Самолёт обратно",
+            "origin": "Сочи · аэропорт",
+            "destination": "Москва · аэропорт",
+            "departure": "2026-11-15T18:00:00+03:00",
+            "arrival": "2026-11-15T22:00:00+03:00",
+            "timezone": "Europe/Moscow",
+            "duration_minutes": 240
+          }
+        ],
+        "checks": [
+          {
+            "code": "dates",
+            "status": "pass",
+            "message": "Расписание и тарифы рассчитаны для ноября–декабря 2026.",
+            "blocking": true
+          },
+          {
+            "code": "checkin",
+            "status": "pass",
+            "message": "Прибытие в отель 10.11 14:20, заселение до 23:00.",
+            "blocking": true
+          },
+          {
+            "code": "return",
+            "status": "pass",
+            "message": "До отправления оставлен запас 120 мин.; выезд из отеля 15.11 12:00.",
+            "blocking": true
+          },
+          {
+            "code": "capacity",
+            "status": "pass",
+            "message": "Размещение для 2 гостей; машин: 1, до 3 пассажиров в каждой.",
+            "blocking": true
+          },
+          {
+            "code": "budget",
+            "status": "pass",
+            "message": "Итог с резервом 64 400 ₽; общий лимит 120 000 ₽.",
+            "blocking": true
+          }
+        ],
+        "can_book": true,
+        "vehicles": 1,
+        "child_seats": 0,
+        "baggage": "1 чемодан и ручная кладь на гостя",
+        "cancellation_until": null,
+        "checkin_from": "2026-11-10T14:00:00+03:00",
+        "checkout_until": "2026-11-15T12:00:00+03:00",
+        "notice": "Сценарный каталог: объекты, отзывы, расписания и тарифы вымышлены для показа пути поездки."
+      },
+      "reasons": [
+        "Дорога и оба трансфера включены",
+        "Оценка гостей 8.7/10"
+      ],
+      "quote": {
+        "base_room_nightly_minor": 480000,
+        "source_kind": "demo",
+        "currency": "RUB",
+        "nightly_minor": 480000,
+        "total_minor": 2400000,
+        "nights": 5,
+        "rooms": 1,
+        "breakfast": false,
+        "free_cancellation": false,
+        "explanation": "Демонстрационный тариф для прототипа, рассчитан от справочной цены каталога. Наличие и стоимость на выбранные даты не подтверждены Островком."
+      },
+      "match_score": 88.39,
+      "unverified": []
+    }
+  },
+  "changed": {
+    "spec": {
+      "keep_hotel": false,
+      "locked_hotel_id": null,
+      "include_transport": true,
+      "trip_budget": null,
+      "hotel_budget": null,
+      "travel_setting": "any",
+      "hotel_preferences": {
+        "pool": null,
+        "parking": null,
+        "spa": null,
+        "fitness": null,
+        "breakfast": null,
+        "max_center_m": null,
+        "max_beach_m": null,
+        "min_rating": null,
+        "min_stars": null
+      },
+      "stay_nights": null,
+      "budget_period": "stay",
+      "origin": "Москва",
+      "destination": "Сочи",
+      "country": null,
+      "dates": {
+        "start": "2026-11-10",
+        "end": "2026-11-17"
+      },
+      "duration_days": null,
+      "travellers": {
+        "adults": 2,
+        "children": []
+      },
+      "budget": {
+        "amount_minor": 12000000,
+        "currency": "RUB"
+      },
+      "budget_scope": "booking",
+      "expense_reserve": null,
+      "hard_constraints": {
+        "no_night_flights": false,
+        "free_cancellation": false,
+        "pets": false,
+        "other": []
+      },
+      "preferences": [],
+      "locked_component_ids": []
+    },
+    "hotel": {
+      "id": "sample-sochi-1",
+      "name": "Сосновый берег",
+      "address": "Сочи · зелёный район",
+      "image_url": "/assets/stay-a.webp",
+      "images": [
+        "/assets/stay-a.webp"
+      ],
+      "destination": "Сочи",
+      "source_kind": "synthetic",
+      "checked_at": "2026-10-27T00:00:00+03:00",
+      "rating": 8.7,
+      "reviews": 3,
+      "stars": 4,
+      "distance_m": 4200,
+      "beach_m": 600,
+      "property_kind": "HOTEL",
+      "amenity_codes": [
+        "has_internet",
+        "has_parking",
+        "has_kids",
+        "has_pool",
+        "has_spa"
+      ],
+      "amenities": [
+        "Wi-Fi",
+        "Парковка",
+        "Для детей",
+        "Бассейн",
+        "Спа"
+      ],
+      "content": {
+        "source_kind": "synthetic",
+        "description": "Небольшой отель в зелёном районе. Подойдёт для спокойного отдыха с бассейном.",
+        "room": "Семейный номер",
+        "room_capacity": 3,
+        "beds": "Двуспальная кровать и дополнительное место",
+        "checkin_from": "14:00",
+        "checkin_until": "23:00",
+        "checkout_until": "12:00",
+        "children_allowed": true,
+        "pets_allowed": false,
+        "breakfast_available": true,
+        "transfer_minutes": 35,
+        "transfer_oneway_minor": 220000,
+        "vehicle_capacity": 3,
+        "baggage": "1 чемодан и ручная кладь на гостя",
+        "child_seats": true
+      },
+      "review_items": [
+        {
+          "id": "sample-sochi-1-r0",
+          "theme": "Чистота",
+          "rating": 9,
+          "text": "В номере чисто, постель удобная. Уборка была каждый день.",
+          "traveller": "семья",
+          "date": "2026-09-14",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-sochi-1-r1",
+          "theme": "Питание",
+          "rating": 9,
+          "text": "Завтрак понравился, но утром в выходные приходилось немного ждать.",
+          "traveller": "пара",
+          "date": "2026-09-22",
+          "source_kind": "synthetic"
+        },
+        {
+          "id": "sample-sochi-1-r2",
+          "theme": "Тишина",
+          "rating": 8,
+          "text": "Вечером слышны соседи в коридоре. Для чувствительного сна лучше номер подальше от лифта.",
+          "traveller": "пара",
+          "date": "2026-10-02",
+          "source_kind": "synthetic"
+        }
+      ],
+      "journey": {
+        "version": "journey-scenarios-v1",
+        "source_kind": "synthetic",
+        "currency": "RUB",
+        "total_minor": 7400000,
+        "breakdown": {
+          "hotel": 3360000,
+          "transport": 3600000,
+          "transfers": 440000,
+          "fees": 0
+        },
+        "reserve_minor": 0,
+        "budget_minor": 12000000,
+        "segments": [
+          {
+            "kind": "flight",
+            "label": "Самолёт туда",
+            "origin": "Москва · аэропорт",
+            "destination": "Сочи · аэропорт",
+            "departure": "2026-11-10T09:00:00+03:00",
+            "arrival": "2026-11-10T13:00:00+03:00",
+            "timezone": "Europe/Moscow",
+            "duration_minutes": 240
+          },
+          {
+            "kind": "transfer",
+            "label": "Трансфер в отель",
+            "origin": "Сочи · аэропорт",
+            "destination": "Сосновый берег",
+            "departure": "2026-11-10T13:45:00+03:00",
+            "arrival": "2026-11-10T14:20:00+03:00",
+            "timezone": "Europe/Moscow",
+            "duration_minutes": 35
+          },
+          {
+            "kind": "transfer",
+            "label": "Обратный трансфер",
+            "origin": "Сосновый берег",
+            "destination": "Сочи · аэропорт",
+            "departure": "2026-11-17T12:00:00+03:00",
+            "arrival": "2026-11-17T12:35:00+03:00",
+            "timezone": "Europe/Moscow",
+            "duration_minutes": 35
+          },
+          {
+            "kind": "flight",
+            "label": "Самолёт обратно",
+            "origin": "Сочи · аэропорт",
+            "destination": "Москва · аэропорт",
+            "departure": "2026-11-17T18:00:00+03:00",
+            "arrival": "2026-11-17T22:00:00+03:00",
+            "timezone": "Europe/Moscow",
+            "duration_minutes": 240
+          }
+        ],
+        "checks": [
+          {
+            "code": "dates",
+            "status": "pass",
+            "message": "Расписание и тарифы рассчитаны для ноября–декабря 2026.",
+            "blocking": true
+          },
+          {
+            "code": "checkin",
+            "status": "pass",
+            "message": "Прибытие в отель 10.11 14:20, заселение до 23:00.",
+            "blocking": true
+          },
+          {
+            "code": "return",
+            "status": "pass",
+            "message": "До отправления оставлен запас 120 мин.; выезд из отеля 17.11 12:00.",
+            "blocking": true
+          },
+          {
+            "code": "capacity",
+            "status": "pass",
+            "message": "Размещение для 2 гостей; машин: 1, до 3 пассажиров в каждой.",
+            "blocking": true
+          },
+          {
+            "code": "budget",
+            "status": "pass",
+            "message": "Итог с резервом 74 000 ₽; общий лимит 120 000 ₽.",
+            "blocking": true
+          }
+        ],
+        "can_book": true,
+        "vehicles": 1,
+        "child_seats": 0,
+        "baggage": "1 чемодан и ручная кладь на гостя",
+        "cancellation_until": null,
+        "checkin_from": "2026-11-10T14:00:00+03:00",
+        "checkout_until": "2026-11-17T12:00:00+03:00",
+        "notice": "Сценарный каталог: объекты, отзывы, расписания и тарифы вымышлены для показа пути поездки."
+      },
+      "reasons": [
+        "Дорога и оба трансфера включены",
+        "Оценка гостей 8.7/10"
+      ],
+      "quote": {
+        "base_room_nightly_minor": 480000,
+        "source_kind": "demo",
+        "currency": "RUB",
+        "nightly_minor": 480000,
+        "total_minor": 3360000,
+        "nights": 7,
+        "rooms": 1,
+        "breakfast": false,
+        "free_cancellation": false,
+        "explanation": "Демонстрационный тариф для прототипа, рассчитан от справочной цены каталога. Наличие и стоимость на выбранные даты не подтверждены Островком."
+      },
+      "match_score": 88.39,
+      "unverified": []
+    }
+  }
+}

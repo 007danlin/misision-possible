@@ -1,0 +1,20 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Подготавливаем О!План</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#f5f6fa;color:#202532;font:16px/1.6 system-ui,sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px}main{max-width:620px;width:100%;background:#fff;border-radius:24px;padding:clamp(24px,6vw,48px);box-shadow:0 12px 50px #1720440a}.brand{color:#3559df;font-size:24px;font-weight:750}h1{line-height:1.2;font-size:clamp(25px,5vw,34px);margin:28px 0 16px}p{color:#667085}ol{list-style:none;padding:0;counter-reset:step}li{padding:10px 0;color:#667085}li:before{counter-increment:step;content:counter(step);display:inline-grid;place-items:center;width:28px;height:28px;background:#f0f2f8;border-radius:50%;margin-right:12px}li.active{color:#3559df;font-weight:650}li.done:before{content:'✓';background:#eaf6ee;color:#26804c}progress{width:100%;height:12px;accent-color:#3559df;display:block;margin:20px 0 10px}#numbers{font-variant-numeric:tabular-nums;font-size:14px;color:#667085;min-height:24px}small{color:#667085}#message{min-height:52px}#error{color:#a33}button{border:0;border-radius:10px;background:#3559df;color:white;padding:12px 20px;font:inherit;cursor:pointer}</style>
+<main><div class="brand">Островок · О!План</div><h1>Готовим помощника к работе</h1><p>Первый запуск занимает больше времени: скачиваем модель и подготавливаем её. Всё произойдёт автоматически.</p><ol><li id="step-download" class="active">Загрузка модели</li><li id="step-verify">Проверка и запуск</li><li id="step-warmup">Подготовка первого ответа</li></ol><div role="status" aria-live="polite"><div id="message">Подключаемся к сервисам…</div><progress id="bar" max="100" aria-label="Прогресс загрузки"></progress><div id="numbers"></div></div><p id="error" hidden></p><small>Можно оставить эту вкладку открытой — приложение появится само. Скачанная модель сохранится для следующих запусков.</small></main>
+<script>
+const $=id=>document.getElementById(id),started=Date.now();let failures=0,stopped=false;
+const rate=n=>(n/1e6).toLocaleString('ru-RU',{maximumFractionDigits:1}),mb=n=>(n/1e6).toLocaleString('ru-RU',{maximumFractionDigits:0}),elapsed=()=>Math.floor((Date.now()-started)/60000)+' мин '+Math.floor((Date.now()-started)/1000%60)+' с';
+async function poll(){
+ if(stopped)return;
+ try{const response=await fetch('/api/runtime/status',{cache:'no-store',signal:AbortSignal.timeout(5000)});if(!response.ok)throw Error('status');const s=await response.json();failures=0;
+ if(s.ready){stopped=true;$('message').textContent='Всё готово, открываем приложение…';location.reload();return}
+ $('message').textContent=s.message||'Подготавливаем сервисы';
+ const phase=s.phase,index=phase==='warmup'?2:['verifying','loading','weights_ready'].includes(phase)?1:0;
+ ['download','verify','warmup'].forEach((name,i)=>{$('step-'+name).className=i<index?'done':i===index?'active':''});
+ if(['downloading','verifying'].includes(phase)&&s.total_bytes){$('bar').value=s.percent||0;$('numbers').textContent=(s.percent||0).toFixed(1)+'% · '+mb(s.downloaded_bytes||0)+' / '+mb(s.total_bytes)+' МБ'+(s.bytes_per_second>0?' · '+rate(s.bytes_per_second)+' МБ/с':'')+' · '+elapsed()}
+ else{$('bar').removeAttribute('value');$('numbers').textContent='Прошло '+elapsed()}
+ $('error').hidden=phase!=='error';$('error').textContent='Не удалось загрузить модель. Автоматические повторы включены. Если ошибка сохраняется, подробности: docker compose logs model.';
+ }catch(e){failures++;$('message').textContent=failures>2?'Связь с сервисами прервалась. Пробуем подключиться снова…':'Подключаемся к сервисам…';$('bar').removeAttribute('value')}
+ setTimeout(poll,2000)
+}poll();
+</script></html>
