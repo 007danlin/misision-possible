@@ -28,7 +28,7 @@ jobs:
       - name: Install linter
         run: python -m pip install ruff==0.14.2
       - name: Lint source and tests
-        run: python -m ruff check main.py tests
+        run: python -m ruff check main.py export_schemas.py travel_agent evals tests
 
   test:
     name: gRPC tests

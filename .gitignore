@@ -51,3 +51,9 @@ coverage/
 *.swo
 .DS_Store
 Thumbs.db
+
+# Local project-only models, runtime, logs and persistent data
+.runtime/
+
+# Encrypted submission for the organizers
+!/secrets.env.age

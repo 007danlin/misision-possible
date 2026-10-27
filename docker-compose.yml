@@ -1,0 +1,90 @@
+name: odin-request
+
+services:
+  app:
+    build: ./backend/core
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      PORT: "8080"
+      MODEL_STATUS_FILE: /startup/model.json
+      MODEL_HEALTH_URL: http://model:8082/health
+      MAP_TILE_URL: ${MAP_TILE_URL:-}
+      BIND_HOST: "0.0.0.0"
+      LOCAL_DEMO_MODE: "true"
+      TRIP_DATA_DIR: /app/data/trips
+      AGENT_HOST: agent
+      AGENT_PORT: "50051"
+      AGENT_PROGRESS_URL: http://agent:15052
+      AGENT_TURN_TIMEOUT_SECONDS: ${AGENT_TURN_TIMEOUT_SECONDS:-300}
+    volumes:
+      - trips:/app/data
+      - startup:/startup:ro
+    depends_on:
+      model:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/ready"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 30m
+    restart: unless-stopped
+
+  agent:
+    build: ./agent
+    environment:
+      AGENT_PORT: "50051"
+      AGENT_PROGRESS_HOST: "0.0.0.0"
+      AGENT_TOOLS_MODE: demo
+      JOURNEY_DATA_SOURCE: ${JOURNEY_DATA_SOURCE:-public}
+      HOTEL_CONTENT_CACHE: /app/content-cache
+      TRAVELPAYOUTS_TOKEN: ${TRAVELPAYOUTS_TOKEN:-}
+      PUBLIC_DATA_USER_AGENT: ${PUBLIC_DATA_USER_AGENT:-OPlan-Hackathon/1.0 https://github.com/ostrovok-hackathon-2026/misision-possible}
+      AGENT_TURN_TIMEOUT_SECONDS: ${AGENT_TURN_TIMEOUT_SECONDS:-300}
+      LLM_PROVIDER: ${LLM_PROVIDER:-llama_cpp}
+      LLM_BASE_URL: ${LLM_BASE_URL:-http://model:8082/v1}
+      LLM_MODEL: ${LLM_MODEL:-qwen3.5-9b}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      HOTEL_COMPACT_WIRE: "1"
+      MODEL_WARMUP: "1"
+      WAIT_FOR_MODEL: "1"
+    volumes:
+      - hotel-content:/app/content-cache
+    depends_on:
+      model:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "python", "healthcheck.py"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      # The process waits for downloads, then warms the model before gRPC.
+      start_period: 30m
+    restart: unless-stopped
+
+  model:
+    build:
+      context: .
+      dockerfile: infra/model/Dockerfile
+      args:
+        MODEL_LOCK: ${MODEL_LOCK:-docs/local-runtime.json}
+    environment:
+      MODEL_THREADS: ${MODEL_THREADS:-4}
+      MODEL_STATUS_FILE: /startup/model.json
+    volumes:
+      - models:/models
+      - startup:/startup
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8082/health', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      start_period: 15m
+      retries: 5
+    restart: "on-failure:3"
+
+volumes:
+  hotel-content:
+  trips:
+  models:
+  startup:

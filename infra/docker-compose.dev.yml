@@ -81,6 +81,12 @@ services:
       dockerfile: Dockerfile
     environment:
       AGENT_PORT: "50051"
+      LLM_PROVIDER: ${LLM_PROVIDER:-llama_cpp}
+      LLM_BASE_URL: ${LLM_BASE_URL:-http://host.docker.internal:18082/v1}
+      LLM_MODEL: ${LLM_MODEL:-qwen3.5-9b}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      AGENT_TOOLS_MODE: ${AGENT_TOOLS_MODE:-unavailable}
+      AGENT_TURN_TIMEOUT_SECONDS: "45"
     ports:
       - "50051:50051"
     networks:
