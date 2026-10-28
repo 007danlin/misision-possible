@@ -34,7 +34,7 @@ func TestColdStartupServesProgressBeforeAgentAndBlocksTripMutations(t *testing.T
 	model := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { w.WriteHeader(503) }))
 	defer model.Close()
 	t.Setenv("MODEL_HEALTH_URL", model.URL)
-	api := NewAPI("", &http.Client{}, &startupAgent{})
+	api := NewAPI(&startupAgent{})
 	api.trips = &TripStore{dir: t.TempDir()}
 	handler := api.Handler()
 	for _, test := range []struct {
@@ -62,7 +62,7 @@ func TestStaleReadyFileDoesNotBypassAgentReadiness(t *testing.T) {
 	model := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { w.WriteHeader(200) }))
 	defer model.Close()
 	t.Setenv("MODEL_HEALTH_URL", model.URL)
-	api := NewAPI("", &http.Client{}, &startupAgent{})
+	api := NewAPI(&startupAgent{})
 	r := httptest.NewRecorder()
 	api.Handler().ServeHTTP(r, httptest.NewRequest("GET", "/ready", nil))
 	if r.Code != 503 || !strings.Contains(r.Body.String(), `"phase":"warmup"`) {
@@ -74,7 +74,7 @@ func TestReadyAgentOpensOriginalApplication(t *testing.T) {
 	defer model.Close()
 	t.Setenv("MODEL_HEALTH_URL", model.URL)
 	t.Setenv("MODEL_STATUS_FILE", filepath.Join(t.TempDir(), "missing.json"))
-	api := NewAPI("", &http.Client{}, &startupAgent{ready: true})
+	api := NewAPI(&startupAgent{ready: true})
 	api.trips = &TripStore{dir: t.TempDir()}
 	handler := api.Handler()
 	for _, path := range []string{"/ready", "/plan.html"} {
@@ -97,7 +97,7 @@ func TestHealthyAgentDoesNotHideUnavailableModel(t *testing.T) {
 	model := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { w.WriteHeader(503) }))
 	defer model.Close()
 	t.Setenv("MODEL_HEALTH_URL", model.URL)
-	api := NewAPI("", &http.Client{}, &startupAgent{ready: true})
+	api := NewAPI(&startupAgent{ready: true})
 	r := httptest.NewRecorder()
 	api.Handler().ServeHTTP(r, httptest.NewRequest("GET", "/ready", nil))
 	if r.Code != 503 || !strings.Contains(r.Body.String(), `"ready":false`) {
@@ -114,7 +114,7 @@ func TestWarmupPreservesDownloadedBytesWithoutClaimingReadiness(t *testing.T) {
 	model := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { w.WriteHeader(200) }))
 	defer model.Close()
 	t.Setenv("MODEL_HEALTH_URL", model.URL)
-	api := NewAPI("", &http.Client{}, &startupAgent{})
+	api := NewAPI(&startupAgent{})
 	r := httptest.NewRecorder()
 	api.Handler().ServeHTTP(r, httptest.NewRequest("GET", "/api/runtime/status", nil))
 	var status startupStatus

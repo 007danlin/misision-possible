@@ -57,7 +57,7 @@ func TestHotelSearchSurvivesClarificationFailureAndReload(t *testing.T) {
 			for _, outcome := range []string{"needs_input", "no_solution", "error"} {
 				t.Run(fmt.Sprintf("hotelOnly=%v/selected=%v/%s", hotelOnly, selected, outcome), func(t *testing.T) {
 					agent := &continuityAgent{journeyAgent: journeyAgent{fixtures: fixtures}, hotelOnly: hotelOnly}
-					api := NewAPI("", &http.Client{}, agent)
+					api := NewAPI(agent)
 					api.trips = &TripStore{dir: t.TempDir()}
 					handler := api.Handler()
 					var cookie *http.Cookie
@@ -168,7 +168,7 @@ func TestUnavailableAlternativeCannotCancelSelectedHotelEdit(t *testing.T) {
 	_ = json.Unmarshal(raw, &fixtures)
 	selected := asMap(asMap(fixtures["changed"])["hotel"])
 	agent := &unavailableAlternativeAgent{journeyAgent{fixtures: fixtures}}
-	api := NewAPI("", &http.Client{}, agent)
+	api := NewAPI(agent)
 	snap := map[string]any{"trip_spec": asMap(fixtures["changed"])["spec"], "hotel_options": []any{selected, map[string]any{"id": "unavailable-alternative"}}}
 	if err := api.refreshJourneyOptions(context.Background(), snap, selected, "test-owner"); err != nil {
 		t.Fatal(err)

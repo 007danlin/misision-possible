@@ -31,7 +31,6 @@ dist/
 build/
 coverage/
 *.tsbuildinfo
-/doc/book/
 
 # Go local binaries and test output
 /bin/

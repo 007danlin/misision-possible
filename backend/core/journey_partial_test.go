@@ -4,7 +4,7 @@ import "testing"
 
 func TestMissingRouteCannotBeConfirmedWithBudgetOverride(t *testing.T) {
 	h := map[string]any{"journey": map[string]any{
-		"route_missing": true,
+		"route_missing":    true,
 		"total_incomplete": true,
 		"checks": []any{
 			map[string]any{"code": "route_missing", "status": "unknown", "blocking": true, "message": "Дорога не рассчитана"},

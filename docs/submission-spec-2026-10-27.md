@@ -179,11 +179,11 @@ HTML содержит автоматическую расшифровку и е�
 
 Предоставленные материалы:
 
-- [Q&A 25.10 — вопросы и ответы](</Users/daniellineckij/Downloads/Q&A 25.10 — вопросы и ответы.html>) — пересказ и автоматическая расшифровка; таймкоды выше относятся к аудиозаписи внутри HTML.
-- [Переписка трека, 24–27 октября](</Users/daniellineckij/.codex/attachments/bae0ab6f-6c4f-4862-bb6e-961d5fe5025e/Вставленный текст.txt>) — сообщения Тимура отделены от мнений участников.
-- [Расписание и общий чат](</Users/daniellineckij/.codex/attachments/b554b888-2fcc-4fcd-88d9-d32139110c90/Вставленный текст.txt>) — сообщение Юлии и ответы Тимура.
+- «Q&A 25.10 — вопросы и ответы» (переданный команде файл) — пересказ и автоматическая расшифровка; таймкоды выше относятся к аудиозаписи внутри HTML.
+- «Переписка трека, 24–27 октября» (переданный команде файл) — сообщения Тимура отделены от мнений участников.
+- «Расписание и общий чат» (переданный команде файл) — сообщение Юлии и ответы Тимура.
 - Локальные копии письменного задания и правил: `../../materials/01-track.txt`, `../../materials/02-technical-rules.txt`; план команды: `../../team-plan.md`.
 
-Проверенные файлы проекта: [README](../README.md), [архитектура агента](agent.md), [отчёт 24.10](agent-evaluation.md), [runtime](local-runtime.json), [dev Compose](../infra/docker-compose.dev.yml), [Core](../backend/core/main.go), [инструменты](../agent/travel_agent/tools.py), [каталог](../agent/travel_agent/demo_tools.py), [локальный установщик](../scripts/setup-local.py), [agent Dockerfile](../agent/Dockerfile), [Core Dockerfile](../backend/core/Dockerfile).
+Проверенные файлы проекта: [README](../README.md), [архитектура агента](agent.md), [отчёт 24.10](agent-evaluation.md), [runtime](local-runtime.json), старый dev Compose (удалён при очистке 28.10; доступен в истории Git), [Core](../backend/core/main.go), [инструменты](../agent/travel_agent/tools.py), [каталог](../agent/travel_agent/demo_tools.py), [локальный установщик](../scripts/setup-local.py), [agent Dockerfile](../agent/Dockerfile), [Core Dockerfile](../backend/core/Dockerfile).
 
-Исходные ссылки из материалов: [задание трека](https://docs.ostrovok.tech/s/0ee4d8b2-ae50-4dda-a2b5-112fcdb5398d), [правила по технике](https://docs.ostrovok.tech/s/b9e6ec5e-5ad6-4091-9c85-a48eee9b21cc). При подготовке использованы их локальные копии; актуальность страниц после получения копий не проверялась. Локальные ссылки на вложения доступны на компьютере автора; при передаче документа команде приложить исходники или доступные команде копии.
+Исходные ссылки из материалов: [задание трека](https://docs.ostrovok.tech/s/0ee4d8b2-ae50-4dda-a2b5-112fcdb5398d), [правила по технике](https://docs.ostrovok.tech/s/b9e6ec5e-5ad6-4091-9c85-a48eee9b21cc). При подготовке использованы их локальные копии; актуальность страниц после получения копий не проверялась. Исходные вложения хранятся у команды и не являются зависимостями запуска проекта.

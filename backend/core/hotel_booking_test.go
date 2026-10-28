@@ -10,7 +10,7 @@ import (
 )
 
 func TestHotelCheckoutPersistenceAndIdempotency(t *testing.T) {
-	api := NewAPI("", &http.Client{}, &sessionAgent{})
+	api := NewAPI(&sessionAgent{})
 	api.trips = &TripStore{dir: t.TempDir()}
 	handler := api.Handler()
 	var cookie *http.Cookie
@@ -83,7 +83,7 @@ func TestHotelCheckoutPersistenceAndIdempotency(t *testing.T) {
 }
 
 func TestHotelSelectionRetainedButCheckoutInvalidatedOnFailedTurn(t *testing.T) {
-	api := NewAPI("", &http.Client{}, &sessionAgent{})
+	api := NewAPI(&sessionAgent{})
 	api.trips = &TripStore{dir: t.TempDir()}
 	handler := api.Handler()
 	owner := strings.Repeat("a", 32)

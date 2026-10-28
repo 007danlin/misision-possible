@@ -19,7 +19,7 @@ func TestOwnedTicketsCompleteRecoveryAndPreserveRollback(t *testing.T) {
 		t.Fatal(err)
 	}
 	agent := &transportAgent{journeyAgent: journeyAgent{fixtures: fixtures}}
-	api := NewAPI("", &http.Client{}, agent)
+	api := NewAPI(agent)
 	api.trips = &TripStore{dir: t.TempDir()}
 	handler := api.Handler()
 	var cookie *http.Cookie

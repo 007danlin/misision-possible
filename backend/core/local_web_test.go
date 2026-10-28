@@ -12,7 +12,7 @@ import (
 func TestLocalWebDirectoryServesEditsWithoutRestart(t *testing.T) {
 	directory := t.TempDir()
 	t.Setenv("LOCAL_WEB_DIR", directory)
-	api := NewAPI("", &http.Client{}, &sessionAgent{})
+	api := NewAPI(&sessionAgent{})
 	api.trips = &TripStore{dir: t.TempDir()}
 	handler := api.Handler()
 	for _, content := range []string{"initial frontend", "updated frontend"} {
@@ -33,7 +33,7 @@ func TestLocalWebDirectoryServesEditsWithoutRestart(t *testing.T) {
 
 func TestLocalWebDefaultsToEmbeddedAssets(t *testing.T) {
 	t.Setenv("LOCAL_WEB_DIR", "")
-	api := NewAPI("", &http.Client{}, &sessionAgent{})
+	api := NewAPI(&sessionAgent{})
 	api.trips = &TripStore{dir: t.TempDir()}
 	response := httptest.NewRecorder()
 	api.Handler().ServeHTTP(response, httptest.NewRequest(http.MethodGet, "/plan.html", nil))

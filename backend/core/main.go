@@ -37,8 +37,6 @@ func agentTimeout() time.Duration {
 func (s *API) Handler() http.Handler {
 	r := chi.NewRouter()
 	r.Use(s.metrics.middleware)
-	r.Post("/api/core/handle", s.HandleRequest)
-	r.Post("/api/core/agent/turn", s.AgentTurn)
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
@@ -65,9 +63,7 @@ func run() error {
 		return err
 	}
 	defer conn.Close()
-	transport := http.DefaultTransport.(*http.Transport).Clone()
-	defer transport.CloseIdleConnections()
-	api := NewAPI(envOrDefault("AUTH_URL", "http://localhost:8080"), &http.Client{Timeout: 3 * time.Second, Transport: transport}, pb.NewPredictorClient(conn))
+	api := NewAPI(pb.NewPredictorClient(conn))
 
 	if os.Getenv("LOCAL_DEMO_MODE") == "true" {
 		dir := envOrDefault("TRIP_DATA_DIR", "./data/trips")

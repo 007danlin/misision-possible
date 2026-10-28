@@ -26,9 +26,8 @@ import (
 //go:embed web/*
 var tripWeb embed.FS
 
-// The local demo uses the SAME Core and agent. Durable snapshots belong to Core,
-// stored as atomic files under the project's private data directory (one writer).
-// This local adapter can later be replaced with Luka's production persistence.
+// Core owns durable snapshots, stored atomically under the private data
+// directory. The file store supports one Core process.
 type TripStore struct {
 	dir   string
 	locks sync.Map

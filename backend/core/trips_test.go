@@ -64,7 +64,7 @@ func (a *sessionAgent) Evaluate(_ context.Context, req *pb.EvaluateRequest, _ ..
 }
 func TestLocalTripLifecycleAndPersistence(t *testing.T) {
 	agent := &sessionAgent{}
-	api := NewAPI("", &http.Client{}, agent)
+	api := NewAPI(agent)
 	dir := t.TempDir()
 	api.trips = &TripStore{dir: dir}
 	handler := api.Handler()
@@ -152,7 +152,7 @@ func TestLocalTripLifecycleAndPersistence(t *testing.T) {
 	call("GET", path, nil, 404)
 }
 func TestLocalTripRejectsForeignOrigin(t *testing.T) {
-	api := NewAPI("", &http.Client{}, &sessionAgent{})
+	api := NewAPI(&sessionAgent{})
 	api.trips = &TripStore{dir: t.TempDir()}
 	req := httptest.NewRequest("POST", "/api/sessions/", strings.NewReader("{}"))
 	req.Header.Set("Origin", "https://unrelated.example")

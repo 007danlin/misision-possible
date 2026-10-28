@@ -127,7 +127,7 @@ func TestStaySearchURLTracksEditAndPreviewRollback(t *testing.T) {
 }
 
 func TestStayEditAndConfirmationPersistDatesPriceAndSearchURL(t *testing.T) {
-	api := NewAPI("", &http.Client{}, &sessionAgent{})
+	api := NewAPI(&sessionAgent{})
 	api.trips = &TripStore{dir: t.TempDir()}
 	owner := strings.Repeat("b", 32)
 	id := randomID()

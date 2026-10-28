@@ -8,8 +8,7 @@ mode=${1:-all}
 
 selected=${2:-all}
 case "$selected" in
-  all) services="backend/auth backend/core backend/notif backend/chat" ;;
-  auth|core|notif|chat) services="backend/$selected" ;;
+  all|core) services="backend/core" ;;
   *) echo "Unknown service: $selected" >&2; exit 2 ;;
 esac
 

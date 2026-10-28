@@ -3,9 +3,10 @@
 Существующий Python gRPC agent расширен разбором поездок, сохранением условий и ToolRegistry.
 Core управляет сессией и учебной покупкой; LLM не назначает цены и не пишет в хранилище.
 
-**Запуск всего приложения:** `python3 scripts/local.py start` из корня репозитория.
-Модель и runtime находятся в `.runtime/` проекта. Общая Ollama не используется.
-[Подробности автономного запуска](../docs/local-setup.md).
+**Запуск всего приложения:** `docker compose up --build` из корня репозитория, UI — http://localhost:8080. В Compose используется локальная Qwen3-4B-Instruct-2507; зависимости и веса готовятся автоматически.
+[Архитектура](../docs/agent.md) · [окружение разработки](../docs/development.md).
+
+Из каталога `agent/`, с подготовленным `.venv`:
 
 ```sh
 .venv/bin/python -m unittest discover -s tests -v
@@ -16,7 +17,7 @@ Core управляет сессией и учебной покупкой; LLM �
 Для hosted endpoint задайте LLM_PROVIDER=dashscope/openai_compatible, LLM_BASE_URL,
 LLM_MODEL, LLM_API_KEY; ключ не коммитится. Скрытого fallback на фикстуры нет.
 
-gRPC: Predict (инфраструктурный smoke), RunTurn (Qwen), Evaluate (кодовая проверка действий).
+gRPC: Predict (healthcheck и готовность), RunTurn (Qwen), Evaluate (кодовая проверка действий).
 [Контракт и ограничения](../docs/agent.md).
 
 ## Проверка формулировок и многошаговых уточнений

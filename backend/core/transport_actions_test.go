@@ -5,7 +5,6 @@ import (
 	pb "core/proto"
 	"encoding/json"
 	"google.golang.org/grpc"
-	"net/http"
 	"os"
 	"testing"
 )
@@ -45,7 +44,7 @@ func TestTransportPreviewAtomicityAndOwnedTickets(t *testing.T) {
 	spec := cloneTrip(asMap(v["spec"]))
 	snap := map[string]any{"trip_spec": spec, "selected_hotel": h, "hotel_options": []any{h}, "search_mode": "hotels", "status": "hotel_checkout"}
 	agent := &transportAgent{journeyAgent: journeyAgent{fixtures: fixtures}}
-	api := NewAPI("", &http.Client{}, agent)
+	api := NewAPI(agent)
 	before := cloneTrip(snap)
 	for _, edit := range []*TransportEdit{{Mode: "rocket"}, {Origin: " "}, {Tickets: &OwnedTickets{Arrival: "bad", Departure: "bad", Terminal: "airport"}}} {
 		if api.changeTransport(context.Background(), snap, "", edit, "owner") == "" {
@@ -91,7 +90,7 @@ func TestTransportPreviewAtomicityAndOwnedTickets(t *testing.T) {
 	}
 }
 func TestAddonNeverInventsOrigin(t *testing.T) {
-	api := NewAPI("", &http.Client{}, nil)
+	api := NewAPI(nil)
 	snap := map[string]any{"trip_spec": map[string]any{}, "hotel_booking": map[string]any{"hotel": map[string]any{}}}
 	before := cloneTrip(snap)
 	if api.tripExtra(context.Background(), snap, "quote_transfer_addon", "", "owner") == "" {

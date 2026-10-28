@@ -55,7 +55,7 @@ func TestWholeJourneyPreviewConflictAndPersistence(t *testing.T) {
 	var fixtures map[string]any
 	_ = json.Unmarshal(raw, &fixtures)
 	agent := &journeyAgent{fixtures: fixtures}
-	api := NewAPI("", &http.Client{}, agent)
+	api := NewAPI(agent)
 	api.trips = &TripStore{dir: t.TempDir()}
 	handler := api.Handler()
 	var cookie *http.Cookie
@@ -134,7 +134,7 @@ func TestJourneyHotelSwitchRetainsRepricedShortlist(t *testing.T) {
 	var fixtures map[string]any
 	_ = json.Unmarshal(raw, &fixtures)
 	agent := &journeyAgent{fixtures: fixtures}
-	api := NewAPI("", &http.Client{}, agent)
+	api := NewAPI(agent)
 	api.trips = &TripStore{dir: t.TempDir()}
 	handler := api.Handler()
 	var cookie *http.Cookie
@@ -257,7 +257,7 @@ func TestDiscardTransportAdditionRestoresHotelOnly(t *testing.T) {
 	}
 	var fixtures map[string]any
 	_ = json.Unmarshal(raw, &fixtures)
-	api := NewAPI("", &http.Client{}, &journeyAgent{fixtures: fixtures})
+	api := NewAPI(&journeyAgent{fixtures: fixtures})
 	original := asMap(fixtures["original"])
 	hotel := cloneTrip(asMap(original["hotel"]))
 	delete(hotel, "journey")

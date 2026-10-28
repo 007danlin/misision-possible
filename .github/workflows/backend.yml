@@ -24,7 +24,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        service: [auth, core, notif, chat]
+        service: [core]
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-go@v6
@@ -42,7 +42,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        service: [auth, core, notif, chat]
+        service: [core]
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-go@v6
@@ -60,7 +60,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        service: [auth, core, notif, chat]
+        service: [core]
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-go@v6
@@ -78,7 +78,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        service: [auth, core, notif, chat]
+        service: [core]
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-go@v6

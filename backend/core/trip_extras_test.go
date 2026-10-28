@@ -15,7 +15,7 @@ func TestExtrasAfterBookingSharePrivacyAndRevocation(t *testing.T) {
 	var fixtures map[string]any
 	_ = json.Unmarshal(raw, &fixtures)
 	a := &journeyAgent{fixtures: fixtures}
-	api := NewAPI("", &http.Client{}, a)
+	api := NewAPI(a)
 	api.trips = &TripStore{dir: t.TempDir()}
 	handler := api.Handler()
 	var cookie *http.Cookie
@@ -100,7 +100,7 @@ func TestTransferConflictBlocksAddon(t *testing.T) {
 	var fixtures map[string]any
 	_ = json.Unmarshal(raw, &fixtures)
 	a := &journeyAgent{fixtures: fixtures, conflict: true}
-	api := NewAPI("", &http.Client{}, a)
+	api := NewAPI(a)
 	v := asMap(fixtures["original"])
 	h := cloneTrip(asMap(v["hotel"]))
 	delete(h, "journey")

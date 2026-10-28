@@ -2,14 +2,13 @@ package main
 
 import (
 	"encoding/json"
-	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
 )
 
 func TestPublicHotelsCannotUseDemoBookingActions(t *testing.T) {
-	api := NewAPI("", &http.Client{}, &sessionAgent{})
+	api := NewAPI(&sessionAgent{})
 	api.trips = &TripStore{dir: t.TempDir()}
 	handler := api.Handler()
 	create := httptest.NewRequest("POST", "/api/sessions/", strings.NewReader(`{"search_mode":"hotels"}`))
