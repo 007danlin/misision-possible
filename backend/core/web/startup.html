@@ -12,15 +12,15 @@ async function poll(){
  const phase=s.phase,index=phase==='warmup'?2:['verifying','loading','weights_ready'].includes(phase)?1:0;
  ['download','verify','warmup'].forEach((name,i)=>{$('step-'+name).className=i<index?'done':i===index?'active':''});
  const total=Number(s.total_bytes),received=Math.max(0,Number(s.downloaded_bytes)||0),hasTotal=Number.isFinite(total)&&total>0;
- const percent=hasTotal?Math.min(100,received/total*100):null,measuring=['downloading','retrying','verifying'].includes(phase);
- $('bar').setAttribute('aria-label',phase==='verifying'?'Прогресс проверки модели':measuring?'Прогресс скачивания модели':'Подготовка модели');
- if(measuring&&hasTotal)$('bar').value=percent;else $('bar').removeAttribute('value');
+ const percent=hasTotal?Math.min(100,received/total*100):null;
+ $('bar').setAttribute('aria-label',phase==='verifying'?'Прогресс проверки модели':'Прогресс скачивания модели');
+ if(hasTotal)$('bar').value=percent;else $('bar').removeAttribute('value');
  if(hasTotal){
   const label=phase==='verifying'?'Проверено':received>=total?'Модель скачана':'Скачано';
   $('numbers').textContent=label+': '+percent.toLocaleString('ru-RU',{maximumFractionDigits:1})+'% · '+gb(Math.min(received,total))+' / '+gb(total)+' ГБ'+(phase==='downloading'&&s.bytes_per_second>0?' · '+rate(s.bytes_per_second)+' МБ/с':'');
  }else $('numbers').textContent=received>0?'Скачано: '+gb(received)+' ГБ · общий объём уточняется':'Прошло '+elapsed();
  $('error').hidden=phase!=='error';$('error').textContent='Не удалось загрузить модель. Автоматические повторы включены. Если ошибка сохраняется, подробности: docker compose logs model.';
- }catch(e){failures++;$('message').textContent=failures>2?'Связь с сервисами прервалась. Пробуем подключиться снова…':'Подключаемся к сервисам…';$('bar').removeAttribute('value')}
+ }catch(e){failures++;$('message').textContent=failures>2?'Связь с сервисами прервалась. Пробуем подключиться снова…':'Подключаемся к сервисам…';}
  setTimeout(poll,2000)
 }poll();
 </script></html>

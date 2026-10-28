@@ -35,7 +35,7 @@ fs.mkdirSync(out, {recursive: true});
     }
     await page.getByRole('heading', {name: 'Готовим помощника к работе'}).waitFor();
     await page.getByText(/Модель скачана: 100% · .* ГБ/).waitFor();
-    assert.equal(await page.locator('progress').getAttribute('value'), null, 'loading is not a fabricated percent');
+    assert.equal(await page.locator('progress').getAttribute('value'), '100', 'completed download stays full during preparation');
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
     await page.screenshot({path: path.join(out, 'loading-mobile.png')});
     await page.reload();

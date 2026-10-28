@@ -10,7 +10,7 @@
     "refresh after automatic navigation",
     "mobile layout",
     "trip API blocked before readiness",
-    "loading phase indeterminate",
+    "completed download bar stays full during loading",
     "automatic navigation after model and agent readiness",
     "no JS errors"
   ]
