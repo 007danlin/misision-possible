@@ -95,6 +95,22 @@ async def run_turn(
             "needs_input", question, questions=[question],
             selection=dict(state.selection, pending_origin_request=message),
         )
+    retry_directions = False
+    pending_direction = state.selection.get("pending_direction_request")
+    if (isinstance(pending_direction, str) and pending_direction
+            and not state.trip_spec.destination
+            and message.strip().casefold().rstrip(".!?") in {
+                "повтори подбор", "повторить подбор", "попробуй ещё раз", "попробуй еще раз", "повтори",
+            }):
+        message = pending_direction
+        retry_directions = True
+        state = state.model_copy(deep=True)
+        state.selection.pop("pending_direction_request", None)
+    elif pending_direction:
+        # A new request supersedes the retry marker; successful later choices
+        # must not resurrect an older request when the user says "repeat".
+        state = state.model_copy(deep=True)
+        state.selection.pop("pending_direction_request", None)
     pending = state.selection.get("pending_origin_request")
     if isinstance(pending, str) and pending:
         # Parse the original wishes together with the reply, so an early
@@ -196,7 +212,9 @@ async def run_turn(
 
             from .inspiration import direction_choice
 
-            direct = direction_choice(state, message) if state.search_mode == "hotels" else None
+            direct = Intent(action="inspire") if retry_directions else (
+                direction_choice(state, message) if state.search_mode == "hotels" else None
+            )
             direct = direct or origin_followup(state, message) or money_followup(state, message) or calendar_followup(message)
             direct = direct or (
                 fast_intent(state, message)
@@ -398,7 +416,7 @@ async def run_turn(
                         selection=state.selection,
                         **updates,
                     )
-                from .inspiration import direction_options, inspiration_text, resolve_directions, QUESTIONS
+                from .inspiration import direction_options, inspiration_text, resolve_directions, direction_context, QUESTIONS
 
                 if not spec.destination:
                     if not spec.origin:
@@ -426,17 +444,23 @@ async def run_turn(
                     metrics.model_calls += 1
                     model_start = time.monotonic()
                     try:
-                        raw, usage = await model.extract({
-                            "search_mode": "directions", "message": message,
-                            "trip_spec": spec.model_dump(mode="json", exclude_defaults=True),
-                            "history": state.history[-5:],
-                            "previous_choices": state.selection.get("direction_options", []),
-                            "candidates": [{k: d[k] for k in ("id", "name", "country", "facts", "limits", "distance_km") if k in d} for d in candidates],
-                        }, None, max(0.01, budget - (time.monotonic() - start)))
+                        # Leave time to return the already validated spec before
+                        # the turn deadline. Timeout must not erase an origin or
+                        # wishes successfully understood earlier in this turn.
+                        remaining = max(0.01, budget - (time.monotonic() - start) - 1)
+                        async with asyncio.timeout(remaining):
+                            raw, usage = await model.extract(direction_context(
+                                spec, message, state.history,
+                                state.selection.get("direction_options", []), candidates,
+                            ), None, remaining)
                         directions, question = resolve_directions(raw, candidates, message=message, spec=spec, history=state.history[-5:])
-                    except ModelError:
-                        question = "Не удалось надёжно подобрать направления. Попробуйте повторить запрос или уточнить пожелания."
-                        return result("needs_input", question, questions=[question], **updates)
+                    except (ModelError, TimeoutError):
+                        question = "Пожелания сохранил, но подбор направлений не завершился. Напишите «Повтори подбор» или уточните пожелания."
+                        return result(
+                            "needs_input", question, questions=[question],
+                            selection=dict(state.selection, pending_direction_request=message),
+                            **updates,
+                        )
                     finally:
                         metrics.model_ms += round((time.monotonic() - model_start) * 1000)
                     for key, value in usage.items():

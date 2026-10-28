@@ -16,8 +16,50 @@ DATE = (
     r"\d{1,2}\s+(?:" + "|".join(MONTHS) + r")(?:\s+\d{4}(?:\s+года)?)?|послезавтра|завтра|сегодня)"
 )
 
+RANGE = re.compile(
+    r"(?<!\w)(?:с\s+)?(?P<first>\d{1,2})\s*"
+    r"(?:(?P<first_month>" + '|'.join(MONTHS) + r")\s*)?"
+    r"(?:по|до|[-–—])\s*(?P<last>\d{1,2})\s+"
+    r"(?P<month>" + '|'.join(MONTHS) + r")"
+    r"(?:\s+(?P<year>\d{4})(?:\s+года)?)?(?!\w)", re.I,
+)
+
+
+def calendar_range(message, today=None, *, standalone=False):
+    """Read an explicit named-month interval, including inside a longer request."""
+    matches = list(RANGE.finditer(message))
+    if len(matches) != 1:
+        return None
+    match = matches[0]
+    if standalone and (message[:match.start()].strip() or message[match.end():].strip(' .!')):
+        return None
+    # Alternatives/negation belong to semantic clarification, not this parser.
+    if re.search(r"\b(?:не|или|либо|если)\b", message[:match.start()], re.I):
+        return None
+    if re.search(r"\b(?:или|либо|если)\b", message[match.end():], re.I):
+        return None
+    today = today or datetime.now(ZoneInfo('Europe/Moscow')).date()
+    month = MONTHS.index(match['month'].casefold()) + 1
+    first_month = MONTHS.index(match['first_month'].casefold()) + 1 if match['first_month'] else month
+    year = int(match['year']) if match['year'] else today.year
+    try:
+        start = date(year, first_month, int(match['first']))
+        end = date(year + (month < first_month), month, int(match['last']))
+        if not match['year'] and start < today:
+            start = start.replace(year=start.year+1)
+            end = end.replace(year=end.year+1)
+    except ValueError:
+        return Intent(action='clarify', questions=['Такого интервала нет в календаре. Уточните даты заезда и выезда.'])
+    if end <= start or start < today:
+        return Intent(action='clarify', questions=['Укажите будущие даты: выезд должен быть позже заезда.'])
+    return Intent(action='change', patch={'dates': {'start':start.isoformat(), 'end':end.isoformat()}},
+                  evidence={'dates':match[0]})
+
 
 def calendar_followup(message, today=None):
+    interval = calendar_range(message, today, standalone=True)
+    if interval is not None:
+        return interval
     text = message.strip().lower().replace("ё", "е").rstrip(".! ")
     match = re.fullmatch(
         r"(?:(?:давай|давайте|поедем|едем|перенеси|перенесем|начнем)\s+)?"

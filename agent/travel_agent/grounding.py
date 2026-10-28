@@ -13,6 +13,22 @@ AMENITIES = {
 }
 
 
+def rejected_destination(message, name):
+    """Return an explicit rejection clause, never a mere city mention."""
+    if not name:
+        return None
+    name = re.escape(name.casefold().replace("ё", "е"))
+    for clause in re.split(r"[.!?;\n]", message.casefold().replace("ё", "е")):
+        place = r"(?<!\w)" + name + r"(?!\w)"
+        if re.search(
+            r"(?:только\s+не|кроме|исключи(?:ть)?|не\s+(?:предлаг\w*|рассматрив\w*|хочу|хотим))\s+(?:в\s+)?" + place
+            + r"|" + place + r"\s+(?:не\s+(?:предлаг\w*|рассматрив\w*|хочу|хотим|нужен|нужна)|исключи(?:ть)?)",
+            clause,
+        ):
+            return clause.strip(' ,:—-')
+    return None
+
+
 def explicit_clarification(message):
     text = message.casefold().replace("ё", "е")
     if re.search(r"\d\s*(?:евро|доллар\w*|usd|eur|€|\$)", text) and re.search(
@@ -61,12 +77,45 @@ def ground_intent(intent, message, previous):
     data = intent.model_dump(mode="json", exclude_unset=True)
     patch = data.setdefault("patch", {})
     evidence = data.setdefault("evidence", {})
+    from .calendar_followup import calendar_range
+
+    interval = calendar_range(message)
+    if interval is not None:
+        if interval.questions:
+            return interval
+        patch['dates'] = interval.patch.dates.model_dump(mode='json')
+        evidence['dates'] = interval.evidence['dates']
     from .origin_followup import canonical_city
 
     for field in ("origin", "destination"):
         value = patch.get(field)
         if isinstance(value, str):
             patch[field] = canonical_city(value) or value
+    # A small model can emit a rejected place as the requested destination.
+    # Retain explicit exclusions as grounded wishes for later short replies.
+    from .inspiration import CATALOGUE
+
+    names = {d[key] for d in CATALOGUE for key in ("name", "destination")}
+    names.update(x for x in (patch.get("destination"), previous.destination) if x)
+    for name in sorted(names):
+        rejection = rejected_destination(message, name)
+        if rejection:
+            if patch.get("destination", previous.destination) == name:
+                if previous.destination == name:
+                    patch["destination"] = None
+                    evidence["destination"] = message[:500]
+                else:
+                    patch.pop("destination", None)
+                    evidence.pop("destination", None)
+            wishes = data.setdefault("add_preferences", [])
+            if rejection not in wishes and rejection not in previous.preferences:
+                wishes.append(rejection)
+                evidence["add_preferences"] = message[:500]
+        elif patch.get("destination") == name:
+            removed = [p for p in previous.preferences if rejected_destination(p, name)]
+            if removed:
+                data.setdefault("remove_preferences", []).extend(removed)
+                evidence["remove_preferences"] = message[:500]
     # Waterfront can mean a river, lake or canal; it does not imply seaside.
     water = re.search(
         r"\b(?:поближе|ближе|рядом|недалеко|у)\s+(?:(?:к|с|от)\s+)?"

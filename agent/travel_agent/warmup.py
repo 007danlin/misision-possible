@@ -1,4 +1,4 @@
-"""Prefill stable hotel instructions; no result is saved as a user answer."""
+"""Prefill both stable instruction sets; no output is saved as a user answer."""
 
 import asyncio
 import json
@@ -33,6 +33,17 @@ async def warmup():
     timeout = startup_timeout()
     print(json.dumps({"warmup": "starting", "timeout_seconds": timeout}), flush=True)
     _, usage = await model.extract(context, None, timeout, prefill=True)
+    if model.settings.provider == "llama_cpp" and os.getenv("LLM_DIRECTION_SLOT"):
+        from .inspiration import CATALOGUE
+
+        print(json.dumps({"warmup": "directions"}), flush=True)
+        _, direction_usage = await model.extract(
+            {"search_mode": "directions", "trip_spec": {}, "message": "Начать подбор",
+             "history": [], "previous_choices": [], "candidates": CATALOGUE},
+            None, max(.01, timeout - (time.monotonic() - started)), prefill=True,
+        )
+        for key, value in direction_usage.items():
+            usage[key] = usage.get(key, 0) + value
     print(
         json.dumps(
             {

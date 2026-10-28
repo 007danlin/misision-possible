@@ -70,9 +70,9 @@ AGENT_TURN_TIMEOUT_SECONDS=300
 | `MODEL_WARMUP_TIMEOUT_SECONDS` | `300` | Отдельный предел первого прогрева при запуске; не меняет лимит пользовательского запроса |
 | `MODEL_LOCK` | `docs/docker-runtime.json` | Закреплённые версия, размер и SHA-256 Docker-модели |
 | `MODEL_THREADS` | `4` | Потоки CPU; на машине с двумя ядрами задайте 2, её скорость отдельно не принята |
-| `MODEL_CONTEXT` | `4096` | Размер контекста модели |
+| `MODEL_CONTEXT` | `4096` | Размер контекста каждого из двух слотов модели |
 | `MODEL_CHECKPOINTS` | `2` | Число контрольных точек контекста inference |
-| `MODEL_CACHE_RAM` | `0` | Дополнительный кэш inference, MiB |
+| `MODEL_CACHE_RAM` | `0` | Дополнительный кэш inference, MiB; два прогретых контекста закреплены в отдельных слотах |
 | `JOURNEY_DATA_SOURCE` | `public` | Публичные данные с кэшем; `synthetic` — учебный каталог |
 | `TRAVELPAYOUTS_TOKEN` | пусто | Необязательный серверный токен кэша авиаперелётов Travelpayouts Data API |
 | `MAP_TILE_URL` | пусто | При пустом значении приложение использует `https://tile.openstreetmap.org/{z}/{x}/{y}.png` |

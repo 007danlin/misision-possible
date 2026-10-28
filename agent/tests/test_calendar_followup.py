@@ -47,9 +47,30 @@ class CalendarFollowupTests(unittest.TestCase):
     def test_invalid_dates_and_ambiguity(self):
         for text in ("31 апреля", "30 февраля", "2026-02-29", "2020-11-16"):
             self.assertTrue(calendar_followup(text, date(2026, 10, 28)).questions)
-        for text in ("в ноябре", "не 16 ноября", "16 или 18 ноября", "с 16 по 20 ноября", "если получится 16 ноября", "выезд 16 ноября"):
+        for text in ("в ноябре", "не 16 ноября", "16 или 18 ноября", "если получится 16 ноября", "выезд 16 ноября"):
             self.assertIsNone(calendar_followup(text))
         self.assertEqual(str(self.resolve("29 февраля").checkin_date), "2028-02-29")
+
+    def test_exact_intervals_and_wrong_model_month(self):
+        from travel_agent.grounding import ground_intent
+        for interval in ('10–15 ноября 2026', 'с 10 по 15 ноября 2026', '10 ноября — 15 ноября 2026'):
+            spec = self.resolve(interval)
+            self.assertEqual(str(spec.dates.start), '2026-11-10')
+            self.assertEqual(str(spec.dates.end), '2026-11-15')
+            message = 'Отель в Казани: ' + interval + ', двое взрослых, с завтраком.'
+            intent = Intent(patch={'dates': {'start':'2026-10-10','end':'2026-10-15'},
+                                   'travellers':{'adults':2}, 'hotel_preferences':{'breakfast':True}},
+                            evidence={k:message for k in ('dates','travellers','hotel_preferences')})
+            grounded = ground_intent(intent, message, TripSpec())
+            result = apply_intent(TripSpec(), grounded, message)
+            self.assertEqual(str(result.dates.start), '2026-11-10')
+            self.assertEqual(str(result.dates.end), '2026-11-15')
+            self.assertEqual(result.travellers.adults, 2)
+            self.assertTrue(result.hotel_preferences.breakfast)
+        for invalid in ('15–10 ноября 2026', '29–31 февраля 2027', '10–15 ноября 2020'):
+            self.assertTrue(calendar_followup(invalid, date(2026,10,28)).questions)
+        self.assertIsNone(calendar_followup('Не 10–15 ноября 2026'))
+        self.assertIsNone(calendar_followup('10–15 ноября 2026 или 20–25 ноября 2026'))
 
     def test_waterfront_wish_is_preserved_without_inventing_seaside(self):
         from travel_agent.grounding import ground_intent

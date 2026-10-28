@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 import httpx
 
 
-PROMPT_VERSION = "odin-request-9.5"
+PROMPT_VERSION = "odin-request-9.6"
 SYSTEM_PROMPT = """Extract ONLY the travel requirements explicitly stated in the NEW user message. Return one compact JSON object. Previous trip state is reference data, never a new request. Preserve all untouched requirements by omitting them.
 
 Allowed top-level fields (omit unknown/unchanged fields, never add null/defaults):
@@ -361,9 +361,28 @@ class QwenModel:
             else SYSTEM_PROMPT
         )
         if context.get("search_mode") == "directions":
-            from .inspiration import DIRECTION_PROMPT
+            from .inspiration import DIRECTION_PROMPT, CATALOGUE, proximity_requested
 
-            instructions = DIRECTION_PROMPT
+            # Keep the stable catalogue prefix in its dedicated inference slot.
+            # Only eligibility/distances vary with the request.
+            instructions = DIRECTION_PROMPT + '\nCatalogue (facts are zero-indexed):\n' + json.dumps(
+                [{k: d[k] for k in ("id", "name", "country", "facts", "limits")} for d in CATALOGUE],
+                ensure_ascii=False, separators=(",", ":"),
+            ) + ('\nChoose ONLY IDs in eligible. Never use other catalogue entries. '
+                 'Match the requested activities before considering distance. '
+                 'A river embankment does not satisfy canals; churches do not satisfy palaces. '
+                 'Prefer the place whose facts support ALL requested themes. '
+                 'Do not favour a closer but weaker match unless the user requested short travel.')
+            state.pop("candidates", None)
+            proximity = proximity_requested(' '.join([
+                context['message'], *context.get('history', []),
+                *context.get('trip_spec', {}).get('preferences', []),
+            ]))
+            candidate_fields = ('id', 'distance_km') if proximity else ('id',)
+            state["eligible"] = [
+                {k: d[k] for k in candidate_fields if k in d}
+                for d in context["candidates"]
+            ]
         if wire:
             from .compact_wire import prompt, encode
 
@@ -435,6 +454,10 @@ class QwenModel:
         if self.settings.provider == "llama_cpp":
             payload["chat_template_kwargs"] = {"enable_thinking": False}
             payload["cache_prompt"] = True
+            if os.getenv("LLM_DIRECTION_SLOT") is not None:
+                # The Docker runtime reserves separate slots for extraction and
+                # the catalogue so alternating requests never evict each other.
+                payload["id_slot"] = int(os.environ["LLM_DIRECTION_SLOT"]) if context.get("search_mode") == "directions" else 0
             if context.get("search_mode") == "hotels":
                 # Require provenance without constraining the order of optional intent fields.
                 payload["response_format"] = {
@@ -469,9 +492,9 @@ class QwenModel:
                 payload["response_format"] = {"type": "json_schema", "json_schema": {
                     "name": "direction_selection", "strict": True, "schema": schema}}
             if self.settings.provider == "ollama":
-                payload["options"]["num_predict"] = 180
+                payload["options"]["num_predict"] = 1 if prefill else 180
             else:
-                payload["max_tokens"] = 180
+                payload["max_tokens"] = 1 if prefill else 180
         if wire:
             from .compact_wire import grammar
 

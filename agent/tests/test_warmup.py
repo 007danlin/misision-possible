@@ -8,6 +8,23 @@ from travel_agent import warmup as startup
 
 
 class WarmupTests(unittest.IsolatedAsyncioTestCase):
+    async def test_catalogue_prefill_requires_a_dedicated_slot(self):
+        for slot, expected in (("", ["hotels"]), ("1", ["hotels", "directions"])):
+            calls = []
+
+            class Prefill:
+                settings = Settings(provider="llama_cpp")
+
+                async def extract(self, context, repair, timeout, *, prefill=False):
+                    self_test.assertTrue(prefill)
+                    calls.append(context["search_mode"])
+                    return "", {}
+
+            self_test = self
+            with patch.dict(os.environ, {"LLM_DIRECTION_SLOT": slot}), patch.object(startup, "QwenModel", return_value=Prefill()):
+                await startup.warmup()
+            self.assertEqual(calls, expected)
+
     async def test_cold_prefill_has_its_own_budget(self):
         class SlowPrefill:
             settings = Settings(timeout=1)

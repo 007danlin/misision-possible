@@ -146,9 +146,11 @@ def main():
     print(json.dumps({'phase':'weights_ready','source':source,'seconds':round(time.monotonic()-started,3)}), flush=True)
     report('loading', 'Загружаем модель в память', target.stat().st_size, lock['model_files'][0]['size_bytes'])
     threads = str(max(1, int(os.getenv('MODEL_THREADS', '4'))))
+    slots = max(1, int(os.getenv('MODEL_PARALLEL', '2')))
+    context = max(2048, int(os.getenv('MODEL_CONTEXT', '4096')))
     os.execv('/runtime/llama-server', [
         'llama-server', '-m', str(target), '--host', '0.0.0.0', '--port', '8082',
-        '--ctx-size', str(max(2048, int(os.getenv('MODEL_CONTEXT', '4096')))), '--parallel', '1', '--n-gpu-layers', '0',
+        '--ctx-size', str(context * slots), '--parallel', str(slots), '--n-gpu-layers', '0',
         '--alias', lock['alias'], '--jinja', '--chat-template-kwargs', '{"enable_thinking":false}',
         '--reasoning-budget', '0', '--threads', threads, '--threads-batch', threads,
         '--batch-size', '512', '--ubatch-size', '128', '--spec-type', 'none',

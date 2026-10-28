@@ -51,6 +51,7 @@ services:
       LLM_MODEL: ${LLM_MODEL:-qwen3-4b-instruct}
       LLM_API_KEY: ${LLM_API_KEY:-}
       HOTEL_COMPACT_WIRE: "1"
+      LLM_DIRECTION_SLOT: "1"
       MODEL_WARMUP: "1"
       MODEL_WARMUP_TIMEOUT_SECONDS: ${MODEL_WARMUP_TIMEOUT_SECONDS:-300}
       WAIT_FOR_MODEL: "1"
@@ -81,6 +82,7 @@ services:
       MODEL_CONTEXT: ${MODEL_CONTEXT:-4096}
       MODEL_CHECKPOINTS: ${MODEL_CHECKPOINTS:-2}
       MODEL_CACHE_RAM: ${MODEL_CACHE_RAM:-0}
+      MODEL_PARALLEL: "2"
       MODEL_STATUS_FILE: /startup/model.json
     volumes:
       - models:/models

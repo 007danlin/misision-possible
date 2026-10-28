@@ -107,6 +107,18 @@ class DirectionValidationTests(unittest.TestCase):
         self.assertLess(pool["seliger"]["distance_km"], pool["altai"]["distance_km"])
         self.assertNotIn("moscow", pool)
 
+    def test_origin_quote_does_not_imply_a_nearby_trip(self):
+        spec = TripSpec(origin='Казань', travel_setting='sea')
+        pool = direction_options(spec)
+        for quote in ('Из Казани', 'Хочу к морю'):
+            cards, question = resolve_directions(
+                json.dumps(selection('sochi','anapa') | {'nearby_quote':quote}), pool,
+                message='Хочу к морю. Из Казани', spec=spec,
+            )
+            self.assertEqual(len(cards), 2)
+            self.assertIsNone(question)
+            self.assertTrue(all('по прямой' not in d['caveat'] for d in cards))
+
 
 class DirectionDialogueTests(unittest.IsolatedAsyncioTestCase):
     async def test_semantic_request_and_saved_constraints_reach_selector(self):
@@ -188,6 +200,29 @@ class DirectionDialogueTests(unittest.IsolatedAsyncioTestCase):
 
 
 class DirectionProtocolTests(unittest.IsolatedAsyncioTestCase):
+    async def test_catalogue_prefix_is_stable_and_eligibility_is_per_request(self):
+        captured = []
+        def respond(request):
+            captured.append(json.loads(request.content))
+            return httpx.Response(200, json={'choices':[{'message':{'content':'{'}, 'finish_reason':'length'}]})
+        original = httpx.AsyncClient
+        def client(**kwargs):
+            return original(transport=httpx.MockTransport(respond), **kwargs)
+        with patch('travel_agent.model.httpx.AsyncClient', side_effect=client), patch.dict('os.environ', {'LLM_DIRECTION_SLOT':'1'}):
+            for setting in ('sea', 'forest'):
+                await QwenModel(Settings()).extract({
+                    'search_mode':'directions', 'message':'Хочу недалеко',
+                    'candidates':direction_options(TripSpec(origin='Омск', travel_setting=setting)),
+                }, None, 2, prefill=True)
+        self.assertEqual(captured[0]['messages'][0], captured[1]['messages'][0])
+        self.assertEqual(captured[0]['max_tokens'], 1)
+        self.assertEqual(captured[0]['id_slot'], 1)
+        self.assertNotIn('Черноморское побережье', captured[0]['messages'][1]['content'])
+        for body, expected in zip(captured, ({'sochi','gelendzhik','anapa'}, {'karelia','altai','seliger','sochi_nature'})):
+            variants = body['response_format']['json_schema']['schema']['properties']['choices']['items']['anyOf']
+            self.assertEqual({v['properties']['id']['enum'][0] for v in variants}, expected)
+            self.assertIn('distance_km', body['messages'][1]['content'])
+
     async def test_model_uses_direction_schema_without_hotel_extraction_grammar(self):
         pool = direction_options(TripSpec(travel_setting="sea"))
         raw = json.dumps(selection("anapa") | {"nearby_quote": ""})
