@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "checks": [
+    "origin alias",
+    "reserve preserves trip budget",
+    "dated stay length edit",
+    "days versus nights",
+    "ambiguous amount asks",
+    "reversed dates ask",
+    "own car is not bought tickets"
+  ]
+}

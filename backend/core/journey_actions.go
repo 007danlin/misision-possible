@@ -116,6 +116,14 @@ func journeyBlock(h map[string]any, acceptBudget bool) string {
 		if c["blocking"] == false || c["status"] == "pass" {
 			continue
 		}
+		// Saving a demo plan does not require supplier confirmation. Actual
+		// conflicts and missing ticket prices still prevent confirmation.
+		if c["status"] == "unknown" {
+			switch c["code"] {
+			case "children", "pets", "cancellation", "other", "no_connections", "no_night_travel":
+				continue
+			}
+		}
 		if acceptBudget && (c["code"] == "budget" || c["code"] == "hotel_budget") {
 			continue
 		}

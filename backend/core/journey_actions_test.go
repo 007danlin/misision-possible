@@ -292,3 +292,17 @@ func TestDiscardTransportAdditionRestoresHotelOnly(t *testing.T) {
 		t.Fatal("booking saved cancelled route")
 	}
 }
+
+func TestDemoJourneySupplierConfirmation(t *testing.T) {
+	for _, code := range []string{"children", "pets", "cancellation", "other", "no_connections", "no_night_travel", "owned_price", "dates", "budget"} {
+		for _, status := range []string{"unknown", "fail"} {
+			t.Run(code+"/"+status, func(t *testing.T) {
+				h := map[string]any{"journey": map[string]any{"checks": []any{map[string]any{"code": code, "status": status, "blocking": true, "message": "Needs attention"}}}}
+				allowed := status == "unknown" && code != "owned_price" && code != "dates" && code != "budget"
+				if got := journeyBlock(h, false); (got == "") != allowed {
+					t.Fatalf("allowed=%v, got %q", allowed, got)
+				}
+			})
+		}
+	}
+}

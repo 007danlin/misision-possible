@@ -61,15 +61,27 @@ def ground_intent(intent, message, previous):
     data = intent.model_dump(mode="json", exclude_unset=True)
     patch = data.setdefault("patch", {})
     evidence = data.setdefault("evidence", {})
+    from .origin_followup import canonical_city
+
     for field in ("origin", "destination"):
         value = patch.get(field)
-        if isinstance(value, str) and value.casefold() in {
-            "питер",
-            "петербург",
-            "санкт петербург",
-            "спб",
-        }:
-            patch[field] = "Санкт-Петербург"
+        if isinstance(value, str):
+            patch[field] = canonical_city(value) or value
+    # Waterfront can mean a river, lake or canal; it does not imply seaside.
+    water = re.search(
+        r"\b(?:поближе|ближе|рядом|недалеко|у)\s+(?:(?:к|с|от)\s+)?"
+        r"(?:вод[аеы]|рек[аеиой]+|озер[аоу]|озёр[аоу]|набережн\w*|канал\w*)\b",
+        message, re.I,
+    )
+    if water and not re.search(r"\b(?:не|без|или|либо)\b", message, re.I):
+        if patch.get("travel_setting") == "sea" and not re.search(
+            r"\b(?:мор[еяю]|морской|пляж\w*)\b", message, re.I
+        ):
+            patch.pop("travel_setting")
+        wishes = data.setdefault("add_preferences", [])
+        if water[0] not in wishes:
+            wishes.append(water[0])
+        evidence["add_preferences"] = message if len(message) <= 500 else water[0]
     # A mention of one restriction does not authorize altering the others.
     topics = {
         "no_connections": r"пересад|прям\w*\s+(?:рейс|перелет|поезд)",
@@ -147,11 +159,26 @@ def ground_intent(intent, message, previous):
         r"бюджет|лимит|сумм|руб|тысяч|₽|на все\b|на всю поездк|только на отель", text
     ):
         patch.pop("budget_scope")
+    # An explicit total-stay amount replaces a previous nightly ceiling even
+    # when the model emits only the new sum and forgets the period.
+    if "budget" in patch and re.search(
+        r"за\s+(?:вс[её]\s+(?:проживание|время)|весь\s+(?:отдых|срок)|всю\s+поездку)",
+        text,
+    ) and not re.search(r"\b(?:или|либо|если)\b|не\s+за\s+(?:вс[её]|весь|всю)", text):
+        patch["budget_period"] = "stay"
+        evidence["budget_period"] = message[:500]
     if re.search(r"\b(?:подешевле|дешевле)\b", text) and not re.search(
         r"\bне\s+(?:подешевле|дешевле)\b", text
     ):
         data["optimization"] = "cheaper"
         evidence["optimization"] = message[:500]
+    if data.get("optimization") == "cheaper" and data.get("action") == "replace_options":
+        replacing = re.search(
+            r"друг|нов[а-я]*\s+(?:вариант|отел|подбор)|следующ|замен|мимо|не\s+подход|не\s+нрав|ни\s+один|"
+            r"ещ[её]\s+(?:вариант|отел|подбор)", text,
+        )
+        if not replacing:
+            data["action"] = "change"
     if data.get("optimization") == "cheaper" and "budget" in patch:
         amount_words = r"\d|ноль|один|одн[аоу]|дв[аеу]|три|трех|четыр|пят|шест|сем|восем|девят|десят|двадцат|тридцат|сорок|пятьдесят|шестьдесят|семьдесят|восемьдесят|девяност|сто\b|сот|двести|триста|полтос|полтинник"
         if not re.search(amount_words, text):
@@ -162,6 +189,11 @@ def ground_intent(intent, message, previous):
             word
             + r".{0,20}не\s+(?:убира|снима|исключа|отменя)\w*|не\s+(?:убира|снима|исключа|отменя)\w*.{0,20}"
             + word,
+            text,
+        )
+        retain = retain or re.search(
+            word + r"\s+(?:сохрани|сохранить|оставь|оставить)(?!\w)|"
+            r"(?<!не )(?:сохрани|сохранить|оставь|оставить)\s+(?:требование\s+)?" + word,
             text,
         )
         if retain:

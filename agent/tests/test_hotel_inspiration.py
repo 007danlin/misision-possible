@@ -14,16 +14,14 @@ class InspirationTests(unittest.IsolatedAsyncioTestCase):
         from travel_agent.inspiration import direction_options
 
         options = direction_options(TripSpec(include_transport=True))
-        self.assertEqual(len(options), 3)
-        self.assertTrue(all("город отправления" in d["reason"] for d in options))
-        self.assertTrue(
-            all("Москвы" not in d["reason"] and "₽" not in d["reason"] for d in options)
-        )
+        self.assertGreater(len(options), 3)
+        self.assertTrue(all("distance_km" not in d for d in options))
+        self.assertTrue(all("₽" not in " ".join(d["facts"]) for d in options))
 
     async def test_forest_offers_directions_without_city_question(self):
         events = []
         result = await run_turn(
-            State(search_mode="hotels"),
+            State(search_mode="hotels", trip_spec={"origin": "Москва"}),
             "Хочу в лес",
             DemoTools(),
             FakeModel(
@@ -31,14 +29,25 @@ class InspirationTests(unittest.IsolatedAsyncioTestCase):
                     "travel_setting": "forest",
                     "evidence": {"travel_setting": "в лес"},
                     "action": "inspire",
-                }
+                },
+                {
+                    "choices": [
+                        {"id": "karelia", "facts": [0]},
+                        {"id": "altai", "facts": [0]},
+                        {"id": "seliger", "facts": [0]},
+                    ],
+                    "question": "none",
+                },
             ),
             progress=lambda **e: events.append(e),
         )
         self.assertEqual(result.trip_spec.travel_setting, "forest")
         self.assertEqual(len(result.destination_options), 3)
         self.assertNotIn("В каком городе", result.assistant_message)
-        self.assertEqual([e["stage"] for e in events], ["understanding", "understood"])
+        self.assertEqual(
+            [e["stage"] for e in events],
+            ["understanding", "understood", "matching_directions"],
+        )
         self.assertEqual(events[-1]["trip_spec"]["travel_setting"], "forest")
 
     async def test_followup_preserves_forest_and_real_search_stages(self):

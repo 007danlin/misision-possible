@@ -18,3 +18,22 @@ LLM_MODEL, LLM_API_KEY; ключ не коммитится. Скрытого fal
 
 gRPC: Predict (инфраструктурный smoke), RunTurn (Qwen), Evaluate (кодовая проверка действий).
 [Контракт и ограничения](../docs/agent.md).
+
+## Проверка формулировок и многошаговых уточнений
+
+Из корня репозитория, с работающей локальной моделью:
+
+```sh
+PYTHONPATH=agent:agent/tests agent/.venv/bin/python -m unittest discover -s agent/tests
+agent/.venv/bin/python scripts/eval-language.py --output .runtime/evals/language
+agent/.venv/bin/python scripts/eval-dialogues.py --timeout 90 --output .runtime/evals/dialogues
+```
+
+`eval-language.py` проверяет отдельные формулировки, `eval-dialogues.py` — целые цепочки через производственный `run_turn`: бюджет, даты, гости, сохранение условий, отрицания, вопросы, смена направления и транспорта. В диалоговом прогоне Qwen настоящая; отели, погода и внешние транспортные сервисы заменены фиксированными данными, чтобы проверять язык и переходы состояния независимо от доступности поставщиков. Ответы модели, ревизии входных условий, ошибки и хеши исходников сохраняются после каждой реплики.
+
+Любой провал даёт ненулевой код завершения. Записанные реальные ответы можно повторно проверить без inference:
+
+```sh
+agent/.venv/bin/python scripts/eval-dialogues.py --replay .runtime/evals/dialogues/results.json --output .runtime/evals/dialogues-replay
+agent/.venv/bin/python scripts/eval-language.py --replay .runtime/evals/language/results.json --output .runtime/evals/language-replay
+```

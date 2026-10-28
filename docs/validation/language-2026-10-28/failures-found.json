@@ -1,0 +1,416 @@
+[
+  {
+    "phase": "dialogues",
+    "case": "budget-periods-and-decimals",
+    "step": 3,
+    "message": "Давай 70 000 рублей за всё проживание",
+    "errors": [
+      "budget_period: expected 'stay', got 'night'"
+    ],
+    "model_outputs": [
+      {
+        "raw": "{\"evidence\":\"Давай 70 000 рублей за всё проживание\",\"action\":\"change\",\"budget\":{\"amount_minor\":7000000,\"currency\":\"RUB\"},\"budget_scope\":\"hotel\"}",
+        "usage": {
+          "completion_tokens": 22,
+          "prompt_tokens": 2092,
+          "total_tokens": 2114,
+          "prompt_ms": 2174,
+          "generation_ms": 4278,
+          "cached_tokens": 1959,
+          "evaluated_prompt_tokens": 133
+        },
+        "mode": "hotels",
+        "repair": null
+      }
+    ]
+  },
+  {
+    "phase": "dialogues",
+    "case": "budget-periods-and-decimals",
+    "step": 4,
+    "message": "Подешевле, бассейн и парковку сохрани",
+    "errors": [
+      "unexpected change excluded_hotel_ids: [] → ['fixture-Сочи-1', 'fixture-Сочи-2', 'fixture-Сочи-3']"
+    ],
+    "model_outputs": [
+      {
+        "raw": "{\"evidence\":\"Подешевле, бассейн и парковку сохрани\",\"action\":\"replace_options\",\"optimization\":\"cheaper\",\"hotel_preferences\":{\"pool\":true,\"parking\":true}}",
+        "usage": {
+          "completion_tokens": 27,
+          "prompt_tokens": 2092,
+          "total_tokens": 2119,
+          "prompt_ms": 1830,
+          "generation_ms": 5745,
+          "cached_tokens": 1960,
+          "evaluated_prompt_tokens": 132
+        },
+        "mode": "hotels",
+        "repair": null
+      }
+    ]
+  },
+  {
+    "phase": "dialogues",
+    "case": "direction-corrections",
+    "step": 2,
+    "message": "Передумал, лучше Питер",
+    "errors": [
+      "unexpected change excluded_hotel_ids: [] → ['fixture-Казань-1', 'fixture-Казань-2', 'fixture-Казань-3']"
+    ],
+    "model_outputs": [
+      {
+        "raw": "{\"evidence\":\"Передумал, лучше Питер\",\"action\":\"replace_options\",\"destination\":\"Санкт-Петербург\"}",
+        "usage": {
+          "completion_tokens": 19,
+          "prompt_tokens": 2087,
+          "total_tokens": 2106,
+          "prompt_ms": 3444,
+          "generation_ms": 1806,
+          "cached_tokens": 1854,
+          "evaluated_prompt_tokens": 233
+        },
+        "mode": "hotels",
+        "repair": null
+      }
+    ]
+  },
+  {
+    "phase": "dialogues",
+    "case": "direction-corrections",
+    "step": 4,
+    "message": "Вернёмся к Сочи, остальные условия прежние",
+    "errors": [
+      "unexpected change excluded_hotel_ids: ['fixture-Казань-1', 'fixture-Казань-2', 'fixture-Казань-3'] → []"
+    ],
+    "model_outputs": [
+      {
+        "raw": "{\"evidence\":\"Вернёмся к Сочи, остальные условия прежние\",\"action\":\"change\",\"destination\":\"Сочи\"}",
+        "usage": {
+          "completion_tokens": 15,
+          "prompt_tokens": 2090,
+          "total_tokens": 2105,
+          "prompt_ms": 2896,
+          "generation_ms": 1320,
+          "cached_tokens": 1854,
+          "evaluated_prompt_tokens": 236
+        },
+        "mode": "hotels",
+        "repair": null
+      }
+    ]
+  },
+  {
+    "phase": "dialogues",
+    "case": "amenity-changes",
+    "step": 2,
+    "message": "Убери требование бассейна, парковку сохрани",
+    "errors": [
+      "unexpected change hotel_preferences.parking: True → None"
+    ],
+    "model_outputs": [
+      {
+        "raw": "{\"evidence\":\"Убери требование бассейна, парковку сохрани\",\"action\":\"change\",\"remove_hotel_preferences\":[\"pool\",\"parking\"]}",
+        "usage": {
+          "completion_tokens": 17,
+          "prompt_tokens": 2098,
+          "total_tokens": 2115,
+          "prompt_ms": 4463,
+          "generation_ms": 1516,
+          "cached_tokens": 1854,
+          "evaluated_prompt_tokens": 244
+        },
+        "mode": "hotels",
+        "repair": null
+      }
+    ]
+  },
+  {
+    "phase": "dialogues",
+    "case": "explicit-negations",
+    "step": 5,
+    "message": "Можно и без бесплатной отмены",
+    "errors": [
+      "agent error: model_invalid_json",
+      "hard_constraints.free_cancellation: expected False, got True"
+    ],
+    "model_outputs": [
+      {
+        "raw": "{\"evidence\":\"Можно и без бесплатной отмены\",\"action\":\"change\",\"remove_hotel_preferences\":[\"cancel\"]}",
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 2014,
+          "total_tokens": 2028,
+          "prompt_ms": 1499,
+          "generation_ms": 1633,
+          "cached_tokens": 1885,
+          "evaluated_prompt_tokens": 129
+        },
+        "mode": "hotels",
+        "repair": null
+      },
+      {
+        "raw": "{\"evidence\":\"Можно и без бесплатной отмены\",\"action\":\"change\",\"remove_hotel_preferences\":[\"cancel\"]}",
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 2185,
+          "total_tokens": 2199,
+          "prompt_ms": 3888,
+          "generation_ms": 1343,
+          "cached_tokens": 2010,
+          "evaluated_prompt_tokens": 175
+        },
+        "mode": "hotels",
+        "repair": {
+          "validation_error": "1 validation error for Intent\nremove_hotel_preferences.0\n  Input should be 'pool', 'parking', 'spa', 'fitness', 'breakfast', 'max_center_m', 'max_beach_m', 'min_rating' or 'min_stars' [type=literal_error, input_value='cancel', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/literal_error",
+          "previous_output": "{\"evidence\":\"Можно и без бесплатной отмены\",\"action\":\"change\",\"remove_hotel_preferences\":[\"cancel\"]}"
+        }
+      }
+    ]
+  },
+  {
+    "phase": "dialogues",
+    "case": "travel-changes",
+    "step": 5,
+    "message": "На своей машине",
+    "errors": [
+      "transport_mode: expected 'car', got 'train'",
+      "unexpected change transport_owned: False → True"
+    ],
+    "model_outputs": [
+      {
+        "raw": "{\"evidence\":\"На своей машине\",\"action\":\"change\",\"include_transport\":true,\"transport_owned\":true}",
+        "usage": {
+          "completion_tokens": 18,
+          "prompt_tokens": 2092,
+          "total_tokens": 2110,
+          "prompt_ms": 4353,
+          "generation_ms": 3471,
+          "cached_tokens": 1885,
+          "evaluated_prompt_tokens": 207
+        },
+        "mode": "hotels",
+        "repair": null
+      }
+    ]
+  },
+  {
+    "phase": "dialogues",
+    "case": "ambiguous-3",
+    "step": 1,
+    "message": "До 40 или 60 тысяч рублей, ещё не решили",
+    "errors": [
+      "unexpected change hotel_budget.currency: None → 'RUB'",
+      "unexpected change hotel_budget.amount_minor: None → 6000000",
+      "unexpected change budget.amount_minor: 12000000 → 6000000",
+      "status: expected needs_input, got choosing",
+      "missing useful question"
+    ],
+    "model_outputs": [
+      {
+        "raw": "{\"evidence\":\"До 40 или 60 тысяч рублей, ещё не решили\",\"action\":\"change\",\"budget\":{\"amount_minor\":4000000,\"currency\":\"RUB\"},\"optimization\":\"cheaper\"}",
+        "usage": {
+          "completion_tokens": 24,
+          "prompt_tokens": 1974,
+          "total_tokens": 1998,
+          "prompt_ms": 1269,
+          "generation_ms": 2274,
+          "cached_tokens": 1885,
+          "evaluated_prompt_tokens": 89
+        },
+        "mode": "hotels",
+        "repair": null
+      }
+    ]
+  },
+  {
+    "phase": "dialogues",
+    "case": "ambiguous-6",
+    "step": 1,
+    "message": "С 20 по 15 ноября 2026",
+    "errors": [
+      "agent error: model_invalid_json",
+      "status: expected needs_input, got error",
+      "missing useful question"
+    ],
+    "model_outputs": [
+      {
+        "raw": "{\"evidence\":\"С 20 по 15 ноября 2026\",\"action\":\"change\",\"dates\":{\"start\":\"2026-11-20\",\"end\":\"2026-11-15\"}}",
+        "usage": {
+          "completion_tokens": 30,
+          "prompt_tokens": 1974,
+          "total_tokens": 2004,
+          "prompt_ms": 1100,
+          "generation_ms": 7660,
+          "cached_tokens": 1885,
+          "evaluated_prompt_tokens": 89
+        },
+        "mode": "hotels",
+        "repair": null
+      },
+      {
+        "raw": "{\"evidence\":\"С 20 по 15 ноября 2026\",\"action\":\"change\",\"dates\":{\"start\":\"2026-11-20\",\"end\":\"2026-11-15\"}}",
+        "usage": {
+          "completion_tokens": 30,
+          "prompt_tokens": 2160,
+          "total_tokens": 2190,
+          "prompt_ms": 3026,
+          "generation_ms": 7107,
+          "cached_tokens": 1970,
+          "evaluated_prompt_tokens": 190
+        },
+        "mode": "hotels",
+        "repair": {
+          "validation_error": "1 validation error for Intent\npatch.dates\n  Value error, end must be after start [type=value_error, input_value={'start': '2026-11-20', 'end': '2026-11-15'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/value_error",
+          "previous_output": "{\"evidence\":\"С 20 по 15 ноября 2026\",\"action\":\"change\",\"dates\":{\"start\":\"2026-11-20\",\"end\":\"2026-11-15\"}}"
+        }
+      }
+    ]
+  },
+  {
+    "phase": "dialogues",
+    "case": "ambiguous-9",
+    "step": 1,
+    "message": "В Питер или Казань, не могу выбрать",
+    "errors": [
+      "unexpected change hotel_budget.currency: None → 'RUB'",
+      "unexpected change hotel_budget.amount_minor: None → 0",
+      "unexpected change stay_nights: None → 5",
+      "unexpected change destination: 'Сочи' → None",
+      "unexpected change budget.amount_minor: 12000000 → 0",
+      "missing useful question"
+    ],
+    "model_outputs": [
+      {
+        "raw": "{\"evidence\":\"В Питер или Казань, не могу выбрать\",\"action\":\"inspire\",\"destination\":null,\"origin\":null,\"travel_setting\":\"any\",\"travellers\":{\"adults\":2},\"stay_nights\":5,\"budget\":{\"amount_minor\":0,\"currency\":\"RUB\"},\"budget_scope\":\"hotel\",\"add_preferences\":[\"тихо\",\"подальше от лифта\"],\"keep_hotel\":false}",
+        "usage": {
+          "completion_tokens": 55,
+          "prompt_tokens": 1972,
+          "total_tokens": 2027,
+          "prompt_ms": 1236,
+          "generation_ms": 10586,
+          "cached_tokens": 1885,
+          "evaluated_prompt_tokens": 87
+        },
+        "mode": "hotels",
+        "repair": null
+      },
+      {
+        "raw": "{\"nearby_quote\":\"\",\"choices\":[{\"id\":\"petersburg\",\"facts\":[0,1]},{\"id\":\"kazan\",\"facts\":[0]}],\"question\":\"none\"}",
+        "usage": {
+          "completion_tokens": 35,
+          "prompt_tokens": 2147,
+          "total_tokens": 2182,
+          "prompt_ms": 23566,
+          "generation_ms": 4418,
+          "cached_tokens": 515,
+          "evaluated_prompt_tokens": 1632
+        },
+        "mode": "directions",
+        "repair": null
+      }
+    ]
+  },
+  {
+    "phase": "dialogues",
+    "case": "no-silent-edit-4",
+    "step": 2,
+    "message": "А можно с собакой в этот отель?",
+    "errors": [
+      "unexpected change hard_constraints.pets: False → True"
+    ],
+    "model_outputs": [
+      {
+        "raw": "{\"evidence\":\"А можно с собакой в этот отель?\",\"action\":\"search\",\"hard_constraints\":{\"pets\":true}}",
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 2089,
+          "total_tokens": 2103,
+          "prompt_ms": 2579,
+          "generation_ms": 1243,
+          "cached_tokens": 1885,
+          "evaluated_prompt_tokens": 204
+        },
+        "mode": "hotels",
+        "repair": null
+      }
+    ]
+  },
+  {
+    "phase": "dialogues",
+    "case": "dated-stay-length-corrections",
+    "step": 3,
+    "message": "На четыре дня",
+    "errors": [
+      "duration_days: expected 4, got None",
+      "stay_nights: expected 3, got 4",
+      "dates.end: expected '2026-11-13', got '2026-11-14'"
+    ],
+    "model_outputs": [
+      {
+        "raw": "{\"evidence\":\"На четыре дня\",\"action\":\"change\",\"stay_nights\":4}",
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 2090,
+          "total_tokens": 2104,
+          "prompt_ms": 2408,
+          "generation_ms": 926,
+          "cached_tokens": 1885,
+          "evaluated_prompt_tokens": 205
+        },
+        "mode": "hotels",
+        "repair": null
+      }
+    ]
+  },
+  {
+    "phase": "fresh",
+    "case": "fresh-dates-shift",
+    "step": 1,
+    "message": "Сдвинь даты поездки на 3 дня вперёд",
+    "errors": [
+      "dates.end: expected '2026-11-18', got '2026-11-15'",
+      "unexpected change duration_days: None → 3"
+    ],
+    "model_outputs": [
+      {
+        "raw": "{\"evidence\":\"Сдвинь даты поездки на 3 дня вперёд\",\"action\":\"change\",\"shift_days\":3}",
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 1973,
+          "total_tokens": 1987,
+          "prompt_ms": 1387,
+          "generation_ms": 1465,
+          "cached_tokens": 1885,
+          "evaluated_prompt_tokens": 88
+        },
+        "mode": "hotels",
+        "repair": null
+      }
+    ]
+  },
+  {
+    "phase": "fresh",
+    "case": "fresh-pet-selected-question",
+    "step": 2,
+    "message": "Можно приехать с питомцем в выбранный отель?",
+    "errors": [
+      "unexpected change hard_constraints.pets: False → True"
+    ],
+    "model_outputs": [
+      {
+        "raw": "{\"evidence\":\"Можно приехать с питомцем в выбранный отель?\",\"action\":\"search\",\"hard_constraints\":{\"pets\":true}}",
+        "usage": {
+          "completion_tokens": 14,
+          "prompt_tokens": 2095,
+          "total_tokens": 2109,
+          "prompt_ms": 2632,
+          "generation_ms": 1423,
+          "cached_tokens": 1885,
+          "evaluated_prompt_tokens": 210
+        },
+        "mode": "hotels",
+        "repair": null
+      }
+    ]
+  }
+]

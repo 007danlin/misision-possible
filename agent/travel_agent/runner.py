@@ -10,6 +10,7 @@ from pydantic import ValidationError
 from .domain import AgentTurn, ChangePreview, Intent, State, Telemetry, apply_intent
 from .model import ModelError, PROMPT_VERSION, QwenModel, Settings, canonical_intent
 from .tools import ToolError, ToolRegistry, allowed
+from .destinations import DestinationUnavailable, resolve_destination, destination_question
 
 
 def missing_questions(spec):
@@ -70,6 +71,8 @@ async def run_turn(
         metrics.total_ms = round((time.monotonic() - start) * 1000)
         if status != "error" and metrics.first_useful_ms is None:
             metrics.first_useful_ms = metrics.total_ms
+        if status != "error" and "selection" not in kwargs:
+            kwargs["selection"] = state.selection
         return AgentTurn(**(base | kwargs), status=status, assistant_message=text)
 
     async def call(name, *args):
@@ -84,6 +87,41 @@ async def run_turn(
             "Сообщение пустое или слишком длинное.",
             error_code="invalid_message",
         )
+    from .origin_followup import needs_initial_origin
+
+    if needs_initial_origin(state, message):
+        question = "Из какого города отправляетесь?"
+        return result(
+            "needs_input", question, questions=[question],
+            selection=dict(state.selection, pending_origin_request=message),
+        )
+    pending = state.selection.get("pending_origin_request")
+    if isinstance(pending, str) and pending:
+        # Parse the original wishes together with the reply, so an early
+        # clarification cannot silently discard budget, dates or preferences.
+        message = pending + "\nОтвет на вопрос «Из какого города отправляетесь?»: " + message
+        state = state.model_copy(deep=True)
+        state.selection.pop("pending_origin_request", None)
+        # Retry must retain the original request if inference fails.
+        base["selection"] = dict(state.selection, pending_origin_request=pending)
+
+    if state.search_mode == "hotels":
+        from .conversation_reply import conversation_reply
+
+        reply = conversation_reply(message)
+        if reply:
+            questions = list(state.questions)
+            if not questions and not state.hotel_options and "?" in state.assistant_message:
+                questions = [state.assistant_message]
+            return result(
+                "needs_input" if questions or not state.hotel_options else "choosing",
+                reply + (" " + questions[0] if questions else ""),
+                questions=questions,
+                hotel_options=state.hotel_options,
+                search_url=state.search_url,
+                selection=state.selection,
+                destination_options=state.selection.get("direction_options", []),
+            )
     try:
         async with asyncio.timeout(budget):
             if (
@@ -127,6 +165,7 @@ async def run_turn(
                 "search_mode": state.search_mode,
                 "last_assistant_message": state.assistant_message,
                 "last_questions": state.questions,
+                "displayed_directions": state.selection.get("direction_options", []),
                 "displayed_hotels": [
                     {
                         "position": i + 1,
@@ -141,6 +180,7 @@ async def run_turn(
                 protect_child_count,
                 protect_added_children,
                 protect_stay_length,
+                protect_duration_units,
                 protect_adult_count,
                 protect_explicit_forest,
                 protect_hotel_budget_scope,
@@ -149,7 +189,16 @@ async def run_turn(
                 protect_journey_language,
             )
 
-            direct = (
+            from .calendar_followup import calendar_followup
+
+            from .origin_followup import origin_followup
+            from .money_followup import money_followup
+
+            from .inspiration import direction_choice
+
+            direct = direction_choice(state, message) if state.search_mode == "hotels" else None
+            direct = direct or origin_followup(state, message) or money_followup(state, message) or calendar_followup(message)
+            direct = direct or (
                 fast_intent(state, message)
                 if state.search_mode == "hotels" and isinstance(model, QwenModel)
                 else None
@@ -185,6 +234,7 @@ async def run_turn(
                             intent, message, state.trip_spec
                         )
                         intent = protect_stay_length(intent, message, state.trip_spec)
+                        intent = protect_duration_units(intent, message)
                         intent = protect_adult_count(intent, message)
                         intent = protect_explicit_forest(intent, message)
                         intent = protect_hotel_budget_scope(intent, message)
@@ -204,7 +254,7 @@ async def run_turn(
                             or intent.action == "restore_options"
                         ):
                             spec.excluded_hotel_ids = []
-                        if intent.action == "replace_options":
+                        if intent.action == "replace_options" and spec.destination == state.trip_spec.destination:
                             if spec.keep_hotel:
                                 return result(
                                     "needs_input",
@@ -342,22 +392,77 @@ async def run_turn(
                 if intent.action == "explain" and not patch and state.hotel_options:
                     return result(
                         "choosing",
-                        explain_hotels(state.hotel_options, intent.hotel_reference),
+                        explain_hotels(state.hotel_options, intent.hotel_reference, message),
                         hotel_options=state.hotel_options,
                         search_url=state.search_url,
                         selection=state.selection,
                         **updates,
                     )
-                from .inspiration import direction_options, inspiration_text
+                from .inspiration import direction_options, inspiration_text, resolve_directions, QUESTIONS
 
                 if not spec.destination:
-                    directions = direction_options(spec)
+                    if not spec.origin:
+                        question = QUESTIONS["origin"]
+                        return result(
+                            "needs_input", question, questions=[question],
+                            selection=state.selection, **updates,
+                        )
+                    candidates = direction_options(spec)
+                    if not candidates:
+                        return result("needs_input", QUESTIONS["coverage"], questions=[QUESTIONS["coverage"]], **updates)
+                    from .inspiration import simple_direction_choices
+
+                    simple = simple_direction_choices(spec, message, state.history, candidates)
+                    if simple is not None:
+                        directions, question = resolve_directions(simple, candidates, message=message, spec=spec, history=state.history)
+                        return result(
+                            "needs_input", question or inspiration_text(spec, directions),
+                            questions=[question] if question else [],
+                            destination_options=directions,
+                            selection=dict(state.selection, direction_options=directions),
+                            **updates,
+                        )
+                    progress(stage="matching_directions", trip_spec=spec.model_dump(mode="json"))
+                    metrics.model_calls += 1
+                    model_start = time.monotonic()
+                    try:
+                        raw, usage = await model.extract({
+                            "search_mode": "directions", "message": message,
+                            "trip_spec": spec.model_dump(mode="json", exclude_defaults=True),
+                            "history": state.history[-5:],
+                            "previous_choices": state.selection.get("direction_options", []),
+                            "candidates": [{k: d[k] for k in ("id", "name", "country", "facts", "limits", "distance_km") if k in d} for d in candidates],
+                        }, None, max(0.01, budget - (time.monotonic() - start)))
+                        directions, question = resolve_directions(raw, candidates, message=message, spec=spec, history=state.history[-5:])
+                    except ModelError:
+                        question = "Не удалось надёжно подобрать направления. Попробуйте повторить запрос или уточнить пожелания."
+                        return result("needs_input", question, questions=[question], **updates)
+                    finally:
+                        metrics.model_ms += round((time.monotonic() - model_start) * 1000)
+                    for key, value in usage.items():
+                        metrics.usage[key] = metrics.usage.get(key, 0) + value
                     return result(
-                        "needs_input",
-                        inspiration_text(spec, directions),
+                        "needs_input", question or inspiration_text(spec, directions),
+                        questions=[question] if question else [],
                         destination_options=directions,
+                        selection=dict(state.selection, direction_options=directions),
                         **updates,
                     )
+                # Resolve unfamiliar names against the provider before asking
+                # for more trip details. Familiar names are also rechecked by
+                # search_hotels, including sales status, when search starts.
+                import os
+                from .ostrovok import CITIES
+
+                destination = (spec.destination or "").strip().casefold().replace("ё", "е")
+                if (
+                    destination
+                    and destination not in CITIES
+                    and os.getenv("JOURNEY_DATA_SOURCE", "public") != "synthetic"
+                ):
+                    resolution = await resolve_destination(spec.destination, spec.country)
+                    if resolution["status"] != "available":
+                        raise DestinationUnavailable(spec.destination, resolution)
                 questions = missing_hotel_questions(spec)
                 if questions:
                     intro = "Учёл ваши пожелания. "
@@ -384,7 +489,9 @@ async def run_turn(
                             else ""
                         )
                         intro = f"В поездке {adults}{count} {children}. "
-                    return result("needs_input", intro + questions[0], **updates)
+                    return result(
+                        "needs_input", intro + questions[0], questions=questions, **updates
+                    )
                 # Reprice the chosen hotel for incremental edits; replacing it is an explicit search.
                 road_change = bool(
                     state.selected_hotel
@@ -416,8 +523,6 @@ async def run_turn(
                                 or spec.destination not in journey.ROUTES
                             )
                         )
-                        or not city_point(spec.origin)
-                        or not city_point(spec.destination)
                     ):
                         return result(
                             "no_solution",
@@ -717,6 +822,13 @@ async def run_turn(
                 else " Ваш запрос сохранён — его можно повторить."
             ),
             error_code=code,
+        )
+    except DestinationUnavailable as exc:
+        text, question, suggestions = await destination_question(exc.name, exc.resolution)
+        return result(
+            "needs_input", text, questions=[question],
+            selection={"destination_suggestions": suggestions},
+            **(updates if "updates" in locals() else {}),
         )
     except ToolError as exc:
         # Preserve extracted intent for backend review, but never allow checkout.

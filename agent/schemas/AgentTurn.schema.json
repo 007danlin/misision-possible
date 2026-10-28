@@ -759,6 +759,19 @@
           ],
           "default": null
         },
+        "checkin_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Checkin Date"
+        },
         "duration_days": {
           "anyOf": [
             {

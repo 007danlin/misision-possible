@@ -1,0 +1,372 @@
+[
+  {
+    "id": "karelia",
+    "name": "Карелия",
+    "destination": "Сортавала",
+    "country": "Россия",
+    "settings": [
+      "forest",
+      "nature"
+    ],
+    "scene": "forest",
+    "facts": [
+      "Сосновые леса и скалистые острова Ладожских шхер.",
+      "Прогулки у озёр и по лесным берегам."
+    ],
+    "limits": "Для уединения нужно выбирать окрестности, а не центр Сортавалы; доступность троп и лодочных маршрутов зависит от сезона.",
+    "source_url": "https://en.wikipedia.org/wiki/Ladoga_Skerries",
+    "photo_key": "Сортавала"
+  },
+  {
+    "id": "altai",
+    "name": "Алтай",
+    "destination": "Чемал",
+    "country": "Россия",
+    "settings": [
+      "forest",
+      "nature",
+      "mountains"
+    ],
+    "scene": "mountains",
+    "facts": [
+      "Лесистые горы и долина Катуни.",
+      "Пешие маршруты и виды на слияние Чемала и Катуни."
+    ],
+    "limits": "Сложность и сезонную доступность маршрутов нужно уточнять; размещение у троп не гарантировано.",
+    "source_url": "https://en.wikipedia.org/wiki/Chemal",
+    "photo_key": "Чемал",
+    "coordinates": [
+      51.41,
+      86.0
+    ]
+  },
+  {
+    "id": "seliger",
+    "name": "Селигер",
+    "destination": "Осташков",
+    "country": "Россия",
+    "settings": [
+      "forest",
+      "nature"
+    ],
+    "scene": "forest",
+    "facts": [
+      "Озеро Селигер, острова и лесные берега.",
+      "Прогулки у воды и загородный отдых."
+    ],
+    "limits": "Для отдыха в лесу нужны окрестности Осташкова; уединение конкретного жилья проверяется отдельно.",
+    "source_url": "https://en.wikipedia.org/wiki/Seliger",
+    "photo_key": "Осташков"
+  },
+  {
+    "id": "sochi_nature",
+    "name": "Леса и предгорья Сочи",
+    "destination": "Сочи",
+    "country": "Россия",
+    "settings": [
+      "forest",
+      "nature",
+      "mountains"
+    ],
+    "scene": "forest",
+    "facts": [
+      "Леса, реки и горные ландшафты Сочинского национального парка.",
+      "Природные маршруты в предгорьях Кавказа."
+    ],
+    "limits": "Нужны выезды из городской части; открытие троп и условия посещения проверяются на выбранные даты.",
+    "source_url": "https://en.wikipedia.org/wiki/Sochi_National_Park",
+    "photo_key": "sochi_nature"
+  },
+  {
+    "id": "sochi",
+    "name": "Сочи",
+    "destination": "Сочи",
+    "country": "Россия",
+    "settings": [
+      "sea",
+      "city"
+    ],
+    "scene": "sea",
+    "facts": [
+      "Черноморское побережье и набережные.",
+      "Приморский город для прогулок и отдыха у моря."
+    ],
+    "limits": "Купание зависит от сезона и состояния моря; городской курорт не означает уединение.",
+    "source_url": "https://en.wikipedia.org/wiki/Sochi",
+    "photo_key": "Сочи"
+  },
+  {
+    "id": "gelendzhik",
+    "name": "Геленджик",
+    "destination": "Геленджик",
+    "country": "Россия",
+    "settings": [
+      "sea"
+    ],
+    "scene": "sea",
+    "facts": [
+      "Бухта Чёрного моря и протяжённая набережная.",
+      "Прогулки вдоль моря."
+    ],
+    "limits": "Купание и работа сезонных объектов требуют проверки на даты поездки.",
+    "source_url": "https://en.wikipedia.org/wiki/Gelendzhik",
+    "photo_key": "gelendzhik"
+  },
+  {
+    "id": "anapa",
+    "name": "Анапа",
+    "destination": "Анапа",
+    "country": "Россия",
+    "settings": [
+      "sea"
+    ],
+    "scene": "sea",
+    "facts": [
+      "Курорт на Чёрном море с песчаными пляжами."
+    ],
+    "limits": "Доступность и состояние пляжей необходимо проверить по актуальным официальным сведениям; купание не подтверждено.",
+    "source_url": "https://en.wikipedia.org/wiki/Anapa",
+    "photo_key": "anapa"
+  },
+  {
+    "id": "kislovodsk",
+    "name": "Кисловодск",
+    "destination": "Кисловодск",
+    "country": "Россия",
+    "settings": [
+      "nature",
+      "mountains",
+      "city"
+    ],
+    "scene": "mountains",
+    "facts": [
+      "Курортный город в предгорьях Кавказа.",
+      "Курортный парк и прогулочные маршруты.",
+      "Минеральные источники и санаторная история."
+    ],
+    "limits": "Это благоустроенный курорт, а не дикая природа; лечебные процедуры и доступность прогулок проверяются отдельно.",
+    "source_url": "https://en.wikipedia.org/wiki/Kislovodsk",
+    "photo_key": "kislovodsk"
+  },
+  {
+    "id": "murmansk",
+    "name": "Мурманск и Кольский полуостров",
+    "destination": "Мурманск",
+    "country": "Россия",
+    "settings": [
+      "nature",
+      "city"
+    ],
+    "scene": "nature",
+    "facts": [
+      "Заполярье и пейзажи Кольского полуострова.",
+      "Портовый город на берегу Кольского залива."
+    ],
+    "limits": "Выезды на природу требуют отдельного маршрута; северное сияние, погода и проходимость дорог не гарантированы.",
+    "source_url": "https://en.wikipedia.org/wiki/Murmansk",
+    "photo_key": "murmansk"
+  },
+  {
+    "id": "petersburg",
+    "name": "Петербург",
+    "destination": "Санкт-Петербург",
+    "country": "Россия",
+    "settings": [
+      "city"
+    ],
+    "scene": "city",
+    "facts": [
+      "Музеи, дворцы и историческая архитектура.",
+      "Каналы и прогулки по набережным."
+    ],
+    "limits": "Доступность музеев и билетов проверяется на даты поездки; это большой город.",
+    "source_url": "https://en.wikipedia.org/wiki/Saint_Petersburg",
+    "photo_key": "Санкт-Петербург"
+  },
+  {
+    "id": "kazan",
+    "name": "Казань",
+    "destination": "Казань",
+    "country": "Россия",
+    "settings": [
+      "city"
+    ],
+    "scene": "city",
+    "facts": [
+      "Казанский кремль и мечеть Кул-Шариф.",
+      "Татарская культура и городские достопримечательности."
+    ],
+    "limits": "Это городское направление; лес и уединение в центре не предполагаются.",
+    "source_url": "https://en.wikipedia.org/wiki/Kazan",
+    "photo_key": "Казань"
+  },
+  {
+    "id": "yaroslavl",
+    "name": "Ярославль",
+    "destination": "Ярославль",
+    "country": "Россия",
+    "settings": [
+      "city"
+    ],
+    "scene": "city",
+    "facts": [
+      "Исторический центр и храмы Золотого кольца.",
+      "Прогулки по набережной Волги."
+    ],
+    "limits": "Это городская поездка, а не отдых в диком лесу.",
+    "source_url": "https://en.wikipedia.org/wiki/Yaroslavl",
+    "photo_key": "yaroslavl"
+  },
+  {
+    "id": "vladimir",
+    "name": "Владимир",
+    "destination": "Владимир",
+    "country": "Россия",
+    "settings": [
+      "city"
+    ],
+    "scene": "city",
+    "facts": [
+      "Древнерусские белокаменные памятники и соборы.",
+      "История и архитектура Золотого кольца."
+    ],
+    "limits": "Это городской экскурсионный отдых.",
+    "source_url": "https://en.wikipedia.org/wiki/Vladimir,_Russia",
+    "photo_key": "vladimir"
+  },
+  {
+    "id": "nizhny",
+    "name": "Нижний Новгород",
+    "destination": "Нижний Новгород",
+    "country": "Россия",
+    "settings": [
+      "city"
+    ],
+    "scene": "city",
+    "facts": [
+      "Кремль и исторические улицы.",
+      "Виды на слияние Оки и Волги."
+    ],
+    "limits": "Подъёмы и лестницы нужно учитывать при планировании пеших прогулок.",
+    "source_url": "https://en.wikipedia.org/wiki/Nizhny_Novgorod",
+    "photo_key": "nizhny"
+  },
+  {
+    "id": "kaliningrad",
+    "name": "Калининград",
+    "destination": "Калининград",
+    "country": "Россия",
+    "settings": [
+      "city"
+    ],
+    "scene": "city",
+    "facts": [
+      "Кафедральный собор и историческое наследие Кёнигсберга.",
+      "Музей янтаря и городские прогулки."
+    ],
+    "limits": "Город не находится на морском пляже; поездки к побережью планируются отдельно.",
+    "source_url": "https://en.wikipedia.org/wiki/Kaliningrad",
+    "photo_key": "kaliningrad"
+  },
+  {
+    "id": "moscow",
+    "name": "Москва",
+    "destination": "Москва",
+    "country": "Россия",
+    "settings": [
+      "city"
+    ],
+    "scene": "city",
+    "facts": [
+      "Кремль, музеи и театры.",
+      "Городская архитектура и большие парки."
+    ],
+    "limits": "Большой город; тишина и отсутствие толп не гарантированы.",
+    "source_url": "https://en.wikipedia.org/wiki/Moscow",
+    "photo_key": "moscow"
+  },
+  {
+    "id": "minsk",
+    "name": "Минск",
+    "destination": "Минск",
+    "country": "Беларусь",
+    "settings": [
+      "city"
+    ],
+    "scene": "city",
+    "facts": [
+      "Городские проспекты, музеи и прогулки вдоль Свислочи."
+    ],
+    "limits": "Условия въезда и транспорт проверяются отдельно.",
+    "source_url": "https://en.wikipedia.org/wiki/Minsk",
+    "photo_key": "minsk"
+  },
+  {
+    "id": "istanbul",
+    "name": "Стамбул",
+    "destination": "Стамбул",
+    "country": "Турция",
+    "settings": [
+      "city"
+    ],
+    "scene": "city",
+    "facts": [
+      "Историческая архитектура, мечети и дворцы.",
+      "Прогулки у Босфора и городские рынки."
+    ],
+    "limits": "Большой город; это не пляжный курорт. Въезд и перелёты проверяются отдельно.",
+    "source_url": "https://en.wikipedia.org/wiki/Istanbul",
+    "photo_key": "istanbul"
+  },
+  {
+    "id": "paris",
+    "name": "Париж",
+    "destination": "Париж",
+    "country": "Франция",
+    "settings": [
+      "city"
+    ],
+    "scene": "city",
+    "facts": [
+      "Художественные музеи и историческая архитектура.",
+      "Прогулки по набережным Сены."
+    ],
+    "limits": "Виза, въезд, билеты и стоимость требуют отдельной проверки.",
+    "source_url": "https://en.wikipedia.org/wiki/Paris",
+    "photo_key": "paris"
+  },
+  {
+    "id": "rome",
+    "name": "Рим",
+    "destination": "Рим",
+    "country": "Италия",
+    "settings": [
+      "city"
+    ],
+    "scene": "city",
+    "facts": [
+      "Античные памятники, Колизей и Римский форум.",
+      "Искусство и историческая архитектура."
+    ],
+    "limits": "Виза, въезд, билеты и стоимость требуют отдельной проверки.",
+    "source_url": "https://en.wikipedia.org/wiki/Rome",
+    "photo_key": "rome"
+  },
+  {
+    "id": "venice",
+    "name": "Венеция",
+    "destination": "Венеция",
+    "country": "Италия",
+    "settings": [
+      "city"
+    ],
+    "scene": "city",
+    "facts": [
+      "Каналы, мосты и исторические дворцы.",
+      "Пешеходные прогулки по островному городу."
+    ],
+    "limits": "Мосты и водный транспорт влияют на доступность; въезд и билеты проверяются отдельно.",
+    "source_url": "https://en.wikipedia.org/wiki/Venice",
+    "photo_key": "venice"
+  }
+]

@@ -11,15 +11,14 @@ from urllib.parse import urlencode, urlparse, urljoin
 import httpx
 
 from .tools import ToolError
+from .destinations import DestinationUnavailable, resolve_destination
 
-# Slugs verified in the supplied Ostrovok homepage archive. Never fetch a user URL.
+# Familiar names for dialogue shortcuts only. Search resolves every destination
+# with Ostrovok; this table is not a coverage whitelist.
 CITIES = {
     "сортавала": "sortavala",
-    "карелия": "sortavala",
     "чемал": "altai_republic_chemal",
-    "алтай": "altai_republic_chemal",
     "осташков": "ostashkov",
-    "селигер": "ostashkov",
     "стамбул": "turkey/istanbul",
     "минск": "belarus/minsk",
     "париж": "france/paris",
@@ -100,7 +99,12 @@ def parse_hotels(html, slug):
         page = json.loads("".join(parser.parts))["props"]["pageProps"]
         if page["searchRegionData"]["catalogSlug"] != catalogue_path(slug):
             raise ValueError("wrong region")
+        region = page["searchRegionData"]
+        if region.get("isSearchable") is False:
+            raise DestinationUnavailable(region.get("name", slug), dict(status="closed", region=None, suggestions=[]))
         hotels = page["serpData"]["hotels"]
+        if not hotels:
+            return []
         output = []
         seen = set()
         for item in hotels:
@@ -146,6 +150,7 @@ def parse_hotels(html, slug):
                     beach_m=min(beaches) if beaches else None,
                     id=hid,
                     source_kind="public",
+                    destination_region={k: region.get(k) for k in ("regionId", "name", "countryCode", "countryName", "type", "center", "catalogSlug")},
                     coordinates={
                         "lat": item.get("location", {}).get("latitude"),
                         "lng": item.get("location", {}).get("longitude"),
@@ -180,12 +185,10 @@ def parse_hotels(html, slug):
 
 
 async def search_hotels(spec, _page=1):
-    destination = (spec.destination or "").strip().casefold().replace("ё", "е")
-    slug = CITIES.get(destination)
-    if not slug:
-        raise ToolError(
-            "Это направление пока не подключено к поиску ИИ. Попробуйте Сочи, Москву, Санкт-Петербург, Казань, Ярославль или обычный поиск Островка."
-        )
+    resolution = await resolve_destination(spec.destination, spec.country)
+    if resolution["status"] != "available":
+        raise DestinationUnavailable(spec.destination, resolution)
+    slug = resolution["region"]["slug"]
     cache_key = slug if _page == 1 else f"{slug}:{_page}"
     page_url = search_url(slug) + (f"&page={_page}" if _page > 1 else "")
     cached = _cache.get(cache_key)

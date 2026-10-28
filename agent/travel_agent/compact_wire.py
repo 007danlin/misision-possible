@@ -5,11 +5,12 @@ from decimal import Decimal
 
 PROMPT = """Extract ALL NEW hotel/travel requirements into ONE flat JSON object. Omit unknown and unchanged fields. Do not invent dates or prices. Return a PATCH, never a complete plan. The backend preserves and merges all unchanged facts. Old wishes and questions are reference only.
 Use these keys (all at top level):
+Keep explicitly named cities and regions, even outside examples. Карелия→to:Карелия, Крым→to:Крым; never replace a region by a city unless the user chooses that city. Tools check availability on Ostrovok.
 e:0 references the exact NEW user message, never repeat its text. REQUIRED act comes immediately after e. Choose act:more_hotels for another/new/different set of hotels; act:previous_hotels ONLY to bring an earlier set back. act:search is the first search, NOT replacing displayed results.
-to:destination, from:origin, co:country. «в Сочи» means to, not from. Карелия→Сортавала, Алтай→Чемал, Селигер→Осташков. A mood never invents a city.
-env:forest/nature/mountains/sea/city/any. лес/дикая природа→forest. New forest/nature without a named city clears an old urban destination with to:null. Keep setting later.
+to:destination, from:origin, co:country. «в Сочи» means to, not from. A bare city reply to the last departure-city question changes ONLY from; «питер»→from:"Санкт-Петербург". Preserve to. Карелия→Сортавала, Алтай→Чемал, Селигер→Осташков. A mood never invents a city.
+env:forest/nature/mountains/sea/city/any. лес/дикая природа→forest. A new request to change the type of trip (museums instead of forest, sea instead of city) without a named place clears the old destination with to:null and replaces env. Ordinary hotel edits keep the chosen destination. Keep setting on other follow-ups.
 a:number of adults (вдвоём/мы с девушкой→2). c:children's ages ARRAY; if only child COUNT is known, c is that integer (5 детей→c:5). Never shrink child count. Missing ages null. Ages reply changes only c.
-d:[YYYYMMDD checkin,YYYYMMDD checkout] as eight-digit integers; extract EVERY stated exact interval even when the request also has guests/budget/transport, e.g. [20261112,20261116] only EXACT calendar dates. n:number of NIGHTS; days:number of DAYS. Month/weekend never becomes exact dates. Date shift: shift:integer days.
+d:[YYYYMMDD checkin,YYYYMMDD checkout] as eight-digit integers; extract EVERY stated exact interval even when the request also has guests/budget/transport, e.g. [20261112,20261116] only EXACT calendar dates. ci:YYYY-MM-DD check-in date string when only the arrival date is stated; never invent checkout, backend combines ci with known n/days. n:number of NIGHTS; days:number of DAYS. Month/weekend never becomes exact dates. Date shift: shift:integer days.
 night_rub:budget in RUBLES PER NIGHT, ONLY explicit «за ночь»/«в сутки». stay_rub:explicit budget for the ENTIRE STAY. rub:ANY stated budget with no explicit nightly/stay period, including the TOTAL TRIP budget; keeps the old period. 100 тысяч→100000. «на 5 ночей» is duration, never a nightly budget. bp:night/stay only when changing the period without stating an amount. bs:hotel/whole_trip/booking only explicit scope. «за всё проживание»→hotel. «на всё, включая дорогу»/«на всю поездку»/«на отель, дорогу и трансферы»→whole_trip. reserve:ONLY separately allocated money for meals or personal expenses. A trip/hotel budget is rub, NEVER reserve. Without a separate personal-expenses amount OMIT reserve, never default it to zero. No currency conversion; foreign currency→ask:[clarifying question].
 pool/parking/spa/fitness/breakfast:true if required, false only explicitly UNWANTED. Removal of a requirement→rm:[key], NOT false. center/beach:POSITIVE maximum distance in METERS, NEVER zero. «до 2 км от центра»→center:2000; «около центра»/«в центре»/«рядом с центром»→center:2000; «рядом с морем»/«около пляжа»→beach:1000. Convert explicit units: «500 м»→500, «0,5 км»→500. «Центр не важен»→rm:["center"]. No distance requested→omit, never center:0 or beach:0. Minutes are travel time, not meters; ask for a distance. rating:minimum 0..10; stars:minimum 0..5, only explicit numbers. Omit all unstated amenities/distances/rating, never fill defaults.
 pets/cancel/dayfly:boolean hard constraints (с собакой→pets:true; без ночных рейсов→dayfly:true). Explicit permission removes a restriction: «разрешаю вылет ночью»→dayfly:false; «пересадки допустимы»→direct:false. other:array of other mandatory requirements.
@@ -38,6 +39,7 @@ FLAT = {
     "from": "origin",
     "co": "country",
     "env": "travel_setting",
+    "ci": "checkin_date",
     "n": "stay_nights",
     "days": "duration_days",
     "bp": "budget_period",
@@ -215,6 +217,7 @@ def grammar(message=None):
         "a": "integer",
         "c": "integer | ages",
         "d": 'dates | "null"',
+        "ci": "string",
         "n": "integer",
         "days": "integer",
         "rub": "number",
@@ -260,6 +263,7 @@ def grammar(message=None):
         types.pop("night_rub")
     if message is not None and not has_calendar_reference(message):
         types.pop("d")
+        types.pop("ci")
     types.pop("act")
     rules = [
         "root ::= " + json.dumps('{"e":0,"act":') + ' action ("," pair)* "}"',

@@ -19,4 +19,4 @@ build-backend = "setuptools.build_meta"
 include = ["travel_agent*", "proto*"]
 
 [tool.setuptools.package-data]
-travel_agent = ["catalogue.json", "journey_catalogue.json", "cities.json"]
+travel_agent = ["catalogue.json", "journey_catalogue.json", "cities.json", "direction_catalogue.json"]

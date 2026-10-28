@@ -7,7 +7,7 @@ from language_cases_20261027 import CASES
 from travel_agent.domain import TripSpec,Intent,apply_intent
 from travel_agent.grounding import ground_intent
 from travel_agent.model import QwenModel,Settings,canonical_intent,PROMPT_VERSION,ModelError
-from travel_agent.fast_intent import protect_child_count,protect_stay_length,protect_adult_count,protect_explicit_forest,protect_hotel_budget_scope,protect_explicit_polarity,clarify_ambiguous_request,protect_hotel_question,protect_journey_language
+from travel_agent.fast_intent import protect_child_count,protect_stay_length,protect_duration_units,protect_adult_count,protect_explicit_forest,protect_hotel_budget_scope,protect_explicit_polarity,clarify_ambiguous_request,protect_hotel_question,protect_journey_language
 BASE=TripSpec(origin='Москва',destination='Сочи',include_transport=True,dates={'start':'2026-11-10','end':'2026-11-15'},travellers={'adults':2},budget={'amount_minor':12000000},budget_scope='booking',hotel_preferences={'pool':True},hard_constraints={'no_night_flights':True})
 def get(d,path):
  for key in path.split('.'):
@@ -19,8 +19,9 @@ def source_hashes():
  return {f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in Path(travel_agent.model.__file__).parent.glob('*.py')}
 
 async def main():
- parser=argparse.ArgumentParser();parser.add_argument('cases',nargs='*');parser.add_argument('--output',type=Path,default=root/'.runtime/evals/language');parser.add_argument('--timeout',type=float,default=90);parser.add_argument('--environment',default='configured inference endpoint');args=parser.parse_args()
+ parser=argparse.ArgumentParser();parser.add_argument('cases',nargs='*');parser.add_argument('--output',type=Path,default=root/'.runtime/evals/language');parser.add_argument('--timeout',type=float,default=90);parser.add_argument('--environment',default='configured inference endpoint');parser.add_argument('--replay',type=Path);args=parser.parse_args()
  hashes=source_hashes()
+ replay={r['id']:r.get('model_attempts',[]) for r in json.loads(args.replay.read_text())} if args.replay else None
  out=args.output;out.mkdir(parents=True,exist_ok=True);results=[];model=QwenModel(replace(Settings.from_env(),timeout=args.timeout));selected=set(args.cases);cases=[c for c in CASES if not selected or c['id'] in selected]
  for c in cases:
   old=TripSpec() if c['empty'] else BASE.model_copy(deep=True);message=c['message'];context={'today':'2026-10-27','search_mode':'hotels','trip_spec':old.model_dump(mode='json',exclude_defaults=True),'message':message,'history':[],'last_assistant_message':'Показал три варианта. Что изменим?','last_questions':[],'displayed_hotels':[{'position':i+1,'name':n} for i,n in enumerate(['Отель Первый','Отель Второй','Отель Третий'])]};start=time.monotonic();row={'id':c['id'],'group':c['group'],'message':message};errors=[];repair=None;calls=[]
@@ -29,10 +30,13 @@ async def main():
     call_start=time.monotonic()
     remaining=args.timeout-(time.monotonic()-start)
     if remaining<=0:raise ModelError('model_timeout')
-    raw,usage=await model.extract(context,repair,remaining)
+    if replay is not None:
+     recorded=replay[c['id']][attempt];raw,usage=recorded['raw_output'],recorded.get('usage',{})
+    else:
+     raw,usage=await model.extract(context,repair,remaining)
     calls.append({'seconds':round(time.monotonic()-call_start,3),'usage':usage,'raw_output':raw})
     try:
-     row["raw_model_output"]=raw;intent=clarify_ambiguous_request(message) or Intent.model_validate_json(canonical_intent(raw,message));intent=protect_child_count(intent,message,old);intent=protect_stay_length(intent,message,old);intent=protect_adult_count(intent,message);intent=protect_explicit_forest(intent,message);intent=protect_hotel_budget_scope(intent,message);intent=protect_journey_language(protect_hotel_question(protect_explicit_polarity(intent,message),message),message);intent=ground_intent(intent,message,old);new=apply_intent(old,intent,message);break
+     row["raw_model_output"]=raw;intent=clarify_ambiguous_request(message) or Intent.model_validate_json(canonical_intent(raw,message));intent=protect_child_count(intent,message,old);intent=protect_stay_length(intent,message,old);intent=protect_duration_units(intent,message);intent=protect_adult_count(intent,message);intent=protect_explicit_forest(intent,message);intent=protect_hotel_budget_scope(intent,message);intent=protect_journey_language(protect_hotel_question(protect_explicit_polarity(intent,message),message),message);intent=ground_intent(intent,message,old);new=apply_intent(old,intent,message);break
     except Exception as e:
      calls[-1]['validation_error']=str(e)[:2000]
      if attempt:raise
@@ -53,5 +57,6 @@ async def main():
   except Exception as e:row['error']=str(e);errors.append(type(e).__name__)
   row['model_attempts']=calls
   row.update(seconds=round(time.monotonic()-start,2),passed=not errors,errors=errors);results.append(row);(out/'results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2));print(json.dumps({'id':row['id'],'passed':row['passed'],'seconds':row['seconds'],'errors':errors},ensure_ascii=False),flush=True)
- (out/'summary.json').write_text(json.dumps({'source_hashes':hashes,'source_files_unchanged':hashes==source_hashes(),'cases':len(results),'passed':sum(r['passed'] for r in results),'failed':[r['id'] for r in results if not r['passed']],'environment':args.environment,'endpoint':model.settings.base_url,'model':model.settings.model,'compact_wire':os.getenv('HOTEL_COMPACT_WIRE'),'timeout_seconds':args.timeout,'latency_seconds':{'median':statistics.median(r['seconds'] for r in results),'p95':sorted(r['seconds'] for r in results)[max(0,math.ceil(len(results)*.95)-1)],'max':max(r['seconds'] for r in results)},'prompt_version':PROMPT_VERSION},ensure_ascii=False,indent=2))
+ (out/'summary.json').write_text(json.dumps({'source_hashes':hashes,'source_files_unchanged':hashes==source_hashes(),'cases':len(results),'passed':sum(r['passed'] for r in results),'failed':[r['id'] for r in results if not r['passed']],'environment':args.environment,'execution_kind':'recorded model outputs' if args.replay else 'real inference','replay_source':str(args.replay) if args.replay else None,'endpoint':model.settings.base_url,'model':model.settings.model,'compact_wire':os.getenv('HOTEL_COMPACT_WIRE'),'timeout_seconds':args.timeout,'latency_seconds':{'median':statistics.median(r['seconds'] for r in results),'p95':sorted(r['seconds'] for r in results)[max(0,math.ceil(len(results)*.95)-1)],'max':max(r['seconds'] for r in results)},'prompt_version':PROMPT_VERSION},ensure_ascii=False,indent=2))
+ if any(not row['passed'] for row in results):raise SystemExit(1)
 asyncio.run(main())

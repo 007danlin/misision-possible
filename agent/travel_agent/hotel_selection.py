@@ -129,6 +129,8 @@ def select_hotels(candidates, spec, cheaper=False, include_conflicts=False):
             if journey.enabled(spec) and quote
             else None
         )
+        if journey.enabled(spec) and trip is None and quote and quote["total_minor"] is not None and hotel.get("source_kind") == "public":
+            trip = journey.partial_quote(spec, quote)
         if journey.enabled(spec):
             if trip is None:
                 failures.append("нет подключённого маршрута")
@@ -151,6 +153,7 @@ def select_hotels(candidates, spec, cheaper=False, include_conflicts=False):
             not failures
             and "бюджет на отель" not in budget_failures
             and value is not None
+            and not (trip and trip.get("route_missing"))
         ):
             base_prices.append(value)
         failures.extend(budget_failures)
@@ -266,6 +269,8 @@ def missing_hotel_questions(spec):
                 f"Сколько лет каждому из {len(spec.travellers.children)} детей? Укажите возраста списком."
             ]
         )
+    if not spec.dates and spec.checkin_date:
+        return [f"Заезд {spec.checkin_date:%d.%m.%Y}. На сколько ночей или до какой даты ищем отель?"]
     if not spec.dates and not spec.stay_nights:
         return ["На какие даты или на сколько ночей ищем отель?"]
     if journey.enabled(spec):
@@ -308,6 +313,28 @@ def response_text(hotels, info, spec, patch, cheaper=False):
         else ("Сравнил варианты по цене. " if cheaper else "Проверил ваши условия. ")
     )
     if not hotels:
+        if not info["considered"]:
+            return intro + "В каталоге Островка по этому направлению сейчас не получены карточки отелей. Это не подтверждает отсутствие номеров на ваши даты. Можно проверить поиск на Островке или выбрать другое направление; остальные условия сохранены."
+        if info["considered"] and info["rejected"].get("нет подключённого маршрута") == info["considered"]:
+            if spec.origin == spec.destination:
+                detail = (
+                    f"Город отправления и город отдыха совпадают: {spec.destination}. "
+                    "Уточните город отдыха или напишите «только отель, без дороги». "
+                )
+            else:
+                mode = {"flight": "самолётом", "train": "поездом", "car": "на автомобиле"}.get(spec.transport_mode)
+                detail = (
+                    f"Не удалось рассчитать дорогу {spec.origin} → {spec.destination}"
+                    + (f" {mode}" if mode else "")
+                    + " с выбранными условиями. "
+                    "Можно изменить способ поездки или написать «только отель, без дороги»; "
+                    "тогда уточню отдельный бюджет на проживание, если он ещё не указан. "
+                )
+            return (
+                intro + detail
+                + "Это ограничение расчёта дороги, а не отсутствие подходящих отелей. "
+                "Изменение бюджета или пожеланий к отелю не подключит маршрут. Остальные пожелания сохранены."
+            )
         text = (
             intro
             + f"Среди {info['considered']} отелей сейчас нет варианта, который проходит все условия. "
@@ -356,6 +383,14 @@ def response_text(hotels, info, spec, patch, cheaper=False):
             + "Можно изменить бюджет, даты или пожелания — остальные условия сохранятся."
         )
     first = hotels[0]
+    if any((h.get("journey") or {}).get("route_missing") for h in hotels):
+        return (
+            intro + f"Нашёл отели на Островке по направлению «{spec.destination}», подходящие по условиям размещения. "
+            "Показываю предварительную стоимость проживания. Дорога и трансферы пока не рассчитаны, "
+            "поэтому соответствие общему бюджету не подтверждено. "
+            "Можно изменить способ поездки или написать «только отель, без дороги» для отдельного подбора проживания. "
+            "Даты, гости и пожелания сохранены."
+        )
     text = (
         intro
         + f"Сравнил {info['considered']} отелей, вашим условиям соответствуют {info['matched']}. "
@@ -373,7 +408,7 @@ def response_text(hotels, info, spec, patch, cheaper=False):
     return text
 
 
-def explain_hotels(hotels, reference=None):
+def explain_hotels(hotels, reference=None, message=""):
     selected = hotels[reference - 1 : reference] if reference else hotels
     if not selected:
         return "Сначала подберём варианты, затем смогу сравнить их и объяснить выбор."
@@ -398,7 +433,22 @@ def explain_hotels(hotels, reference=None):
                 + rub(quote["total_minor"] or quote["nightly_minor"])
                 + (" за проживание." if quote["total_minor"] else " за ночь.")
             )
-        text += " Удобства: " + ", ".join(h.get("amenities", [])) + "."
+        if h.get("amenities"):
+            text += " Удобства: " + ", ".join(h["amenities"]) + "."
+        if re.search(r"питом|собак|кошк|животн", message, re.I):
+            text += (
+                " В каталоге отмечено размещение с питомцами; ограничения, доплату и согласование нужно подтвердить у отеля."
+                if "has_pets" in h.get("amenity_codes", [])
+                else " Размещение с питомцем не подтверждено в доступных данных; уточните разрешение и доплату у отеля."
+            )
+        if re.search(r"отмен", message, re.I):
+            text += " Условия отмены конкретного тарифа нужно подтвердить перед реальным бронированием."
+        if re.search(r"завтрак", message, re.I) and quote:
+            text += (
+                " В демонстрационном расчёте завтрак учтён; включение в реальный тариф требует подтверждения."
+                if quote.get("breakfast")
+                else " В расчёте завтрак не учтён; включение в реальный тариф нужно уточнить."
+            )
         if h.get("unverified"):
             text += " Требуют уточнения: " + ", ".join(h["unverified"]) + "."
         parts.append(text)

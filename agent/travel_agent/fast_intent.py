@@ -188,6 +188,19 @@ def fast_intent(state, message):
             dict(patch=patch or {}, evidence=evidence, **extra)
         )
 
+    # Exact standalone wishes need no model extraction. Combined requests and
+    # negation still go through semantic parsing; all saved constraints survive.
+    if not state.trip_spec.destination:
+        setting = {
+            "к морю": "sea", "на море": "sea", "хочу к морю": "sea",
+            "хочу на море": "sea", "море": "sea",
+            "на природу": "nature", "хочу на природу": "nature",
+            "в горы": "mountains", "хочу в горы": "mountains",
+            "в лес": "forest", "хочу в лес": "forest",
+        }.get(text)
+        if setting:
+            return result({"travel_setting": setting}, action="search")
+
     # Incremental family edits must not replace known children or invent an age.
     m = re.fullmatch(
         r"(?:добавь|добавим|добавить)\s+(?:(?:еще|пожалуйста)\s+)?(?:(?P<count>"
@@ -233,7 +246,7 @@ def fast_intent(state, message):
     if text in {"покажи другие отели", "все отели замени"}:
         return result(action="replace_options")
     m = re.fullmatch(
-        r"(?:лучше|давай|поедем) (поездом|самолетом|на машине|на автомобиле)", text
+        r"(?:(?:лучше|давай|поедем) )?(поездом|самолетом|на (?:своей )?машине|на (?:своем )?автомобиле)", text
     )
     if m:
         return result(
@@ -243,6 +256,8 @@ def fast_intent(state, message):
                     "самолетом": "flight",
                     "на машине": "car",
                     "на автомобиле": "car",
+                    "на своей машине": "car",
+                    "на своем автомобиле": "car",
                 }[m[1]],
                 "include_transport": True,
                 "transport_owned": False,
@@ -251,7 +266,13 @@ def fast_intent(state, message):
         )
     m = re.fullmatch(r"отправляемся из (.{1,100})", message.strip(), re.I)
     if m:
-        return result({"origin": m[1].strip()}, action="change")
+        from .origin_followup import canonical_city
+
+        city = canonical_city(m[1].strip())
+        if city:
+            return result({"origin": city}, action="change")
+        # A combined request must reach Qwen as a whole, not become a city.
+        return None
     if text == "без пересадок":
         return result({"hard_constraints": {"no_connections": True}}, action="change")
     if text in {"билеты уже куплены", "билеты я уже купил"}:
@@ -327,36 +348,11 @@ def fast_intent(state, message):
             }.get(text),
         )
     if text in {
-        "хочу на природу, в лес. дикая природа",
-        "хочу в лес",
-        "хочу на природу, в лес",
-        "хочу на природу",
-    }:
-        return result(
-            {
-                "travel_setting": "forest" if "лес" in text else "nature",
-                "destination": None,
-            },
-            action="inspire",
-        )
-    if text in {
         "бассейн больше не обязателен",
         "бассейн больше не обязателен. остальное оставь",
         "бассейн не важен",
     }:
         return result(remove_hotel_preferences=["pool"], action="change")
-    for region, city in [
-        ("Карелия", "Сортавала"),
-        ("Алтай", "Чемал"),
-        ("Селигер", "Осташков"),
-        ("Сочи", "Сочи"),
-        ("Петербург", "Санкт-Петербург"),
-    ]:
-        if (
-            text
-            == f"выбираю {region}, ищем в районе {city}. остальные пожелания сохрани".lower()
-        ):
-            return result({"destination": city})
     m = re.fullmatch(r"(?:на\s+)?(" + COUNT + r")\s+(?:детей|ребенка|ребенок)", text)
     if m and number(m[1]) <= 10:
         return result({"travellers": {"children": [None] * number(m[1])}})
@@ -366,6 +362,9 @@ def fast_intent(state, message):
     m = re.fullmatch(r"(?:на\s+)?(" + COUNT + r")\s+ноч(?:ь|и|ей)", text)
     if m:
         return result({"stay_nights": number(m[1])})
+    m = re.fullmatch(r"(?:на\s+)?(" + COUNT + r")\s+(?:день|дня|дней)", text)
+    if m and 1 <= number(m[1]) <= 365:
+        return result({"duration_days": number(m[1])})
     if (
         state.trip_spec.travellers.children
         and any(a is None for a in state.trip_spec.travellers.children)
@@ -448,6 +447,36 @@ def protect_stay_length(intent, message, previous):
     data = intent.model_dump(exclude_unset=True)
     data.setdefault("patch", {})["stay_nights"] = n
     data.setdefault("evidence", {})["stay_nights"] = m[0]
+    return Intent.model_validate(data)
+
+
+def protect_duration_units(intent, message):
+    """Do not let an explicit day count become nights, or vice versa."""
+    if intent.shift_days or re.search(r"\b(?:если|или|либо|позже|раньше|позднее|назад|впер[её]д)\b", message, re.I):
+        return intent
+    if len(re.findall(r"(?<!\w)(?:" + COUNT + r")\s+(?:ночь|ночи|ночей|день|дня|дней)(?!\w)", message, re.I)) != 1:
+        return intent
+    matches = list(re.finditer(
+        r"\bна\s+(" + COUNT + r")\s+(ночь|ночи|ночей|день|дня|дней)(?!\w)",
+        message, re.I,
+    ))
+    if len(matches) != 1:
+        return intent
+    match = matches[0]
+    if re.search(r"(?:не|меньше|больше|минимум|максимум|около|до|от)\s*$", message[max(0,match.start()-20):match.start()], re.I):
+        return intent
+    field = "stay_nights" if match[2].lower().startswith("ноч") else "duration_days"
+    count = number(match[1].lower())
+    if not 1 <= count <= (60 if field == "stay_nights" else 365):
+        return intent
+    other = "duration_days" if field == "stay_nights" else "stay_nights"
+    other_unit = r"\bдн(?:я|ей)|\bдень\b" if other == "duration_days" else r"\bноч(?:ь|и|ей)\b"
+    data = intent.model_dump(exclude_unset=True)
+    patch = data.setdefault("patch", {})
+    if other in patch and not re.search(other_unit, message, re.I):
+        patch.pop(other)
+    patch[field] = count
+    data.setdefault("evidence", {})[field] = match[0]
     return Intent.model_validate(data)
 
 
@@ -637,8 +666,25 @@ def clarify_ambiguous_request(message):
             + duration[2]
             + "?"
         )
+    if re.search(
+        r"(?<!\w)\d[\d ]*(?:[.,]\d+)?(?:\s*(?:тыс[а-я]*\.?|руб[а-я]*|₽|млн\.?))?\s+"
+        r"(?:или|либо)\s+\d[\d ]*(?:[.,]\d+)?\s*(?:тыс[а-я]*|руб[а-я]*|₽|млн)",
+        text,
+    ):
+        question = "Какой бюджет оставить? Вы назвали разные суммы; пока сохраняю прежний лимит."
+    if re.search(r"\b(?:или|либо)\b", text):
+        from .ostrovok import CITIES
+        from .origin_followup import canonical_city
+
+        cities = {
+            canonical_city(name) or name
+            for name in CITIES
+            if re.search(r"(?<!\w)" + re.escape(name) + r"(?!\w)", text)
+        }
+        if len(cities) >= 2:
+            question = "Какое направление выбираем? Пока сохраняю прежнее; можно сначала сравнить варианты."
     dates = re.search(
-        r"(?<!\d)(\d{1,2})\s*[–—-]\s*(\d{1,2})\s+(?:января|февраля|марта|апреля|мая|июня|июля|августа|сентября|октября|ноября|декабря)",
+        r"(?<!\d)(\d{1,2})\s*(?:[–—-]|по)\s*(\d{1,2})\s+(?:января|февраля|марта|апреля|мая|июня|июля|августа|сентября|октября|ноября|декабря)",
         text,
     )
     if dates and int(dates[1]) >= int(dates[2]):
@@ -651,6 +697,15 @@ def clarify_ambiguous_request(message):
 
 
 def protect_hotel_question(intent, message):
+    # Asking whether a displayed hotel allows a pet is a factual question,
+    # not permission to add a new mandatory filter to the search.
+    if (
+        re.search(r"\b(?:можно|пускают|принимают|разрешен[а-яё]*)\b", message, re.I)
+        and re.search(r"питом|собак|кошк|животн", message, re.I)
+        and re.search(r"(?:этот|выбранный|первый|второй|третий)\s+отел", message, re.I)
+        and not re.search(r"добавь|убери|найди|ищи|ищем|хочу|поменяй|измени|подбери|подобрать", message, re.I)
+    ):
+        return Intent(action="explain", hotel_reference=intent.hotel_reference)
     if (
         intent.action == "reviews"
         and intent.hotel_reference

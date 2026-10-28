@@ -100,6 +100,7 @@ class TripSpec(Model):
     destination: Text | None = None
     country: Text | None = None
     dates: Dates | None = None
+    checkin_date: date | None = None
     duration_days: Annotated[StrictInt, Field(ge=1, le=365)] | None = None
     travellers: Travellers = Field(default_factory=Travellers)
     budget: Money | None = None
@@ -141,6 +142,7 @@ class TripPatch(Model):
     destination: Text | None = None
     country: Text | None = None
     dates: Dates | None = None
+    checkin_date: date | None = None
     duration_days: Annotated[StrictInt, Field(ge=1, le=365)] | None = None
     travellers: TravellersPatch | None = None
     budget: Money | None = None
@@ -280,11 +282,21 @@ def apply_intent(spec: TripSpec, intent: Intent, message: str) -> TripSpec:
             if not patch[key]:
                 del patch[key]
         elif patch[key] == previous[key]:
-            del patch[key]
+            # A stored duration can lag behind edited dates. Repeating that
+            # duration is still a real change to the effective calendar stay.
+            calendar_length = (
+                (spec.dates.end - spec.dates.start).days
+                + (1 if key == "duration_days" else 0)
+                if spec.dates and key in {"stay_nights", "duration_days"}
+                else None
+            )
+            if calendar_length is None or patch[key] == calendar_length:
+                del patch[key]
     for key, value in patch.items():
         if value is None and key not in {
             "destination",
             "dates",
+            "checkin_date",
             "budget",
             "expense_reserve",
         }:
@@ -329,6 +341,11 @@ def apply_intent(spec: TripSpec, intent: Intent, message: str) -> TripSpec:
             errors.append(
                 "budget_period: night requires an explicit PER NIGHT amount, e.g. за ночь. 'на 5 ночей' is a stay length, NOT a nightly budget. Omit budget_period or use stay with evidence for the total budget."
             )
+        if key == "checkin_date" and patch[key] is not None:
+            if not has_calendar_reference(quote) and not re.search(
+                r"\b(?:сегодня|завтра|послезавтра)\b", quote, re.I
+            ):
+                errors.append("checkin_date requires an explicit calendar date")
         if key == "dates" and patch[key] is not None:
             numeric_day = re.search(
                 r"(?<!\d)(?:3[01]|[12]\d|0?[1-9])(?!\d)(?!\s*(?:дн|день|ноч|недел|месяц))",
@@ -403,6 +420,49 @@ def apply_intent(spec: TripSpec, intent: Intent, message: str) -> TripSpec:
         if result.get("budget_scope") in {"booking", "whole_trip"}:
             result["budget"] = result.get("hotel_budget")
             result["budget_scope"] = "hotel"
+    # Resolve partial calendar information only after merging the new turn.
+    # Explicit intervals take precedence; a new start retains the known length.
+    if "dates" in patch:
+        result["checkin_date"] = None
+    elif "checkin_date" in patch or (
+        result.get("checkin_date") and {"stay_nights", "duration_days"} & patch.keys()
+    ):
+        start = result.get("checkin_date")
+        nights = result.get("stay_nights")
+        if "duration_days" in patch and "stay_nights" not in patch:
+            nights = result["duration_days"] - 1
+        elif nights is None and result.get("duration_days"):
+            nights = result["duration_days"] - 1
+        if spec.dates and not {"stay_nights", "duration_days"} & patch.keys():
+            nights = (spec.dates.end - spec.dates.start).days
+        if start and nights and nights > 0:
+            start = date.fromisoformat(start)
+            result["dates"] = {"start": start, "end": start + timedelta(days=nights)}
+            result["checkin_date"] = None
+    elif result.get("dates") and {"stay_nights", "duration_days"} & patch.keys():
+        # A new exact length keeps check-in and moves check-out. Otherwise the
+        # price calculator would keep using the old interval and ignore the edit.
+        nights = (
+            patch["stay_nights"]
+            if "stay_nights" in patch
+            else patch["duration_days"] - 1
+        )
+        conflicting = (
+            "stay_nights" in patch and "duration_days" in patch
+            and patch["stay_nights"] != patch["duration_days"] - 1
+        )
+        if nights and nights > 0 and not conflicting:
+            start = date.fromisoformat(result["dates"]["start"])
+            result["dates"] = {"start": start.isoformat(), "end": (start + timedelta(days=nights)).isoformat()}
+    if result.get("dates") and {"dates", "checkin_date", "stay_nights", "duration_days"} & patch.keys():
+        interval = Dates.model_validate(result["dates"])
+        nights = (interval.end - interval.start).days
+        # Refresh old derived lengths, while preserving newly stated conflicts
+        # so the runner can ask the user instead of choosing a side.
+        if spec.stay_nights is not None and "stay_nights" not in patch:
+            result["stay_nights"] = nights
+        if spec.duration_days is not None and "duration_days" not in patch:
+            result["duration_days"] = nights + 1
     return TripSpec.model_validate(result)
 
 

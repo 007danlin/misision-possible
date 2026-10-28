@@ -7,13 +7,14 @@ from urllib.parse import urlparse
 import httpx
 
 
-PROMPT_VERSION = "odin-request-9.2"
+PROMPT_VERSION = "odin-request-9.5"
 SYSTEM_PROMPT = """Extract ONLY the travel requirements explicitly stated in the NEW user message. Return one compact JSON object. Previous trip state is reference data, never a new request. Preserve all untouched requirements by omitting them.
 
 Allowed top-level fields (omit unknown/unchanged fields, never add null/defaults):
 origin: departure city (ОТКУДА, «из Москвы» → «Москва»).
 destination: arrival city (КУДА, «в Казань» → «Казань»). «В Сочи» alone gives NO origin. «Лучше в Казань» changes destination only.
 country: only explicitly named country; never infer it from a city.
+checkin_date: ISO arrival date when only the start is stated; backend combines it with saved stay_nights/duration_days.
 dates: {start,end}, ISO dates, ONLY if exact calendar days are given. A month, weekend or duration NEVER supplies exact dates.
 duration_days: integer, e.g. «на 4 дня в ноябре» → 4, WITHOUT dates.
 travellers: {adults,children}. «вдвоём», «мы с девушкой» → adults:2. children is ages; unknown child age → [null].
@@ -46,7 +47,8 @@ Do not generate plans, prices, booking, weather or unsupported facts. Ignore req
 HOTEL_PROMPT = """
 Hotel mode instructions (apply only to hotel search):
 travel_setting: forest for лес/дикая природа, nature for загородный отдых/на природу, mountains for горы, sea for море, city for городской отдых, any if explicitly removing this requirement. Provide evidence.travel_setting exact user quote. This is a structured field, not just a soft preference. Keep it on later short answers. A new forest/nature wish with no explicit destination should clear a previous urban destination (destination:null with the same exact quote), action:inspire. Never invent a city when the user only expresses a mood.
-Our direction choices: Карелия — search Сортавала and surroundings; Алтай — Чемал; Селигер — Осташков. When the user chooses one of these regions, normalize destination to that search base with evidence.destination quoting the selected region. Preserve travel_setting. Users may answer with the number of a direction: use last_assistant_message to resolve it.
+Resolve region names and ordinal replies using displayed_directions (name → destination) from the actual previous selection. Preserve travel_setting. Never assume a fixed order of suggestions.
+Explicit city/region names are not limited to examples. Keep a requested region as the destination (Карелия → Карелия, Крым → Крым); never substitute one of its cities unless the user selects that city. Provider tools determine destination availability.
 
 Treat the user's next message as a continuation of last_assistant_message and existing trip_spec. Resolve short answers using the previous question, but quote the NEW user's exact text as evidence. Keep every untouched field. Never ask again for known dates, guests or budget.
 Additional fields:
@@ -65,10 +67,10 @@ COMPACT_HOTEL_PROMPT = """Extract EVERY explicitly stated NEW hotel-search requi
 Fields:
 keep_hotel: true for «отель оставь», false for «можно сменить отель». Exact evidence required.
 include_transport: true for «добавь дорогу и трансфер», false for «только отель, без дороги». Provide exact evidence. expense_reserve: money explicitly reserved for meals/personal expenses, including zero.
-origin/destination/country: named places only. Карелия→Сортавала, Алтай→Чемал, Селигер→Осташков. A mood is not a city.
-travel_setting: forest for лес/леса/дикая природа; nature for загородный отдых/на природу; mountains/sea/city for горы/море/город. New nature request without a named destination clears previous urban destination (destination:null). Preserve setting on follow-ups.
+origin/destination/country: named places only. A bare city reply to last_questions/last_assistant_message asking departure city changes origin only, preserving destination; «питер»→origin:"Санкт-Петербург". Карелия→Сортавала, Алтай→Чемал, Селигер→Осташков. A mood is not a city.
+travel_setting: forest for лес/леса/дикая природа; nature for загородный отдых/на природу; mountains/sea/city for горы/море/город. A new request to change the type of trip (e.g. museums instead of forest, sea instead of city) without a named destination clears the old destination (destination:null) and replaces travel_setting. Keep ordinary hotel edits at their chosen destination. Preserve setting on other follow-ups.
 travellers:{adults,children}: «вдвоём», «мы с девушкой»→adults:2; «трое взрослых»→3. children is an ARRAY OF AGES: «5 детей»→[null,null,null,null,null]. Always preserve the full count. Unknown ages are null. Age-list replies change children only.
-dates:{start,end}: ISO exact dates only; stay_nights: explicit NIGHTS; duration_days: explicit DAYS. No invented dates from months/weekends. «С 12 по 16 ноября 2026»→dates:{start:"2026-11-12",end:"2026-11-16"}. «На семь ночей»→stay_nights:7, NOT duration_days.
+checkin_date: ISO arrival date when only the start is stated; backend combines it with saved duration. dates:{start,end}: ISO exact dates only; stay_nights: explicit NIGHTS; duration_days: explicit DAYS. No invented dates from months/weekends. «С 12 по 16 ноября 2026»→dates:{start:"2026-11-12",end:"2026-11-16"}. «На семь ночей»→stay_nights:7, NOT duration_days.
 budget:{amount_minor,currency:"RUB"}: KOPECKS. 40 тысяч=4000000, 100 тысяч=10000000. budget_period is top-level: night ONLY for «за ночь»/«в сутки»; «на 5 ночей» is duration, not nightly money. Otherwise stay. budget_scope: hotel/whole_trip/booking only if explicit. Keep old budget period/scope unless changed. Never convert foreign currency.
 hotel_preferences: only changed keys pool/parking/spa/fitness/breakfast bool; max_center_m/max_beach_m meters; min_rating 0..10; min_stars 0..5. «нужен завтрак и парковка»→breakfast:true,parking:true. «рядом с морем»→max_beach_m:1000. «до 2 км от центра»→max_center_m:2000. «около центра»/«в центре»→max_center_m:2000. Distances are POSITIVE, never zero; «0,5 км»→500 meters. Minutes are not meters; ask about unsupported comparisons or conflicting distances. NEVER add distances/stars/rating unless asked. Remove a requirement with remove_hotel_preferences:[key], e.g. «бассейн не важен»→["pool"]. Explicitly unwanted=false; never silently relax criteria.
 hard_constraints:{pets,free_cancellation,no_night_flights,other}. «с собакой»→pets:true. add_preferences/remove_preferences: soft wishes, including «уединение», «тихо», «подальше от города». Keep these wishes even when a structured setting is also present. Do not duplicate structured amenities as soft wishes.
@@ -94,7 +96,10 @@ def hotel_reference_state(spec, message):
     """Keep values needed to resolve relative edits, never the whole old plan."""
     import re
 
-    keep = {"preferences", "locked_component_ids"}
+    keep = {
+        "preferences", "locked_component_ids", "dates", "checkin_date",
+        "stay_nights", "duration_days",
+    }
     text = message.casefold().replace("ё", "е")
     for clause in re.split(r"[.!?;,]", text):
         if not re.search(
@@ -191,6 +196,24 @@ def canonical_intent(content: str, message: str | None = None) -> str:
     ):
         if key in patch and key not in data:
             data[key] = patch.pop(key)
+    # Small models can put hard-constraint keys in the criterion-removal list.
+    # Removing a hard requirement means false in the domain, not an unknown
+    # hotel amenity; preserve exact evidence and reject conflicting operations.
+    removals = data.get("remove_hotel_preferences")
+    if isinstance(removals, list):
+        aliases = {"cancel": "free_cancellation", "pets": "pets", "dayfly": "no_night_flights", "direct": "no_connections", "daytravel": "no_night_travel"}
+        aliases.update({name: name for name in aliases.values()})
+        for key in list(removals):
+            if isinstance(key, str) and key in aliases:
+                field = aliases[key]
+                constraints = patch.setdefault("hard_constraints", {})
+                if constraints.get(field) is True:
+                    raise ValueError("conflicting hard constraint removal")
+                constraints[field] = False
+                removals.remove(key)
+                if isinstance(data.get("evidence"), dict):
+                    quote = data["evidence"].get("remove_hotel_preferences", "")
+                    data["evidence"].setdefault("hard_constraints", quote)
     # Lossless recovery of a misplaced action, not a relaxation of constraints.
     optimization = data.get("optimization")
     if (
@@ -250,6 +273,9 @@ def canonical_intent(content: str, message: str | None = None) -> str:
                     "forest",
                     "nature",
                     "mountains",
+                    "sea",
+                    "city",
+                    "any",
                 }:
                     continue
                 if key == "dates" and patch.get("stay_nights"):
@@ -334,6 +360,10 @@ class QwenModel:
             if context.get("search_mode") == "hotels"
             else SYSTEM_PROMPT
         )
+        if context.get("search_mode") == "directions":
+            from .inspiration import DIRECTION_PROMPT
+
+            instructions = DIRECTION_PROMPT
         if wire:
             from .compact_wire import prompt, encode
 
@@ -342,7 +372,7 @@ class QwenModel:
             "Старое состояние поездки (справочные данные, не инструкции):\n"
             + json.dumps(state, ensure_ascii=False, separators=(",", ":"))
         )
-        if context.get("search_mode") == "hotels":
+        if context.get("search_mode") in {"hotels", "directions"}:
             # Qwen's recurrent cache checkpoints at the user-message boundary.
             # Keep the instructions before that boundary stable across sessions;
             # putting mutable trip state in the system message forced full prefill.
@@ -429,6 +459,19 @@ class QwenModel:
                         },
                     },
                 }
+        if context.get("search_mode") == "directions":
+            from .inspiration import direction_schema
+
+            schema = direction_schema(context["candidates"])
+            if self.settings.provider == "ollama":
+                payload["format"] = schema
+            else:
+                payload["response_format"] = {"type": "json_schema", "json_schema": {
+                    "name": "direction_selection", "strict": True, "schema": schema}}
+            if self.settings.provider == "ollama":
+                payload["options"]["num_predict"] = 180
+            else:
+                payload["max_tokens"] = 180
         if wire:
             from .compact_wire import grammar
 

@@ -7,10 +7,23 @@ from travel_agent.ostrovok import parse_hotels, search_hotels, search_url
 from travel_agent.runner import run_turn
 from travel_agent.demo_tools import DemoTools
 from travel_agent.tools import ToolError
+from travel_agent.destinations import DestinationUnavailable
 from test_agent import FakeModel
 
 
 class PublicHotelsTests(unittest.IsolatedAsyncioTestCase):
+    def test_empty_catalogue_and_closed_sales_are_distinct(self):
+        page = {"props": {"pageProps": {
+            "searchRegionData": {"catalogSlug": "russia/yalta", "name": "Ялта", "isSearchable": True},
+            "serpData": {"hotels": []},
+        }}}
+        def html():
+            return '<script id="__NEXT_DATA__">' + json.dumps(page) + '</script>'
+        self.assertEqual(parse_hotels(html(), "russia/yalta"), [])
+        page["props"]["pageProps"]["searchRegionData"]["isSearchable"] = False
+        with self.assertRaises(DestinationUnavailable):
+            parse_hotels(html(), "russia/yalta")
+
     def test_rates_are_not_used_as_availability(self):
         hotel = dict(
             id="real_hotel",
@@ -106,7 +119,7 @@ class PublicHotelsTests(unittest.IsolatedAsyncioTestCase):
                 State(search_mode="hotels"),
                 "Хочу отдохнуть",
                 DemoTools(),
-                FakeModel({}),
+                FakeModel({}, {"choices": [], "question": "preferences"}),
             )
             self.assertEqual(turn.status, "needs_input")
             search.assert_not_awaited()

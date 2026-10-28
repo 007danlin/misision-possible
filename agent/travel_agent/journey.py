@@ -79,6 +79,29 @@ def at(day, clock):
     return datetime.fromisoformat(f"{day}T{clock}").replace(tzinfo=ZONE)
 
 
+def partial_quote(spec, hotel_quote):
+    """Keep provider hotels visible without pretending the road costs zero."""
+    ceiling = spec.trip_budget or (spec.budget if spec.budget_scope in {"booking", "whole_trip"} else None)
+    hotel_limit = spec.hotel_budget or (spec.budget if spec.budget_scope in {None, "hotel"} else None)
+    reserve = spec.expense_reserve.amount_minor if spec.expense_reserve else 0
+    total = hotel_quote["total_minor"]
+    checks = [dict(code="route_missing", status="unknown", blocking=True,
+                   message="Дорога и трансферы не рассчитаны. Полная стоимость поездки неизвестна; оформить её пока нельзя.")]
+    if ceiling:
+        checks.append(dict(code="budget", status="fail" if total + reserve > ceiling.amount_minor else "unknown", blocking=True,
+                           message="Проверена только стоимость проживания и резерва; для проверки общего бюджета нужна стоимость дороги и трансферов."))
+    if hotel_limit:
+        value = hotel_quote["nightly_minor"] if spec.budget_period == "night" else total
+        checks.append(dict(code="hotel_budget", status="pass" if value <= hotel_limit.amount_minor else "fail", blocking=True,
+                           message="Стоимость проживания проверена отдельно от дороги."))
+    return dict(version="public-trip-partial-v1", source_kind="estimate", currency="RUB",
+                total_minor=total, breakdown=dict(hotel=total, transport=0, transfers=0, fees=0),
+                reserve_minor=reserve, budget_minor=ceiling.amount_minor if ceiling else None,
+                total_incomplete=True, route_missing=True, checks=checks, segments=[], alternatives=[],
+                can_book=False, unknown_costs=["Дорога и оба трансфера не рассчитаны и не входят в показанную сумму."],
+                notice="Показана только предварительная стоимость отеля. Маршрут и полный бюджет поездки не рассчитаны.")
+
+
 def quote(hotel, spec, hotel_quote):
     """None means there is no connected route; never invent a supported route."""
     if hotel.get("source_kind") == "public":
