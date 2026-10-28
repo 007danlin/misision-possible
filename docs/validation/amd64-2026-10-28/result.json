@@ -1,0 +1,99 @@
+{
+  "environment": "Docker Desktop on Apple Silicon; linux/amd64 emulation, not physical Intel/AMD",
+  "base_commit": "72f17e31a497e3c5e6e40d578bf0bfe6b13dacbf",
+  "scope": "Architecture compatibility of built images; concurrent working-tree application edits are not certified by this report. Image IDs identify tested artifacts.",
+  "images": [
+    {
+      "tags": [
+        "oplan-amd64-20261028-app:latest"
+      ],
+      "id": "sha256:6d6e0487e67a1fd03bcadde3bc4392727eafb461749852d33bd57b165ccb5833",
+      "os": "linux",
+      "architecture": "amd64"
+    },
+    {
+      "tags": [
+        "oplan-amd64-20261028-agent:latest"
+      ],
+      "id": "sha256:28d3d2b597d9d5c9c687a5bdf40e09d878bbec9dcdaf585bd0d1cf16aef819d6",
+      "os": "linux",
+      "architecture": "amd64"
+    },
+    {
+      "tags": [
+        "oplan-amd64-20261028-model:latest"
+      ],
+      "id": "sha256:7b37cc3c93128a6285fd61f876287dc7b27ccec9ffc6fea1704904a38c62685e",
+      "os": "linux",
+      "architecture": "amd64"
+    }
+  ],
+  "default_run": {
+    "empty_model_volume": true,
+    "llm_api_key": false,
+    "warmup_timeout_seconds": 300,
+    "outcome": "model_timeout; agent restarted; default cold readiness not achieved before test was interrupted"
+  },
+  "extended_run": {
+    "success": true,
+    "total_seconds": 262.278,
+    "milestones_seconds": {
+      "web_process": 0.04,
+      "startup_page": 0.054,
+      "model_healthy": 0.296,
+      "compose_up_finished": 3.392,
+      "ready": 258.151,
+      "agent_healthy": 262.277,
+      "app_healthy": 262.277
+    },
+    "services": [
+      {
+        "Service": "agent",
+        "State": "running",
+        "Health": "healthy",
+        "ExitCode": 0
+      },
+      {
+        "Service": "app",
+        "State": "running",
+        "Health": "healthy",
+        "ExitCode": 0
+      },
+      {
+        "Service": "model",
+        "State": "running",
+        "Health": "healthy",
+        "ExitCode": 0
+      }
+    ],
+    "limits": {
+      "agent": {
+        "cpuset": null,
+        "mem_limit": "536870912",
+        "memswap_limit": "536870912"
+      },
+      "app": {
+        "cpuset": null,
+        "mem_limit": "268435456",
+        "memswap_limit": "268435456"
+      },
+      "model": {
+        "cpuset": null,
+        "mem_limit": "5368709120",
+        "memswap_limit": "5368709120"
+      }
+    },
+    "docker": {
+      "Architecture": "aarch64",
+      "NCPU": 10,
+      "MemTotal": 8321712128,
+      "ServerVersion": "29.4.0",
+      "OperatingSystem": "Docker Desktop"
+    }
+  },
+  "extended_overrides": {
+    "MODEL_WARMUP_TIMEOUT_SECONDS": 900,
+    "AGENT_TURN_TIMEOUT_SECONDS": 300
+  },
+  "cache_note": "Same model process and weights reused. Prefill from interrupted attempts was reused; 262 seconds is not a fresh cold-start measurement."
+}

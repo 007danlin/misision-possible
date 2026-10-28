@@ -1,0 +1,47 @@
+{
+  "base_url": "http://127.0.0.1:18084",
+  "passed": true,
+  "errors": [],
+  "steps": [
+    {
+      "action": "message",
+      "seconds": 68.471,
+      "status": "choosing",
+      "answer": "Учёл направление, даты, бюджет, состав гостей, пожелания к отелю. Сравнил 20 отелей, вашим условиям соответствуют 3. Показываю лучшие по соответствию и оценкам гостей. Спа-отель Грейс Арли — дорога и оба трансфера включены; бассейн в отеле; оценка гостей 9.3/10. Стоимость предварительная.",
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 67874,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 1,
+        "model_ms": 55206,
+        "prompt_version": "odin-request-9.2",
+        "provider": "llama_cpp",
+        "sources_ms": 12589,
+        "tool_calls": [
+          "ostrovok_public_search"
+        ],
+        "total_ms": 67874,
+        "usage": {
+          "cached_tokens": 1818,
+          "completion_tokens": 68,
+          "evaluated_prompt_tokens": 160,
+          "generation_ms": 26311,
+          "prompt_ms": 28850,
+          "prompt_tokens": 1978,
+          "total_tokens": 2046
+        }
+      }
+    },
+    {
+      "action": "Перейти к оформлению",
+      "status": "hotel_checkout"
+    },
+    {
+      "action": "Подтвердить поездку",
+      "status": "hotel_booked"
+    }
+  ],
+  "options": 3,
+  "reload": true,
+  "pdf_bytes": 704146
+}

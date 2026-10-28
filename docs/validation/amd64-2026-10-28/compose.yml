@@ -1,0 +1,9 @@
+services:
+  app:
+    platform: linux/amd64
+    ports: !override
+      - "127.0.0.1:18084:8080"
+  agent:
+    platform: linux/amd64
+  model:
+    platform: linux/amd64

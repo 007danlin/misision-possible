@@ -1,0 +1,8 @@
+services:
+  app:
+    environment:
+      AGENT_TURN_TIMEOUT_SECONDS: "300"
+  agent:
+    environment:
+      MODEL_WARMUP_TIMEOUT_SECONDS: "900"
+      AGENT_TURN_TIMEOUT_SECONDS: "300"
