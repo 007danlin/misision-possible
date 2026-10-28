@@ -1,4 +1,5 @@
-import json,unittest
+import json
+import unittest
 from travel_agent.domain import Intent,TripSpec,apply_intent,State
 from travel_agent.fast_intent import fast_intent
 from travel_agent.model import canonical_intent
@@ -30,4 +31,5 @@ class HardConstraintRemoval(unittest.TestCase):
             self.assertTrue(new.include_transport)
             self.assertEqual(new.travellers,old.travellers)
 
-if __name__=='__main__':unittest.main()
+if __name__ == "__main__":
+    unittest.main()

@@ -1,5 +1,5 @@
 import unittest
-from datetime import date,timedelta
+from datetime import timedelta
 from travel_agent.domain import Intent,State,TripSpec,apply_intent
 from travel_agent.fast_intent import fast_intent
 
@@ -42,4 +42,5 @@ class StayLengthEdits(unittest.TestCase):
         new=apply_intent(old,Intent(patch={'dates':dates,'duration_days':7},evidence={'dates':text,'duration_days':text}),text)
         self.assertEqual(new.duration_days,7)  # Contradiction stays visible for clarification.
 
-if __name__=='__main__':unittest.main()
+if __name__ == "__main__":
+    unittest.main()

@@ -35,4 +35,5 @@ class CityCommandTests(unittest.TestCase):
         ]:
             self.assertIsNone(fast_intent(self.state,phrase),phrase)
 
-if __name__=='__main__':unittest.main()
+if __name__ == "__main__":
+    unittest.main()

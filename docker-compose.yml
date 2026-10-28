@@ -14,11 +14,12 @@ services:
       MAP_TILE_URL: ${MAP_TILE_URL:-}
       BIND_HOST: "0.0.0.0"
       LOCAL_DEMO_MODE: "true"
+      JOURNEY_DATA_SOURCE: ${JOURNEY_DATA_SOURCE:-public}
       TRIP_DATA_DIR: /app/data/trips
       AGENT_HOST: agent
       AGENT_PORT: "50051"
       AGENT_PROGRESS_URL: http://agent:15052
-      AGENT_TURN_TIMEOUT_SECONDS: ${AGENT_TURN_TIMEOUT_SECONDS:-90}
+      AGENT_TURN_TIMEOUT_SECONDS: ${AGENT_TURN_TIMEOUT_SECONDS:-300}
     volumes:
       - trips:/app/data
       - startup:/startup:ro
@@ -45,7 +46,7 @@ services:
       HOTEL_CONTENT_CACHE: /app/content-cache
       TRAVELPAYOUTS_TOKEN: ${TRAVELPAYOUTS_TOKEN:-}
       PUBLIC_DATA_USER_AGENT: ${PUBLIC_DATA_USER_AGENT:-OPlan-Hackathon/1.0 https://github.com/ostrovok-hackathon-2026/misision-possible}
-      AGENT_TURN_TIMEOUT_SECONDS: ${AGENT_TURN_TIMEOUT_SECONDS:-90}
+      AGENT_TURN_TIMEOUT_SECONDS: ${AGENT_TURN_TIMEOUT_SECONDS:-300}
       LLM_PROVIDER: ${LLM_PROVIDER:-llama_cpp}
       LLM_BASE_URL: ${LLM_BASE_URL:-http://model:8082/v1}
       LLM_MODEL: ${LLM_MODEL:-qwen3-4b-instruct}

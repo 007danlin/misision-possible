@@ -1,0 +1,41 @@
+{
+  "app": {
+    "image_id": "sha256:83905c49fff58bc95bc23c57f60aa3b91424b9175c160819a01eb4139c1df66c",
+    "architecture": "amd64",
+    "os": "linux",
+    "uid": "10001",
+    "health": "healthy",
+    "restarts": 0,
+    "oom_killed": false,
+    "turn_timeout_seconds": "300",
+    "warmup_timeout_seconds": null,
+    "api_key_present": false,
+    "travelpayouts_token_present": false
+  },
+  "agent": {
+    "image_id": "sha256:b4cf50977f8d08af9570460415592c4e1ddeee64901cb07df69ff307841a98fd",
+    "architecture": "amd64",
+    "os": "linux",
+    "uid": "10001",
+    "health": "healthy",
+    "restarts": 0,
+    "oom_killed": false,
+    "turn_timeout_seconds": "300",
+    "warmup_timeout_seconds": "900",
+    "api_key_present": false,
+    "travelpayouts_token_present": false
+  },
+  "model": {
+    "image_id": "sha256:e4d547c8f25118d381bed85c1c89a8f52254efc8313957c0785a3e8e7456717c",
+    "architecture": "amd64",
+    "os": "linux",
+    "uid": "10001",
+    "health": "healthy",
+    "restarts": 0,
+    "oom_killed": false,
+    "turn_timeout_seconds": null,
+    "warmup_timeout_seconds": null,
+    "api_key_present": false,
+    "travelpayouts_token_present": false
+  }
+}

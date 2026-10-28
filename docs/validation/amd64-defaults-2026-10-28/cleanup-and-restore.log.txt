@@ -1,0 +1,325 @@
+ Container oplan-amd64-defaults-20261028-app-1 Stopping 
+ Container oplan-amd64-defaults-20261028-agent-1 Stopping 
+ Container oplan-amd64-defaults-20261028-app-1 Stopped 
+ Container oplan-amd64-defaults-20261028-app-1 Removing 
+ Container oplan-amd64-defaults-20261028-app-1 Removed 
+ Container oplan-amd64-defaults-20261028-agent-1 Stopped 
+ Container oplan-amd64-defaults-20261028-agent-1 Removing 
+ Container oplan-amd64-defaults-20261028-agent-1 Removed 
+ Container oplan-amd64-defaults-20261028-model-1 Stopping 
+ Container oplan-amd64-defaults-20261028-model-1 Stopped 
+ Container oplan-amd64-defaults-20261028-model-1 Removing 
+ Container oplan-amd64-defaults-20261028-model-1 Removed 
+ Volume oplan-amd64-defaults-20261028_trips Removing 
+ Network oplan-amd64-defaults-20261028_default Removing 
+ Volume oplan-amd64-defaults-20261028_models Removing 
+ Volume oplan-amd64-defaults-20261028_startup Removing 
+ Volume oplan-amd64-defaults-20261028_hotel-content Removing 
+ Volume oplan-amd64-defaults-20261028_trips Removed 
+ Volume oplan-amd64-defaults-20261028_models Removed 
+ Volume oplan-amd64-defaults-20261028_hotel-content Removed 
+ Volume oplan-amd64-defaults-20261028_startup Removed 
+ Network oplan-amd64-defaults-20261028_default Removed 
+oplan-amd64-defaults-20261028 removed
+ Image odin-request-agent Building 
+ Image odin-request-model Building 
+ Image odin-request-app Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.77kB done
+#1 DONE 0.0s
+
+#2 [agent internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.10kB done
+#2 DONE 0.0s
+
+#3 [model internal] load build definition from Dockerfile
+#3 transferring dockerfile: 1.83kB done
+#3 DONE 0.0s
+
+#4 [app internal] load build definition from Dockerfile
+#4 transferring dockerfile: 533B done
+#4 DONE 0.0s
+
+#5 [app internal] load metadata for docker.io/library/golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb
+#5 ...
+
+#6 [app internal] load metadata for docker.io/library/alpine:3.19@sha256:6baf43584bcb78f2e5847d1de515f23499913ac9f12bdf834811a3145eb11ca1
+#6 DONE 1.7s
+
+#5 [app internal] load metadata for docker.io/library/golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb
+#5 DONE 1.7s
+
+#7 [app internal] load .dockerignore
+#7 transferring context: 64B done
+#7 DONE 0.0s
+
+#8 [app builder 1/5] FROM docker.io/library/golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb
+#8 resolve docker.io/library/golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb done
+#8 DONE 0.0s
+
+#9 [app stage-1 1/4] FROM docker.io/library/alpine:3.19@sha256:6baf43584bcb78f2e5847d1de515f23499913ac9f12bdf834811a3145eb11ca1
+#9 resolve docker.io/library/alpine:3.19@sha256:6baf43584bcb78f2e5847d1de515f23499913ac9f12bdf834811a3145eb11ca1 done
+#9 DONE 0.0s
+
+#10 [model internal] load metadata for docker.io/library/ubuntu:24.04@sha256:24737cef17f4e22b1977df7d9a05e77c4e28b7da5b8911f8d8ccda136bf3573c
+#10 DONE 1.8s
+
+#11 [agent internal] load metadata for docker.io/library/python:3.12-slim-bookworm@sha256:6dd8b6dab6b3adc7812bab69eca5dbdc1a5cc690ad28306d234ffb4ef8ac9753
+#11 DONE 1.8s
+
+#12 [agent internal] load .dockerignore
+#12 transferring context: 119B done
+#12 DONE 0.0s
+
+#13 [model internal] load .dockerignore
+#13 transferring context: 130B done
+#13 DONE 0.0s
+
+#14 [model internal] load build context
+#14 transferring context: 166B done
+#14 DONE 0.0s
+
+#15 [model download 1/3] FROM docker.io/library/ubuntu:24.04@sha256:24737cef17f4e22b1977df7d9a05e77c4e28b7da5b8911f8d8ccda136bf3573c
+#15 resolve docker.io/library/ubuntu:24.04@sha256:24737cef17f4e22b1977df7d9a05e77c4e28b7da5b8911f8d8ccda136bf3573c 0.0s done
+#15 DONE 0.0s
+
+#16 [agent builder 1/8] FROM docker.io/library/python:3.12-slim-bookworm@sha256:6dd8b6dab6b3adc7812bab69eca5dbdc1a5cc690ad28306d234ffb4ef8ac9753
+#16 resolve docker.io/library/python:3.12-slim-bookworm@sha256:6dd8b6dab6b3adc7812bab69eca5dbdc1a5cc690ad28306d234ffb4ef8ac9753 0.0s done
+#16 DONE 0.0s
+
+#17 [model download 2/3] RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates curl     && rm -rf /var/lib/apt/lists/*
+#17 CACHED
+
+#18 [agent internal] load build context
+#18 transferring context: 1.09MB 0.0s done
+#18 DONE 0.0s
+
+#19 [app internal] load build context
+#19 transferring context: 19.42MB 0.2s done
+#19 DONE 0.2s
+
+#20 [agent builder 2/8] WORKDIR /app
+#20 CACHED
+
+#21 [agent builder 3/8] COPY pyproject.toml README.md constraints.txt ./
+#21 CACHED
+
+#22 [app builder 2/5] WORKDIR /core
+#22 CACHED
+
+#23 [agent builder 4/8] COPY travel_agent ./travel_agent
+#23 DONE 0.1s
+
+#24 [app builder 3/5] COPY . .
+#24 DONE 0.1s
+
+#25 [agent builder 5/8] COPY proto ./proto
+#25 DONE 0.0s
+
+#26 [agent builder 6/8] RUN python -m venv /opt/venv
+#26 DONE 1.8s
+
+#27 [model download 3/3] RUN runtime_arch="arm64"     && case "$runtime_arch" in       amd64) arch=x64; sha=b0bba21f5673f80f242c1a8f7c1380800f08b6eff6f32fd55eae9fe220690fdc ;;       arm64) arch=arm64; sha=f5a52789342647d39768efd14fed9fed2b4a826f5430d812c6778f6a8fd37e93 ;;       *) echo "Unsupported model architecture: $runtime_arch" >&2; exit 1 ;;     esac     && curl -fL --retry 3 -o /tmp/runtime.tar.gz "https://github.com/ggml-org/llama.cpp/releases/download/b11853/llama-b11853-bin-ubuntu-${arch}.tar.gz"     && echo "$sha  /tmp/runtime.tar.gz" | sha256sum -c -     && mkdir /runtime && tar -xzf /tmp/runtime.tar.gz -C /runtime --strip-components=1
+#27 0.287   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#27 0.287                                  Dload  Upload   Total   Spent    Left  Speed
+#27 0.287   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#27 1.201   1 17.3M    1  335k    0     0   367k      0  0:00:48 --:--:--  0:00:48  367k 91 17.3M   91 15.8M    0     0  8493k      0  0:00:02  0:00:01  0:00:01 15.5M100 17.3M  100 17.3M    0     0  8924k      0  0:00:01  0:00:01 --:--:-- 15.8M
+#27 2.284 /tmp/runtime.tar.gz: OK
+#27 DONE 2.5s
+
+#28 [agent builder 7/8] RUN python -m pip install --no-cache-dir -c constraints.txt . grpcio-tools==1.80.0
+#28 0.254 Processing /app
+#28 0.255   Installing build dependencies: started
+#28 ...
+
+#29 [model stage-1 3/6] WORKDIR /runtime
+#29 CACHED
+
+#30 [model stage-1 2/6] RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates python3 libgomp1 libcurl4t64     && rm -rf /var/lib/apt/lists/*     && groupadd -g 10001 model && useradd -u 10001 -g model -m model     && mkdir -p /models /startup && chown model:model /models /startup
+#30 CACHED
+
+#31 [model stage-1 4/6] COPY --from=download /runtime /runtime
+#31 CACHED
+
+#32 [model stage-1 5/6] COPY docs/docker-runtime.json /runtime/model-lock.json
+#32 CACHED
+
+#33 [model stage-1 6/6] COPY infra/model/start.py /runtime/start.py
+#33 CACHED
+
+#34 [model] exporting to image
+#34 exporting layers done
+#34 exporting manifest sha256:61b81263c2477c0ac1115e10bf638c85c92f5bb4acd28528fda4d49a1816b31f done
+#34 exporting config sha256:74a537446ea0ace031fe92e1cd98a66f1b6fc13e1224ac21fddec87a1c9f7ed3 done
+#34 exporting attestation manifest sha256:71f5811c814ae563d399c0d28b5656be94ae309c766143a5a3d88835e06fefe3 done
+#34 exporting manifest list sha256:07674b46c26c5586ccf3bb939ce3d33bc51bdb6131d0c032af704308dcd646df done
+#34 naming to docker.io/library/odin-request-model:latest done
+#34 unpacking to docker.io/library/odin-request-model:latest done
+#34 DONE 0.0s
+
+#35 [model] resolving provenance for metadata file
+#35 DONE 0.0s
+
+#36 [app builder 4/5] RUN go mod download
+#36 DONE 3.3s
+
+#28 [agent builder 7/8] RUN python -m pip install --no-cache-dir -c constraints.txt . grpcio-tools==1.80.0
+#28 2.528   Installing build dependencies: finished with status 'done'
+#28 2.529   Getting requirements to build wheel: started
+#28 2.671   Getting requirements to build wheel: finished with status 'done'
+#28 2.671   Preparing metadata (pyproject.toml): started
+#28 2.810   Preparing metadata (pyproject.toml): finished with status 'done'
+#28 3.692 Collecting grpcio-tools==1.80.0
+#28 4.045   Downloading grpcio_tools-1.80.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl.metadata (5.3 kB)
+#28 4.237 Collecting protobuf<7.0.0,>=6.31.1 (from grpcio-tools==1.80.0)
+#28 4.318   Downloading protobuf-6.33.6-cp39-abi3-manylinux2014_aarch64.whl.metadata (593 bytes)
+#28 5.889 Collecting grpcio>=1.80.0 (from grpcio-tools==1.80.0)
+#28 5.972   Downloading grpcio-1.80.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl.metadata (3.8 kB)
+#28 6.095 Collecting setuptools>=77.0.1 (from grpcio-tools==1.80.0)
+#28 6.157   Downloading setuptools-84.2.1-py3-none-any.whl.metadata (6.6 kB)
+#28 6.306 Collecting pydantic==2.12.3 (from agent==0.2.0)
+#28 6.413   Downloading pydantic-2.12.3-py3-none-any.whl.metadata (87 kB)
+#28 6.587 Collecting httpx==0.28.1 (from agent==0.2.0)
+#28 6.646   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#28 6.730 Collecting typing-extensions~=4.12 (from grpcio>=1.80.0->grpcio-tools==1.80.0)
+#28 6.791   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#28 6.946 Collecting anyio (from httpx==0.28.1->agent==0.2.0)
+#28 7.006   Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+#28 7.078 Collecting certifi (from httpx==0.28.1->agent==0.2.0)
+#28 7.141   Downloading certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+#28 7.209 Collecting httpcore==1.* (from httpx==0.28.1->agent==0.2.0)
+#28 ...
+
+#37 [app builder 5/5] RUN CGO_ENABLED=0 GOOS=linux go build -o core
+#37 DONE 5.7s
+
+#38 [app stage-1 2/4] WORKDIR /app
+#38 CACHED
+
+#39 [app stage-1 3/4] RUN addgroup -g 10001 app && adduser -D -u 10001 -G app app     && mkdir -p /app/data/trips && chown -R app:app /app/data
+#39 CACHED
+
+#40 [app stage-1 4/4] COPY --from=builder /core/core .
+#40 DONE 0.0s
+
+#28 [agent builder 7/8] RUN python -m pip install --no-cache-dir -c constraints.txt . grpcio-tools==1.80.0
+#28 7.270   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#28 ...
+
+#41 [app] exporting to image
+#41 exporting layers
+#41 exporting layers 0.6s done
+#41 exporting manifest sha256:0010bd90281cc14383a4ae0a4ccaa4fb1ff53ba34d2587891f23edac6f97facd
+#41 exporting manifest sha256:0010bd90281cc14383a4ae0a4ccaa4fb1ff53ba34d2587891f23edac6f97facd done
+#41 exporting config sha256:51a5af87faa9f34db9c78829668f3a69dff389c6497b9cc4f052524b35e65d28 done
+#41 exporting attestation manifest sha256:a1905afc738315c3e8b073d32f37e05d564d4b67bda1661fc90b3232d97543bd done
+#41 exporting manifest list sha256:7fc3d8b48cb35c4e17af48c217941842c58d58fb6c47ee3713cff4450cb50e11 done
+#41 naming to docker.io/library/odin-request-app:latest done
+#41 unpacking to docker.io/library/odin-request-app:latest 0.1s done
+#41 DONE 0.7s
+
+#42 [app] resolving provenance for metadata file
+#42 DONE 0.0s
+
+#28 [agent builder 7/8] RUN python -m pip install --no-cache-dir -c constraints.txt . grpcio-tools==1.80.0
+#28 9.742 Collecting idna (from httpx==0.28.1->agent==0.2.0)
+#28 9.813   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+#28 9.887 Collecting annotated-types>=0.6.0 (from pydantic==2.12.3->agent==0.2.0)
+#28 10.03   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+#28 10.90 Collecting pydantic-core==2.41.4 (from pydantic==2.12.3->agent==0.2.0)
+#28 10.96   Downloading pydantic_core-2.41.4-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (7.3 kB)
+#28 11.08 Collecting typing-inspection>=0.4.2 (from pydantic==2.12.3->agent==0.2.0)
+#28 11.14   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+#28 11.22 Collecting h11>=0.16 (from httpcore==1.*->httpx==0.28.1->agent==0.2.0)
+#28 11.28   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#28 11.37 Downloading grpcio_tools-1.80.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (2.6 MB)
+#28 11.82    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.6/2.6 MB 7.4 MB/s eta 0:00:00
+#28 11.89 Downloading grpcio-1.80.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (6.6 MB)
+#28 12.43    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.6/6.6 MB 12.0 MB/s eta 0:00:00
+#28 12.50 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#28 12.66 Downloading protobuf-6.33.6-cp39-abi3-manylinux2014_aarch64.whl (324 kB)
+#28 12.73 Downloading pydantic-2.12.3-py3-none-any.whl (462 kB)
+#28 12.82 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#28 12.89 Downloading pydantic_core-2.41.4-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (2.0 MB)
+#28 13.01    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 16.9 MB/s eta 0:00:00
+#28 13.08 Downloading setuptools-84.2.1-py3-none-any.whl (876 kB)
+#28 13.18    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 876.3/876.3 kB 95.7 MB/s eta 0:00:00
+#28 13.25 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+#28 13.32 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#28 13.39 Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+#28 13.46 Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+#28 13.54 Downloading idna-3.20-py3-none-any.whl (69 kB)
+#28 13.61 Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+#28 13.76 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#28 13.79 Building wheels for collected packages: agent
+#28 13.79   Building wheel for agent (pyproject.toml): started
+#28 13.89   Building wheel for agent (pyproject.toml): finished with status 'done'
+#28 13.89   Created wheel for agent: filename=agent-0.2.0-py3-none-any.whl size=157461 sha256=d7f4fcae698da19a001aa4ba066de35b62dcc0ec983ba9fbd1a32a8120756fa1
+#28 13.89   Stored in directory: /tmp/pip-ephem-wheel-cache-m49nip5l/wheels/54/1b/b7/aa63e25c8f14f4f2ae7b04e6097bdecb770e455c5c1ee0a600
+#28 13.89 Successfully built agent
+#28 13.90 Installing collected packages: typing-extensions, setuptools, protobuf, idna, h11, certifi, annotated-types, typing-inspection, pydantic-core, httpcore, grpcio, anyio, pydantic, httpx, grpcio-tools, agent
+#28 14.65 Successfully installed agent-0.2.0 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.10.23 grpcio-1.80.0 grpcio-tools-1.80.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 protobuf-6.33.6 pydantic-2.12.3 pydantic-core-2.41.4 setuptools-84.2.1 typing-extensions-4.16.0 typing-inspection-0.4.4
+#28 15.02 
+#28 15.02 [notice] A new release of pip is available: 25.0.1 -> 26.2.2
+#28 15.02 [notice] To update, run: pip install --upgrade pip
+#28 DONE 15.1s
+
+#43 [agent builder 8/8] RUN python -m grpc_tools.protoc -I/app --python_out=/app --grpc_python_out=/app /app/proto/predict.proto
+#43 DONE 0.2s
+
+#20 [agent builder 2/8] WORKDIR /app
+#20 CACHED
+
+#44 [agent stage-1 3/7] COPY --from=builder /opt/venv /opt/venv
+#44 DONE 0.1s
+
+#45 [agent stage-1 4/7] RUN python -m pip uninstall -y grpcio-tools setuptools pip     && useradd -u 10001 -m appuser     && mkdir -p /app/content-cache && chown appuser:appuser /app/content-cache
+#45 0.473 Found existing installation: grpcio-tools 1.80.0
+#45 0.474 Uninstalling grpcio-tools-1.80.0:
+#45 0.486   Successfully uninstalled grpcio-tools-1.80.0
+#45 0.488 Found existing installation: setuptools 84.2.1
+#45 0.495 Uninstalling setuptools-84.2.1:
+#45 0.561   Successfully uninstalled setuptools-84.2.1
+#45 0.565 Found existing installation: pip 25.0.1
+#45 0.576 Uninstalling pip-25.0.1:
+#45 0.660   Successfully uninstalled pip-25.0.1
+#45 DONE 0.7s
+
+#46 [agent stage-1 5/7] COPY --from=builder /app/proto ./proto
+#46 DONE 0.0s
+
+#47 [agent stage-1 6/7] COPY travel_agent ./travel_agent
+#47 DONE 0.0s
+
+#48 [agent stage-1 7/7] COPY main.py healthcheck.py bootstrap.py ./
+#48 DONE 0.0s
+
+#49 [agent] exporting to image
+#49 exporting layers
+#49 exporting layers 1.2s done
+#49 exporting manifest sha256:e418e503daa1928c0ba5133a199bc577847d36e1c362926bf69780c2b6e5ba59 done
+#49 exporting config sha256:4e376290d6b986fa97fce1dc75cf4399271a97556a9574fd1bfb6e94cd64ffd8 done
+#49 exporting attestation manifest sha256:1fb3435c52e8219267ea309abea9d1c76b5e2dc0beac968f23f49a94bb1a178e done
+#49 exporting manifest list sha256:68a4dbb9f1a93c35b2a2a67114d8b70e6765e3844a8b6c30f70e9c0d39da2084 done
+#49 naming to docker.io/library/odin-request-agent:latest done
+#49 unpacking to docker.io/library/odin-request-agent:latest
+#49 unpacking to docker.io/library/odin-request-agent:latest 0.2s done
+#49 DONE 1.5s
+
+#50 [agent] resolving provenance for metadata file
+#50 DONE 0.0s
+ Image odin-request-model Built 
+ Image odin-request-app Built 
+ Image odin-request-agent Built 
+ Container odin-request-model-1 Recreate 
+ Container odin-request-model-1 Recreated 
+ Container odin-request-agent-1 Recreate 
+ Container odin-request-app-1 Recreate 
+ Container odin-request-agent-1 Recreated 
+ Container odin-request-app-1 Recreated 
+ Container odin-request-model-1 Starting 
+ Container odin-request-model-1 Started 
+ Container odin-request-agent-1 Starting 
+ Container odin-request-app-1 Starting 
+ Container odin-request-app-1 Started 
+ Container odin-request-agent-1 Started 

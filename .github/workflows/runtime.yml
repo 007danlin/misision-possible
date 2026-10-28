@@ -1,0 +1,66 @@
+name: Linux AMD64 runtime
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: runtime-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cold-start:
+    name: Native AMD64 defaults and real HTTP journey
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      BUILDX_BUILDER: oplan-native-cold
+      PYTHONUNBUFFERED: "1"
+    steps:
+      - uses: actions/checkout@v6
+      - name: Require a native x86-64 runner
+        run: |
+          test "$(uname -m)" = x86_64
+          docker version
+          docker compose version
+          docker buildx create --name "$BUILDX_BUILDER" --driver docker-container
+      - name: Cold build, weight download and inference readiness
+        run: >-
+          python3 scripts/check-cold-start.py
+          --project oplan-native-amd64
+          --output validation-output/linux-amd64/startup.json
+          --timeout 1500
+      - name: Real model, public search, edit and simulated booking
+        run: >-
+          docker compose --env-file /dev/null -p oplan-native-amd64
+          exec -T agent python -m travel_agent.verify_running
+          > validation-output/linux-amd64/http-journey.json
+      - name: Check the ten-minute startup target
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          report = json.loads(Path('validation-output/linux-amd64/startup.json').read_text())
+          assert report['success'], 'Stack did not become healthy'
+          assert report['total_seconds'] <= 600, 'Cold start exceeded the ten-minute target; see the measured report'
+          PY
+      - name: Collect diagnostics
+        if: always()
+        run: |
+          mkdir -p validation-output/linux-amd64
+          docker compose --env-file /dev/null -p oplan-native-amd64 ps --all --format json > validation-output/linux-amd64/containers.json
+          docker compose --env-file /dev/null -p oplan-native-amd64 logs --no-color > validation-output/linux-amd64/services.log
+      - name: Upload measured results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: linux-amd64-runtime
+          path: validation-output/linux-amd64/
+          retention-days: 14
+      - name: Cleanup test resources
+        if: always()
+        run: |
+          docker compose --env-file /dev/null -p oplan-native-amd64 down -v
+          docker buildx rm "$BUILDX_BUILDER"

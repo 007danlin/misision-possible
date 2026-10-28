@@ -1,0 +1,249 @@
+ Image oplan-amd64-defaults-20261028-agent Building 
+ Image oplan-amd64-defaults-20261028-model Building 
+ Image oplan-amd64-defaults-20261028-app Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.81kB done
+#1 DONE 0.0s
+
+#2 [app internal] load build definition from Dockerfile
+#2 transferring dockerfile: 533B done
+#2 DONE 0.0s
+
+#3 [agent internal] load build definition from Dockerfile
+#3 transferring dockerfile: 1.10kB done
+#3 DONE 0.0s
+
+#4 [app internal] load metadata for docker.io/library/alpine:3.19@sha256:6baf43584bcb78f2e5847d1de515f23499913ac9f12bdf834811a3145eb11ca1
+#4 DONE 2.3s
+
+#5 [app internal] load metadata for docker.io/library/golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb
+#5 DONE 2.3s
+
+#6 [agent internal] load metadata for docker.io/library/python:3.12-slim-bookworm@sha256:6dd8b6dab6b3adc7812bab69eca5dbdc1a5cc690ad28306d234ffb4ef8ac9753
+#6 DONE 2.3s
+
+#7 [agent internal] load .dockerignore
+#7 transferring context: 119B done
+#7 DONE 0.0s
+
+#8 [app internal] load .dockerignore
+#8 transferring context: 64B done
+#8 DONE 0.0s
+
+#9 [agent internal] load build context
+#9 transferring context: 55.85kB done
+#9 DONE 0.0s
+
+#10 [app stage-1 1/4] FROM docker.io/library/alpine:3.19@sha256:6baf43584bcb78f2e5847d1de515f23499913ac9f12bdf834811a3145eb11ca1
+#10 resolve docker.io/library/alpine:3.19@sha256:6baf43584bcb78f2e5847d1de515f23499913ac9f12bdf834811a3145eb11ca1 0.0s done
+#10 DONE 0.0s
+
+#11 [agent builder 1/8] FROM docker.io/library/python:3.12-slim-bookworm@sha256:6dd8b6dab6b3adc7812bab69eca5dbdc1a5cc690ad28306d234ffb4ef8ac9753
+#11 resolve docker.io/library/python:3.12-slim-bookworm@sha256:6dd8b6dab6b3adc7812bab69eca5dbdc1a5cc690ad28306d234ffb4ef8ac9753 0.0s done
+#11 DONE 0.0s
+
+#12 [app builder 1/5] FROM docker.io/library/golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb
+#12 resolve docker.io/library/golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb 0.0s done
+#12 DONE 0.0s
+
+#13 [agent builder 2/8] WORKDIR /app
+#13 CACHED
+
+#14 [agent builder 3/8] COPY pyproject.toml README.md constraints.txt ./
+#14 CACHED
+
+#15 [app internal] load build context
+#15 transferring context: 36.08kB 0.0s done
+#15 DONE 0.0s
+
+#16 [app builder 2/5] WORKDIR /core
+#16 CACHED
+
+#17 [agent builder 4/8] COPY travel_agent ./travel_agent
+#17 DONE 0.0s
+
+#18 [agent builder 5/8] COPY proto ./proto
+#18 DONE 0.0s
+
+#19 [app builder 3/5] COPY . .
+#19 DONE 0.1s
+
+#20 [agent builder 6/8] RUN python -m venv /opt/venv
+#20 DONE 4.3s
+
+#21 [app builder 4/5] RUN go mod download
+#21 DONE 4.6s
+
+#22 [agent builder 7/8] RUN python -m pip install --no-cache-dir -c constraints.txt . grpcio-tools==1.80.0
+#22 1.645 Processing /app
+#22 1.657   Installing build dependencies: started
+#22 ...
+
+#23 [app builder 5/5] RUN CGO_ENABLED=0 GOOS=linux go build -o core
+#23 ...
+
+#22 [agent builder 7/8] RUN python -m pip install --no-cache-dir -c constraints.txt . grpcio-tools==1.80.0
+#22 16.09   Installing build dependencies: finished with status 'done'
+#22 16.13   Getting requirements to build wheel: started
+#22 17.51   Getting requirements to build wheel: finished with status 'done'
+#22 17.52   Preparing metadata (pyproject.toml): started
+#22 18.43   Preparing metadata (pyproject.toml): finished with status 'done'
+#22 21.81 Collecting grpcio-tools==1.80.0
+#22 22.19   Downloading grpcio_tools-1.80.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (5.3 kB)
+#22 22.55 Collecting protobuf<7.0.0,>=6.31.1 (from grpcio-tools==1.80.0)
+#22 22.64   Downloading protobuf-6.33.6-cp39-abi3-manylinux2014_x86_64.whl.metadata (593 bytes)
+#22 23.83 Collecting grpcio>=1.80.0 (from grpcio-tools==1.80.0)
+#22 23.90   Downloading grpcio-1.80.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (3.8 kB)
+#22 24.27 Collecting setuptools>=77.0.1 (from grpcio-tools==1.80.0)
+#22 24.34   Downloading setuptools-84.2.1-py3-none-any.whl.metadata (6.6 kB)
+#22 24.71 Collecting pydantic==2.12.3 (from agent==0.2.0)
+#22 24.81   Downloading pydantic-2.12.3-py3-none-any.whl.metadata (87 kB)
+#22 25.11 Collecting httpx==0.28.1 (from agent==0.2.0)
+#22 25.18   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#22 25.38 Collecting typing-extensions~=4.12 (from grpcio>=1.80.0->grpcio-tools==1.80.0)
+#22 25.45   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#22 25.62 Collecting anyio (from httpx==0.28.1->agent==0.2.0)
+#22 25.69   Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+#22 25.89 Collecting certifi (from httpx==0.28.1->agent==0.2.0)
+#22 26.12   Downloading certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+#22 26.37 Collecting httpcore==1.* (from httpx==0.28.1->agent==0.2.0)
+#22 26.46   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#22 26.87 Collecting idna (from httpx==0.28.1->agent==0.2.0)
+#22 26.95   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+#22 27.07 Collecting annotated-types>=0.6.0 (from pydantic==2.12.3->agent==0.2.0)
+#22 27.23   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+#22 30.02 Collecting pydantic-core==2.41.4 (from pydantic==2.12.3->agent==0.2.0)
+#22 30.10   Downloading pydantic_core-2.41.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)
+#22 30.41 Collecting typing-inspection>=0.4.2 (from pydantic==2.12.3->agent==0.2.0)
+#22 30.51   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+#22 30.68 Collecting h11>=0.16 (from httpcore==1.*->httpx==0.28.1->agent==0.2.0)
+#22 30.83   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#22 31.02 Downloading grpcio_tools-1.80.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (2.7 MB)
+#22 31.48    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.7/2.7 MB 6.7 MB/s eta 0:00:00
+#22 31.56 Downloading grpcio-1.80.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (6.8 MB)
+#22 32.10    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.8/6.8 MB 12.8 MB/s eta 0:00:00
+#22 32.19 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#22 32.29 Downloading protobuf-6.33.6-cp39-abi3-manylinux2014_x86_64.whl (323 kB)
+#22 32.42 Downloading pydantic-2.12.3-py3-none-any.whl (462 kB)
+#22 32.52 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#22 32.59 Downloading pydantic_core-2.41.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+#22 32.69    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 51.3 MB/s eta 0:00:00
+#22 32.77 Downloading setuptools-84.2.1-py3-none-any.whl (876 kB)
+#22 32.81    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 876.3/876.3 kB 23.8 MB/s eta 0:00:00
+#22 32.97 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+#22 33.07 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#22 33.23 Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+#22 33.30 Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+#22 33.46 Downloading idna-3.20-py3-none-any.whl (69 kB)
+#22 33.53 Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+#22 33.69 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#22 33.87 Building wheels for collected packages: agent
+#22 33.88   Building wheel for agent (pyproject.toml): started
+#22 35.99   Building wheel for agent (pyproject.toml): finished with status 'done'
+#22 36.00   Created wheel for agent: filename=agent-0.2.0-py3-none-any.whl size=157451 sha256=4d76a9f0370612dec85546402614c9b5f8dff47cfc7a0fa93b1d4bfed99d5a19
+#22 36.00   Stored in directory: /tmp/pip-ephem-wheel-cache-8dfeywhk/wheels/54/1b/b7/aa63e25c8f14f4f2ae7b04e6097bdecb770e455c5c1ee0a600
+#22 36.00 Successfully built agent
+#22 36.12 Installing collected packages: typing-extensions, setuptools, protobuf, idna, h11, certifi, annotated-types, typing-inspection, pydantic-core, httpcore, grpcio, anyio, pydantic, httpx, grpcio-tools, agent
+#22 41.19 Successfully installed agent-0.2.0 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.10.23 grpcio-1.80.0 grpcio-tools-1.80.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 protobuf-6.33.6 pydantic-2.12.3 pydantic-core-2.41.4 setuptools-84.2.1 typing-extensions-4.16.0 typing-inspection-0.4.4
+#22 41.81 
+#22 41.81 [notice] A new release of pip is available: 25.0.1 -> 26.2.2
+#22 41.81 [notice] To update, run: pip install --upgrade pip
+#22 DONE 42.5s
+
+#23 [app builder 5/5] RUN CGO_ENABLED=0 GOOS=linux go build -o core
+#23 ...
+
+#24 [agent builder 8/8] RUN python -m grpc_tools.protoc -I/app --python_out=/app --grpc_python_out=/app /app/proto/predict.proto
+#24 DONE 1.5s
+
+#23 [app builder 5/5] RUN CGO_ENABLED=0 GOOS=linux go build -o core
+#23 ...
+
+#13 [agent builder 2/8] WORKDIR /app
+#13 CACHED
+
+#25 [agent stage-1 3/7] COPY --from=builder /opt/venv /opt/venv
+#25 DONE 1.0s
+
+#23 [app builder 5/5] RUN CGO_ENABLED=0 GOOS=linux go build -o core
+#23 ...
+
+#26 [agent stage-1 4/7] RUN python -m pip uninstall -y grpcio-tools setuptools pip     && useradd -u 10001 -m appuser     && mkdir -p /app/content-cache && chown appuser:appuser /app/content-cache
+#26 11.29 Found existing installation: grpcio-tools 1.80.0
+#26 11.33 Uninstalling grpcio-tools-1.80.0:
+#26 11.70   Successfully uninstalled grpcio-tools-1.80.0
+#26 11.76 Found existing installation: setuptools 84.2.1
+#26 11.90 Uninstalling setuptools-84.2.1:
+#26 14.11   Successfully uninstalled setuptools-84.2.1
+#26 14.16 Found existing installation: pip 25.0.1
+#26 14.29 Uninstalling pip-25.0.1:
+#26 18.99   Successfully uninstalled pip-25.0.1
+#26 DONE 20.9s
+
+#23 [app builder 5/5] RUN CGO_ENABLED=0 GOOS=linux go build -o core
+#23 ...
+
+#27 [agent stage-1 5/7] COPY --from=builder /app/proto ./proto
+#27 DONE 0.2s
+
+#23 [app builder 5/5] RUN CGO_ENABLED=0 GOOS=linux go build -o core
+#23 ...
+
+#28 [agent stage-1 6/7] COPY travel_agent ./travel_agent
+#28 DONE 0.2s
+
+#23 [app builder 5/5] RUN CGO_ENABLED=0 GOOS=linux go build -o core
+#23 ...
+
+#29 [agent stage-1 7/7] COPY main.py healthcheck.py bootstrap.py ./
+#29 DONE 0.4s
+
+#23 [app builder 5/5] RUN CGO_ENABLED=0 GOOS=linux go build -o core
+#23 ...
+
+#30 [agent] exporting to oci image format
+#30 exporting layers
+#30 exporting layers 6.9s done
+#30 exporting manifest sha256:4f031710ab2b465b29e2ea961544416417d00d96548cb713bb3e178025e49609 0.0s done
+#30 exporting config sha256:6640b7699b7fbf3808019da2c879586a1a1ed367f64454305f276ce20bad098f 0.1s done
+#30 sending tarball
+#30 ...
+
+#31 importing to docker
+#31 DONE 0.0s
+
+#30 [agent] exporting to oci image format
+#30 sending tarball 9.1s done
+#30 DONE 16.2s
+
+#32 [agent] resolving provenance for metadata file
+#32 DONE 0.0s
+
+#23 [app builder 5/5] RUN CGO_ENABLED=0 GOOS=linux go build -o core
+#23 DONE 128.1s
+
+#33 [app stage-1 2/4] WORKDIR /app
+#33 CACHED
+
+#34 [app stage-1 3/4] RUN addgroup -g 10001 app && adduser -D -u 10001 -G app app     && mkdir -p /app/data/trips && chown -R app:app /app/data
+#34 CACHED
+
+#35 [app stage-1 4/4] COPY --from=builder /core/core .
+#35 DONE 0.0s
+
+#36 [app] exporting to oci image format
+#36 exporting layers
+#36 exporting layers 1.0s done
+#36 exporting manifest sha256:83905c49fff58bc95bc23c57f60aa3b91424b9175c160819a01eb4139c1df66c done
+#36 exporting config sha256:4db3939562659f46b3e191fea93a6a212f2a8ca0d5cae70747822e557ce9e314 done
+#36 sending tarball
+#36 sending tarball 0.9s done
+#36 DONE 1.9s
+
+#37 importing to docker
+#37 DONE 0.0s
+
+#38 [app] resolving provenance for metadata file
+#38 DONE 0.0s
+ Image oplan-amd64-defaults-20261028-agent Built 
+ Image oplan-amd64-defaults-20261028-app Built 

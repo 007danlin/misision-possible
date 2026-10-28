@@ -22,4 +22,5 @@ class AmbiguousFollowups(unittest.TestCase):
         for text in ['Было 40 тысяч рублей, теперь 60 тысяч','С 20 ноября по 15 декабря 2026','С 10 по 15 ноября 2026']:
             self.assertIsNone(clarify_ambiguous_request(text),text)
 
-if __name__=='__main__':unittest.main()
+if __name__ == "__main__":
+    unittest.main()

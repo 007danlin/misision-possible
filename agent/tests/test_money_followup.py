@@ -13,7 +13,8 @@ class MoneyFollowupTests(unittest.TestCase):
         for questions in ([],['Сколько из общего бюджета оставить на питание и личные расходы?']):
             for message,amount in cases:
                 with self.subTest(message=message,questions=questions):
-                    state=waiting(questions=questions);intent=money_followup(state,message)
+                    state=waiting(questions=questions)
+                    intent=money_followup(state,message)
                     self.assertIsNotNone(intent)
                     new=apply_intent(state.trip_spec,intent,message)
                     self.assertEqual(new.expense_reserve.amount_minor,amount)
@@ -28,4 +29,5 @@ class MoneyFollowupTests(unittest.TestCase):
         for message in ['Бюджет на всю поездку 100 тысяч рублей','10 или 15 тысяч','Не 10 тысяч','10 тысяч, добавь бассейн','200 долларов','-1000','500 евро','10 тысяч на отель','0,001 рубля']:
             self.assertIsNone(money_followup(waiting(),message),message)
 
-if __name__=='__main__':unittest.main()
+if __name__ == "__main__":
+    unittest.main()

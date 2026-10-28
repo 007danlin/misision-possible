@@ -1,0 +1,249 @@
+app-1  | 2026/10/28 18:42:24 core listening on :8080
+app-1  | 2026/10/28 18:42:24 О!План: откройте http://localhost:8080 — здесь виден прогресс подготовки модели
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Модель загружена. Начинаем подготовку первого ответа.
+agent-1  | {"warmup": "starting", "timeout_seconds": 900.0}
+agent-1  | INFO:httpx:HTTP Request: POST http://model:8082/v1/chat/completions "HTTP/1.1 200 OK"
+agent-1  | {"warmup": "directions"}
+agent-1  | Traceback (most recent call last):
+agent-1  |   File "/app/travel_agent/model.py", line 515, in extract
+agent-1  |     response = await client.post(
+agent-1  |                ^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/opt/venv/lib/python3.12/site-packages/httpx/_client.py", line 1859, in post
+agent-1  |     return await self.request(
+agent-1  |            ^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/opt/venv/lib/python3.12/site-packages/httpx/_client.py", line 1540, in request
+agent-1  |     return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+agent-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/opt/venv/lib/python3.12/site-packages/httpx/_client.py", line 1629, in send
+agent-1  |     response = await self._send_handling_auth(
+agent-1  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/opt/venv/lib/python3.12/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+agent-1  |     response = await self._send_handling_redirects(
+agent-1  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/opt/venv/lib/python3.12/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+agent-1  |     response = await self._send_single_request(request)
+agent-1  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/opt/venv/lib/python3.12/site-packages/httpx/_client.py", line 1730, in _send_single_request
+agent-1  |     response = await transport.handle_async_request(request)
+agent-1  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/opt/venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+agent-1  |     resp = await self._pool.handle_async_request(req)
+agent-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/opt/venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+agent-1  |     raise exc from None
+agent-1  |   File "/opt/venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+agent-1  |     response = await connection.handle_async_request(
+agent-1  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/opt/venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 103, in handle_async_request
+agent-1  |     return await self._connection.handle_async_request(request)
+agent-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/opt/venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 136, in handle_async_request
+agent-1  |     raise exc
+agent-1  |   File "/opt/venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 106, in handle_async_request
+agent-1  |     ) = await self._receive_response_headers(**kwargs)
+agent-1  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/opt/venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 177, in _receive_response_headers
+agent-1  |     event = await self._receive_event(timeout=timeout)
+agent-1  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/opt/venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 217, in _receive_event
+agent-1  |     data = await self._network_stream.read(
+agent-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/opt/venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 35, in read
+agent-1  |     return await self._stream.receive(max_bytes=max_bytes)
+agent-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/opt/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1407, in receive
+agent-1  |     await self._protocol.read_event.wait()
+agent-1  |   File "/usr/local/lib/python3.12/asyncio/locks.py", line 212, in wait
+agent-1  |     await fut
+agent-1  | asyncio.exceptions.CancelledError
+agent-1  | 
+agent-1  | The above exception was the direct cause of the following exception:
+agent-1  | 
+agent-1  | Traceback (most recent call last):
+agent-1  |   File "/app/travel_agent/model.py", line 511, in extract
+agent-1  |     async with asyncio.timeout(timeout):
+agent-1  |                ^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/usr/local/lib/python3.12/asyncio/timeouts.py", line 115, in __aexit__
+agent-1  |     raise TimeoutError from exc_val
+agent-1  | TimeoutError
+agent-1  | 
+agent-1  | The above exception was the direct cause of the following exception:
+agent-1  | 
+agent-1  | Traceback (most recent call last):
+agent-1  |   File "/app/main.py", line 227, in <module>
+agent-1  |     serve()
+agent-1  |   File "/app/main.py", line 215, in serve
+agent-1  |     asyncio.run(warmup())
+agent-1  |   File "/usr/local/lib/python3.12/asyncio/runners.py", line 195, in run
+agent-1  |     return runner.run(main)
+model-1  | {"phase": "verify_weights", "model": "qwen3-4b-instruct"}
+agent-1  |            ^^^^^^^^^^^^^^^^
+agent-1  |   File "/usr/local/lib/python3.12/asyncio/runners.py", line 118, in run
+agent-1  |     return self._loop.run_until_complete(task)
+agent-1  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/usr/local/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+agent-1  |     return future.result()
+agent-1  |            ^^^^^^^^^^^^^^^
+agent-1  |   File "/app/travel_agent/warmup.py", line 40, in warmup
+agent-1  |     _, direction_usage = await model.extract(
+agent-1  |                          ^^^^^^^^^^^^^^^^^^^^
+agent-1  |   File "/app/travel_agent/model.py", line 576, in extract
+agent-1  |     raise ModelError("model_timeout") from exc
+agent-1  | travel_agent.model.ModelError: model_timeout
+model-1  | Проверяем наличие модели
+model-1  | Скачиваем модель 0.0% (0/2497 MB, 0.0 MB/s)
+model-1  | Скачиваем модель 0.0% (1/2497 MB, 2.0 MB/s)
+model-1  | Скачиваем модель 1.2% (30/2497 MB, 12.0 MB/s)
+model-1  | Скачиваем модель 2.2% (56/2497 MB, 12.1 MB/s)
+model-1  | Скачиваем модель 3.4% (84/2497 MB, 12.5 MB/s)
+agent-1  | Модель загружена. Начинаем подготовку первого ответа.
+agent-1  | {"warmup": "starting", "timeout_seconds": 900.0}
+agent-1  | INFO:httpx:HTTP Request: POST http://model:8082/v1/chat/completions "HTTP/1.1 200 OK"
+agent-1  | {"warmup": "directions"}
+agent-1  | INFO:httpx:HTTP Request: POST http://model:8082/v1/chat/completions "HTTP/1.1 200 OK"
+agent-1  | {"warmup": "ready", "seconds": 6.648, "usage": {"completion_tokens": 2, "prompt_tokens": 4358, "total_tokens": 4360, "prompt_ms": 1272, "generation_ms": 0, "cached_tokens": 4356, "evaluated_prompt_tokens": 2}}
+agent-1  | agent gRPC server running on :50051
+model-1  | Скачиваем модель 4.6% (114/2497 MB, 13.0 MB/s)
+model-1  | Скачиваем модель 5.6% (139/2497 MB, 12.7 MB/s)
+model-1  | Скачиваем модель 7.0% (175/2497 MB, 13.5 MB/s)
+model-1  | Скачиваем модель 8.5% (212/2497 MB, 14.1 MB/s)
+model-1  | Скачиваем модель 9.7% (241/2497 MB, 14.0 MB/s)
+model-1  | Скачиваем модель 10.9% (273/2497 MB, 14.1 MB/s)
+model-1  | Скачиваем модель 12.2% (305/2497 MB, 14.3 MB/s)
+model-1  | Скачиваем модель 13.7% (342/2497 MB, 14.6 MB/s)
+model-1  | Скачиваем модель 15.1% (376/2497 MB, 14.7 MB/s)
+model-1  | Скачиваем модель 16.2% (405/2497 MB, 14.6 MB/s)
+model-1  | Скачиваем модель 17.4% (434/2497 MB, 14.5 MB/s)
+model-1  | Скачиваем модель 18.6% (466/2497 MB, 14.5 MB/s)
+model-1  | Скачиваем модель 20.1% (501/2497 MB, 14.7 MB/s)
+model-1  | Скачиваем модель 21.1% (526/2497 MB, 14.5 MB/s)
+model-1  | Скачиваем модель 22.2% (556/2497 MB, 14.5 MB/s)
+model-1  | Скачиваем модель 23.3% (582/2497 MB, 14.4 MB/s)
+model-1  | Скачиваем модель 24.6% (616/2497 MB, 14.5 MB/s)
+model-1  | Скачиваем модель 26.1% (651/2497 MB, 14.6 MB/s)
+model-1  | Скачиваем модель 27.4% (684/2497 MB, 14.7 MB/s)
+model-1  | Скачиваем модель 28.8% (719/2497 MB, 14.8 MB/s)
+model-1  | Скачиваем модель 29.9% (747/2497 MB, 14.7 MB/s)
+model-1  | Скачиваем модель 31.1% (776/2497 MB, 14.7 MB/s)
+model-1  | Скачиваем модель 32.5% (812/2497 MB, 14.8 MB/s)
+model-1  | Скачиваем модель 33.8% (844/2497 MB, 14.8 MB/s)
+model-1  | Скачиваем модель 34.9% (870/2497 MB, 14.7 MB/s)
+model-1  | Скачиваем модель 35.9% (897/2497 MB, 14.6 MB/s)
+model-1  | Скачиваем модель 37.4% (933/2497 MB, 14.7 MB/s)
+model-1  | Скачиваем модель 38.8% (970/2497 MB, 14.8 MB/s)
+model-1  | Скачиваем модель 40.4% (1009/2497 MB, 14.9 MB/s)
+model-1  | Скачиваем модель 41.3% (1031/2497 MB, 14.8 MB/s)
+model-1  | Скачиваем модель 42.5% (1062/2497 MB, 14.8 MB/s)
+model-1  | Скачиваем модель 44.0% (1100/2497 MB, 14.9 MB/s)
+model-1  | Скачиваем модель 45.6% (1139/2497 MB, 15.0 MB/s)
+model-1  | Скачиваем модель 46.9% (1171/2497 MB, 15.0 MB/s)
+model-1  | Скачиваем модель 48.1% (1201/2497 MB, 15.0 MB/s)
+model-1  | Скачиваем модель 49.4% (1233/2497 MB, 15.0 MB/s)
+model-1  | Скачиваем модель 51.0% (1273/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 52.4% (1310/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 53.6% (1339/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 55.0% (1374/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 56.2% (1404/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 57.5% (1437/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 58.4% (1458/2497 MB, 15.0 MB/s)
+model-1  | Скачиваем модель 59.2% (1480/2497 MB, 15.0 MB/s)
+model-1  | Скачиваем модель 60.7% (1515/2497 MB, 15.0 MB/s)
+model-1  | Скачиваем модель 62.1% (1551/2497 MB, 15.0 MB/s)
+model-1  | Скачиваем модель 63.5% (1585/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 64.8% (1619/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 66.1% (1652/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 67.6% (1687/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 68.9% (1721/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 69.8% (1743/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 71.2% (1777/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 72.5% (1811/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 73.7% (1841/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 75.2% (1878/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 76.5% (1909/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 77.9% (1945/2497 MB, 15.2 MB/s)
+model-1  | Скачиваем модель 79.2% (1978/2497 MB, 15.2 MB/s)
+model-1  | Скачиваем модель 80.5% (2009/2497 MB, 15.2 MB/s)
+model-1  | Скачиваем модель 81.7% (2039/2497 MB, 15.2 MB/s)
+model-1  | Скачиваем модель 82.9% (2070/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 84.4% (2107/2497 MB, 15.2 MB/s)
+model-1  | Скачиваем модель 85.7% (2140/2497 MB, 15.2 MB/s)
+model-1  | Скачиваем модель 87.2% (2177/2497 MB, 15.2 MB/s)
+model-1  | Скачиваем модель 88.5% (2210/2497 MB, 15.2 MB/s)
+model-1  | Скачиваем модель 89.9% (2245/2497 MB, 15.3 MB/s)
+model-1  | Скачиваем модель 91.2% (2276/2497 MB, 15.2 MB/s)
+model-1  | Скачиваем модель 92.5% (2310/2497 MB, 15.3 MB/s)
+model-1  | Скачиваем модель 93.8% (2343/2497 MB, 15.3 MB/s)
+model-1  | Скачиваем модель 95.3% (2379/2497 MB, 15.3 MB/s)
+model-1  | Скачиваем модель 96.6% (2412/2497 MB, 15.3 MB/s)
+model-1  | Скачиваем модель 97.9% (2445/2497 MB, 15.3 MB/s)
+model-1  | Скачиваем модель 99.4% (2483/2497 MB, 15.3 MB/s)
+model-1  | Скачиваем модель 100.0% (2497/2497 MB, 15.4 MB/s)
+model-1  | Модель загружена, контрольная сумма совпала 100.0% (2497/2497 MB, 0.0 MB/s)
+model-1  | {"phase": "weights_ready", "source": "downloaded_and_verified", "seconds": 163.738}
+model-1  | Загружаем модель в память 100.0% (2497/2497 MB, 0.0 MB/s)
+model-1  | 0.00.033.903 W Setting 'enable_thinking' via --chat-template-kwargs is deprecated. Use --reasoning on / --reasoning off instead.
+model-1  | 0.00.035.995 I srv  llama_server: initializing ...
+model-1  | 0.00.036.226 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+model-1  | 0.00.040.661 W srv  llama_server: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+model-1  | 0.00.046.758 I srv    load_model: loading model '/models/Qwen3-4B-Instruct-2507-Q4_K_M.gguf'
+model-1  | 0.00.337.762 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+model-1  | 0.03.091.650 I cmn          init: llama threadpool init, n_threads = 4
+model-1  | 0.04.129.185 I srv    load_model: initializing, n_slots = 2, n_ctx_slot = 4096, kv_unified = 'false'
+model-1  | 0.04.130.492 W srv          init: --cache-idle-slots requires --cache-ram, disabling
+model-1  | 0.04.167.952 I srv  llama_server: model loaded
+model-1  | 0.04.168.051 I srv  llama_server: listening on http://0.0.0.0:8082
+model-1  | 0.05.565.529 I slot get_availabl: id  0 | task -1 | selected slot by id (0)
+model-1  | 0.05.569.149 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+model-1  | 1.07.531.437 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =    512, progress = 0.26, t =  61.96 s / 8.26 tokens per second
+model-1  | 2.21.771.868 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   1024, progress = 0.51, t = 136.20 s / 7.52 tokens per second
+model-1  | 3.42.030.054 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   1536, progress = 0.77, t = 216.46 s / 7.10 tokens per second
+model-1  | 5.02.502.565 I slot print_timing: id  0 | task 0 | prompt eval time =  296930.36 ms /  2002 tokens (  148.32 ms per token,     6.74 tokens per second)
+model-1  | 5.02.502.580 I slot print_timing: id  0 | task 0 |        eval time =       0.00 ms /     1 tokens (    0.00 ms per token,     0.00 tokens per second)
+model-1  | 5.02.502.582 I slot print_timing: id  0 | task 0 |       total time =  296930.36 ms /  2003 tokens
+model-1  | 5.02.502.705 I slot print_timing: id  0 | task 0 |    graphs reused =          8
+model-1  | 5.02.502.713 I slot print_timing: id  0 | task 0 |   graph reallocs =          0    /     0        (same size) / (changed size)
+model-1  | 5.02.506.200 I slot      release: id  0 | task 0 | stop processing: n_tokens = 2002, truncated = 0
+model-1  | 5.02.609.588 I slot get_availabl: id  1 | task -1 | selected slot by id (1)
+model-1  | 5.02.610.891 I slot launch_slot_: id  1 | task 5 | processing task, is_child = 0
+model-1  | 6.25.973.785 I slot print_timing: id  1 | task 5 | prompt processing, n_tokens =    512, progress = 0.22, t =  83.36 s / 6.14 tokens per second
+model-1  | 8.53.021.771 I slot print_timing: id  1 | task 5 | prompt processing, n_tokens =   1024, progress = 0.43, t = 230.41 s / 4.44 tokens per second
+model-1  | 11.16.548.319 I slot print_timing: id  1 | task 5 | prompt processing, n_tokens =   1536, progress = 0.65, t = 373.94 s / 4.11 tokens per second
+model-1  | 13.18.736.230 I slot print_timing: id  1 | task 5 | prompt processing, n_tokens =   2048, progress = 0.87, t = 496.13 s / 4.13 tokens per second
+model-1  | 15.05.751.474 W srv          stop: cancel task, id_task = 5
+model-1  | 15.16.001.847 I slot print_timing: id  1 | task 5 | prompt eval time =  613391.29 ms /  2356 tokens (  260.35 ms per token,     3.84 tokens per second)
+model-1  | 15.16.001.863 I slot print_timing: id  1 | task 5 |        eval time =       0.00 ms /     1 tokens (    0.00 ms per token,     0.00 tokens per second)
+model-1  | 15.16.001.866 I slot print_timing: id  1 | task 5 |       total time =  613391.29 ms /  2357 tokens
+model-1  | 15.16.001.869 I slot print_timing: id  1 | task 5 |    graphs reused =         17
+model-1  | 15.16.001.870 I slot print_timing: id  1 | task 5 |   graph reallocs =          0    /     0        (same size) / (changed size)
+model-1  | 15.16.004.855 I slot      release: id  1 | task 5 | stop processing: n_tokens = 2356, truncated = 0
+model-1  | 15.16.004.996 I slot get_availabl: id  0 | task -1 | selected slot by id (0)
+model-1  | 15.16.007.351 I slot launch_slot_: id  0 | task 12 | processing task, is_child = 0
+model-1  | 15.16.007.842 W slot   operator(): id  0 | task 12 | need to evaluate at least 1 token for each active slot (n_past = 2002, task.n_tokens() = 2002)
+model-1  | 15.16.007.852 W slot   operator(): id  0 | task 12 | n_past was set to 2001
+model-1  | 15.16.620.714 I slot print_timing: id  0 | task 12 | prompt eval time =     613.05 ms /     1 tokens (  613.05 ms per token,     1.63 tokens per second)
+model-1  | 15.16.620.740 I slot print_timing: id  0 | task 12 |        eval time =       0.00 ms /     1 tokens (    0.00 ms per token,     0.00 tokens per second)
+model-1  | 15.16.620.743 I slot print_timing: id  0 | task 12 |       total time =     613.06 ms /     2 tokens
+model-1  | 15.16.620.745 I slot print_timing: id  0 | task 12 |    graphs reused =         17
+model-1  | 15.16.620.747 I slot print_timing: id  0 | task 12 |   graph reallocs =          0    /     0        (same size) / (changed size)
+model-1  | 15.16.621.962 I slot      release: id  0 | task 12 | stop processing: n_tokens = 2002, truncated = 0
+model-1  | 15.16.722.933 I slot get_availabl: id  1 | task -1 | selected slot by id (1)
+model-1  | 15.16.724.007 I slot launch_slot_: id  1 | task 14 | processing task, is_child = 0
+model-1  | 15.16.724.047 W slot   operator(): id  1 | task 14 | need to evaluate at least 1 token for each active slot (n_past = 2356, task.n_tokens() = 2356)
+model-1  | 15.16.724.068 W slot   operator(): id  1 | task 14 | n_past was set to 2355
+model-1  | 15.17.382.858 I slot print_timing: id  1 | task 14 | prompt eval time =     658.77 ms /     1 tokens (  658.77 ms per token,     1.52 tokens per second)
+model-1  | 15.17.382.873 I slot print_timing: id  1 | task 14 |        eval time =       0.00 ms /     1 tokens (    0.00 ms per token,     0.00 tokens per second)
+model-1  | 15.17.382.876 I slot print_timing: id  1 | task 14 |       total time =     658.77 ms /     2 tokens
+model-1  | 15.17.382.878 I slot print_timing: id  1 | task 14 |    graphs reused =         17
+model-1  | 15.17.382.880 I slot print_timing: id  1 | task 14 |   graph reallocs =          0    /     0        (same size) / (changed size)
+model-1  | 15.17.383.146 I slot      release: id  1 | task 14 | stop processing: n_tokens = 2356, truncated = 0

@@ -1,0 +1,7 @@
+services:
+  app:
+    platform: linux/amd64
+  agent:
+    platform: linux/amd64
+  model:
+    platform: linux/amd64

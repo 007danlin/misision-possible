@@ -1,0 +1,20 @@
+{
+  "linux_amd64_execution": "emulation on Apple Silicon",
+  "native_linux_amd64_timing_verified": false,
+  "windows_runtime_verified": false,
+  "baseline_cold_start_seconds": 1171.651,
+  "baseline_cold_start_within_600_seconds": false,
+  "final_container_http_verification_success": true,
+  "final_containers_all_healthy": true,
+  "default_turn_timeout_seconds": 300,
+  "default_warmup_timeout_seconds": 900,
+  "llm_api_key_required": false,
+  "public_hotel_flow_requires_travelpayouts_token": false,
+  "amd64_empty_targetarch_download_stage_success": true,
+  "legacy_download_stage_actual_architecture": "arm64",
+  "native_actions_execution": "blocked by organization billing/spending limit",
+  "go_format_vet_race_build": "passed",
+  "python_unittest_count": 305,
+  "python_unittest": "passed",
+  "python_ruff": "passed"
+}

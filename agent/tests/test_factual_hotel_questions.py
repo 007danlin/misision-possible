@@ -1,5 +1,5 @@
 import unittest
-from travel_agent.domain import State,Intent,TripSpec,apply_intent
+from travel_agent.domain import Intent,TripSpec,apply_intent
 from travel_agent.fast_intent import protect_hotel_question,clarify_ambiguous_request
 from travel_agent.hotel_selection import explain_hotels
 
@@ -36,4 +36,5 @@ class FactualHotelQuestions(unittest.TestCase):
             self.assertEqual(apply_intent(old,intent,text),old)
         self.assertIsNone(clarify_ambiguous_request('Питер или Санкт-Петербург'))
 
-if __name__=='__main__':unittest.main()
+if __name__ == "__main__":
+    unittest.main()

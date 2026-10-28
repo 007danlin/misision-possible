@@ -1,0 +1,3 @@
+Checking backend/core (all)
+ok  	core	4.310s
+?   	core/proto	[no test files]

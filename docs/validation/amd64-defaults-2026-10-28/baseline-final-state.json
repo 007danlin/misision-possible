@@ -1,0 +1,23 @@
+{
+  "app": {
+    "image_id": "sha256:e7e877951d5ed9e20739eb9db123e6d10b606114906fb63c726bdc9b8d413019",
+    "matches_baseline_image": true,
+    "restarts": 0,
+    "oom_killed": false,
+    "health": "healthy"
+  },
+  "agent": {
+    "image_id": "sha256:ed8a4f1f46ea017db4065c1cfdf29f6a6a7c4ead08555b5fdf5e4f6580f32154",
+    "matches_baseline_image": true,
+    "restarts": 1,
+    "oom_killed": false,
+    "health": "healthy"
+  },
+  "model": {
+    "image_id": "sha256:e4d547c8f25118d381bed85c1c89a8f52254efc8313957c0785a3e8e7456717c",
+    "matches_baseline_image": true,
+    "restarts": 0,
+    "oom_killed": false,
+    "health": "healthy"
+  }
+}

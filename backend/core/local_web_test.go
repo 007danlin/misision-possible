@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -8,6 +9,27 @@ import (
 	"strings"
 	"testing"
 )
+
+func TestLocalStatusDistinguishesPublicContentFromEstimatedPrices(t *testing.T) {
+	for _, test := range []struct {
+		source, expectedSource, expectedMode string
+	}{{"", "public", "public_catalogue"}, {"public", "public", "public_catalogue"}, {"synthetic", "synthetic", "synthetic"}} {
+		t.Run(test.source, func(t *testing.T) {
+			t.Setenv("JOURNEY_DATA_SOURCE", test.source)
+			api := NewAPI(&sessionAgent{})
+			api.trips = &TripStore{dir: t.TempDir()}
+			response := httptest.NewRecorder()
+			api.Handler().ServeHTTP(response, httptest.NewRequest(http.MethodGet, "/api/local/status", nil))
+			var status map[string]any
+			if err := json.Unmarshal(response.Body.Bytes(), &status); err != nil {
+				t.Fatal(err)
+			}
+			if response.Code != http.StatusOK || status["hotel_data_source"] != test.expectedSource || status["data_mode"] != test.expectedMode || status["pricing_mode"] != "estimated" || status["real_booking"] != false {
+				t.Fatalf("incorrect runtime provenance: %d %v", response.Code, status)
+			}
+		})
+	}
+}
 
 func TestLocalWebDirectoryServesEditsWithoutRestart(t *testing.T) {
 	directory := t.TempDir()

@@ -1,0 +1,15 @@
+Модель загружена. Начинаем подготовку первого ответа.
+{"warmup": "starting", "timeout_seconds": 900.0}
+{"warmup": "directions"}
+{"warmup": "ready", "seconds": 8.668, "usage": {"completion_tokens": 2, "prompt_tokens": 4358, "total_tokens": 4360, "prompt_ms": 8536, "generation_ms": 0, "cached_tokens": 4318, "evaluated_prompt_tokens": 40}}
+agent gRPC server running on :50051
+INFO:httpx:HTTP Request: POST http://model:8082/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://model:8082/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://model:8082/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://routing.openstreetmap.de/routed-car/route/v1/driving/37.6173,55.7558;39.7231,43.5855?overview=false&steps=false "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://suggest.travelpayouts.com/search?service=tutu_trains&term=2000000&term2=2064130&callback=n "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://suggest.travelpayouts.com/search?service=tutu_trains&term=2064130&term2=2000000&callback=n "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://ostrovok.ru/api/site/multicomplete.json?query=%D0%A1%D0%BE%D1%87%D0%B8&language=ru "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://ostrovok.ru/hotel/russia/sochi/?language=ru "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: GET https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=43.47&lon=39.9 "HTTP/1.1 200 OK"
+INFO:root:agent_turn {"status": "choosing", "error_code": null, "model": "qwen3-4b-instruct", "provider": "llama_cpp", "prompt_version": "odin-request-9.6", "model_calls": 1, "tool_calls": ["ostrovok_public_search"], "first_useful_ms": 58062, "total_ms": 58062, "model_ms": 51066, "sources_ms": 6922, "usage": {"completion_tokens": 73, "prompt_tokens": 2129, "total_tokens": 2202, "prompt_ms": 25838, "generation_ms": 25194, "cached_tokens": 1963, "evaluated_prompt_tokens": 166}, "cost": null}

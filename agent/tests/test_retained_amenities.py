@@ -21,4 +21,5 @@ class RetainedAmenities(unittest.TestCase):
         self.assertIsNone(new.hotel_preferences.breakfast)
         self.assertTrue(new.hotel_preferences.parking)
 
-if __name__=='__main__':unittest.main()
+if __name__ == "__main__":
+    unittest.main()

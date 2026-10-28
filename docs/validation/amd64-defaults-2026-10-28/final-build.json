@@ -1,0 +1,28 @@
+{
+  "changed_files": [
+    "README.md",
+    "agent/tests/test_ambiguous_followups.py",
+    "agent/tests/test_budget_followups.py",
+    "agent/tests/test_city_commands.py",
+    "agent/tests/test_conversation_reply.py",
+    "agent/tests/test_destination_edit_exclusions.py",
+    "agent/tests/test_duration_units.py",
+    "agent/tests/test_factual_hotel_questions.py",
+    "agent/tests/test_hard_constraint_removal.py",
+    "agent/tests/test_money_followup.py",
+    "agent/tests/test_retained_amenities.py",
+    "agent/tests/test_stay_length_edits.py",
+    "agent/travel_agent/runner.py",
+    "backend/core/local_web_test.go",
+    "backend/core/trips.go",
+    "docker-compose.yml",
+    "docs/development.md",
+    "docs/submission-status.md",
+    "agent/travel_agent/verify_running.py",
+    ".github/workflows/runtime.yml"
+  ],
+  "seconds": 141.838,
+  "model_container_unchanged": true,
+  "cold_start": false,
+  "env_file_present": false
+}

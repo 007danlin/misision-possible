@@ -1,0 +1,10 @@
+{
+  "app": {
+    "image_id": "sha256:83905c49fff58bc95bc23c57f60aa3b91424b9175c160819a01eb4139c1df66c",
+    "turn_timeout_seconds": "90"
+  },
+  "agent": {
+    "image_id": "sha256:4f031710ab2b465b29e2ea961544416417d00d96548cb713bb3e178025e49609",
+    "turn_timeout_seconds": "90"
+  }
+}

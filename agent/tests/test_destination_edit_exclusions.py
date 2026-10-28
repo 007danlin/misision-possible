@@ -15,4 +15,5 @@ class DestinationEditExclusions(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(result.trip_spec.excluded_hotel_ids,[])
         self.assertEqual(state.trip_spec.excluded_hotel_ids,['earlier'])
 
-if __name__=='__main__':unittest.main()
+if __name__ == "__main__":
+    unittest.main()

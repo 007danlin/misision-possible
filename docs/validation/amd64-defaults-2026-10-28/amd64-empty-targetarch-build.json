@@ -1,0 +1,10 @@
+{
+  "exit_code": 0,
+  "seconds": 33.008,
+  "buildkit": true,
+  "explicit_empty_targetarch": true,
+  "target": "download",
+  "platform": "linux/amd64",
+  "image_id": "sha256:9bb7d97c08dd53c2d77b042cc441e7f2079be272bc9b181e4f042509e565704e",
+  "actual_image_architecture": "amd64"
+}

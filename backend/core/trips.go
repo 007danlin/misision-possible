@@ -236,7 +236,11 @@ func (s *API) mountLocalTrips(r chi.Router, store *TripStore) {
 		writeSnapshot(w, map[string]any{"tile_url": envOrDefault("MAP_TILE_URL", "https://tile.openstreetmap.org/{z}/{x}/{y}.png")})
 	})
 	r.Get("/api/local/status", func(w http.ResponseWriter, r *http.Request) {
-		writeSnapshot(w, map[string]any{"mode": "local_demo", "data_mode": "synthetic", "real_booking": false})
+		source, dataMode := "public", "public_catalogue"
+		if os.Getenv("JOURNEY_DATA_SOURCE") == "synthetic" {
+			source, dataMode = "synthetic", "synthetic"
+		}
+		writeSnapshot(w, map[string]any{"mode": "local_demo", "data_mode": dataMode, "hotel_data_source": source, "pricing_mode": "estimated", "real_booking": false})
 	})
 	web, _ := fs.Sub(tripWeb, "web")
 	// Native local development serves edits immediately; packaged builds keep

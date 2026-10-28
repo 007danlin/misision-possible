@@ -1,0 +1,52 @@
+{
+  "app": {
+    "image_id": "sha256:e7e877951d5ed9e20739eb9db123e6d10b606114906fb63c726bdc9b8d413019",
+    "image_os": "linux",
+    "image_architecture": "amd64",
+    "uname_m": "x86_64",
+    "uid": "app",
+    "oom_killed": false,
+    "restarts": 0,
+    "memory_limit": 268435456,
+    "settings": {
+      "AGENT_TURN_TIMEOUT_SECONDS": "90"
+    },
+    "llm_key_present": false,
+    "provider_token_present": false
+  },
+  "agent": {
+    "image_id": "sha256:ed8a4f1f46ea017db4065c1cfdf29f6a6a7c4ead08555b5fdf5e4f6580f32154",
+    "image_os": "linux",
+    "image_architecture": "amd64",
+    "uname_m": "x86_64",
+    "uid": "appuser",
+    "oom_killed": false,
+    "restarts": 0,
+    "memory_limit": 536870912,
+    "settings": {
+      "LLM_PROVIDER": "llama_cpp",
+      "LLM_BASE_URL": "http://model:8082/v1",
+      "LLM_MODEL": "qwen3-4b-instruct",
+      "MODEL_WARMUP_TIMEOUT_SECONDS": "900",
+      "AGENT_TURN_TIMEOUT_SECONDS": "90"
+    },
+    "llm_key_present": false,
+    "provider_token_present": false
+  },
+  "model": {
+    "image_id": "sha256:e4d547c8f25118d381bed85c1c89a8f52254efc8313957c0785a3e8e7456717c",
+    "image_os": "linux",
+    "image_architecture": "amd64",
+    "uname_m": "x86_64",
+    "uid": "model",
+    "oom_killed": false,
+    "restarts": 0,
+    "memory_limit": 5368709120,
+    "settings": {
+      "MODEL_THREADS": "4",
+      "MODEL_PARALLEL": "2"
+    },
+    "llm_key_present": false,
+    "provider_token_present": false
+  }
+}

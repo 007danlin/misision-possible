@@ -26,4 +26,5 @@ class BudgetFollowups(unittest.TestCase):
             intent=Intent(action='replace_options',optimization='cheaper',evidence={'optimization':text})
             self.assertEqual(ground_intent(intent,text,TripSpec()).action,'replace_options')
 
-if __name__=='__main__':unittest.main()
+if __name__ == "__main__":
+    unittest.main()

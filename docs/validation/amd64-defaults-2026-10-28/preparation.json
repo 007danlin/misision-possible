@@ -1,0 +1,8 @@
+{
+  "base_commit": "1e7331e72b80033d7b0a39b76157849e67ede365",
+  "clone_seconds": 15.563,
+  "checkout": "/private/tmp/oplan-amd64-defaults-20261028",
+  "source_modified": false,
+  "env_present": false,
+  "execution": "linux/amd64 emulation on Apple Silicon; native GitHub runner unavailable"
+}

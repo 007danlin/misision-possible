@@ -34,4 +34,5 @@ class DurationUnits(unittest.TestCase):
         for text in ['На четыре дня позже','На 3 дня вперёд','На 3 или 5 ночей','Не на четыре дня','На 5 ночей, если будет дёшево','На 4 дня и 5 ночей']:
             self.assertEqual(protect_duration_units(Intent(),text).patch.model_dump(exclude_unset=True),{})
 
-if __name__=='__main__':unittest.main()
+if __name__ == "__main__":
+    unittest.main()

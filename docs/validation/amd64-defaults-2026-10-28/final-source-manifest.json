@@ -1,0 +1,34 @@
+{
+  "docker-compose.yml": {
+    "sha256": "f5bb47aaededd54657af1d67b42174ecbeacfea4ff80b375a0d24b94249227fc",
+    "matches_test_checkout": true
+  },
+  "infra/model/Dockerfile": {
+    "sha256": "b5f5e745b630cd06b3d1cd8a084f4d5dfa8cabd19e3e8b60f71343ae00aa52aa",
+    "matches_test_checkout": true
+  },
+  "infra/model/start.py": {
+    "sha256": "f87f875608971847c7c3107396b7626fc64bbb46e40e6acfa0fca2f04b8c3949",
+    "matches_test_checkout": true
+  },
+  "backend/core/trips.go": {
+    "sha256": "aed1ee0751420cee5d43f058404e9d7318ebae18546049e16581d5fb46902caf",
+    "matches_test_checkout": true
+  },
+  "agent/travel_agent/runner.py": {
+    "sha256": "b77e19bc19c5281ae6d52df16972b2d50fc6f6d4b0f92a115c01457377b41a1f",
+    "matches_test_checkout": true
+  },
+  "agent/travel_agent/verify_running.py": {
+    "sha256": "8df5b178450ca27cc159ce53e47e2a7ac0c2d981f43457819819b60207d24118",
+    "matches_test_checkout": true
+  },
+  "agent/travel_agent/warmup.py": {
+    "sha256": "b0272ae57ab4279d47571d29fd565d6b39945b03933dafc69fa4fb133f616dbf",
+    "matches_test_checkout": true
+  },
+  "agent/bootstrap.py": {
+    "sha256": "e3bc0c2d288beab54b0677f90f760e1af53bf8c5c5300faa535209c6b1e1ec02",
+    "matches_test_checkout": true
+  }
+}

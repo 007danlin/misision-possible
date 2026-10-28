@@ -1,0 +1,48 @@
+{
+  "success": false,
+  "steps": [
+    {
+      "method": "GET",
+      "route": "/health",
+      "http_status": 200,
+      "seconds": 0.002,
+      "state": "ok",
+      "error_code": null
+    },
+    {
+      "method": "GET",
+      "route": "/api/local/status",
+      "http_status": 200,
+      "seconds": 0.002,
+      "state": null,
+      "error_code": null
+    },
+    {
+      "method": "POST",
+      "route": "/api/sessions/",
+      "http_status": 200,
+      "seconds": 0.013,
+      "state": "needs_input",
+      "error_code": null
+    },
+    {
+      "method": "POST",
+      "route": "/api/sessions/646eca79abfa884dfd971e3e945aa869/turns",
+      "http_status": 200,
+      "seconds": 89.868,
+      "state": "error",
+      "error_code": "turn_timeout"
+    }
+  ],
+  "readiness_wait_seconds": 0.011,
+  "runtime": {
+    "data_mode": "public_catalogue",
+    "hotel_data_source": "public",
+    "mode": "local_demo",
+    "pricing_mode": "estimated",
+    "real_booking": false
+  },
+  "session_id": "646eca79abfa884dfd971e3e945aa869",
+  "failure": "Agent failed: turn_timeout",
+  "total_seconds": 89.897
+}

@@ -20,6 +20,18 @@ docker compose up --build
 
 Локальной модели API-ключ не нужен. Для настройки можно скопировать `.env.example` в `.env`; пустые значения используют настройки по умолчанию. Для жюри предусмотрен `secrets.env.age` с необязательным токеном авиаперелётов — [инструкция расшифровки](docs/secrets.md).
 
+### Проверка на Linux-сервере без браузера
+
+После запуска можно проверить весь HTTP-путь через уже установленный в контейнере Python:
+
+```sh
+docker compose exec -T agent python -m travel_agent.verify_running
+```
+
+Команда ждёт `/ready`, проверяет настоящий ответ модели, публичные отели, пересчёт дат, учебное оформление и восстановление сохранённой поездки. Возвращает JSON с результатами и код 0 при успехе; при ошибке — код 1. Ключи и браузер не нужны. Проверка создаёт одну учебную поездку; реальные заказы и платежи не выполняются. Время этой проверки после старта не является замером холодной установки.
+
+На Linux Intel/AMD Docker выбирает `linux/amd64` автоматически. На Windows требуется Docker Desktop в режиме Linux containers; на сервере проверяющий обращается к `http://localhost:8080`. Порт опубликован на loopback; открывать его в интернет для локальной оценки не требуется.
+
 ```sh
 docker compose down
 ```
@@ -38,7 +50,7 @@ Compose запускает `app` (Go Core и UI, порт 8080), `agent` (Python
 | `LLM_BASE_URL` | `http://model:8082/v1` | Внутренний адрес модели |
 | `LLM_MODEL` | `qwen3-4b-instruct` | Имя модели |
 | `LLM_API_KEY` | пусто | Ключ внешнего провайдера, если используется |
-| `AGENT_TURN_TIMEOUT_SECONDS` | `90` | Предел ответа, секунды (1–300) |
+| `AGENT_TURN_TIMEOUT_SECONDS` | `300` | Верхний предел ответа на медленном CPU, секунды (1–300); готовый ответ возвращается сразу |
 | `MODEL_WARMUP_TIMEOUT_SECONDS` | `900` | Предел прогрева для медленного CPU; готовность открывается сразу после завершения |
 | `MODEL_LOCK` | `docs/docker-runtime.json` | Версия и SHA-256 модели |
 | `MODEL_THREADS` | `4` | Потоки CPU |
@@ -67,6 +79,7 @@ Volumes: `trips` — поездки, `hotel-content` — кэш отелей, `m
 | `/health` | HTTP 200, `{"status":"ok"}` — процесс запущен |
 | `/ready` | HTTP 200 после подготовки, 503 во время запуска |
 | `/api/runtime/status` | Этап подготовки модели |
+| `/api/local/status` | Настроенный источник карточек, расчётные цены и признак учебного бронирования |
 | `/api/sessions/` | Создание и история поездок |
 | `/api/sessions/{id}` | Сохранённая поездка |
 | `/api/sessions/{id}/turns` | Сообщение агенту |
@@ -85,4 +98,5 @@ Volumes: `trips` — поездки, `hotel-content` — кэш отелей, `m
 - [Запуск и диагностика](docs/runtime.md), [разработка и проверки](docs/development.md).
 - [Источники данных и ограничения](docs/public-data-sources.md).
 - [Проверка CPU](docs/validation/docker-cpu-2026-10-27/README.md), [совместимость AMD64](docs/validation/amd64-2026-10-28/README.md).
-- [Чистый запуск для жюри: 5 мин 25 с с загрузкой модели](docs/validation/jury-clean-2026-10-28/README.md).
+- [Проверка Linux AMD64 с defaults и реальным HTTP-сценарием](docs/validation/amd64-defaults-2026-10-28/README.md).
+- [Чистый запуск на Mac M4: 5 мин 25 с с загрузкой модели](docs/validation/jury-clean-2026-10-28/README.md).

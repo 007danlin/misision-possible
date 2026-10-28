@@ -537,7 +537,7 @@ async def run_turn(
                         if synthetic
                         else "public_hotels_estimated_journey"
                     )
-                    from .transport import city_point, prepare_road, road_snapshot
+                    from .transport import prepare_road, road_snapshot
 
                     if (
                         (

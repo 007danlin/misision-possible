@@ -1,0 +1,37 @@
+{
+  "restored": true,
+  "ready": {
+    "phase": "ready",
+    "message": "\u0412\u0441\u0451 \u0433\u043e\u0442\u043e\u0432\u043e",
+    "ready": true
+  },
+  "containers": {
+    "app": {
+      "health": "healthy",
+      "restarts": 0,
+      "oom_killed": false,
+      "turn_timeout_seconds": "300",
+      "warmup_timeout_seconds": null,
+      "travelpayouts_token_present": false
+    },
+    "agent": {
+      "health": "healthy",
+      "restarts": 0,
+      "oom_killed": false,
+      "turn_timeout_seconds": "300",
+      "warmup_timeout_seconds": "900",
+      "travelpayouts_token_present": true
+    },
+    "model": {
+      "health": "healthy",
+      "restarts": 0,
+      "oom_killed": false,
+      "turn_timeout_seconds": null,
+      "warmup_timeout_seconds": null,
+      "travelpayouts_token_present": false
+    }
+  },
+  "user_volumes_preserved": true,
+  "temporary_test_project_removed": true,
+  "note": "This is restoration, not a cold start measurement."
+}

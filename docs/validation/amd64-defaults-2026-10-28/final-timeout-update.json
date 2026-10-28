@@ -1,0 +1,7 @@
+{
+  "seconds": 27.672,
+  "model_container_unchanged": true,
+  "cold_start": false,
+  "env_file_present": false,
+  "default_turn_timeout_seconds": 300
+}

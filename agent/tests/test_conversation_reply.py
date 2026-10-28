@@ -32,4 +32,5 @@ class ConversationReplyTests(unittest.IsolatedAsyncioTestCase):
         for message in ['Привет, хочу в Сочи','Спасибо, но измени даты','Что значит предварительная цена? И добавь бассейн','Большое спасибо, давай другой отель']:
             self.assertIsNone(conversation_reply(message))
 
-if __name__=='__main__':unittest.main()
+if __name__ == "__main__":
+    unittest.main()

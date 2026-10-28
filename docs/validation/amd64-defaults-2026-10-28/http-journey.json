@@ -1,0 +1,229 @@
+{
+  "success": true,
+  "steps": [
+    {
+      "method": "GET",
+      "route": "/health",
+      "http_status": 200,
+      "seconds": 0.002,
+      "state": "ok",
+      "error_code": null
+    },
+    {
+      "method": "GET",
+      "route": "/api/local/status",
+      "http_status": 200,
+      "seconds": 0.003,
+      "state": null,
+      "error_code": null
+    },
+    {
+      "method": "POST",
+      "route": "/api/sessions/",
+      "http_status": 200,
+      "seconds": 0.006,
+      "state": "needs_input",
+      "error_code": null
+    },
+    {
+      "method": "POST",
+      "route": "/api/sessions/bec2ae19200af362d0e4238448e89d5d/turns",
+      "http_status": 200,
+      "seconds": 58.094,
+      "state": "choosing",
+      "error_code": null,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 58062,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 1,
+        "model_ms": 51066,
+        "prompt_version": "odin-request-9.6",
+        "provider": "llama_cpp",
+        "sources_ms": 6922,
+        "tool_calls": [
+          "ostrovok_public_search"
+        ],
+        "total_ms": 58062,
+        "usage": {
+          "cached_tokens": 1963,
+          "completion_tokens": 73,
+          "evaluated_prompt_tokens": 166,
+          "generation_ms": 25194,
+          "prompt_ms": 25838,
+          "prompt_tokens": 2129,
+          "total_tokens": 2202
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "route": "/api/sessions/bec2ae19200af362d0e4238448e89d5d/actions",
+      "http_status": 200,
+      "seconds": 0.02,
+      "state": "hotel_checkout",
+      "error_code": null,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 58062,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 1,
+        "model_ms": 51066,
+        "prompt_version": "odin-request-9.6",
+        "provider": "llama_cpp",
+        "sources_ms": 6922,
+        "tool_calls": [
+          "ostrovok_public_search"
+        ],
+        "total_ms": 58062,
+        "usage": {
+          "cached_tokens": 1963,
+          "completion_tokens": 73,
+          "evaluated_prompt_tokens": 166,
+          "generation_ms": 25194,
+          "prompt_ms": 25838,
+          "prompt_tokens": 2129,
+          "total_tokens": 2202
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "route": "/api/sessions/bec2ae19200af362d0e4238448e89d5d/actions",
+      "http_status": 200,
+      "seconds": 0.039,
+      "state": "choosing",
+      "error_code": null,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 58062,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 1,
+        "model_ms": 51066,
+        "prompt_version": "odin-request-9.6",
+        "provider": "llama_cpp",
+        "sources_ms": 6922,
+        "tool_calls": [
+          "ostrovok_public_search"
+        ],
+        "total_ms": 58062,
+        "usage": {
+          "cached_tokens": 1963,
+          "completion_tokens": 73,
+          "evaluated_prompt_tokens": 166,
+          "generation_ms": 25194,
+          "prompt_ms": 25838,
+          "prompt_tokens": 2129,
+          "total_tokens": 2202
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "route": "/api/sessions/bec2ae19200af362d0e4238448e89d5d/actions",
+      "http_status": 200,
+      "seconds": 0.013,
+      "state": "hotel_checkout",
+      "error_code": null,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 58062,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 1,
+        "model_ms": 51066,
+        "prompt_version": "odin-request-9.6",
+        "provider": "llama_cpp",
+        "sources_ms": 6922,
+        "tool_calls": [
+          "ostrovok_public_search"
+        ],
+        "total_ms": 58062,
+        "usage": {
+          "cached_tokens": 1963,
+          "completion_tokens": 73,
+          "evaluated_prompt_tokens": 166,
+          "generation_ms": 25194,
+          "prompt_ms": 25838,
+          "prompt_tokens": 2129,
+          "total_tokens": 2202
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "route": "/api/sessions/bec2ae19200af362d0e4238448e89d5d/actions",
+      "http_status": 200,
+      "seconds": 0.022,
+      "state": "hotel_booked",
+      "error_code": null,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 58062,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 1,
+        "model_ms": 51066,
+        "prompt_version": "odin-request-9.6",
+        "provider": "llama_cpp",
+        "sources_ms": 6922,
+        "tool_calls": [
+          "ostrovok_public_search"
+        ],
+        "total_ms": 58062,
+        "usage": {
+          "cached_tokens": 1963,
+          "completion_tokens": 73,
+          "evaluated_prompt_tokens": 166,
+          "generation_ms": 25194,
+          "prompt_ms": 25838,
+          "prompt_tokens": 2129,
+          "total_tokens": 2202
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "route": "/api/sessions/bec2ae19200af362d0e4238448e89d5d",
+      "http_status": 200,
+      "seconds": 0.014,
+      "state": "hotel_booked",
+      "error_code": null,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 58062,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 1,
+        "model_ms": 51066,
+        "prompt_version": "odin-request-9.6",
+        "provider": "llama_cpp",
+        "sources_ms": 6922,
+        "tool_calls": [
+          "ostrovok_public_search"
+        ],
+        "total_ms": 58062,
+        "usage": {
+          "cached_tokens": 1963,
+          "completion_tokens": 73,
+          "evaluated_prompt_tokens": 166,
+          "generation_ms": 25194,
+          "prompt_ms": 25838,
+          "prompt_tokens": 2129,
+          "total_tokens": 2202
+        }
+      }
+    }
+  ],
+  "readiness_wait_seconds": 12.048,
+  "runtime": {
+    "data_mode": "public_catalogue",
+    "hotel_data_source": "public",
+    "mode": "local_demo",
+    "pricing_mode": "estimated",
+    "real_booking": false
+  },
+  "session_id": "bec2ae19200af362d0e4238448e89d5d",
+  "request_message": "Из Москвы в Сочи, 11.11.2026–16.11.2026, двое взрослых. 120 тысяч рублей на дорогу, отель и оба трансфера. Без ночных рейсов, нужен бассейн. Резерв на личные расходы 0 рублей.",
+  "public_hotels": 3,
+  "booking_id": "OP-042F71CB",
+  "booking_total_minor": 5590000,
+  "total_seconds": 70.265
+}

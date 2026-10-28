@@ -1,0 +1,10 @@
+{
+  "exit_code": 0,
+  "seconds": 26.343,
+  "buildkit": false,
+  "target": "download",
+  "requested_platform": "linux/amd64",
+  "actual_image_architecture": "arm64",
+  "note": "Legacy builder on this Docker Desktop used the local ARM64 base image despite --platform; proves empty-ARG legacy path on ARM64. Separate BuildKit run forces AMD64 with an empty TARGETARCH.",
+  "image_id": "sha256:1ed6417984f0f01572954134b411b00fff8af50d651a59a7c60e8db4a2c1314c"
+}
