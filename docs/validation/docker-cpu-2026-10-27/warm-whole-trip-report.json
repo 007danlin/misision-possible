@@ -1,0 +1,31 @@
+{
+  "mocked": false,
+  "base_url": "http://127.0.0.1:8080",
+  "errors": [],
+  "booking_preserved": true,
+  "saved_total": 3320000,
+  "query_seconds": 15.036,
+  "telemetry": {
+    "cost": null,
+    "first_useful_ms": 14961,
+    "model": "qwen3-4b-instruct",
+    "model_calls": 1,
+    "model_ms": 14908,
+    "prompt_version": "odin-request-9.2",
+    "provider": "llama_cpp",
+    "sources_ms": 0,
+    "tool_calls": [],
+    "total_ms": 14961,
+    "usage": {
+      "cached_tokens": 1818,
+      "completion_tokens": 55,
+      "evaluated_prompt_tokens": 141,
+      "generation_ms": 8016,
+      "prompt_ms": 6862,
+      "prompt_tokens": 1959,
+      "total_tokens": 2014
+    }
+  },
+  "status": "needs_input",
+  "passed": true
+}

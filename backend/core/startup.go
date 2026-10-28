@@ -33,7 +33,8 @@ func (s *API) startupHandler(next http.Handler) http.Handler {
 	var mu sync.Mutex
 	var last time.Time
 	current := startupStatus{Phase: "starting", Message: "Подготавливаем сервисы"}
-	client := &http.Client{Timeout: time.Second}
+	// Docker service discovery must not depend on a host HTTP proxy.
+	client := &http.Client{Timeout: time.Second, Transport: &http.Transport{Proxy: nil}}
 	probe := func(ctx context.Context) startupStatus {
 		mu.Lock()
 		defer mu.Unlock()

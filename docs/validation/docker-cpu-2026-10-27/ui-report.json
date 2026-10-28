@@ -1,0 +1,1812 @@
+{
+  "base_url": "http://127.0.0.1:8080",
+  "steps": [
+    {
+      "message": "В Сочи с 31 октября по 3 ноября 2026 года. Двое взрослых, 150 тысяч рублей на отель, дорогу туда-обратно и оба трансфера. Нужен бассейн.",
+      "seconds": 16.164,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 16053,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 1,
+        "model_ms": 16050,
+        "prompt_version": "odin-request-9.2",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 16053,
+        "usage": {
+          "cached_tokens": 1816,
+          "completion_tokens": 58,
+          "evaluated_prompt_tokens": 146,
+          "generation_ms": 8487,
+          "prompt_ms": 7530,
+          "prompt_tokens": 1962,
+          "total_tokens": 2020
+        }
+      },
+      "status": "needs_input",
+      "answer": "Учёл ваши пожелания. Из какого города отправляетесь?",
+      "spec": {
+        "budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        },
+        "budget_period": "stay",
+        "budget_scope": "whole_trip",
+        "country": null,
+        "dates": {
+          "end": "2026-11-03",
+          "start": "2026-10-31"
+        },
+        "destination": "Сочи",
+        "duration_days": null,
+        "excluded_hotel_ids": [],
+        "expense_reserve": null,
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": true,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": false,
+        "locked_component_ids": [],
+        "locked_hotel_id": null,
+        "origin": null,
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "auto",
+        "transport_owned": false,
+        "travel_setting": "any",
+        "travellers": {
+          "adults": 2,
+          "children": []
+        },
+        "trip_budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        }
+      },
+      "preview": false
+    },
+    {
+      "message": "Резерв на личные расходы 0 рублей.",
+      "seconds": 2.391,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 1983,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 0,
+        "model_ms": 0,
+        "prompt_version": "odin-request-9.2",
+        "provider": "llama_cpp",
+        "sources_ms": 1981,
+        "tool_calls": [
+          "ostrovok_public_search"
+        ],
+        "total_ms": 1983,
+        "usage": {}
+      },
+      "status": "choosing",
+      "answer": "Проверил ваши условия. Сравнил 20 отелей, вашим условиям соответствуют 3. Показываю лучшие по соответствию и оценкам гостей. Спа-отель Грейс Арли — дорога и оба трансфера включены; бассейн в отеле; оценка гостей 9.3/10. Стоимость предварительная.",
+      "spec": {
+        "budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        },
+        "budget_period": "stay",
+        "budget_scope": "whole_trip",
+        "country": null,
+        "dates": {
+          "end": "2026-11-03",
+          "start": "2026-10-31"
+        },
+        "destination": "Сочи",
+        "duration_days": null,
+        "excluded_hotel_ids": [],
+        "expense_reserve": {
+          "amount_minor": 0,
+          "currency": "RUB"
+        },
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": true,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": false,
+        "locked_component_ids": [],
+        "locked_hotel_id": null,
+        "origin": "Москва",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "auto",
+        "transport_owned": false,
+        "travel_setting": "any",
+        "travellers": {
+          "adults": 2,
+          "children": []
+        },
+        "trip_budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        }
+      },
+      "preview": false,
+      "total": 3731600
+    },
+    {
+      "message": "покажи другие отели",
+      "seconds": 4.403,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 4246,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 0,
+        "model_ms": 0,
+        "prompt_version": "odin-request-9.2",
+        "provider": "llama_cpp",
+        "sources_ms": 4245,
+        "tool_calls": [
+          "ostrovok_public_search"
+        ],
+        "total_ms": 4246,
+        "usage": {}
+      },
+      "status": "choosing",
+      "answer": "Показал другие варианты; прежние исключены, остальные пожелания сохранены. Проверил ваши условия. Сравнил 57 отелей, вашим условиям соответствуют 3. Показываю лучшие по соответствию и оценкам гостей. Вилла Мария Клуб (VillaMariaClub) — дорога и оба трансфера включены; бассейн в отеле; оценка гостей 9.6/10. Стоимость предварительная.",
+      "spec": {
+        "budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        },
+        "budget_period": "stay",
+        "budget_scope": "whole_trip",
+        "country": null,
+        "dates": {
+          "end": "2026-11-03",
+          "start": "2026-10-31"
+        },
+        "destination": "Сочи",
+        "duration_days": null,
+        "excluded_hotel_ids": [
+          "otel_arli",
+          "greys_lazur_hotel",
+          "grejs_kruiz_hotel"
+        ],
+        "expense_reserve": {
+          "amount_minor": 0,
+          "currency": "RUB"
+        },
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": true,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": false,
+        "locked_component_ids": [],
+        "locked_hotel_id": null,
+        "origin": "Москва",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "auto",
+        "transport_owned": false,
+        "travel_setting": "any",
+        "travellers": {
+          "adults": 2,
+          "children": []
+        },
+        "trip_budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        }
+      },
+      "preview": false,
+      "total": 3891600
+    },
+    {
+      "message": "отель оставь, поменяй дорогу",
+      "seconds": 0.072,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 1,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 0,
+        "model_ms": 0,
+        "prompt_version": "odin-request-9.2",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 1,
+        "usage": {}
+      },
+      "status": "hotel_checkout",
+      "answer": "Отель оставил. Сравните дорогу и выберите подходящий вариант.",
+      "spec": {
+        "budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        },
+        "budget_period": "stay",
+        "budget_scope": "whole_trip",
+        "country": null,
+        "dates": {
+          "end": "2026-11-03",
+          "start": "2026-10-31"
+        },
+        "destination": "Сочи",
+        "duration_days": null,
+        "excluded_hotel_ids": [
+          "otel_arli",
+          "greys_lazur_hotel",
+          "grejs_kruiz_hotel"
+        ],
+        "expense_reserve": {
+          "amount_minor": 0,
+          "currency": "RUB"
+        },
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": true,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": true,
+        "locked_component_ids": [],
+        "locked_hotel_id": "villa_maria_club_aparthotel",
+        "origin": "Москва",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "auto",
+        "transport_owned": false,
+        "travel_setting": "any",
+        "travellers": {
+          "adults": 2,
+          "children": []
+        },
+        "trip_budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        }
+      },
+      "preview": false,
+      "total": 3891600
+    },
+    {
+      "message": "лучше поездом",
+      "seconds": 0.073,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 3,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 0,
+        "model_ms": 0,
+        "prompt_version": "odin-request-9.2",
+        "provider": "llama_cpp",
+        "sources_ms": 2,
+        "tool_calls": [
+          "ostrovok_public_search"
+        ],
+        "total_ms": 3,
+        "usage": {}
+      },
+      "status": "choosing",
+      "answer": "Пересчитал всю поездку. Сравните изменения и подтвердите новый план — прежний выбор сохранён.",
+      "spec": {
+        "budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        },
+        "budget_period": "stay",
+        "budget_scope": "whole_trip",
+        "country": null,
+        "dates": {
+          "end": "2026-11-03",
+          "start": "2026-10-31"
+        },
+        "destination": "Сочи",
+        "duration_days": null,
+        "excluded_hotel_ids": [
+          "otel_arli",
+          "greys_lazur_hotel",
+          "grejs_kruiz_hotel"
+        ],
+        "expense_reserve": {
+          "amount_minor": 0,
+          "currency": "RUB"
+        },
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": true,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": true,
+        "locked_component_ids": [],
+        "locked_hotel_id": "villa_maria_club_aparthotel",
+        "origin": "Москва",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "train",
+        "transport_owned": false,
+        "travel_setting": "any",
+        "travellers": {
+          "adults": 2,
+          "children": []
+        },
+        "trip_budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        }
+      },
+      "preview": true,
+      "total": 2927400
+    },
+    {
+      "message": "без пересадок",
+      "seconds": 0.062,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 2,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 0,
+        "model_ms": 0,
+        "prompt_version": "odin-request-9.2",
+        "provider": "llama_cpp",
+        "sources_ms": 2,
+        "tool_calls": [
+          "ostrovok_public_search"
+        ],
+        "total_ms": 2,
+        "usage": {}
+      },
+      "status": "choosing",
+      "answer": "Пересчитал всю поездку. Сравните изменения и подтвердите новый план — прежний выбор сохранён.",
+      "spec": {
+        "budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        },
+        "budget_period": "stay",
+        "budget_scope": "whole_trip",
+        "country": null,
+        "dates": {
+          "end": "2026-11-03",
+          "start": "2026-10-31"
+        },
+        "destination": "Сочи",
+        "duration_days": null,
+        "excluded_hotel_ids": [
+          "otel_arli",
+          "greys_lazur_hotel",
+          "grejs_kruiz_hotel"
+        ],
+        "expense_reserve": {
+          "amount_minor": 0,
+          "currency": "RUB"
+        },
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": true,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": true,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": true,
+        "locked_component_ids": [],
+        "locked_hotel_id": "villa_maria_club_aparthotel",
+        "origin": "Москва",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "car",
+        "transport_owned": false,
+        "travel_setting": "any",
+        "travellers": {
+          "adults": 2,
+          "children": []
+        },
+        "trip_budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        }
+      },
+      "preview": true,
+      "total": 2850000
+    },
+    {
+      "message": "лучше поездом",
+      "seconds": 0.062,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 3,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 0,
+        "model_ms": 0,
+        "prompt_version": "odin-request-9.2",
+        "provider": "llama_cpp",
+        "sources_ms": 3,
+        "tool_calls": [
+          "ostrovok_public_search"
+        ],
+        "total_ms": 3,
+        "usage": {}
+      },
+      "status": "choosing",
+      "answer": "Пересчитал всю поездку. Сравните изменения и подтвердите новый план — прежний выбор сохранён.",
+      "spec": {
+        "budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        },
+        "budget_period": "stay",
+        "budget_scope": "whole_trip",
+        "country": null,
+        "dates": {
+          "end": "2026-11-03",
+          "start": "2026-10-31"
+        },
+        "destination": "Сочи",
+        "duration_days": null,
+        "excluded_hotel_ids": [
+          "otel_arli",
+          "greys_lazur_hotel",
+          "grejs_kruiz_hotel"
+        ],
+        "expense_reserve": {
+          "amount_minor": 0,
+          "currency": "RUB"
+        },
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": true,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": true,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": true,
+        "locked_component_ids": [],
+        "locked_hotel_id": "villa_maria_club_aparthotel",
+        "origin": "Москва",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "train",
+        "transport_owned": false,
+        "travel_setting": "any",
+        "travellers": {
+          "adults": 2,
+          "children": []
+        },
+        "trip_budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        }
+      },
+      "preview": true,
+      "total": 2927400
+    },
+    {
+      "message": "хочу интересное рядом",
+      "seconds": 0.057,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 1,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 0,
+        "model_ms": 0,
+        "prompt_version": "odin-request-9.2",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 1,
+        "usage": {}
+      },
+      "status": "hotel_checkout",
+      "answer": "Открыл места рядом с отелем. Расстояния на схеме — по прямой, а не время в пути.",
+      "spec": {
+        "budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        },
+        "budget_period": "stay",
+        "budget_scope": "whole_trip",
+        "country": null,
+        "dates": {
+          "end": "2026-11-03",
+          "start": "2026-10-31"
+        },
+        "destination": "Сочи",
+        "duration_days": null,
+        "excluded_hotel_ids": [
+          "otel_arli",
+          "greys_lazur_hotel",
+          "grejs_kruiz_hotel"
+        ],
+        "expense_reserve": {
+          "amount_minor": 0,
+          "currency": "RUB"
+        },
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": true,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": true,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": true,
+        "locked_component_ids": [],
+        "locked_hotel_id": "villa_maria_club_aparthotel",
+        "origin": "Владимир",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "car",
+        "transport_owned": false,
+        "travel_setting": "any",
+        "travellers": {
+          "adults": 2,
+          "children": []
+        },
+        "trip_budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        }
+      },
+      "preview": false,
+      "total": 3050000
+    },
+    {
+      "message": "Пересадки теперь допустимы, остальные условия сохрани.",
+      "seconds": 6.206,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 6065,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 1,
+        "model_ms": 6060,
+        "prompt_version": "odin-request-9.2",
+        "provider": "llama_cpp",
+        "sources_ms": 4,
+        "tool_calls": [
+          "ostrovok_public_search"
+        ],
+        "total_ms": 6065,
+        "usage": {
+          "cached_tokens": 1834,
+          "completion_tokens": 14,
+          "evaluated_prompt_tokens": 91,
+          "generation_ms": 2477,
+          "prompt_ms": 3559,
+          "prompt_tokens": 1925,
+          "total_tokens": 1939
+        }
+      },
+      "status": "choosing",
+      "answer": "Пересчитал всю поездку. Сравните изменения и подтвердите новый план — прежний выбор сохранён.",
+      "spec": {
+        "budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        },
+        "budget_period": "stay",
+        "budget_scope": "whole_trip",
+        "country": null,
+        "dates": {
+          "end": "2026-11-03",
+          "start": "2026-10-31"
+        },
+        "destination": "Сочи",
+        "duration_days": null,
+        "excluded_hotel_ids": [
+          "otel_arli",
+          "greys_lazur_hotel",
+          "grejs_kruiz_hotel"
+        ],
+        "expense_reserve": {
+          "amount_minor": 0,
+          "currency": "RUB"
+        },
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": true,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": true,
+        "locked_component_ids": [],
+        "locked_hotel_id": "villa_maria_club_aparthotel",
+        "origin": "Владимир",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "car",
+        "transport_owned": false,
+        "travel_setting": "any",
+        "travellers": {
+          "adults": 2,
+          "children": []
+        },
+        "trip_budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        }
+      },
+      "preview": true,
+      "total": 3050000
+    },
+    {
+      "message": "билеты уже куплены",
+      "seconds": 0.124,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 1,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 0,
+        "model_ms": 0,
+        "prompt_version": "odin-request-9.2",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 1,
+        "usage": {}
+      },
+      "status": "needs_input",
+      "answer": "Учёл ваши пожелания. Укажите время прибытия, обратного отправления и аэропорт или вокзал в разделе «Ваши билеты». По ним рассчитаем трансферы.",
+      "spec": {
+        "budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        },
+        "budget_period": "stay",
+        "budget_scope": "whole_trip",
+        "country": null,
+        "dates": {
+          "end": "2026-11-03",
+          "start": "2026-10-31"
+        },
+        "destination": "Сочи",
+        "duration_days": null,
+        "excluded_hotel_ids": [
+          "otel_arli",
+          "greys_lazur_hotel",
+          "grejs_kruiz_hotel"
+        ],
+        "expense_reserve": {
+          "amount_minor": 0,
+          "currency": "RUB"
+        },
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": true,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": true,
+        "locked_component_ids": [],
+        "locked_hotel_id": "villa_maria_club_aparthotel",
+        "origin": "Владимир",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "car",
+        "transport_owned": true,
+        "travel_setting": "any",
+        "travellers": {
+          "adults": 2,
+          "children": []
+        },
+        "trip_budget": {
+          "amount_minor": 15000000,
+          "currency": "RUB"
+        }
+      },
+      "preview": false,
+      "total": 3050000
+    }
+  ],
+  "errors": [],
+  "initial": {
+    "id": "otel_arli",
+    "name": "Спа-отель Грейс Арли",
+    "total": 3731600,
+    "weather": {
+      "checked_at": "2026-10-27T23:13:38.861862+00:00",
+      "days": [
+        {
+          "condition": "Возможен дождь",
+          "date": "2026-10-31",
+          "max": 16.1,
+          "min": 15.2
+        },
+        {
+          "condition": "Возможен дождь",
+          "date": "2026-11-01",
+          "max": 17.9,
+          "min": 12.4
+        },
+        {
+          "condition": "Переменная облачность",
+          "date": "2026-11-02",
+          "max": 21.1,
+          "min": 11.5
+        },
+        {
+          "condition": "Возможен дождь",
+          "date": "2026-11-03",
+          "max": 17.6,
+          "min": 13.5
+        }
+      ],
+      "forecast_updated_at": "2026-10-27T19:17:39Z",
+      "kind": "forecast",
+      "scope": "trip",
+      "source_label": "MET Norway · CC BY 4.0",
+      "source_url": "https://api.met.no/",
+      "summary": "+11,5…+21,1 °C. Возможен дождь",
+      "text": "Погода может меняться — проверьте прогноз перед выездом."
+    },
+    "nearby": [
+      {
+        "category": "С детьми",
+        "distance_kind": "straight",
+        "distance_m": 22,
+        "lat": 43.4726676940918,
+        "lng": 39.89590072631836,
+        "name": "Океанариум Sochi Discovery World Aquarium",
+        "reason": "Можно рассмотреть для семейного досуга; часы работы и билеты уточняются.",
+        "region_id": 6292571,
+        "score": 0.9977776307264435,
+        "source_url": "https://ostrovok.ru/hotel/russia/sochi/mid8105660/otel_arli/?language=ru&dates=31.10.2026-03.11.2026&guests=2",
+        "type": "ZOOS_AND_AQUARIUMS"
+      },
+      {
+        "category": "Прогулки",
+        "distance_kind": "straight",
+        "distance_m": 8768,
+        "lat": 43.40626907348633,
+        "lng": 39.95451736450195,
+        "name": "Олимпийский парк",
+        "reason": "Природная точка для прогулки; доступность троп нужно уточнить.",
+        "region_id": 965826459,
+        "score": 0.1232180358603937,
+        "source_url": "https://ostrovok.ru/hotel/russia/sochi/mid8105660/otel_arli/?language=ru&dates=31.10.2026-03.11.2026&guests=2",
+        "type": "ARENAS_AND_STADIUMS"
+      },
+      {
+        "category": "Впечатления",
+        "distance_kind": "straight",
+        "distance_m": 9694,
+        "lat": 43.55086135864258,
+        "lng": 39.84273147583008,
+        "name": "Смотровая башня горы Ахун",
+        "reason": "Местная достопримечательность для прогулочной программы.",
+        "region_id": 6118759,
+        "score": 0.030599999018230628,
+        "source_url": "https://ostrovok.ru/hotel/russia/sochi/mid8105660/otel_arli/?language=ru&dates=31.10.2026-03.11.2026&guests=2",
+        "type": "VIEWPOINT"
+      },
+      {
+        "category": "Море",
+        "distance_kind": "straight",
+        "distance_m": 288,
+        "lat": 43.471866607666016,
+        "lng": 39.89279556274414,
+        "name": "Пляж Фрегат",
+        "reason": "Место для прогулки у воды; условия купания зависят от сезона.",
+        "region_id": 965855591,
+        "score": -0.02879605098524285,
+        "source_url": "https://ostrovok.ru/hotel/russia/sochi/mid8105660/otel_arli/?language=ru&dates=31.10.2026-03.11.2026&guests=2",
+        "type": "BEACH"
+      },
+      {
+        "category": "Море",
+        "distance_kind": "straight",
+        "distance_m": 362,
+        "lat": 43.470130920410156,
+        "lng": 39.89350509643555,
+        "name": "Пляж Пирс",
+        "reason": "Место для прогулки у воды; условия купания зависят от сезона.",
+        "region_id": 966301275,
+        "score": -0.036172446698982154,
+        "source_url": "https://ostrovok.ru/hotel/russia/sochi/mid8105660/otel_arli/?language=ru&dates=31.10.2026-03.11.2026&guests=2",
+        "type": "BEACH"
+      }
+    ],
+    "transport": [
+      {
+        "id": "flight",
+        "source": "Aviasales / Travelpayouts · кэш прямых перелётов",
+        "cost": 3731600
+      },
+      {
+        "id": "train",
+        "source": "Туту / Travelpayouts · кэш без проверки даты",
+        "cost": 2627400
+      },
+      {
+        "id": "car",
+        "source": "OSRM · © OpenStreetMap contributors",
+        "cost": 2660000
+      }
+    ]
+  },
+  "actions": [
+    {
+      "label": "Перейти к оформлению",
+      "seconds": 0.052
+    },
+    {
+      "label": "Принять изменения",
+      "seconds": 0.053
+    },
+    {
+      "label": "Выбрать автомобиль",
+      "seconds": 0.069
+    },
+    {
+      "label": "Принять изменения",
+      "seconds": 0.048
+    },
+    {
+      "label": "Принять изменения",
+      "seconds": 0.052
+    },
+    {
+      "label": "Оставить прежний план",
+      "seconds": 0.056
+    },
+    {
+      "label": "Принять изменения",
+      "seconds": 0.044
+    },
+    {
+      "label": "Принять изменения",
+      "seconds": 0.096
+    },
+    {
+      "label": "Сохранить билеты и пересчитать",
+      "seconds": 0.102
+    },
+    {
+      "label": "Принять изменения",
+      "seconds": 0.069
+    },
+    {
+      "label": "Подтвердить поездку",
+      "seconds": 0.105
+    }
+  ],
+  "train": {
+    "alternatives": [
+      {
+        "arrival": "2026-10-31T12:07:00+03:00",
+        "assumptions": "Кэш прямых перелётов Aviasales на ваши даты; цена на одного взрослого туда-обратно. Наличие, багаж и итоговый тариф требуют перепроверки. Путь до аэропорта отправления не включён. Полное время включает ожидание в терминале и трансфер до отеля; дорога из дома до терминала отправления не рассчитана.",
+        "baggage": "Нормы багажа по билету нужно уточнить",
+        "benefit": "Быстрее на дальнем направлении",
+        "buffer": 120,
+        "can_book": true,
+        "collect": 45,
+        "connections": 0,
+        "departure": "2026-10-31T07:05:00+03:00",
+        "exact_departure": "2026-10-31T07:05:00+03:00",
+        "exact_return": "2026-11-03T18:50:00+03:00",
+        "full_out_minutes": 422,
+        "full_return_minutes": 630,
+        "id": "flight",
+        "issues": [],
+        "kind": "flight",
+        "label": "Самолёт",
+        "minutes": 230,
+        "origin_terminal": "Москва · аэропорт",
+        "overnight": false,
+        "price_delta": 964200,
+        "price_unit": "person",
+        "reference_checked_at": "2026-10-27T23:23:27.416296",
+        "return_arrival": "2026-11-03T22:30:00+03:00",
+        "return_departure": "2026-11-03T12:00:00+03:00",
+        "return_minutes": 220,
+        "roundtrip_minor": 1385800,
+        "source": "Aviasales / Travelpayouts · кэш прямых перелётов",
+        "source_url": "https://travelpayouts.github.io/slate/#non-stop-tickets",
+        "terminal": [
+          43.4499,
+          39.9566
+        ],
+        "terminal_name": "Сочи · аэропорт",
+        "total_transfers_minor": 220000,
+        "total_transport_minor": 2771600,
+        "tradeoff": "Нужен запас в аэропорту; багаж оплачивается по тарифу",
+        "trip_total_minor": 3891600
+      },
+      {
+        "arrival": "2026-10-31T16:21:00+03:00",
+        "assumptions": "Время и базовая цена взяты из кэша Туту в обе стороны. Дни курсирования, наличие мест, категория и цена на ваши даты не проверены. Это ориентир для планирования, не предложение билетов. Полное время включает ожидание в терминале и трансфер до отеля; дорога из дома до терминала отправления не рассчитана.",
+        "back_clock": "21:35",
+        "baggage": "Нормы багажа по билету нужно уточнить",
+        "benefit": "Прибытие в город, меньше времени на формальности",
+        "buffer": 45,
+        "can_book": true,
+        "collect": 15,
+        "connections": null,
+        "departure": "2026-10-30T14:20:00+03:00",
+        "full_out_minutes": 1606,
+        "full_return_minutes": 2091,
+        "id": "train",
+        "issues": [],
+        "kind": "train",
+        "label": "Поезд",
+        "minutes": 1459,
+        "origin_terminal": "Москва · вокзал",
+        "out_clock": "14:20",
+        "overnight": true,
+        "price_delta": 0,
+        "price_unit": "person",
+        "reference_checked_at": "2026-10-27T23:13:33.621921",
+        "return_arrival": "2026-11-04T22:51:00+03:00",
+        "return_departure": "2026-11-03T12:00:00+03:00",
+        "return_minutes": 1516,
+        "roundtrip_minor": 743700,
+        "source": "Туту / Travelpayouts · кэш без проверки даты",
+        "source_url": "https://support.travelpayouts.com/hc/ru/articles/360020147791",
+        "terminal": [
+          43.5914,
+          39.7277
+        ],
+        "terminal_name": "Сочи · вокзал",
+        "total_transfers_minor": 540000,
+        "total_transport_minor": 1487400,
+        "tradeoff": "Дальняя дорога может включать ночь; места и багаж зависят от тарифа",
+        "trip_total_minor": 2927400
+      },
+      {
+        "arrival": "2026-10-31T12:00:00+03:00",
+        "assumptions": "OSRM: путь по дорогам без живых пробок. Отсчёт от центра города отправления. Своё авто на 4 человека; топливо 9 л/100 км × 65 ₽/л; платные дороги, парковки и ночлег не включены. Отдых: 15 мин/2 ч, 8 ч после 10 ч езды.",
+        "baggage": "В пределах вашего автомобиля",
+        "benefit": "До отеля на своём авто; стоимость делится на гостей",
+        "buffer": 0,
+        "can_book": true,
+        "collect": 0,
+        "connections": 0,
+        "departure": "2026-10-29T17:26:00+03:00",
+        "driving_minutes": 1346,
+        "full_out_minutes": 2554,
+        "full_return_minutes": 2554,
+        "id": "car",
+        "issues": [],
+        "kind": "car",
+        "label": "Автомобиль",
+        "minutes": 2554,
+        "origin_terminal": "Москва",
+        "overnight": true,
+        "price_delta": -77400,
+        "price_unit": "car",
+        "rest_minutes": 1125,
+        "return_arrival": "2026-11-05T06:34:00+03:00",
+        "return_departure": "2026-11-03T12:00:00+03:00",
+        "road_km": 1624,
+        "roundtrip_minor": 1950000,
+        "source": "OSRM · © OpenStreetMap contributors",
+        "source_url": "https://routing.openstreetmap.de/about.html",
+        "terminal": [
+          43.5855,
+          39.7231
+        ],
+        "terminal_name": "Сочи",
+        "total_transfers_minor": 0,
+        "total_transport_minor": 1950000,
+        "tradeoff": "Нужен свой автомобиль и водитель; дополнительные расходы и остановки",
+        "trip_total_minor": 2850000
+      }
+    ],
+    "baggage": "Нормы багажа по билету нужно уточнить",
+    "breakdown": {
+      "fees": 0,
+      "hotel": 900000,
+      "transfers": 540000,
+      "transport": 1487400
+    },
+    "budget_minor": 15000000,
+    "can_book": true,
+    "cancellation_until": null,
+    "checkin_from": "2026-10-31T14:00:00+03:00",
+    "checkout_until": "2026-11-03T12:00:00+03:00",
+    "checks": [
+      {
+        "blocking": true,
+        "code": "dates",
+        "message": "Даты проживания согласованы.",
+        "status": "pass"
+      },
+      {
+        "blocking": true,
+        "code": "departure_future",
+        "message": "Расчётное отправление должно быть в будущем.",
+        "status": "pass"
+      },
+      {
+        "blocking": true,
+        "code": "checkin",
+        "message": "Расчётное прибытие в отель 31.10 16:21.",
+        "status": "pass"
+      },
+      {
+        "blocking": true,
+        "code": "return",
+        "message": "Выезд из отеля 03.11 12:00; запас перед отправлением 45 мин.",
+        "status": "pass"
+      },
+      {
+        "blocking": false,
+        "code": "capacity",
+        "message": "Вместимость номеров и машины для трансфера нужно уточнить перед поездкой.",
+        "status": "unknown"
+      },
+      {
+        "blocking": true,
+        "code": "budget",
+        "message": "Поездка укладывается в общий бюджет.",
+        "status": "pass"
+      },
+      {
+        "blocking": false,
+        "code": "supplier_confirmation",
+        "message": "Цены и плановые часы требуют подтверждения; сохранение плана не бронирует услуги.",
+        "status": "unknown"
+      }
+    ],
+    "child_seats": 0,
+    "currency": "RUB",
+    "notice": "Отель, фото и доступные отзывы — с Островка. Цена поездки и часы дороги — оценка; наличие и тарифы на даты не подтверждены.",
+    "reserve_minor": 0,
+    "segments": [
+      {
+        "arrival": "2026-10-31T14:39:00+03:00",
+        "departure": "2026-10-30T14:20:00+03:00",
+        "destination": "Сочи · вокзал",
+        "duration_minutes": 1459,
+        "ends_at_hotel": false,
+        "estimated": true,
+        "kind": "train",
+        "label": "Поезд туда",
+        "origin": "Москва · вокзал",
+        "timezone": "Europe/Moscow"
+      },
+      {
+        "arrival": "2026-10-31T16:21:00+03:00",
+        "departure": "2026-10-31T14:54:00+03:00",
+        "destination": "Вилла Мария Клуб (VillaMariaClub)",
+        "duration_minutes": 87,
+        "ends_at_hotel": true,
+        "estimated": true,
+        "kind": "transfer",
+        "label": "Трансфер в отель",
+        "origin": "Сочи · вокзал",
+        "timezone": "Europe/Moscow"
+      },
+      {
+        "arrival": "2026-11-03T13:27:00+03:00",
+        "departure": "2026-11-03T12:00:00+03:00",
+        "destination": "Сочи · вокзал",
+        "duration_minutes": 87,
+        "ends_at_hotel": false,
+        "estimated": true,
+        "kind": "transfer",
+        "label": "Обратный трансфер",
+        "origin": "Вилла Мария Клуб (VillaMariaClub)",
+        "timezone": "Europe/Moscow"
+      },
+      {
+        "arrival": "2026-11-04T22:51:00+03:00",
+        "departure": "2026-11-03T21:35:00+03:00",
+        "destination": "Москва · вокзал",
+        "duration_minutes": 1516,
+        "ends_at_hotel": false,
+        "estimated": true,
+        "kind": "train",
+        "label": "Поезд обратно",
+        "origin": "Сочи · вокзал",
+        "timezone": "Europe/Moscow"
+      }
+    ],
+    "source_kind": "estimate",
+    "total_incomplete": false,
+    "total_minor": 2927400,
+    "transfer_choice": {
+      "label": "Трансфер до отеля",
+      "notice": "Расчёт по расстоянию; поставщик и подача не подтверждены.",
+      "provider": "estimate",
+      "source_url": null,
+      "status": "estimate"
+    },
+    "transfer_estimate": {
+      "assumptions": "Оценка трансфера по координатам: путь × 1,5, 35 км/ч + 15 мин; 800 ₽ + 45 ₽/км. Подача и пробки не подтверждены.",
+      "minutes": 87,
+      "terminal": {
+        "lat": 43.5914,
+        "lng": 39.7277
+      }
+    },
+    "transport": {
+      "arrival": "2026-10-31T16:21:00+03:00",
+      "assumptions": "Время и базовая цена взяты из кэша Туту в обе стороны. Дни курсирования, наличие мест, категория и цена на ваши даты не проверены. Это ориентир для планирования, не предложение билетов. Полное время включает ожидание в терминале и трансфер до отеля; дорога из дома до терминала отправления не рассчитана.",
+      "back_clock": "21:35",
+      "baggage": "Нормы багажа по билету нужно уточнить",
+      "benefit": "Прибытие в город, меньше времени на формальности",
+      "buffer": 45,
+      "collect": 15,
+      "connections": null,
+      "departure": "2026-10-30T14:20:00+03:00",
+      "full_out_minutes": 1606,
+      "full_return_minutes": 2091,
+      "id": "train",
+      "kind": "train",
+      "label": "Поезд",
+      "minutes": 1459,
+      "origin_terminal": "Москва · вокзал",
+      "out_clock": "14:20",
+      "overnight": true,
+      "price_unit": "person",
+      "reference_checked_at": "2026-10-27T23:13:33.621921",
+      "return_arrival": "2026-11-04T22:51:00+03:00",
+      "return_departure": "2026-11-03T12:00:00+03:00",
+      "return_minutes": 1516,
+      "roundtrip_minor": 743700,
+      "source": "Туту / Travelpayouts · кэш без проверки даты",
+      "source_url": "https://support.travelpayouts.com/hc/ru/articles/360020147791",
+      "terminal": [
+        43.5914,
+        39.7277
+      ],
+      "terminal_name": "Сочи · вокзал",
+      "total_transfers_minor": 540000,
+      "total_transport_minor": 1487400,
+      "tradeoff": "Дальняя дорога может включать ночь; места и багаж зависят от тарифа"
+    },
+    "unknown_costs": [
+      "Сборы объекта и доплаты на месте",
+      "Багаж и доплаты перевозчика"
+    ],
+    "vehicles": 1,
+    "version": "public-trip-v2"
+  },
+  "car": {
+    "alternatives": [
+      {
+        "arrival": "2026-10-31T12:07:00+03:00",
+        "assumptions": "Кэш прямых перелётов Aviasales на ваши даты; цена на одного взрослого туда-обратно. Наличие, багаж и итоговый тариф требуют перепроверки. Путь до аэропорта отправления не включён. Полное время включает ожидание в терминале и трансфер до отеля; дорога из дома до терминала отправления не рассчитана.",
+        "baggage": "Нормы багажа по билету нужно уточнить",
+        "benefit": "Быстрее на дальнем направлении",
+        "buffer": 120,
+        "can_book": true,
+        "collect": 45,
+        "connections": 0,
+        "departure": "2026-10-31T07:05:00+03:00",
+        "exact_departure": "2026-10-31T07:05:00+03:00",
+        "exact_return": "2026-11-03T18:50:00+03:00",
+        "full_out_minutes": 422,
+        "full_return_minutes": 630,
+        "id": "flight",
+        "issues": [],
+        "kind": "flight",
+        "label": "Самолёт",
+        "minutes": 230,
+        "origin_terminal": "Москва · аэропорт",
+        "overnight": false,
+        "price_delta": 1041600,
+        "price_unit": "person",
+        "reference_checked_at": "2026-10-27T23:23:27.416296",
+        "return_arrival": "2026-11-03T22:30:00+03:00",
+        "return_departure": "2026-11-03T12:00:00+03:00",
+        "return_minutes": 220,
+        "roundtrip_minor": 1385800,
+        "source": "Aviasales / Travelpayouts · кэш прямых перелётов",
+        "source_url": "https://travelpayouts.github.io/slate/#non-stop-tickets",
+        "terminal": [
+          43.4499,
+          39.9566
+        ],
+        "terminal_name": "Сочи · аэропорт",
+        "total_transfers_minor": 220000,
+        "total_transport_minor": 2771600,
+        "tradeoff": "Нужен запас в аэропорту; багаж оплачивается по тарифу",
+        "trip_total_minor": 3891600
+      },
+      {
+        "arrival": "2026-10-31T16:21:00+03:00",
+        "assumptions": "Время и базовая цена взяты из кэша Туту в обе стороны. Дни курсирования, наличие мест, категория и цена на ваши даты не проверены. Это ориентир для планирования, не предложение билетов. Полное время включает ожидание в терминале и трансфер до отеля; дорога из дома до терминала отправления не рассчитана.",
+        "back_clock": "21:35",
+        "baggage": "Нормы багажа по билету нужно уточнить",
+        "benefit": "Прибытие в город, меньше времени на формальности",
+        "buffer": 45,
+        "can_book": true,
+        "collect": 15,
+        "connections": null,
+        "departure": "2026-10-30T14:20:00+03:00",
+        "full_out_minutes": 1606,
+        "full_return_minutes": 2091,
+        "id": "train",
+        "issues": [],
+        "kind": "train",
+        "label": "Поезд",
+        "minutes": 1459,
+        "origin_terminal": "Москва · вокзал",
+        "out_clock": "14:20",
+        "overnight": true,
+        "price_delta": 77400,
+        "price_unit": "person",
+        "reference_checked_at": "2026-10-27T23:13:33.621921",
+        "return_arrival": "2026-11-04T22:51:00+03:00",
+        "return_departure": "2026-11-03T12:00:00+03:00",
+        "return_minutes": 1516,
+        "roundtrip_minor": 743700,
+        "source": "Туту / Travelpayouts · кэш без проверки даты",
+        "source_url": "https://support.travelpayouts.com/hc/ru/articles/360020147791",
+        "terminal": [
+          43.5914,
+          39.7277
+        ],
+        "terminal_name": "Сочи · вокзал",
+        "total_transfers_minor": 540000,
+        "total_transport_minor": 1487400,
+        "tradeoff": "Дальняя дорога может включать ночь; места и багаж зависят от тарифа",
+        "trip_total_minor": 2927400
+      },
+      {
+        "arrival": "2026-10-31T12:00:00+03:00",
+        "assumptions": "OSRM: путь по дорогам без живых пробок. Отсчёт от центра города отправления. Своё авто на 4 человека; топливо 9 л/100 км × 65 ₽/л; платные дороги, парковки и ночлег не включены. Отдых: 15 мин/2 ч, 8 ч после 10 ч езды.",
+        "baggage": "В пределах вашего автомобиля",
+        "benefit": "До отеля на своём авто; стоимость делится на гостей",
+        "buffer": 0,
+        "can_book": true,
+        "collect": 0,
+        "connections": 0,
+        "departure": "2026-10-29T17:26:00+03:00",
+        "driving_minutes": 1346,
+        "full_out_minutes": 2554,
+        "full_return_minutes": 2554,
+        "id": "car",
+        "issues": [],
+        "kind": "car",
+        "label": "Автомобиль",
+        "minutes": 2554,
+        "origin_terminal": "Москва",
+        "overnight": true,
+        "price_delta": 0,
+        "price_unit": "car",
+        "rest_minutes": 1125,
+        "return_arrival": "2026-11-05T06:34:00+03:00",
+        "return_departure": "2026-11-03T12:00:00+03:00",
+        "road_km": 1624,
+        "roundtrip_minor": 1950000,
+        "source": "OSRM · © OpenStreetMap contributors",
+        "source_url": "https://routing.openstreetmap.de/about.html",
+        "terminal": [
+          43.5855,
+          39.7231
+        ],
+        "terminal_name": "Сочи",
+        "total_transfers_minor": 0,
+        "total_transport_minor": 1950000,
+        "tradeoff": "Нужен свой автомобиль и водитель; дополнительные расходы и остановки",
+        "trip_total_minor": 2850000
+      }
+    ],
+    "baggage": "В пределах вашего автомобиля",
+    "breakdown": {
+      "fees": 0,
+      "hotel": 900000,
+      "transfers": 0,
+      "transport": 1950000
+    },
+    "budget_minor": 15000000,
+    "can_book": true,
+    "cancellation_until": null,
+    "checkin_from": "2026-10-31T14:00:00+03:00",
+    "checkout_until": "2026-11-03T12:00:00+03:00",
+    "checks": [
+      {
+        "blocking": true,
+        "code": "dates",
+        "message": "Даты проживания согласованы.",
+        "status": "pass"
+      },
+      {
+        "blocking": true,
+        "code": "departure_future",
+        "message": "Расчётное отправление должно быть в будущем.",
+        "status": "pass"
+      },
+      {
+        "blocking": true,
+        "code": "checkin",
+        "message": "Расчётное прибытие в отель 31.10 12:00.",
+        "status": "pass"
+      },
+      {
+        "blocking": true,
+        "code": "return",
+        "message": "Выезд из отеля 03.11 12:00; запас перед отправлением 0 мин.",
+        "status": "pass"
+      },
+      {
+        "blocking": false,
+        "code": "capacity",
+        "message": "Вместимость номеров и автомобиля нужно уточнить перед поездкой.",
+        "status": "unknown"
+      },
+      {
+        "blocking": true,
+        "code": "budget",
+        "message": "Поездка укладывается в общий бюджет.",
+        "status": "pass"
+      },
+      {
+        "blocking": false,
+        "code": "early_arrival",
+        "message": "До заселения потребуется ожидание; ранний заезд не включён.",
+        "status": "pass"
+      },
+      {
+        "blocking": false,
+        "code": "supplier_confirmation",
+        "message": "Цены и плановые часы требуют подтверждения; сохранение плана не бронирует услуги.",
+        "status": "unknown"
+      }
+    ],
+    "child_seats": 0,
+    "currency": "RUB",
+    "notice": "Отель, фото и доступные отзывы — с Островка. Цена поездки и часы дороги — оценка; наличие и тарифы на даты не подтверждены.",
+    "reserve_minor": 0,
+    "segments": [
+      {
+        "arrival": "2026-10-31T12:00:00+03:00",
+        "departure": "2026-10-29T17:26:00+03:00",
+        "destination": "Вилла Мария Клуб (VillaMariaClub)",
+        "duration_minutes": 2554,
+        "ends_at_hotel": true,
+        "estimated": true,
+        "kind": "car",
+        "label": "На своём автомобиле",
+        "origin": "Москва",
+        "timezone": "Europe/Moscow"
+      },
+      {
+        "arrival": "2026-11-05T06:34:00+03:00",
+        "departure": "2026-11-03T12:00:00+03:00",
+        "destination": "Москва",
+        "duration_minutes": 2554,
+        "ends_at_hotel": false,
+        "estimated": true,
+        "kind": "car",
+        "label": "Обратная дорога",
+        "origin": "Вилла Мария Клуб (VillaMariaClub)",
+        "timezone": "Europe/Moscow"
+      }
+    ],
+    "source_kind": "estimate",
+    "total_incomplete": false,
+    "total_minor": 2850000,
+    "transfer_choice": null,
+    "transfer_estimate": null,
+    "transport": {
+      "arrival": "2026-10-31T12:00:00+03:00",
+      "assumptions": "OSRM: путь по дорогам без живых пробок. Отсчёт от центра города отправления. Своё авто на 4 человека; топливо 9 л/100 км × 65 ₽/л; платные дороги, парковки и ночлег не включены. Отдых: 15 мин/2 ч, 8 ч после 10 ч езды.",
+      "baggage": "В пределах вашего автомобиля",
+      "benefit": "До отеля на своём авто; стоимость делится на гостей",
+      "buffer": 0,
+      "collect": 0,
+      "connections": 0,
+      "departure": "2026-10-29T17:26:00+03:00",
+      "driving_minutes": 1346,
+      "full_out_minutes": 2554,
+      "full_return_minutes": 2554,
+      "id": "car",
+      "kind": "car",
+      "label": "Автомобиль",
+      "minutes": 2554,
+      "origin_terminal": "Москва",
+      "overnight": true,
+      "price_unit": "car",
+      "rest_minutes": 1125,
+      "return_arrival": "2026-11-05T06:34:00+03:00",
+      "return_departure": "2026-11-03T12:00:00+03:00",
+      "road_km": 1624,
+      "roundtrip_minor": 1950000,
+      "source": "OSRM · © OpenStreetMap contributors",
+      "source_url": "https://routing.openstreetmap.de/about.html",
+      "terminal": [
+        43.5855,
+        39.7231
+      ],
+      "terminal_name": "Сочи",
+      "total_transfers_minor": 0,
+      "total_transport_minor": 1950000,
+      "tradeoff": "Нужен свой автомобиль и водитель; дополнительные расходы и остановки"
+    },
+    "unknown_costs": [
+      "Сборы объекта и доплаты на месте",
+      "Платные дороги, парковки, ночлег в пути"
+    ],
+    "vehicles": 1,
+    "version": "public-trip-v2"
+  },
+  "map_loaded": true,
+  "owned": {
+    "alternatives": [
+      {
+        "arrival": "2026-10-31T12:00:00+03:00",
+        "assumptions": "OSRM: путь по дорогам без живых пробок. Отсчёт от центра города отправления. Своё авто на 4 человека; топливо 9 л/100 км × 65 ₽/л; платные дороги, парковки и ночлег не включены. Отдых: 15 мин/2 ч, 8 ч после 10 ч езды.",
+        "baggage": "В пределах вашего автомобиля",
+        "benefit": "До отеля на своём авто; стоимость делится на гостей",
+        "buffer": 0,
+        "can_book": true,
+        "collect": 0,
+        "connections": 0,
+        "departure": "2026-10-29T15:05:00+03:00",
+        "driving_minutes": 1472,
+        "full_out_minutes": 2695,
+        "full_return_minutes": 2695,
+        "id": "car",
+        "issues": [],
+        "kind": "car",
+        "label": "Автомобиль",
+        "minutes": 2695,
+        "origin_terminal": "Владимир",
+        "overnight": true,
+        "price_delta": -270000,
+        "price_unit": "car",
+        "rest_minutes": 1140,
+        "return_arrival": "2026-11-05T08:55:00+03:00",
+        "return_departure": "2026-11-03T12:00:00+03:00",
+        "road_km": 1792,
+        "roundtrip_minor": 2150000,
+        "source": "OSRM · © OpenStreetMap contributors",
+        "source_url": "https://routing.openstreetmap.de/about.html",
+        "terminal": [
+          43.5855,
+          39.7231
+        ],
+        "terminal_name": "Сочи",
+        "total_transfers_minor": 0,
+        "total_transport_minor": 2150000,
+        "tradeoff": "Нужен свой автомобиль и водитель; дополнительные расходы и остановки",
+        "trip_total_minor": 3050000
+      }
+    ],
+    "baggage": "Нормы багажа по билету нужно уточнить",
+    "breakdown": {
+      "fees": 0,
+      "hotel": 900000,
+      "transfers": 220000,
+      "transport": 2200000
+    },
+    "budget_minor": 15000000,
+    "can_book": true,
+    "cancellation_until": null,
+    "checkin_from": "2026-10-31T14:00:00+03:00",
+    "checkout_until": "2026-11-03T12:00:00+03:00",
+    "checks": [
+      {
+        "blocking": true,
+        "code": "dates",
+        "message": "Даты проживания согласованы.",
+        "status": "pass"
+      },
+      {
+        "blocking": true,
+        "code": "checkin",
+        "message": "Расчётное прибытие в отель 31.10 13:12.",
+        "status": "pass"
+      },
+      {
+        "blocking": true,
+        "code": "return",
+        "message": "Выезд из отеля 03.11 12:00; запас перед отправлением 120 мин.",
+        "status": "pass"
+      },
+      {
+        "blocking": false,
+        "code": "capacity",
+        "message": "Вместимость номеров и машины для трансфера нужно уточнить перед поездкой.",
+        "status": "unknown"
+      },
+      {
+        "blocking": true,
+        "code": "budget",
+        "message": "Поездка укладывается в общий бюджет.",
+        "status": "pass"
+      },
+      {
+        "blocking": false,
+        "code": "early_arrival",
+        "message": "До заселения потребуется ожидание; ранний заезд не включён.",
+        "status": "pass"
+      },
+      {
+        "blocking": false,
+        "code": "supplier_confirmation",
+        "message": "Цены и плановые часы требуют подтверждения; сохранение плана не бронирует услуги.",
+        "status": "unknown"
+      }
+    ],
+    "child_seats": 0,
+    "currency": "RUB",
+    "notice": "Отель, фото и доступные отзывы — с Островка. Цена поездки и часы дороги — оценка; наличие и тарифы на даты не подтверждены.",
+    "reserve_minor": 0,
+    "segments": [
+      {
+        "arrival": "2026-10-31T12:00:00+03:00",
+        "departure": "2026-10-31T12:00:00+03:00",
+        "destination": "Сочи · аэропорт",
+        "duration_minutes": null,
+        "ends_at_hotel": false,
+        "estimated": false,
+        "kind": "owned",
+        "label": "Ваши билеты туда",
+        "origin": "Владимир",
+        "time_partial": "arrival",
+        "timezone": "Europe/Moscow"
+      },
+      {
+        "arrival": "2026-10-31T13:12:00+03:00",
+        "departure": "2026-10-31T12:45:00+03:00",
+        "destination": "Вилла Мария Клуб (VillaMariaClub)",
+        "duration_minutes": 27,
+        "ends_at_hotel": true,
+        "estimated": true,
+        "kind": "transfer",
+        "label": "Трансфер в отель",
+        "origin": "Сочи · аэропорт",
+        "timezone": "Europe/Moscow"
+      },
+      {
+        "arrival": "2026-11-03T12:27:00+03:00",
+        "departure": "2026-11-03T12:00:00+03:00",
+        "destination": "Сочи · аэропорт",
+        "duration_minutes": 27,
+        "ends_at_hotel": false,
+        "estimated": true,
+        "kind": "transfer",
+        "label": "Обратный трансфер",
+        "origin": "Вилла Мария Клуб (VillaMariaClub)",
+        "timezone": "Europe/Moscow"
+      },
+      {
+        "arrival": "2026-11-03T18:00:00+03:00",
+        "departure": "2026-11-03T18:00:00+03:00",
+        "destination": "Владимир",
+        "duration_minutes": null,
+        "ends_at_hotel": false,
+        "estimated": false,
+        "kind": "owned",
+        "label": "Ваши билеты обратно",
+        "origin": "Сочи · аэропорт",
+        "time_partial": "departure",
+        "timezone": "Europe/Moscow"
+      }
+    ],
+    "source_kind": "estimate",
+    "total_incomplete": false,
+    "total_minor": 3320000,
+    "transfer_choice": {
+      "label": "Трансфер до отеля",
+      "notice": "Расчёт по расстоянию; поставщик и подача не подтверждены.",
+      "provider": "estimate",
+      "source_url": null,
+      "status": "estimate"
+    },
+    "transfer_estimate": {
+      "assumptions": "Оценка трансфера по координатам: путь × 1,5, 35 км/ч + 15 мин; 800 ₽ + 45 ₽/км. Подача и пробки не подтверждены.",
+      "minutes": 27,
+      "terminal": {
+        "lat": 43.4499,
+        "lng": 39.9566
+      }
+    },
+    "transport": {
+      "arrival": "2026-10-31T13:12:00+03:00",
+      "assumptions": "Приложение не проверяет билеты у перевозчика. Время прибытия и обратного отправления — из ваших данных.",
+      "baggage": "Нормы багажа по билету нужно уточнить",
+      "benefit": "Уже приобретённая дорога сохранена",
+      "buffer": 120,
+      "collect": 45,
+      "connections": null,
+      "departure": "2026-10-31T12:00:00+03:00",
+      "full_out_minutes": null,
+      "full_return_minutes": null,
+      "id": "owned",
+      "kind": "owned",
+      "label": "Ваши билеты",
+      "minutes": 0,
+      "origin_terminal": "Владимир",
+      "overnight": null,
+      "price_unit": "booking",
+      "return_arrival": "2026-11-03T18:00:00+03:00",
+      "return_departure": "2026-11-03T12:00:00+03:00",
+      "roundtrip_minor": 2200000,
+      "source": "Время и оплаченная сумма указаны вами",
+      "source_url": null,
+      "terminal": [
+        43.4499,
+        39.9566
+      ],
+      "terminal_name": "Сочи · аэропорт",
+      "total_transfers_minor": 220000,
+      "total_transport_minor": 2200000,
+      "tradeoff": "Проверяются переданные вами даты и стыковки"
+    },
+    "unknown_costs": [
+      "Сборы объекта и доплаты на месте",
+      "Багаж и доплаты перевозчика"
+    ],
+    "vehicles": 1,
+    "version": "public-trip-v2"
+  },
+  "saved_total": 3320000,
+  "pdf_seconds": 1.642,
+  "passed": true
+}

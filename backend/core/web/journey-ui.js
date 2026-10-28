@@ -117,6 +117,7 @@ function renderSavedHotelSearch(){
  const title=state.status==='needs_input'?'Уточним детали — ваш выбор сохранён':state.status==='error'?'Не удалось пересчитать — ваш выбор сохранён':'Новые условия требуют уточнения';
  const box=stateBox(title,state.assistant_message);
  box.append(node('p','Отели и цены ниже сохранены по прежним условиям. Новые условия из чата применим после уточнения и пересчёта.','context-note'));
+ if(state.trip_spec?.transport_owned&&!state.trip_spec.owned_transport)box.append(button('Ваши билеты',()=>ownedTicketsDialog(hotel?.id||state.selected_hotel?.id),'primary',true));
  box.append(button(hotel?'Вернуться к прежней поездке':'Вернуть прежнюю подборку',()=>act('restore_journey'),'secondary',true));
  if(state.status==='error'&&lastMessage)box.append(button('Повторить запрос',()=>submitMessage(lastMessage),'secondary',true));
  $('results').append(box);

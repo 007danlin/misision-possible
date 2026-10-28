@@ -1,0 +1,9 @@
+{
+  "url": "https://github.com/ggml-org/llama.cpp/releases/download/b11853/llama-b11853-bin-ubuntu-x64.tar.gz",
+  "sha256": "b0bba21f5673f80f242c1a8f7c1380800f08b6eff6f32fd55eae9fe220690fdc",
+  "size_bytes": 22438758,
+  "architecture": "ELF64 x86-64",
+  "executable_path": "llama-b11853/llama-server",
+  "executed": false,
+  "seconds": 1.978
+}

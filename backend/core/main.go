@@ -13,6 +13,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/backoff"
 	"google.golang.org/grpc/credentials/insecure"
 
 	pb "core/proto"
@@ -51,7 +52,15 @@ func (s *API) Handler() http.Handler {
 
 func run() error {
 	port := envOrDefault("PORT", "8081")
-	conn, err := grpc.NewClient(net.JoinHostPort(envOrDefault("AGENT_HOST", "localhost"), envOrDefault("AGENT_PORT", "50051")), grpc.WithTransportCredentials(insecure.NewCredentials()))
+	options := []grpc.DialOption{grpc.WithTransportCredentials(insecure.NewCredentials())}
+	if os.Getenv("MODEL_STATUS_FILE") != "" {
+		// The agent opens gRPC after prefill. A long initial absence must not
+		// leave the web server in the default 120-second reconnect backoff.
+		retry := backoff.DefaultConfig
+		retry.MaxDelay = 3 * time.Second
+		options = append(options, grpc.WithConnectParams(grpc.ConnectParams{Backoff: retry, MinConnectTimeout: 2 * time.Second}))
+	}
+	conn, err := grpc.NewClient(net.JoinHostPort(envOrDefault("AGENT_HOST", "localhost"), envOrDefault("AGENT_PORT", "50051")), options...)
 	if err != nil {
 		return err
 	}

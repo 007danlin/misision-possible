@@ -382,7 +382,8 @@ func (s *API) tripOperation(store *TripStore, w http.ResponseWriter, r *http.Req
 	} else {
 		if snap["search_mode"] == "hotels" {
 			var message string
-			if snap["journey_recovery"] != nil && input.Type != "restore_journey" {
+			completingTickets := input.Type == "change_transport" && input.Transport != nil && input.Transport.Tickets != nil && asMap(snap["trip_spec"])["transport_owned"] == true && snap["status"] == "needs_input"
+			if snap["journey_recovery"] != nil && input.Type != "restore_journey" && !completingTickets {
 				message = "Сначала уточните новые условия в чате или вернитесь к сохранённому плану."
 			} else if extraAction(input.Type) {
 				message = s.tripExtra(r.Context(), snap, input.Type, input.RequestTime, owner, input.RequestOrigin)

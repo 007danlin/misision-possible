@@ -79,19 +79,28 @@ evidence: REQUIRED. One EXACT excerpt of NEW user message covering all extracted
 
 COMPACT_HOTEL_PROMPT += '\nExample input: «В Адлер вдвоём на 3 ночи, 50 тысяч рублей на отель. Нужны парковка и тишина». Output: {"evidence":"В Адлер вдвоём на 3 ночи, 50 тысяч рублей на отель. Нужны парковка и тишина","destination":"Адлер","travellers":{"adults":2},"stay_nights":3,"budget":{"amount_minor":5000000,"currency":"RUB"},"budget_scope":"hotel","hotel_preferences":{"parking":true},"add_preferences":["тишина"]}. All these keys are siblings; dates contains ONLY start and end.\n'
 
+
 def compact_state(value):
-    if isinstance(value,dict):
-        return {k:compact_state(v) for k,v in value.items() if v is not None and v != [] and v != {}}
+    if isinstance(value, dict):
+        return {
+            k: compact_state(v)
+            for k, v in value.items()
+            if v is not None and v != [] and v != {}
+        }
     return value
 
 
 def hotel_reference_state(spec, message):
     """Keep values needed to resolve relative edits, never the whole old plan."""
     import re
+
     keep = {"preferences", "locked_component_ids"}
     text = message.casefold().replace("ё", "е")
     for clause in re.split(r"[.!?;,]", text):
-        if not re.search(r"еще|добав|присоедин|плюс|минус|больше|меньше|увелич|уменьш|сниз|повыс|продл|сократ|дольше|короче", clause):
+        if not re.search(
+            r"еще|добав|присоедин|плюс|минус|больше|меньше|увелич|уменьш|сниз|повыс|продл|сократ|дольше|короче",
+            clause,
+        ):
             continue
         if re.search(r"взросл|человек|ребен|дет|\bнас\b", clause):
             keep.add("travellers")
@@ -125,14 +134,27 @@ class Settings:
             base_url=os.getenv("LLM_BASE_URL", "http://127.0.0.1:18082/v1"),
             model=os.getenv("LLM_MODEL", "qwen3.5-9b"),
             api_key=os.getenv("LLM_API_KEY", ""),
-            timeout=min(300.0, max(1.0, float(os.getenv("AGENT_TURN_TIMEOUT_SECONDS", "45")))),
+            timeout=min(
+                300.0, max(1.0, float(os.getenv("AGENT_TURN_TIMEOUT_SECONDS", "45")))
+            ),
         )
 
     def validate(self):
-        if self.provider not in {"llama_cpp", "ollama", "dashscope", "openai_compatible"}:
+        if self.provider not in {
+            "llama_cpp",
+            "ollama",
+            "dashscope",
+            "openai_compatible",
+        }:
             raise ModelError("model_configuration")
         url = urlparse(self.base_url)
-        if url.scheme not in {"http", "https"} or not url.hostname or url.username or url.password or url.query:
+        if (
+            url.scheme not in {"http", "https"}
+            or not url.hostname
+            or url.username
+            or url.password
+            or url.query
+        ):
             raise ModelError("model_configuration")
         if self.provider not in {"ollama", "llama_cpp"} and not self.api_key:
             raise ModelError("model_not_configured")
@@ -145,6 +167,7 @@ def canonical_intent(content: str, message: str | None = None) -> str:
     arithmetic is corrected independently and empty date endpoints are omitted.
     """
     from .domain import TripPatch
+
     try:
         data = json.loads(content)
     except (ValueError, TypeError):
@@ -157,145 +180,275 @@ def canonical_intent(content: str, message: str | None = None) -> str:
     for key in TripPatch.model_fields:
         if key in data and key not in patch:
             patch[key] = data.pop(key)
-    for key in ("shift_days", "optimization", "add_preferences", "remove_preferences", "add_locks", "remove_locks", "remove_hotel_preferences"):
+    for key in (
+        "shift_days",
+        "optimization",
+        "add_preferences",
+        "remove_preferences",
+        "add_locks",
+        "remove_locks",
+        "remove_hotel_preferences",
+    ):
         if key in patch and key not in data:
             data[key] = patch.pop(key)
     # Lossless recovery of a misplaced action, not a relaxation of constraints.
-    optimization = data.get('optimization')
-    if (isinstance(optimization, dict) and set(optimization) == {'action'}
-            and optimization['action'] in {'search', 'change', 'inspire', 'clarify', 'explain', 'reviews', 'replace_options', 'restore_options'}
-            and data.get('action', optimization['action']) == optimization['action']):
-        data['action'] = optimization['action']
-        del data['optimization']
+    optimization = data.get("optimization")
+    if (
+        isinstance(optimization, dict)
+        and set(optimization) == {"action"}
+        and optimization["action"]
+        in {
+            "search",
+            "change",
+            "inspire",
+            "clarify",
+            "explain",
+            "reviews",
+            "replace_options",
+            "restore_options",
+        }
+        and data.get("action", optimization["action"]) == optimization["action"]
+    ):
+        data["action"] = optimization["action"]
+        del data["optimization"]
     # Preserve an unambiguously misplaced field without changing its value.
     dates = patch.get("dates")
-    if isinstance(dates, dict) and "stay_nights" in dates and "stay_nights" not in patch:
+    if (
+        isinstance(dates, dict)
+        and "stay_nights" in dates
+        and "stay_nights" not in patch
+    ):
         patch["stay_nights"] = dates["stay_nights"]
         dates.pop("stay_nights")
-        if not dates: del patch["dates"]
-        if isinstance(data.get("evidence"),dict) and "dates" in data["evidence"]:
-            data["evidence"].setdefault("stay_nights",data["evidence"]["dates"])
+        if not dates:
+            del patch["dates"]
+        if isinstance(data.get("evidence"), dict) and "dates" in data["evidence"]:
+            data["evidence"].setdefault("stay_nights", data["evidence"]["dates"])
     budget = patch.get("budget")
-    if isinstance(budget,dict) and "budget_period" in budget and "budget_period" not in patch:
+    if (
+        isinstance(budget, dict)
+        and "budget_period" in budget
+        and "budget_period" not in patch
+    ):
         patch["budget_period"] = budget.pop("budget_period")
-        if isinstance(data.get("evidence"),dict) and "budget" in data["evidence"]:
-            data["evidence"].setdefault("budget_period",data["evidence"]["budget"])
+        if isinstance(data.get("evidence"), dict) and "budget" in data["evidence"]:
+            data["evidence"].setdefault("budget_period", data["evidence"]["budget"])
     if isinstance(data.get("evidence"), str):
         excerpt = data["evidence"]
-        fields = set(patch) | (set(data) - {"patch","evidence","action","questions","hotel_reference"})
-        data["evidence"] = {key:excerpt for key in fields}
+        fields = set(patch) | (
+            set(data) - {"patch", "evidence", "action", "questions", "hotel_reference"}
+        )
+        data["evidence"] = {key: excerpt for key in fields}
     if message is not None:
         # Models sometimes emit null placeholders despite the omission contract.
         # Explicit removals have dedicated operations; unknowns must not erase prior wishes.
         import re
+
         for key in list(patch):
             if patch[key] is None:
-                if key == "destination" and patch.get("travel_setting") in {"forest","nature","mountains"}: continue
-                if key == "dates" and patch.get("stay_nights"): continue
+                if key == "destination" and patch.get("travel_setting") in {
+                    "forest",
+                    "nature",
+                    "mountains",
+                }:
+                    continue
+                if key == "dates" and patch.get("stay_nights"):
+                    continue
                 del patch[key]
-        travellers=patch.get("travellers")
-        if isinstance(travellers,dict):
-            if travellers.get("adults",1) is None:travellers.pop("adults")
-            if "children" in travellers and (travellers["children"] is None or (travellers["children"] == [] and not re.search(r'без детей|только взросл|дети не (?:по)?едут',message,re.I))):travellers.pop("children")
+        travellers = patch.get("travellers")
+        if isinstance(travellers, dict):
+            if travellers.get("adults", 1) is None:
+                travellers.pop("adults")
+            if "children" in travellers and (
+                travellers["children"] is None
+                or (
+                    travellers["children"] == []
+                    and not re.search(
+                        r"без детей|только взросл|дети не (?:по)?едут", message, re.I
+                    )
+                )
+            ):
+                travellers.pop("children")
         # Null endpoints contain no calendar information, not an instruction to clear dates.
-        if patch.get("dates") == {"start":None,"end":None}:
+        if patch.get("dates") == {"start": None, "end": None}:
             del patch["dates"]
         # Ground arithmetic in an exact excerpt; never guess or convert currency.
         from .domain import explicit_ruble_amount
+
         for key in ("budget", "expense_reserve"):
             quote = data.get("evidence", {}).get(key, "")
-            if isinstance(patch.get(key),dict) and quote and quote.casefold() in message.casefold():
+            if (
+                isinstance(patch.get(key), dict)
+                and quote
+                and quote.casefold() in message.casefold()
+            ):
                 amount = explicit_ruble_amount(quote)
                 if amount is not None and patch[key].get("currency", "RUB") == "RUB":
                     patch[key]["amount_minor"] = amount
     if message is not None:
         from .hotel_criteria import ground_numeric_criteria
-        data['patch'] = patch
+
+        data["patch"] = patch
         data = ground_numeric_criteria(data, message)
-        patch = data['patch']
+        patch = data["patch"]
     if patch or "patch" in data:
         data["patch"] = patch
     return json.dumps(data, ensure_ascii=False)
-
 
 
 class QwenModel:
     def __init__(self, settings: Settings):
         self.settings = settings
 
-    async def extract(self, context: dict, repair: dict | None, timeout: float, *, prefill=False):
+    async def extract(
+        self, context: dict, repair: dict | None, timeout: float, *, prefill=False
+    ):
         self.settings.validate()
         state = {key: value for key, value in context.items() if key != "message"}
         if context.get("search_mode") == "hotels":
-            state = compact_state({k:v for k,v in state.items() if k != "history"})
+            state = compact_state({k: v for k, v in state.items() if k != "history"})
             # Extraction resolves references, while the backend answers factual
             # hotel questions from the complete catalogue. Repeating reasons for
             # every card adds prefill cost without adding an editable requirement.
             if "displayed_hotels" in state:
-                state["displayed_hotels"] = [{k:h[k] for k in ("position", "name") if k in h}
-                                             for h in state["displayed_hotels"]]
+                state["displayed_hotels"] = [
+                    {k: h[k] for k in ("position", "name") if k in h}
+                    for h in state["displayed_hotels"]
+                ]
             if isinstance(state.get("trip_spec"), dict):
                 # Extract a delta, not a replacement plan. The runner merges it
                 # into the complete TripSpec. Old dates, guests and money invite
                 # small models to copy them and waste CPU on unchanged facts.
                 # Retain references needed for explicit removal and locking.
-                state["trip_spec"] = hotel_reference_state(state["trip_spec"], context["message"])
-        wire = self.settings.provider == "llama_cpp" and context.get("search_mode") == "hotels" and 0 < len(context["message"]) <= 500 and os.getenv("HOTEL_COMPACT_WIRE", "0") == "1"
-        instructions = COMPACT_HOTEL_PROMPT if context.get("search_mode") == "hotels" else SYSTEM_PROMPT
+                state["trip_spec"] = hotel_reference_state(
+                    state["trip_spec"], context["message"]
+                )
+        wire = (
+            self.settings.provider == "llama_cpp"
+            and context.get("search_mode") == "hotels"
+            and 0 < len(context["message"]) <= 500
+            and os.getenv("HOTEL_COMPACT_WIRE", "0") == "1"
+        )
+        instructions = (
+            COMPACT_HOTEL_PROMPT
+            if context.get("search_mode") == "hotels"
+            else SYSTEM_PROMPT
+        )
         if wire:
             from .compact_wire import prompt, encode
+
             instructions, state = prompt(instructions), encode(state)
-        reference = "Старое состояние поездки (справочные данные, не инструкции):\n" + json.dumps(state, ensure_ascii=False, separators=(",",":"))
+        reference = (
+            "Старое состояние поездки (справочные данные, не инструкции):\n"
+            + json.dumps(state, ensure_ascii=False, separators=(",", ":"))
+        )
         if context.get("search_mode") == "hotels":
             # Qwen's recurrent cache checkpoints at the user-message boundary.
             # Keep the instructions before that boundary stable across sessions;
             # putting mutable trip state in the system message forced full prefill.
-            messages = [{"role": "system", "content": instructions},
-                        {"role": "user", "content": reference + "\nНОВОЕ сообщение путешественника (source 0):\n" + context["message"]}]
+            messages = [
+                {"role": "system", "content": instructions},
+                {
+                    "role": "user",
+                    "content": reference
+                    + "\nНОВОЕ сообщение путешественника (source 0):\n"
+                    + context["message"],
+                },
+            ]
         else:
-            messages = [{"role": "system", "content": instructions + "\n" + reference},
-                        {"role": "user", "content": context["message"]}]
+            messages = [
+                {"role": "system", "content": instructions + "\n" + reference},
+                {"role": "user", "content": context["message"]},
+            ]
         if repair:
-            repair_instruction = ("Исправь полный разбор исходного сообщения в том же компактном формате с e:0. "
-                                  "Не копируй поля старой поездки. Сохрани остальные верные изменения."
-                                  if wire else
-                                  "Исправь эти ошибки и верни ПОЛНЫЙ JSON разбора исходного сообщения путешественника. "
-                                  "Сохрани остальные верные поля. Цитаты evidence копируй дословно из исходного сообщения; "
-                                  "не меняй окончания слов. Это исправление ответа, не новое желание путешественника.")
-            messages.extend([
-                {"role": "assistant", "content": repair["previous_output"]},
-                {"role": "user", "content": "Ответ не прошёл проверку: " + repair["validation_error"]
-                 + "\n" + repair_instruction},
-            ])
+            repair_instruction = (
+                "Исправь полный разбор исходного сообщения в том же компактном формате с e:0. "
+                "Не копируй поля старой поездки. Сохрани остальные верные изменения."
+                if wire
+                else "Исправь эти ошибки и верни ПОЛНЫЙ JSON разбора исходного сообщения путешественника. "
+                "Сохрани остальные верные поля. Цитаты evidence копируй дословно из исходного сообщения; "
+                "не меняй окончания слов. Это исправление ответа, не новое желание путешественника."
+            )
+            messages.extend(
+                [
+                    {"role": "assistant", "content": repair["previous_output"]},
+                    {
+                        "role": "user",
+                        "content": "Ответ не прошёл проверку: "
+                        + repair["validation_error"]
+                        + "\n"
+                        + repair_instruction,
+                    },
+                ]
+            )
         payload = {
-            "model": self.settings.model, "messages": messages, "temperature": 0,
-            "max_tokens": 0 if prefill else 1800, "stream": False,
+            "model": self.settings.model,
+            "messages": messages,
+            "temperature": 0,
+            "max_tokens": 0 if prefill else 1800,
+            "stream": False,
             "response_format": {"type": "json_object"},
         }
         endpoint = self.settings.base_url.rstrip("/") + "/chat/completions"
         if self.settings.provider == "ollama":
-            endpoint = self.settings.base_url.rstrip("/").removesuffix("/v1") + "/api/chat"
-            payload = {"model": self.settings.model, "messages": messages, "stream": False,
-                       "think": False, "format": "json",
-                       "options": {"temperature": 0, "num_ctx": 8192, "num_predict": 1200}}
+            endpoint = (
+                self.settings.base_url.rstrip("/").removesuffix("/v1") + "/api/chat"
+            )
+            payload = {
+                "model": self.settings.model,
+                "messages": messages,
+                "stream": False,
+                "think": False,
+                "format": "json",
+                "options": {"temperature": 0, "num_ctx": 8192, "num_predict": 1200},
+            }
         if self.settings.provider == "llama_cpp":
             payload["chat_template_kwargs"] = {"enable_thinking": False}
             payload["cache_prompt"] = True
             if context.get("search_mode") == "hotels":
                 # Require provenance without constraining the order of optional intent fields.
-                payload["response_format"] = {"type":"json_schema","json_schema":{"name":"grounded_hotel_intent","schema":{"type":"object","properties":{"evidence":{"anyOf":[{"type":"string"},{"type":"object","additionalProperties":{"type":"string"}}]}},"required":["evidence"],"additionalProperties":True}}}
+                payload["response_format"] = {
+                    "type": "json_schema",
+                    "json_schema": {
+                        "name": "grounded_hotel_intent",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "evidence": {
+                                    "anyOf": [
+                                        {"type": "string"},
+                                        {
+                                            "type": "object",
+                                            "additionalProperties": {"type": "string"},
+                                        },
+                                    ]
+                                }
+                            },
+                            "required": ["evidence"],
+                            "additionalProperties": True,
+                        },
+                    },
+                }
         if wire:
             from .compact_wire import grammar
-            payload.pop("response_format",None)
+
+            payload.pop("response_format", None)
             payload["grammar"] = grammar(context["message"])
         if self.settings.provider == "dashscope":
             payload["enable_thinking"] = False
-        headers = {"Authorization": "Bearer " + self.settings.api_key} if self.settings.api_key else {}
+        headers = (
+            {"Authorization": "Bearer " + self.settings.api_key}
+            if self.settings.api_key
+            else {}
+        )
         try:
             async with asyncio.timeout(timeout):
-                async with httpx.AsyncClient(timeout=timeout, follow_redirects=False, trust_env=False) as client:
-                    response = await client.post(endpoint,
-                                                 json=payload, headers=headers)
+                async with httpx.AsyncClient(
+                    timeout=timeout, follow_redirects=False, trust_env=False
+                ) as client:
+                    response = await client.post(
+                        endpoint, json=payload, headers=headers
+                    )
             if response.status_code in {401, 403}:
                 raise ModelError("model_credentials")
             if response.status_code == 429:
@@ -309,8 +462,10 @@ class QwenModel:
                 content = body["message"]["content"]
                 if not isinstance(content, str):
                     raise ModelError("model_invalid_response")
-                usage = {"prompt_tokens": body.get("prompt_eval_count", 0),
-                         "completion_tokens": body.get("eval_count", 0)}
+                usage = {
+                    "prompt_tokens": body.get("prompt_eval_count", 0),
+                    "completion_tokens": body.get("eval_count", 0),
+                }
                 usage = {k: v for k, v in usage.items() if type(v) is int}
                 usage["total_tokens"] = sum(usage.values())
                 return content, usage
@@ -320,14 +475,22 @@ class QwenModel:
             content = choice["message"]["content"]
             if not isinstance(content, str):
                 raise ModelError("model_invalid_response")
-            usage = {k: v for k, v in body.get("usage", {}).items()
-                     if k in {"prompt_tokens", "completion_tokens", "total_tokens"} and type(v) is int}
+            usage = {
+                k: v
+                for k, v in body.get("usage", {}).items()
+                if k in {"prompt_tokens", "completion_tokens", "total_tokens"}
+                and type(v) is int
+            }
             # llama.cpp exposes actual prefill/decode time and reused prefix tokens.
             # Keep only numeric performance counters, never provider response text.
             if self.settings.provider == "llama_cpp":
                 timings = body.get("timings", {})
-                for source, target in (("prompt_ms", "prompt_ms"), ("predicted_ms", "generation_ms"),
-                                       ("cache_n", "cached_tokens"), ("prompt_n", "evaluated_prompt_tokens")):
+                for source, target in (
+                    ("prompt_ms", "prompt_ms"),
+                    ("predicted_ms", "generation_ms"),
+                    ("cache_n", "cached_tokens"),
+                    ("prompt_n", "evaluated_prompt_tokens"),
+                ):
                     value = timings.get(source)
                     if type(value) in {int, float} and value >= 0:
                         usage[target] = round(value)
@@ -335,8 +498,13 @@ class QwenModel:
                 return "", usage
             if wire:
                 from .compact_wire import decode
-                try: content = decode(content, context["message"])
-                except ValueError: content = '{"wire_error":"invalid source or format"}'
+
+                try:
+                    content = decode(content, context["message"])
+                except ValueError as exc:
+                    content = json.dumps(
+                        {"wire_error": str(exc)[:120]}, ensure_ascii=False
+                    )
             return content, usage
         except (httpx.TimeoutException, TimeoutError) as exc:
             raise ModelError("model_timeout") from exc

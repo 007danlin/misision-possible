@@ -1,0 +1,198 @@
+ Image oplan-cold-20261028-agent Building 
+ Image oplan-cold-20261028-model Building 
+ Image oplan-cold-20261028-app Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.62kB done
+#1 DONE 0.0s
+
+#2 [agent internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.10kB done
+#2 DONE 0.0s
+
+#3 [model internal] load build definition from Dockerfile
+#3 transferring dockerfile: 1.55kB done
+#3 DONE 0.0s
+
+#4 [app internal] load build definition from Dockerfile
+#4 transferring dockerfile: 533B done
+#4 DONE 0.0s
+
+#5 [model internal] load metadata for docker.io/library/ubuntu:24.04@sha256:24737cef17f4e22b1977df7d9a05e77c4e28b7da5b8911f8d8ccda136bf3573c
+#5 DONE 0.0s
+
+#6 [app internal] load metadata for docker.io/library/alpine:3.19@sha256:6baf43584bcb78f2e5847d1de515f23499913ac9f12bdf834811a3145eb11ca1
+#6 DONE 0.0s
+
+#7 [model internal] load .dockerignore
+#7 transferring context: 130B done
+#7 DONE 0.0s
+
+#8 [app internal] load metadata for docker.io/library/golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb
+#8 DONE 0.0s
+
+#9 [agent internal] load metadata for docker.io/library/python:3.12-slim-bookworm@sha256:6dd8b6dab6b3adc7812bab69eca5dbdc1a5cc690ad28306d234ffb4ef8ac9753
+#9 DONE 0.0s
+
+#10 [app internal] load .dockerignore
+#10 transferring context: 64B done
+#10 DONE 0.0s
+
+#11 [agent internal] load .dockerignore
+#11 transferring context: 119B done
+#11 DONE 0.0s
+
+#12 [model download 1/3] FROM docker.io/library/ubuntu:24.04@sha256:24737cef17f4e22b1977df7d9a05e77c4e28b7da5b8911f8d8ccda136bf3573c
+#12 resolve docker.io/library/ubuntu:24.04@sha256:24737cef17f4e22b1977df7d9a05e77c4e28b7da5b8911f8d8ccda136bf3573c done
+#12 DONE 0.0s
+
+#13 [model internal] load build context
+#13 transferring context: 166B done
+#13 DONE 0.0s
+
+#14 [model stage-1 3/6] WORKDIR /runtime
+#14 CACHED
+
+#15 [model download 3/3] RUN case "arm64" in       amd64) arch=x64; sha=b0bba21f5673f80f242c1a8f7c1380800f08b6eff6f32fd55eae9fe220690fdc ;;       arm64) arch=arm64; sha=f5a52789342647d39768efd14fed9fed2b4a826f5430d812c6778f6a8fd37e93 ;;       *) exit 1 ;;     esac     && curl -fL --retry 3 -o /tmp/runtime.tar.gz "https://github.com/ggml-org/llama.cpp/releases/download/b11853/llama-b11853-bin-ubuntu-${arch}.tar.gz"     && echo "$sha  /tmp/runtime.tar.gz" | sha256sum -c -     && mkdir /runtime && tar -xzf /tmp/runtime.tar.gz -C /runtime --strip-components=1
+#15 CACHED
+
+#16 [model download 2/3] RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates curl     && rm -rf /var/lib/apt/lists/*
+#16 CACHED
+
+#17 [model stage-1 2/6] RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates python3 libgomp1 libcurl4t64     && rm -rf /var/lib/apt/lists/*     && groupadd -g 10001 model && useradd -u 10001 -g model -m model     && mkdir -p /models /startup && chown model:model /models /startup
+#17 CACHED
+
+#18 [model stage-1 4/6] COPY --from=download /runtime /runtime
+#18 CACHED
+
+#19 [model stage-1 5/6] COPY docs/docker-runtime.json /runtime/model-lock.json
+#19 CACHED
+
+#20 [model stage-1 6/6] COPY infra/model/start.py /runtime/start.py
+#20 CACHED
+
+#21 [agent internal] load build context
+#21 transferring context: 1.62kB done
+#21 DONE 0.0s
+
+#22 [app stage-1 1/4] FROM docker.io/library/alpine:3.19@sha256:6baf43584bcb78f2e5847d1de515f23499913ac9f12bdf834811a3145eb11ca1
+#22 resolve docker.io/library/alpine:3.19@sha256:6baf43584bcb78f2e5847d1de515f23499913ac9f12bdf834811a3145eb11ca1 0.0s done
+#22 DONE 0.0s
+
+#23 [app builder 1/5] FROM docker.io/library/golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb
+#23 resolve docker.io/library/golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb done
+#23 DONE 0.0s
+
+#24 [agent builder 1/8] FROM docker.io/library/python:3.12-slim-bookworm@sha256:6dd8b6dab6b3adc7812bab69eca5dbdc1a5cc690ad28306d234ffb4ef8ac9753
+#24 resolve docker.io/library/python:3.12-slim-bookworm@sha256:6dd8b6dab6b3adc7812bab69eca5dbdc1a5cc690ad28306d234ffb4ef8ac9753 0.0s done
+#24 DONE 0.0s
+
+#25 [agent stage-1 6/7] COPY travel_agent ./travel_agent
+#25 CACHED
+
+#26 [agent builder 7/8] RUN python -m pip install --no-cache-dir -c constraints.txt . grpcio-tools==1.80.0
+#26 CACHED
+
+#27 [agent builder 4/8] COPY travel_agent ./travel_agent
+#27 CACHED
+
+#28 [agent stage-1 4/7] RUN python -m pip uninstall -y grpcio-tools setuptools pip     && useradd -u 10001 -m appuser     && mkdir -p /app/content-cache && chown appuser:appuser /app/content-cache
+#28 CACHED
+
+#29 [agent stage-1 5/7] COPY --from=builder /app/proto ./proto
+#29 CACHED
+
+#30 [agent builder 3/8] COPY pyproject.toml README.md constraints.txt ./
+#30 CACHED
+
+#31 [agent builder 2/8] WORKDIR /app
+#31 CACHED
+
+#32 [agent builder 5/8] COPY proto ./proto
+#32 CACHED
+
+#33 [agent stage-1 3/7] COPY --from=builder /opt/venv /opt/venv
+#33 CACHED
+
+#34 [agent builder 8/8] RUN python -m grpc_tools.protoc -I/app --python_out=/app --grpc_python_out=/app /app/proto/predict.proto
+#34 CACHED
+
+#35 [agent builder 6/8] RUN python -m venv /opt/venv
+#35 CACHED
+
+#36 [app internal] load build context
+#36 transferring context: 5.66kB done
+#36 DONE 0.0s
+
+#37 [agent stage-1 7/7] COPY main.py healthcheck.py bootstrap.py ./
+#37 CACHED
+
+#38 [app builder 4/5] RUN go mod download
+#38 CACHED
+
+#39 [app builder 5/5] RUN CGO_ENABLED=0 GOOS=linux go build -o core
+#39 CACHED
+
+#40 [app stage-1 3/4] RUN addgroup -g 10001 app && adduser -D -u 10001 -G app app     && mkdir -p /app/data/trips && chown -R app:app /app/data
+#40 CACHED
+
+#41 [app builder 3/5] COPY . .
+#41 CACHED
+
+#42 [app stage-1 2/4] WORKDIR /app
+#42 CACHED
+
+#43 [app builder 2/5] WORKDIR /core
+#43 CACHED
+
+#44 [app stage-1 4/4] COPY --from=builder /core/core .
+#44 CACHED
+
+#45 [app] exporting to oci image format
+#45 exporting layers done
+#45 exporting manifest sha256:f50b65ffef93bab44a5d31472d8ef74dedfb458eaf3271777d19957568cf746d 0.0s done
+#45 exporting config sha256:c689aaca23b06b32bb765010f0ddc1b02faea1a7cbe762fdc5583745e95c794f
+#45 exporting config sha256:c689aaca23b06b32bb765010f0ddc1b02faea1a7cbe762fdc5583745e95c794f done
+#45 sending tarball
+#45 sending tarball 0.7s done
+#45 DONE 0.7s
+
+#46 importing to docker
+#46 DONE 0.0s
+
+#47 [app] resolving provenance for metadata file
+#47 DONE 0.0s
+
+#48 [agent] exporting to oci image format
+#48 exporting layers done
+#48 exporting manifest sha256:7ce7f6f188c2ddb9d336a927602571062724bd89c7388e6e427f380ec7a3a757 done
+#48 exporting config sha256:2e32a64e8de06167613f266bbe7bec61270b04f1b775f4b219d29c989763c3c7 0.0s done
+#48 sending tarball 1.3s done
+#48 DONE 1.4s
+
+#49 [model] exporting to oci image format
+#49 exporting layers done
+#49 exporting manifest sha256:99b4659ebf3075237259e0a459d1431c98d01b830e5ae6cc481a7e03eacee430 done
+#49 exporting config sha256:edc056fb892d4ec8413b07392d920cb81d51651aadb209c5d766c3b08eec33bc done
+#49 sending tarball 1.3s done
+#49 DONE 1.3s
+
+#50 importing to docker
+#50 DONE 0.0s
+
+#51 [model] resolving provenance for metadata file
+#51 DONE 0.0s
+
+#52 importing to docker
+#52 DONE 0.0s
+
+#53 [agent] resolving provenance for metadata file
+#53 DONE 0.0s
+ Image oplan-cold-20261028-app Built 
+ Image oplan-cold-20261028-agent Built 
+ Image oplan-cold-20261028-model Built 
+ Container oplan-cold-20261028-model-1 Starting 
+ Container oplan-cold-20261028-model-1 Started 
+ Container oplan-cold-20261028-agent-1 Starting 
+ Container oplan-cold-20261028-app-1 Starting 
+ Container oplan-cold-20261028-agent-1 Started 
+ Container oplan-cold-20261028-app-1 Started 

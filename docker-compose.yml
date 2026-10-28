@@ -2,6 +2,8 @@ name: odin-request
 
 services:
   app:
+    mem_limit: 256m
+    memswap_limit: 256m
     build: ./backend/core
     ports:
       - "127.0.0.1:8080:8080"
@@ -16,7 +18,7 @@ services:
       AGENT_HOST: agent
       AGENT_PORT: "50051"
       AGENT_PROGRESS_URL: http://agent:15052
-      AGENT_TURN_TIMEOUT_SECONDS: ${AGENT_TURN_TIMEOUT_SECONDS:-300}
+      AGENT_TURN_TIMEOUT_SECONDS: ${AGENT_TURN_TIMEOUT_SECONDS:-90}
     volumes:
       - trips:/app/data
       - startup:/startup:ro
@@ -32,6 +34,8 @@ services:
     restart: unless-stopped
 
   agent:
+    mem_limit: 512m
+    memswap_limit: 512m
     build: ./agent
     environment:
       AGENT_PORT: "50051"
@@ -41,13 +45,14 @@ services:
       HOTEL_CONTENT_CACHE: /app/content-cache
       TRAVELPAYOUTS_TOKEN: ${TRAVELPAYOUTS_TOKEN:-}
       PUBLIC_DATA_USER_AGENT: ${PUBLIC_DATA_USER_AGENT:-OPlan-Hackathon/1.0 https://github.com/ostrovok-hackathon-2026/misision-possible}
-      AGENT_TURN_TIMEOUT_SECONDS: ${AGENT_TURN_TIMEOUT_SECONDS:-300}
+      AGENT_TURN_TIMEOUT_SECONDS: ${AGENT_TURN_TIMEOUT_SECONDS:-90}
       LLM_PROVIDER: ${LLM_PROVIDER:-llama_cpp}
       LLM_BASE_URL: ${LLM_BASE_URL:-http://model:8082/v1}
-      LLM_MODEL: ${LLM_MODEL:-qwen3.5-9b}
+      LLM_MODEL: ${LLM_MODEL:-qwen3-4b-instruct}
       LLM_API_KEY: ${LLM_API_KEY:-}
       HOTEL_COMPACT_WIRE: "1"
       MODEL_WARMUP: "1"
+      MODEL_WARMUP_TIMEOUT_SECONDS: ${MODEL_WARMUP_TIMEOUT_SECONDS:-300}
       WAIT_FOR_MODEL: "1"
     volumes:
       - hotel-content:/app/content-cache
@@ -64,13 +69,18 @@ services:
     restart: unless-stopped
 
   model:
+    mem_limit: 5g
+    memswap_limit: 5g
     build:
       context: .
       dockerfile: infra/model/Dockerfile
       args:
-        MODEL_LOCK: ${MODEL_LOCK:-docs/local-runtime.json}
+        MODEL_LOCK: ${MODEL_LOCK:-docs/docker-runtime.json}
     environment:
       MODEL_THREADS: ${MODEL_THREADS:-4}
+      MODEL_CONTEXT: ${MODEL_CONTEXT:-4096}
+      MODEL_CHECKPOINTS: ${MODEL_CHECKPOINTS:-2}
+      MODEL_CACHE_RAM: ${MODEL_CACHE_RAM:-0}
       MODEL_STATUS_FILE: /startup/model.json
     volumes:
       - models:/models

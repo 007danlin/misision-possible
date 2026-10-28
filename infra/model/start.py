@@ -147,12 +147,12 @@ def main():
     threads = str(max(1, int(os.getenv('MODEL_THREADS', '4'))))
     os.execv('/runtime/llama-server', [
         'llama-server', '-m', str(target), '--host', '0.0.0.0', '--port', '8082',
-        '--ctx-size', str(max(2048, int(os.getenv('MODEL_CONTEXT', '8192')))), '--parallel', '1', '--n-gpu-layers', '0',
+        '--ctx-size', str(max(2048, int(os.getenv('MODEL_CONTEXT', '4096')))), '--parallel', '1', '--n-gpu-layers', '0',
         '--alias', lock['alias'], '--jinja', '--chat-template-kwargs', '{"enable_thinking":false}',
         '--reasoning-budget', '0', '--threads', threads, '--threads-batch', threads,
         '--batch-size', '512', '--ubatch-size', '128', '--spec-type', 'none',
-        '--ctx-checkpoints', str(max(0, int(os.getenv('MODEL_CHECKPOINTS', '4')))),
-        '--checkpoint-min-step', '64', '--cache-ram', str(max(0, int(os.getenv('MODEL_CACHE_RAM', '256')))), '--metrics',
+        '--ctx-checkpoints', str(max(0, int(os.getenv('MODEL_CHECKPOINTS', '2')))),
+        '--checkpoint-min-step', '64', '--cache-ram', str(max(0, int(os.getenv('MODEL_CACHE_RAM', '0')))), '--metrics',
         *(['--no-repack'] if os.getenv('MODEL_REPACK', '1') == '0' else []),
     ])
 

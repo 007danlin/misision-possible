@@ -2,8 +2,7 @@
 set -eu
 
 cd "$(dirname "$0")/.."
-# The exact toolchain is shared by Docker, CI and local checks.
-export GOTOOLCHAIN=${GOTOOLCHAIN:-go1.27.1}
+# CI installs the module's toolchain; local checks select it per service below.
 export GOEXPERIMENT=runtimesecret
 mode=${1:-all}
 
@@ -17,6 +16,7 @@ esac
 for service in $services; do
   (
     cd "$service"
+    export GOTOOLCHAIN=${GOTOOLCHAIN:-go$(awk '$1 == "go" { print $2; exit }' go.mod)}
     echo "Checking $service ($mode)"
     case "$mode" in
       format)

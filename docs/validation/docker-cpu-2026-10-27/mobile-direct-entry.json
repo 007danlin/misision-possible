@@ -1,0 +1,13 @@
+{
+  "width": 390,
+  "overflow": false,
+  "headers": 1,
+  "headerRects": [
+    {
+      "top": 0,
+      "bottom": 56
+    }
+  ],
+  "bottomElement": "ASIDE",
+  "booked": true
+}

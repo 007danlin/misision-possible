@@ -1,0 +1,111 @@
+{
+  "project": "oplan-cold-20261028",
+  "empty_project_volumes": false,
+  "build_requested": true,
+  "milestones_seconds": {
+    "compose_up_finished": 2.073,
+    "web_process": 2.075,
+    "startup_page": 2.08,
+    "model_healthy": 11.272,
+    "ready": 92.136,
+    "agent_healthy": 93.311,
+    "app_healthy": 93.311
+  },
+  "phases": [
+    {
+      "seconds": 2.078,
+      "phase": "loading",
+      "message": "Загружаем модель в память",
+      "ready": false,
+      "attempt": 1
+    },
+    {
+      "seconds": 7.118,
+      "phase": "warmup",
+      "message": "Прогреваем модель перед первым запросом",
+      "ready": false,
+      "attempt": 1
+    },
+    {
+      "seconds": 92.135,
+      "phase": "ready",
+      "message": "Всё готово",
+      "ready": true
+    }
+  ],
+  "ready": true,
+  "success": true,
+  "builder": "oplan-cold-20261027",
+  "source_sha256": {
+    "docker-compose.yml": "fce3d9c6628c11d07d3f1d06916bf0213793e057cc332d1051f12bf4b6a7bc6b",
+    "infra/model/start.py": "1d4a839a98c19c6aed789c3c6cdfbf2b4715ffe582868ad8d83994720dc3ad12",
+    "infra/model/Dockerfile": "606be2570ac4de5b4932740732d72ea081cdbf4e86254f0c49f808ffed04ffb2",
+    "agent/travel_agent/model.py": "895e59aea4e3ad95c6a80c7bb65a05a5f985d6f1a6118b50ffbbfd0d79392bd7",
+    "agent/travel_agent/compact_wire.py": "ef5a07d45862050c9393cc4bb22becf765a4882a5b3735815d693967ec6ec4c2",
+    "agent/travel_agent/warmup.py": "e9033aef20848fbc040576027bab986028d88e9a421533dd7282b402d3f479ee",
+    "agent/bootstrap.py": "b186f96048f5fdd00f483343d071c024bfb27d9d40c6ff94f1625d25a981adbf",
+    "agent/Dockerfile": "d52737335670807dd33fca8bfd53e2cd78d08dd0ce5e3d22ced2b945ca39a68d",
+    "backend/core/startup.go": "dcf6d232fd00dfa1744cafe13db86686dbe33d2bdd5bab5f658d4200d5b43a92",
+    "backend/core/main.go": "53205d499dd1840a15da26c7a1b32b381844769ca015397ce0070e38332d7181",
+    "backend/core/web/startup.html": "fa78ff00240ea6c002cc1b9bea24fe5fb5c9f98c39c309a2026003e7a81ae508"
+  },
+  "limits": {
+    "agent": {
+      "cpuset": "0-3",
+      "mem_limit": "536870912",
+      "memswap_limit": "536870912"
+    },
+    "app": {
+      "cpuset": "0-3",
+      "mem_limit": "268435456",
+      "memswap_limit": "268435456"
+    },
+    "model": {
+      "cpuset": "0-3",
+      "mem_limit": "5368709120",
+      "memswap_limit": "5368709120"
+    }
+  },
+  "model_volume_initially_absent": false,
+  "model_lock": {
+    "base_model": "Qwen/Qwen3-4B-Instruct-2507",
+    "alias": "qwen3-4b-instruct",
+    "model_revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+    "model_files": [
+      {
+        "file": "Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+        "size_bytes": 2497281120,
+        "sha256": "3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597"
+      }
+    ]
+  },
+  "docker": {
+    "Architecture": "aarch64",
+    "NCPU": 10,
+    "MemTotal": 8321712128,
+    "ServerVersion": "29.4.0",
+    "OperatingSystem": "Docker Desktop"
+  },
+  "services": [
+    {
+      "Service": "agent",
+      "State": "running",
+      "Health": "healthy",
+      "ExitCode": 0
+    },
+    {
+      "Service": "app",
+      "State": "running",
+      "Health": "healthy",
+      "ExitCode": 0
+    },
+    {
+      "Service": "model",
+      "State": "running",
+      "Health": "healthy",
+      "ExitCode": 0
+    }
+  ],
+  "compose_exit_code": 0,
+  "total_seconds": 93.311
+}

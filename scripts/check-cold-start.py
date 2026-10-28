@@ -41,6 +41,15 @@ report['source_sha256'] = {name: hashlib.sha256(Path(name).read_bytes()).hexdige
     'backend/core/startup.go', 'backend/core/main.go', 'backend/core/web/startup.html')}
 configuration = json.loads(subprocess.run(cmd+['config','--format','json'], env=env, capture_output=True, text=True, check=True).stdout)
 report['limits'] = {name: {key: service.get(key) for key in ('cpuset','mem_limit','memswap_limit')} for name,service in configuration['services'].items()}
+model_mount = next(v for v in configuration['services']['model']['volumes'] if v['target']=='/models')
+assert model_mount['type']=='volume', 'Use a named volume, not host weights'
+model_volume = configuration['volumes'][model_mount['source']]
+assert not model_volume.get('external'), 'External cached weights are excluded from a cold check'
+volume_name = model_volume['name']
+found = subprocess.run(['docker','volume','inspect',volume_name], capture_output=True, text=True).returncode==0
+if found and not a.reuse:
+    raise SystemExit('The resolved model volume already exists; refusing to report a cold download')
+report['model_volume_initially_absent'] = not found
 lock_path = configuration['services']['model']['build'].get('args',{}).get('MODEL_LOCK','docs/local-runtime.json')
 lock = json.loads(Path(lock_path).read_text())
 report['model_lock'] = {key:lock.get(key) for key in ('base_model','alias','model_revision','model_files')}

@@ -1,4 +1,5 @@
 """Exercise the configured model; never print credentials or provider responses."""
+
 import asyncio
 import json
 
@@ -22,7 +23,11 @@ async def check():
     except ValueError:
         print(json.dumps({"status": "error", "code": "model_invalid_json"}))
         return False
-    print(json.dumps({"status": "ok", "provider": settings.provider, "model": settings.model}))
+    print(
+        json.dumps(
+            {"status": "ok", "provider": settings.provider, "model": settings.model}
+        )
+    )
     return True
 
 

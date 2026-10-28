@@ -1,0 +1,10 @@
+445	E702	[ ] multiple-statements-on-one-line-semicolon
+314	E701	[ ] multiple-statements-on-one-line-colon
+  8	E401	[*] multiple-imports-on-one-line
+  7	F401	[*] unused-import
+  4	E721	[ ] type-comparison
+  1	E731	[ ] lambda-assignment
+  1	F811	[*] redefined-while-unused
+  1	F841	[ ] unused-variable
+Found 781 errors.
+[*] 16 fixable with the `--fix` option (2 hidden fixes can be enabled with the `--unsafe-fixes` option).

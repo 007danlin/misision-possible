@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-27T23:38:12.834947+00:00",
+  "host_os": "Darwin",
+  "host_arch": "arm64",
+  "cpu": "Apple M4",
+  "ram_bytes": "34359738368",
+  "swap": "vm.swapusage: total = 14336.00M  used = 13123.06M  free = 1212.94M  (encrypted)",
+  "virtual_memory": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                     5287.\nPages active:                                 619537.\nPages inactive:                               617970.\nPages speculative:                               258.\nPages throttled:                                   0.\nPages wired down:                             221500.\nPages purgeable:                                4057.\n\"Translation faults\":                     9765389200.\nPages copy-on-write:                       188319505.\nPages zero filled:                       10250131471.\nPages reactivated:                        2362773694.\nPages purged:                              283537717.\nFile-backed pages:                            419532.\nAnonymous pages:                              818233.\nPages stored in compressor:                  1126174.\nPages occupied by compressor:                 580035.\nDecompressions:                           2599177011.\nCompressions:                             2933017544.\nPageins:                                   758875985.\nPageouts:                                    1976660.\nSwapins:                                   117917143.\nSwapouts:                                  139095925.",
+  "memory_pressure": "The system has 34359738368 (2097152 pages with a page size of 16384).\nSystem-wide memory free percentage: 60%",
+  "thermal": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+  "docker": {
+    "Architecture": "aarch64",
+    "NCPU": 10,
+    "MemTotal": 8321712128,
+    "ServerVersion": "29.4.0",
+    "KernelVersion": "6.12.76-linuxkit"
+  },
+  "container": {
+    "image": "sha256:99b4659ebf3075237259e0a459d1431c98d01b830e5ae6cc481a7e03eacee430",
+    "state": "running",
+    "oom_killed": false,
+    "Memory": 5368709120,
+    "MemorySwap": 5368709120,
+    "CpusetCpus": "0-3",
+    "NanoCpus": 0
+  },
+  "cgroup": {
+    "memory.current": "5358592000",
+    "memory.peak": "5368709120",
+    "memory.events": "low 0\nhigh 0\nmax 533\noom 0\noom_kill 0\noom_group_kill 0",
+    "memory.stat": "anon 3175723008\nfile 2107305984\nkernel 74719232\nkernel_stack 278528\npagetables 11321344\nsec_pagetables 0\npercpu 26784\nsock 0\nvmalloc 16384\nshmem 0\nzswap 0\nzswapped 0\nfile_mapped 2069700608\nfile_dirty 0\nfile_writeback 0\nswapcached 0\nanon_thp 195035136\nfile_thp 0\nshmem_thp 0\ninactive_anon 1767542784\nactive_anon 1408167936\ninactive_file 1366712320\nactive_file 740593664\nunevictable 0\nslab_reclaimable 62563848\nslab_unreclaimable 466776\nslab 63030624\nworkingset_refault_anon 0\nworkingset_refault_file 7685\nworkingset_activate_anon 0\nworkingset_activate_file 7652\nworkingset_restore_anon 0\nworkingset_restore_file 7652\nworkingset_nodereclaim 0\npgdemote_kswapd 0\npgdemote_direct 0\npgdemote_khugepaged 0\npgscan 566220\npgsteal 104081\npgscan_kswapd 371136\npgscan_direct 195084\npgscan_khugepaged 0\npgsteal_kswapd 3\npgsteal_direct 104078\npgsteal_khugepaged 0\npgfault 934261\npgmajfault 884\npgrefill 281880\npgactivate 6531\npgdeactivate 0\npglazyfree 0\npglazyfreed 0\nswpin_zero 0\nswpout_zero 0\nzswpin 0\nzswpout 0\nzswpwb 0\nthp_fault_alloc 98\nthp_collapse_alloc 0\nthp_swpout 0\nthp_swpout_fallback 0",
+    "cpu.stat": "usage_usec 385489746\nuser_usec 373396176\nsystem_usec 12093570\nnice_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0"
+  },
+  "process_memory": "aaaae5de0000-ffffebf12000 ---p 00000000 00:00 0                          [rollup]\nRss:             5136696 kB\nPss:             5136178 kB\nPss_Dirty:       3101208 kB\nPss_Anon:        3101208 kB\nPss_File:        2034970 kB\nPss_Shmem:             0 kB\nShared_Clean:       1032 kB\nShared_Dirty:          0 kB\nPrivate_Clean:   2034456 kB\nPrivate_Dirty:   3101208 kB\nReferenced:      3654480 kB\nAnonymous:       3101208 kB\nKSM:                   0 kB\nLazyFree:              0 kB\nAnonHugePages:    190464 kB\nShmemPmdMapped:        0 kB\nFilePmdMapped:         0 kB\nShared_Hugetlb:        0 kB\nPrivate_Hugetlb:       0 kB\nSwap:                  0 kB\nSwapPss:               0 kB\nLocked:                0 kB"
+}

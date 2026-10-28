@@ -1,0 +1,17 @@
+{
+  "started_at": "2026-10-27T23:38:17.461885377Z",
+  "cached_weights": {
+    "phase": "weights_ready",
+    "source": "verified_cache",
+    "seconds": 0.001
+  },
+  "download_repeated": false,
+  "runtime_flags": {
+    "--ctx-size": "4096",
+    "--threads": "4",
+    "--ctx-checkpoints": "2",
+    "--cache-ram": "0",
+    "--n-gpu-layers": "0",
+    "--alias": "qwen3-4b-instruct"
+  }
+}

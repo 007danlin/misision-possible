@@ -1,0 +1,43 @@
+{
+  "source_hashes": {
+    "warmup.py": "e9033aef20848fbc040576027bab986028d88e9a421533dd7282b402d3f479ee",
+    "tools.py": "1b57034eb9db2444347d7a849f7ae96fc9e2a77d3f44c2b9a768a389a9613986",
+    "hotel_selection.py": "7754325e1f7faf1ff4c1f113b5c4439c84838dd1089ff6ee8a68c750603c3164",
+    "tutu.py": "4c06e9f311017d7d7f1f6c2dd525d55881a643f4eb1d94c464f3bc667cc844ff",
+    "runner.py": "a40ffddc28627cb6f2f8dac5646de92f3da3271fa4c3ffd6300884aa01f87273",
+    "compact_wire.py": "ef5a07d45862050c9393cc4bb22becf765a4882a5b3735815d693967ec6ec4c2",
+    "progress.py": "6f6d88c55a3d81cd30df4a80c08d21b836c14f12cd9a3bf6f6c84bdb26cee787",
+    "journey.py": "51c8b9748f93852691cfb1e6a1e4f384d4065f7154b699a241f0dc58199adde2",
+    "hotel_criteria.py": "81d97bf806e3f2e05cb77278139745afd581aa144f127ed9944b53b14466b34b",
+    "travelpayouts.py": "fdfe465973b403e2cdb6811783b9e77d1926fe70b06cb5d07ece952ecaa479c2",
+    "transport.py": "5895f39d5e042e921bdf126c01f8976dbddaae366c34794d866cfb0404de22db",
+    "explicit_commands.py": "9a73742e2209cfc92d0520ece81860a9af3c0d31c859fee8d8a050b70c9bcc6a",
+    "model_check.py": "8e6ecacd4e81c3840152aa2beb98287014a38f223f402f23073b5c1c101383b5",
+    "model.py": "895e59aea4e3ad95c6a80c7bb65a05a5f985d6f1a6118b50ffbbfd0d79392bd7",
+    "inspiration.py": "2e0e92114bda835f54fe12799f562fe257e9c8323898595c756ebcf1144dfd64",
+    "domain.py": "a3edf189fac5c3d907adac4ddfd0e4ed6903fbdb98b33bff4a887656be8e4f7d",
+    "public_content.py": "f6207b159643fe38c62102d9a04c140d4743f7bb14a09e93d0e6d9ddd962c96a",
+    "__init__.py": "2cd6455d8f2764c3e201e580e7230159246d2ec96c1e72b81252e030c286c5b8",
+    "places.py": "ec4b6e1f6af2ad3980179c46a30235395b27255b17936de5b15b2ce8aaf0e438",
+    "trip_context.py": "f0b60622dc2bc06cc5ebdf678604a4f93062ee5984a900eaf31a292dd6d796f3",
+    "demo_tools.py": "5ee1960291ee2955f92d6de4da38c418f7fbb0b176a5088bfb0b9ee72c9bdcee",
+    "fast_intent.py": "f95b4eb148e8620031e90f5c1c5a4953278a8860690be42d39ab937500eb8006",
+    "ostrovok.py": "c8829e5d0a5ffaec9d534ce6db907f7dcd7a6544e200e78e4aa74b8cf672a2fc",
+    "grounding.py": "2d87ba542b247d83ce155452a8f6c3cd802645208f2f612edb9696f338fcc245"
+  },
+  "source_files_unchanged": true,
+  "cases": 95,
+  "passed": 95,
+  "failed": [],
+  "environment": "Main Docker Compose production agent; 4 shared CPU cores; stack RAM 5.75GiB; no container swap; final 95 corpus with strengthened preservation assertions",
+  "endpoint": "http://model:8082/v1",
+  "model": "qwen3-4b-instruct",
+  "compact_wire": "1",
+  "timeout_seconds": 90.0,
+  "latency_seconds": {
+    "median": 3.62,
+    "p95": 8.52,
+    "max": 33.62
+  },
+  "prompt_version": "odin-request-9.2"
+}

@@ -37,16 +37,21 @@ class PredictTests(unittest.TestCase):
         self.assertEqual(response.caller, "123")
 
     def test_empty_name_and_caller(self):
-        response = self.stub.Predict(
-            predict_pb2.PredictRequest(name="   "), timeout=5
-        )
+        response = self.stub.Predict(predict_pb2.PredictRequest(name="   "), timeout=5)
         self.assertEqual(response.message, "hello friend from agent")
         self.assertEqual(response.caller, "unknown")
 
     def test_run_turn_over_real_grpc(self):
-        reply = self.stub.RunTurn(predict_pb2.TurnRequest(
-            message="подбери поездку", caller="123",
-            state_json=json.dumps({"trip_spec": full_spec().model_dump(mode="json")})), timeout=5)
+        reply = self.stub.RunTurn(
+            predict_pb2.TurnRequest(
+                message="подбери поездку",
+                caller="123",
+                state_json=json.dumps(
+                    {"trip_spec": full_spec().model_dump(mode="json")}
+                ),
+            ),
+            timeout=5,
+        )
         turn = json.loads(reply.turn_json)
         self.assertEqual(reply.caller, "123")
         self.assertEqual(turn["status"], "choosing")
@@ -54,15 +59,29 @@ class PredictTests(unittest.TestCase):
         self.assertFalse(turn["checkout_allowed"])
 
     def test_run_turn_rejects_bad_state(self):
-        for caller, state, code in (("", "{}", grpc.StatusCode.UNAUTHENTICATED),
-                                    ("123", '{"revision":-1}', grpc.StatusCode.INVALID_ARGUMENT)):
+        for caller, state, code in (
+            ("", "{}", grpc.StatusCode.UNAUTHENTICATED),
+            ("123", '{"revision":-1}', grpc.StatusCode.INVALID_ARGUMENT),
+        ):
             with self.assertRaises(grpc.RpcError) as error:
-                self.stub.RunTurn(predict_pb2.TurnRequest(message="тест", caller=caller, state_json=state), timeout=5)
+                self.stub.RunTurn(
+                    predict_pb2.TurnRequest(
+                        message="тест", caller=caller, state_json=state
+                    ),
+                    timeout=5,
+                )
             self.assertEqual(error.exception.code(), code)
 
     def test_evaluate_uses_catalogue_without_model(self):
-        reply = self.stub.Evaluate(predict_pb2.EvaluateRequest(
-            state_json=json.dumps({"trip_spec": full_spec().model_dump(mode="json")}), caller="123"), timeout=5)
+        reply = self.stub.Evaluate(
+            predict_pb2.EvaluateRequest(
+                state_json=json.dumps(
+                    {"trip_spec": full_spec().model_dump(mode="json")}
+                ),
+                caller="123",
+            ),
+            timeout=5,
+        )
         turn = json.loads(reply.turn_json)
         self.assertEqual(len(turn["options"]), 3)
         self.assertEqual(turn["telemetry"]["model_calls"], 0)

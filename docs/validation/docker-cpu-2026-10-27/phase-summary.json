@@ -1,0 +1,77 @@
+{
+  "language_cases": 95,
+  "model_attempts": 96,
+  "repair_cases": [
+    "injection-01"
+  ],
+  "prompt_ms": 180901,
+  "generation_ms": 238975,
+  "wall_seconds": 424.12,
+  "ui_model_turns": [
+    {
+      "message": "В Сочи с 31 октября по 3 ноября 2026 года. Двое взрослых, 150 тысяч рублей на отель, дорогу туда-обратно и оба трансфера. Нужен бассейн.",
+      "wall_seconds": 16.164,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 16053,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 1,
+        "model_ms": 16050,
+        "prompt_version": "odin-request-9.2",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 16053,
+        "usage": {
+          "cached_tokens": 1816,
+          "completion_tokens": 58,
+          "evaluated_prompt_tokens": 146,
+          "generation_ms": 8487,
+          "prompt_ms": 7530,
+          "prompt_tokens": 1962,
+          "total_tokens": 2020
+        }
+      }
+    },
+    {
+      "message": "Пересадки теперь допустимы, остальные условия сохрани.",
+      "wall_seconds": 6.206,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 6065,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 1,
+        "model_ms": 6060,
+        "prompt_version": "odin-request-9.2",
+        "provider": "llama_cpp",
+        "sources_ms": 4,
+        "tool_calls": [
+          "ostrovok_public_search"
+        ],
+        "total_ms": 6065,
+        "usage": {
+          "cached_tokens": 1834,
+          "completion_tokens": 14,
+          "evaluated_prompt_tokens": 91,
+          "generation_ms": 2477,
+          "prompt_ms": 3559,
+          "prompt_tokens": 1925,
+          "total_tokens": 1939
+        }
+      }
+    }
+  ],
+  "ui_sources_turns": [
+    {
+      "message": "Резерв на личные расходы 0 рублей.",
+      "wall_seconds": 2.391,
+      "sources_ms": 1981
+    },
+    {
+      "message": "покажи другие отели",
+      "wall_seconds": 4.403,
+      "sources_ms": 4245
+    }
+  ],
+  "pdf_seconds": 1.642
+}

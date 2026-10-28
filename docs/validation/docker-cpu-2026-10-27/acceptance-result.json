@@ -1,0 +1,35 @@
+{
+  "model": "qwen3-4b-instruct",
+  "quantization": "Q4_K_M",
+  "language_passed": 95,
+  "language_cases": 95,
+  "language_latency_seconds": {
+    "median": 3.62,
+    "p95": 8.52,
+    "max": 33.62
+  },
+  "ui_passed": true,
+  "cold_all_healthy_seconds": 235.862,
+  "restart_all_healthy_seconds": 93.311,
+  "goals_met": {
+    "95_of_95": true,
+    "warm_p95_at_most_30s": true,
+    "warm_max_at_most_90s": true,
+    "cold_at_most_600s": true,
+    "end_to_end": true
+  },
+  "scope": "MacBook Air M4 / Linux ARM64 Docker; all three services share CPU 0-3; memory caps total 5.75GiB; no GPU or container swap",
+  "not_verified": [
+    "Older physical Intel/AMD CPUs",
+    "Runtime inference on Linux amd64",
+    "Two CPU cores",
+    "4GiB total host RAM",
+    "Multiple concurrent travellers",
+    "Independent unseen-user quality study"
+  ],
+  "remaining_release_items": [
+    "Resolve repository Ruff CI debt",
+    "Publish current screencast and check public access",
+    "Commit reviewed final files and create submission tag"
+  ]
+}

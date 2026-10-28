@@ -18,7 +18,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     && mkdir -p /models /startup && chown model:model /models /startup
 WORKDIR /runtime
 COPY --from=download /runtime /runtime
-ARG MODEL_LOCK=docs/local-runtime.json
+ARG MODEL_LOCK=docs/docker-runtime.json
 COPY ${MODEL_LOCK} /runtime/model-lock.json
 COPY infra/model/start.py /runtime/start.py
 ENV LD_LIBRARY_PATH=/runtime

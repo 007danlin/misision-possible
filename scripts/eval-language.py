@@ -1,10 +1,11 @@
 """Run real Qwen extraction over a fixed corpus; persist every result immediately."""
-import asyncio,json,os,sys,time,argparse,statistics,hashlib
+import asyncio,json,os,sys,time,argparse,statistics,hashlib,math
 from dataclasses import replace
 from pathlib import Path
 root=Path(__file__).resolve().parents[1];sys.path.insert(0,str(root/'agent'));sys.path.insert(0,str(root/'agent/evals'));os.environ.setdefault('HOTEL_COMPACT_WIRE','1')
 from language_cases_20261027 import CASES
 from travel_agent.domain import TripSpec,Intent,apply_intent
+from travel_agent.grounding import ground_intent
 from travel_agent.model import QwenModel,Settings,canonical_intent,PROMPT_VERSION,ModelError
 from travel_agent.fast_intent import protect_child_count,protect_stay_length,protect_adult_count,protect_explicit_forest,protect_hotel_budget_scope,protect_explicit_polarity,clarify_ambiguous_request,protect_hotel_question,protect_journey_language
 BASE=TripSpec(origin='Москва',destination='Сочи',include_transport=True,dates={'start':'2026-11-10','end':'2026-11-15'},travellers={'adults':2},budget={'amount_minor':12000000},budget_scope='booking',hotel_preferences={'pool':True},hard_constraints={'no_night_flights':True})
@@ -31,7 +32,7 @@ async def main():
     raw,usage=await model.extract(context,repair,remaining)
     calls.append({'seconds':round(time.monotonic()-call_start,3),'usage':usage,'raw_output':raw})
     try:
-     row["raw_model_output"]=raw;intent=clarify_ambiguous_request(message) or Intent.model_validate_json(canonical_intent(raw,message));intent=protect_child_count(intent,message,old);intent=protect_stay_length(intent,message,old);intent=protect_adult_count(intent,message);intent=protect_explicit_forest(intent,message);intent=protect_hotel_budget_scope(intent,message);intent=protect_journey_language(protect_hotel_question(protect_explicit_polarity(intent,message),message),message);new=apply_intent(old,intent,message);break
+     row["raw_model_output"]=raw;intent=clarify_ambiguous_request(message) or Intent.model_validate_json(canonical_intent(raw,message));intent=protect_child_count(intent,message,old);intent=protect_stay_length(intent,message,old);intent=protect_adult_count(intent,message);intent=protect_explicit_forest(intent,message);intent=protect_hotel_budget_scope(intent,message);intent=protect_journey_language(protect_hotel_question(protect_explicit_polarity(intent,message),message),message);intent=ground_intent(intent,message,old);new=apply_intent(old,intent,message);break
     except Exception as e:
      calls[-1]['validation_error']=str(e)[:2000]
      if attempt:raise
@@ -52,5 +53,5 @@ async def main():
   except Exception as e:row['error']=str(e);errors.append(type(e).__name__)
   row['model_attempts']=calls
   row.update(seconds=round(time.monotonic()-start,2),passed=not errors,errors=errors);results.append(row);(out/'results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2));print(json.dumps({'id':row['id'],'passed':row['passed'],'seconds':row['seconds'],'errors':errors},ensure_ascii=False),flush=True)
- (out/'summary.json').write_text(json.dumps({'source_hashes':hashes,'source_files_unchanged':hashes==source_hashes(),'cases':len(results),'passed':sum(r['passed'] for r in results),'failed':[r['id'] for r in results if not r['passed']],'environment':args.environment,'endpoint':model.settings.base_url,'model':model.settings.model,'compact_wire':os.getenv('HOTEL_COMPACT_WIRE'),'timeout_seconds':args.timeout,'latency_seconds':{'median':statistics.median(r['seconds'] for r in results),'p95':sorted(r['seconds'] for r in results)[max(0,int(len(results)*.95)-1)],'max':max(r['seconds'] for r in results)},'prompt_version':PROMPT_VERSION},ensure_ascii=False,indent=2))
+ (out/'summary.json').write_text(json.dumps({'source_hashes':hashes,'source_files_unchanged':hashes==source_hashes(),'cases':len(results),'passed':sum(r['passed'] for r in results),'failed':[r['id'] for r in results if not r['passed']],'environment':args.environment,'endpoint':model.settings.base_url,'model':model.settings.model,'compact_wire':os.getenv('HOTEL_COMPACT_WIRE'),'timeout_seconds':args.timeout,'latency_seconds':{'median':statistics.median(r['seconds'] for r in results),'p95':sorted(r['seconds'] for r in results)[max(0,math.ceil(len(results)*.95)-1)],'max':max(r['seconds'] for r in results)},'prompt_version':PROMPT_VERSION},ensure_ascii=False,indent=2))
 asyncio.run(main())

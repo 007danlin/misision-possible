@@ -1,0 +1,173 @@
+app-1    | 2026/10/27 23:28:26 core listening on :8080
+app-1    | 2026/10/27 23:28:26 О!План: откройте http://localhost:8080 — здесь виден прогресс подготовки модели
+app-1    | 2026/10/27 23:38:17 core listening on :8080
+app-1    | 2026/10/27 23:38:17 О!План: откройте http://localhost:8080 — здесь виден прогресс подготовки модели
+model-1  | {"phase": "verify_weights", "model": "qwen3-4b-instruct"}
+model-1  | Проверяем наличие модели
+model-1  | Скачиваем модель 0.0% (0/2497 MB, 0.0 MB/s)
+model-1  | Скачиваем модель 0.0% (1/2497 MB, 2.5 MB/s)
+model-1  | Скачиваем модель 2.3% (57/2497 MB, 22.7 MB/s)
+model-1  | Скачиваем модель 4.6% (114/2497 MB, 25.1 MB/s)
+model-1  | Скачиваем модель 6.6% (166/2497 MB, 25.3 MB/s)
+model-1  | Скачиваем модель 8.8% (220/2497 MB, 25.7 MB/s)
+model-1  | Скачиваем модель 10.7% (266/2497 MB, 24.9 MB/s)
+model-1  | Скачиваем модель 12.7% (317/2497 MB, 24.9 MB/s)
+model-1  | Скачиваем модель 14.7% (368/2497 MB, 25.0 MB/s)
+model-1  | Скачиваем модель 16.9% (422/2497 MB, 25.2 MB/s)
+model-1  | Скачиваем модель 18.9% (473/2497 MB, 25.2 MB/s)
+model-1  | Скачиваем модель 21.1% (526/2497 MB, 25.1 MB/s)
+model-1  | Скачиваем модель 23.2% (580/2497 MB, 25.3 MB/s)
+model-1  | Скачиваем модель 25.6% (640/2497 MB, 25.6 MB/s)
+model-1  | Скачиваем модель 28.0% (698/2497 MB, 25.8 MB/s)
+model-1  | Скачиваем модель 30.0% (750/2497 MB, 25.8 MB/s)
+model-1  | Скачиваем модель 31.9% (798/2497 MB, 25.5 MB/s)
+model-1  | Скачиваем модель 34.2% (855/2497 MB, 25.6 MB/s)
+model-1  | Скачиваем модель 36.2% (905/2497 MB, 25.5 MB/s)
+model-1  | Скачиваем модель 38.5% (963/2497 MB, 25.7 MB/s)
+model-1  | Скачиваем модель 40.3% (1006/2497 MB, 25.5 MB/s)
+model-1  | Скачиваем модель 42.2% (1053/2497 MB, 25.3 MB/s)
+model-1  | Скачиваем модель 44.1% (1102/2497 MB, 25.2 MB/s)
+model-1  | Скачиваем модель 46.4% (1160/2497 MB, 25.4 MB/s)
+model-1  | Скачиваем модель 48.5% (1210/2497 MB, 25.4 MB/s)
+model-1  | Скачиваем модель 50.6% (1264/2497 MB, 25.4 MB/s)
+model-1  | Скачиваем модель 52.6% (1315/2497 MB, 25.3 MB/s)
+model-1  | Скачиваем модель 55.1% (1377/2497 MB, 25.5 MB/s)
+model-1  | Скачиваем модель 57.2% (1428/2497 MB, 25.5 MB/s)
+model-1  | Скачиваем модель 59.1% (1476/2497 MB, 25.4 MB/s)
+model-1  | Скачиваем модель 61.0% (1525/2497 MB, 25.4 MB/s)
+model-1  | Скачиваем модель 63.0% (1574/2497 MB, 25.3 MB/s)
+model-1  | Скачиваем модель 65.0% (1624/2497 MB, 25.3 MB/s)
+model-1  | Скачиваем модель 67.3% (1681/2497 MB, 25.3 MB/s)
+model-1  | Скачиваем модель 69.6% (1737/2497 MB, 25.4 MB/s)
+model-1  | Скачиваем модель 72.0% (1798/2497 MB, 25.5 MB/s)
+model-1  | Скачиваем модель 74.0% (1849/2497 MB, 25.5 MB/s)
+model-1  | Скачиваем модель 76.6% (1914/2497 MB, 25.7 MB/s)
+model-1  | Скачиваем модель 78.7% (1966/2497 MB, 25.7 MB/s)
+model-1  | Скачиваем модель 81.0% (2024/2497 MB, 25.8 MB/s)
+model-1  | Скачиваем модель 83.3% (2081/2497 MB, 25.8 MB/s)
+model-1  | Скачиваем модель 85.7% (2141/2497 MB, 25.9 MB/s)
+model-1  | Скачиваем модель 88.3% (2204/2497 MB, 26.0 MB/s)
+model-1  | Скачиваем модель 91.0% (2271/2497 MB, 26.1 MB/s)
+model-1  | Скачиваем модель 93.1% (2326/2497 MB, 26.1 MB/s)
+model-1  | Скачиваем модель 95.5% (2384/2497 MB, 26.2 MB/s)
+model-1  | Скачиваем модель 97.6% (2438/2497 MB, 26.2 MB/s)
+model-1  | Скачиваем модель 99.6% (2487/2497 MB, 26.2 MB/s)
+model-1  | Скачиваем модель 100.0% (2497/2497 MB, 26.1 MB/s)
+model-1  | Модель загружена, контрольная сумма совпала 100.0% (2497/2497 MB, 0.0 MB/s)
+model-1  | {"phase": "weights_ready", "source": "downloaded_and_verified", "seconds": 96.509}
+model-1  | Загружаем модель в память
+model-1  | 0.00.004.350 W Setting 'enable_thinking' via --chat-template-kwargs is deprecated. Use --reasoning on / --reasoning off instead.
+model-1  | 0.00.004.455 I srv  llama_server: initializing ...
+model-1  | 0.00.004.464 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+model-1  | 0.00.004.767 W srv  llama_server: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+model-1  | 0.00.006.773 I srv    load_model: loading model '/models/Qwen3-4B-Instruct-2507-Q4_K_M.gguf'
+model-1  | 0.00.140.743 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+model-1  | 0.02.973.746 I cmn          init: llama threadpool init, n_threads = 4
+model-1  | 0.03.204.795 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 4096, kv_unified = 'false'
+model-1  | 0.03.204.844 W srv          init: --cache-idle-slots requires --cache-ram, disabling
+model-1  | 0.03.210.459 I srv  llama_server: model loaded
+model-1  | 0.03.210.470 I srv  llama_server: listening on http://0.0.0.0:8082
+model-1  | 0.04.564.342 I slot get_availabl: id  0 | task -1 | selected slot by LRU, n_tokens = 0, t_last = -1
+model-1  | 0.04.564.458 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+model-1  | 0.21.724.979 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =    512, progress = 0.28, t =  17.16 s / 29.84 tokens per second
+model-1  | 0.43.977.713 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   1024, progress = 0.55, t =  39.41 s / 25.98 tokens per second
+model-1  | 1.08.316.837 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   1536, progress = 0.83, t =  63.75 s / 24.09 tokens per second
+model-1  | 1.26.620.546 I slot print_timing: id  0 | task 0 | prompt eval time =   82056.33 ms /  1857 tokens (   44.19 ms per token,    22.63 tokens per second)
+model-1  | 1.26.620.558 I slot print_timing: id  0 | task 0 |        eval time =       0.00 ms /     1 tokens (    0.00 ms per token,     0.00 tokens per second)
+model-1  | 1.26.620.559 I slot print_timing: id  0 | task 0 |       total time =   82056.33 ms /  1858 tokens
+model-1  | 1.26.620.563 I slot print_timing: id  0 | task 0 |    graphs reused =          8
+model-1  | 1.26.620.564 I slot print_timing: id  0 | task 0 |   graph reallocs =          0    /     0        (same size) / (changed size)
+model-1  | 1.26.622.465 I slot      release: id  0 | task 0 | stop processing: n_tokens = 1857, truncated = 0
+model-1  | 2.31.827.304 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.927 (> 0.100 thold), f_keep = 0.979
+model-1  | 2.31.827.528 I slot launch_slot_: id  0 | task 5 | processing task, is_child = 0
+model-1  | 2.44.819.165 I slot print_timing: id  0 | task 5 | prompt eval time =    3828.78 ms /   144 tokens (   26.59 ms per token,    37.61 tokens per second)
+model-1  | 2.44.819.182 I slot print_timing: id  0 | task 5 |        eval time =    9162.53 ms /    58 tokens (  160.75 ms per token,     6.22 tokens per second)
+model-1  | 2.44.819.183 I slot print_timing: id  0 | task 5 |       total time =   12991.31 ms /   202 tokens
+model-1  | 2.44.819.185 I slot print_timing: id  0 | task 5 |    graphs reused =         64
+model-1  | 2.44.819.186 I slot print_timing: id  0 | task 5 |   graph reallocs =          0    /     0        (same size) / (changed size)
+model-1  | 2.44.821.387 I slot      release: id  0 | task 5 | stop processing: n_tokens = 2019, truncated = 0
+model-1  | 3.01.051.870 I slot get_availabl: id  0 | task -1 | selected slot by LCP similarity, f_sim_best = 0.953 (> 0.100 thold), f_keep = 0.908
+model-1  | 3.01.052.023 I slot launch_slot_: id  0 | task 64 | processing task, is_child = 0
+model-1  | 3.04.901.425 I slot print_timing: id  0 | task 64 | prompt eval time =    2741.30 ms /    91 tokens (   30.12 ms per token,    33.20 tokens per second)
+model-1  | 3.04.901.437 I slot print_timing: id  0 | task 64 |        eval time =    1108.04 ms /    14 tokens (   85.23 ms per token,    11.73 tokens per second)
+model-1  | 3.04.901.438 I slot print_timing: id  0 | task 64 |       total time =    3849.34 ms /   105 tokens
+model-1  | 3.04.901.447 I slot print_timing: id  0 | task 64 |    graphs reused =         76
+model-1  | 3.04.901.447 I slot print_timing: id  0 | task 64 |   graph reallocs =          0    /     0        (same size) / (changed size)
+model-1  | 3.04.902.863 I slot      release: id  0 | task 64 | stop processing: n_tokens = 1938, truncated = 0
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Модель загружена. Начинаем подготовку первого ответа.
+model-1  | 8.12.478.862 I srv    operator(): operator(): cleaning up before exit...
+model-1  | {"phase": "verify_weights", "model": "qwen3-4b-instruct"}
+model-1  | Проверяем наличие модели
+model-1  | Модель найдена в кэше, повторное скачивание не нужно
+model-1  | {"phase": "weights_ready", "source": "verified_cache", "seconds": 0.001}
+agent-1  | {"warmup": "starting", "timeout_seconds": 300.0}
+agent-1  | INFO:httpx:HTTP Request: POST http://model:8082/v1/chat/completions "HTTP/1.1 200 OK"
+agent-1  | {"warmup": "ready", "seconds": 82.108, "usage": {"completion_tokens": 1, "prompt_tokens": 1857, "total_tokens": 1858, "prompt_ms": 82056, "generation_ms": 0, "cached_tokens": 0, "evaluated_prompt_tokens": 1857}}
+agent-1  | agent gRPC server running on :50051
+agent-1  | INFO:httpx:HTTP Request: POST http://model:8082/v1/chat/completions "HTTP/1.1 200 OK"
+model-1  | Загружаем модель в память
+model-1  | 0.00.004.197 W Setting 'enable_thinking' via --chat-template-kwargs is deprecated. Use --reasoning on / --reasoning off instead.
+model-1  | 0.00.004.273 I srv  llama_server: initializing ...
+model-1  | 0.00.004.285 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+model-1  | 0.00.004.495 W srv  llama_server: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+model-1  | 0.00.006.943 I srv    load_model: loading model '/models/Qwen3-4B-Instruct-2507-Q4_K_M.gguf'
+model-1  | 0.00.204.635 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+model-1  | 0.03.068.566 I cmn          init: llama threadpool init, n_threads = 4
+model-1  | 0.03.242.965 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 4096, kv_unified = 'false'
+model-1  | 0.03.243.016 W srv          init: --cache-idle-slots requires --cache-ram, disabling
+model-1  | 0.03.247.132 I srv  llama_server: model loaded
+model-1  | 0.03.247.143 I srv  llama_server: listening on http://0.0.0.0:8082
+model-1  | 0.04.600.292 I slot get_availabl: id  0 | task -1 | selected slot by LRU, n_tokens = 0, t_last = -1
+model-1  | 0.04.600.397 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+model-1  | 0.22.821.850 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =    512, progress = 0.28, t =  18.22 s / 28.10 tokens per second
+model-1  | 0.44.383.922 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   1024, progress = 0.55, t =  39.78 s / 25.74 tokens per second
+model-1  | 1.08.405.125 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   1536, progress = 0.83, t =  63.81 s / 24.07 tokens per second
+model-1  | 1.26.991.254 I slot print_timing: id  0 | task 0 | prompt eval time =   82395.95 ms /  1857 tokens (   44.37 ms per token,    22.54 tokens per second)
+model-1  | 1.26.991.279 I slot print_timing: id  0 | task 0 |        eval time =       0.00 ms /     1 tokens (    0.00 ms per token,     0.00 tokens per second)
+model-1  | 1.26.991.280 I slot print_timing: id  0 | task 0 |       total time =   82395.95 ms /  1858 tokens
+model-1  | 1.26.991.290 I slot print_timing: id  0 | task 0 |    graphs reused =          8
+model-1  | 1.26.991.291 I slot print_timing: id  0 | task 0 |   graph reallocs =          0    /     0        (same size) / (changed size)
+model-1  | 1.26.991.714 I slot      release: id  0 | task 0 | stop processing: n_tokens = 1857, truncated = 0
+agent-1  | INFO:root:agent_turn {"status": "needs_input", "error_code": null, "model": "qwen3-4b-instruct", "provider": "llama_cpp", "prompt_version": "odin-request-9.2", "model_calls": 1, "tool_calls": [], "first_useful_ms": 13081, "total_ms": 13081, "model_ms": 13025, "sources_ms": 0, "usage": {"completion_tokens": 58, "prompt_tokens": 1962, "total_tokens": 2020, "prompt_ms": 3829, "generation_ms": 9163, "cached_tokens": 1818, "evaluated_prompt_tokens": 144}, "cost": null}
+agent-1  | INFO:root:agent_turn {"status": "needs_input", "error_code": null, "model": "qwen3-4b-instruct", "provider": "llama_cpp", "prompt_version": "odin-request-9.2", "model_calls": 0, "tool_calls": [], "first_useful_ms": 1, "total_ms": 1, "model_ms": 0, "sources_ms": 0, "usage": {}, "cost": null}
+agent-1  | INFO:httpx:HTTP Request: GET https://routing.openstreetmap.de/routed-car/route/v1/driving/37.6173,55.7558;39.7231,43.5855?overview=false&steps=false "HTTP/1.1 200 OK"
+agent-1  | INFO:httpx:HTTP Request: GET https://suggest.travelpayouts.com/search?service=tutu_trains&term=2000000&term2=2064130&callback=n "HTTP/1.1 200 OK"
+agent-1  | INFO:httpx:HTTP Request: GET https://suggest.travelpayouts.com/search?service=tutu_trains&term=2064130&term2=2000000&callback=n "HTTP/1.1 200 OK"
+agent-1  | INFO:httpx:HTTP Request: GET https://ostrovok.ru/hotel/russia/sochi/?language=ru "HTTP/1.1 200 OK"
+agent-1  | INFO:httpx:HTTP Request: GET https://ostrovok.ru/hotel/russia/sochi/mid9829023/grejs_kruiz_hotel/?language=ru "HTTP/1.1 200 OK"
+agent-1  | INFO:httpx:HTTP Request: GET https://ostrovok.ru/hotel/russia/sochi/mid11200750/greys_lazur_hotel/?language=ru "HTTP/1.1 200 OK"
+agent-1  | INFO:httpx:HTTP Request: GET https://ostrovok.ru/hotel/russia/sochi/mid8105660/otel_arli/?language=ru "HTTP/1.1 200 OK"
+agent-1  | INFO:httpx:HTTP Request: GET https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=43.47&lon=39.9 "HTTP/1.1 200 OK"
+agent-1  | INFO:root:agent_turn {"status": "choosing", "error_code": null, "model": "qwen3-4b-instruct", "provider": "llama_cpp", "prompt_version": "odin-request-9.2", "model_calls": 0, "tool_calls": ["ostrovok_public_search"], "first_useful_ms": 5313, "total_ms": 5313, "model_ms": 0, "sources_ms": 5311, "usage": {}, "cost": null}
+agent-1  | INFO:httpx:HTTP Request: GET https://ostrovok.ru/hotel/russia/sochi/?language=ru&page=2 "HTTP/1.1 200 OK"
+agent-1  | INFO:httpx:HTTP Request: GET https://ostrovok.ru/hotel/russia/sochi/?language=ru&page=3 "HTTP/1.1 200 OK"
+agent-1  | INFO:httpx:HTTP Request: GET https://ostrovok.ru/hotel/russia/sochi/mid10439075/villa_maria_club_aparthotel/?language=ru "HTTP/1.1 301 Moved Permanently"
+agent-1  | INFO:httpx:HTTP Request: GET https://ostrovok.ru/hotel/russia/sochi/mid13075397/hotel_gostinichnyij_kompleks_grand_cascade/?language=ru "HTTP/1.1 200 OK"
+agent-1  | INFO:httpx:HTTP Request: GET https://ostrovok.ru/hotel/russia/sirius/mid10439075/villa_maria_club_aparthotel/?language=ru "HTTP/1.1 200 OK"
+agent-1  | INFO:httpx:HTTP Request: GET https://ostrovok.ru/hotel/russia/sochi/mid11201577/mantera_resort_congress/?language=ru "HTTP/1.1 301 Moved Permanently"
+agent-1  | INFO:httpx:HTTP Request: GET https://ostrovok.ru/hotel/russia/sirius/mid11201577/mantera_resort_congress/?language=ru "HTTP/1.1 200 OK"
+agent-1  | INFO:httpx:HTTP Request: GET https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=43.41&lon=39.96 "HTTP/1.1 200 OK"
+agent-1  | INFO:root:agent_turn {"status": "choosing", "error_code": null, "model": "qwen3-4b-instruct", "provider": "llama_cpp", "prompt_version": "odin-request-9.2", "model_calls": 0, "tool_calls": ["ostrovok_public_search"], "first_useful_ms": 6844, "total_ms": 6844, "model_ms": 0, "sources_ms": 6842, "usage": {}, "cost": null}
+agent-1  | INFO:root:agent_turn {"status": "choosing", "error_code": null, "model": "qwen3-4b-instruct", "provider": "llama_cpp", "prompt_version": "odin-request-9.2", "model_calls": 0, "tool_calls": [], "first_useful_ms": 1, "total_ms": 1, "model_ms": 0, "sources_ms": 0, "usage": {}, "cost": null}
+agent-1  | INFO:root:agent_turn {"status": "choosing", "error_code": null, "model": "qwen3-4b-instruct", "provider": "llama_cpp", "prompt_version": "odin-request-9.2", "model_calls": 0, "tool_calls": ["ostrovok_public_search"], "first_useful_ms": 3, "total_ms": 3, "model_ms": 0, "sources_ms": 2, "usage": {}, "cost": null}
+agent-1  | INFO:root:agent_turn {"status": "choosing", "error_code": null, "model": "qwen3-4b-instruct", "provider": "llama_cpp", "prompt_version": "odin-request-9.2", "model_calls": 0, "tool_calls": ["ostrovok_public_search"], "first_useful_ms": 4, "total_ms": 4, "model_ms": 0, "sources_ms": 3, "usage": {}, "cost": null}
+agent-1  | INFO:root:agent_turn {"status": "choosing", "error_code": null, "model": "qwen3-4b-instruct", "provider": "llama_cpp", "prompt_version": "odin-request-9.2", "model_calls": 0, "tool_calls": ["ostrovok_public_search"], "first_useful_ms": 3, "total_ms": 3, "model_ms": 0, "sources_ms": 3, "usage": {}, "cost": null}
+agent-1  | INFO:httpx:HTTP Request: GET https://routing.openstreetmap.de/routed-car/route/v1/driving/40.406,56.129;39.7231,43.5855?overview=false&steps=false "HTTP/1.1 200 OK"
+agent-1  | INFO:root:agent_turn {"status": "choosing", "error_code": null, "model": "qwen3-4b-instruct", "provider": "llama_cpp", "prompt_version": "odin-request-9.2", "model_calls": 0, "tool_calls": ["ostrovok_public_search"], "first_useful_ms": 186, "total_ms": 186, "model_ms": 0, "sources_ms": 185, "usage": {}, "cost": null}
+agent-1  | INFO:root:agent_turn {"status": "choosing", "error_code": null, "model": "qwen3-4b-instruct", "provider": "llama_cpp", "prompt_version": "odin-request-9.2", "model_calls": 0, "tool_calls": [], "first_useful_ms": 1, "total_ms": 1, "model_ms": 0, "sources_ms": 0, "usage": {}, "cost": null}
+agent-1  | INFO:httpx:HTTP Request: POST http://model:8082/v1/chat/completions "HTTP/1.1 200 OK"
+agent-1  | INFO:root:agent_turn {"status": "choosing", "error_code": null, "model": "qwen3-4b-instruct", "provider": "llama_cpp", "prompt_version": "odin-request-9.2", "model_calls": 1, "tool_calls": ["ostrovok_public_search"], "first_useful_ms": 3885, "total_ms": 3885, "model_ms": 3879, "sources_ms": 5, "usage": {"completion_tokens": 14, "prompt_tokens": 1925, "total_tokens": 1939, "prompt_ms": 2741, "generation_ms": 1108, "cached_tokens": 1834, "evaluated_prompt_tokens": 91}, "cost": null}
+agent-1  | INFO:root:agent_turn {"status": "needs_input", "error_code": null, "model": "qwen3-4b-instruct", "provider": "llama_cpp", "prompt_version": "odin-request-9.2", "model_calls": 0, "tool_calls": [], "first_useful_ms": 1, "total_ms": 1, "model_ms": 0, "sources_ms": 0, "usage": {}, "cost": null}
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Модель загружена. Начинаем подготовку первого ответа.
+agent-1  | {"warmup": "starting", "timeout_seconds": 300.0}
+agent-1  | INFO:httpx:HTTP Request: POST http://model:8082/v1/chat/completions "HTTP/1.1 200 OK"
+agent-1  | {"warmup": "ready", "seconds": 82.437, "usage": {"completion_tokens": 1, "prompt_tokens": 1857, "total_tokens": 1858, "prompt_ms": 82396, "generation_ms": 0, "cached_tokens": 0, "evaluated_prompt_tokens": 1857}}
+agent-1  | agent gRPC server running on :50051

@@ -1,0 +1,13 @@
+services:
+  model:
+    cpuset: "0-3"
+    mem_limit: 5g
+    memswap_limit: 5g
+  agent:
+    cpuset: "0-3"
+    mem_limit: 512m
+    memswap_limit: 512m
+  app:
+    cpuset: "0-3"
+    mem_limit: 256m
+    memswap_limit: 256m

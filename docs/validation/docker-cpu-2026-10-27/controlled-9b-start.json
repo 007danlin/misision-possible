@@ -1,0 +1,10 @@
+{
+  "kind": "cached weights load + HTTP readiness, no build/download; 4 shared cores, model RAM cap 5GiB, swap disabled",
+  "success": false,
+  "state": {
+    "Status": "exited",
+    "OOMKilled": true,
+    "ExitCode": 137
+  },
+  "seconds": 12.114
+}

@@ -63,11 +63,9 @@ func (s *API) changeTransport(ctx context.Context, snap map[string]any, hotelID 
 	}
 	previous := asMap(snap["selected_hotel"])
 	previousSpec := cloneTrip(asMap(snap["trip_spec"]))
-	if previous == nil {
-		if recovery := asMap(snap["journey_recovery"]); recovery != nil {
-			previous = asMap(recovery["hotel"])
-			previousSpec = cloneTrip(asMap(recovery["spec"]))
-		}
+	if recovery := asMap(snap["journey_recovery"]); recovery != nil {
+		previous = asMap(recovery["hotel"])
+		previousSpec = cloneTrip(asMap(recovery["spec"]))
 	}
 	if previous == nil {
 		for _, v := range asList(snap["hotel_options"]) {
