@@ -9,7 +9,165 @@ function saveGuestDraft(value){
  checkoutGuestDraft[state.session_id]=value;
  try{sessionStorage.setItem('oplan-guest:'+state.session_id,value);}catch{/* Keep the draft in memory when browser storage is unavailable. */}
 }
-const directionPhotos={"Сортавала": {"image_url": "https://cdn.ostrovok.ru/t/640x400/extranet/dc/36/dc36c027cc0ba229f04c7776a3774ddbfc2488a8.PNG", "photo_source": "https://ostrovok.ru/hotel/russia/sortavala/mid13426149/uyutny_dom_private_house_9/?language=ru", "photo_name": "Частный дом Дом Гнездо Аиста Коттедж №2"}, "Осташков": {"image_url": "https://cdn.ostrovok.ru/t/640x400/extranet/6c/ba/6cba86d373fd90347be81beefcd2288e8c2b4f55.JPEG", "photo_source": "https://ostrovok.ru/hotel/russia/ostashkov/mid13428923/na_beregu_seligera_private_house_2/?language=ru", "photo_name": "Частный дом на Берегу Селигера"}, "Сочи": {"image_url": "https://cdn.ostrovok.ru/t/640x400/extranet/21/77/217787f8947cbdbdc5c766540d69a9a4e3437a56.JPEG", "photo_source": "https://ostrovok.ru/hotel/russia/sochi/mid7942708/bellagio_hotel_3/?language=ru", "photo_name": "Отель Спа Bellagio"}, "Санкт-Петербург": {"image_url": "https://cdn.ostrovok.ru/t/640x400/extranet/64/6f/646f71c392fa05b5a3524dab7967289219b30edf.JPEG", "photo_source": "https://ostrovok.ru/hotel/russia/st._petersburg/mid11235014/hotel_hovard_club/?language=ru", "photo_name": "Отель Hovard Club"}, "Чемал": {"image_url": "https://cdn.ostrovok.ru/t/640x400/extranet/fb/06/fb06801ac7e65ba56ed8495d692afaaef5b132af.JPEG", "photo_source": "https://ostrovok.ru/hotel/russia/altai_republic_chemal/mid13949591/recreation_camp_eko_hotel_v_gorakh_altaya_shale_leshiy/?language=ru", "photo_name": "База отдыха ЭКО отель в горах Алтая Шале Леший"}};
+// Destination photographs are independent of hotel offer images.
+const directionPhotos={
+  "Сортавала": {
+    "image_url": "/assets/directions/karelia.jpg",
+    "alt": "Сосновые острова и скалистые берега Ладожских шхер, Карелия",
+    "author": "Yuriy Stolypin",
+    "source": "https://commons.wikimedia.org/wiki/File:Summer%2C_August%2C_morning%2C_skerries.jpg",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "Чемал": {
+    "image_url": "/assets/directions/altai.jpg",
+    "alt": "Лесистые горы и слияние рек Чемал и Катунь, Алтай",
+    "author": "Ludvig14",
+    "source": "https://commons.wikimedia.org/wiki/File:Chemal-KatunRiversConfluence_014_2458.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+  },
+  "Осташков": {
+    "image_url": "/assets/directions/seliger.jpg",
+    "alt": "Остров Вороний и лесные берега озера Селигер",
+    "author": "Александр Байдуков",
+    "source": "https://commons.wikimedia.org/wiki/File:Lake_Seliger._Ostashkov._View_of_Voroniy_Island.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+  },
+  "Сочи": {
+    "image_url": "/assets/idea-sochi.jpg",
+    "alt": "Чёрное море и побережье Сочи"
+  },
+  "Санкт-Петербург": {
+    "image_url": "/assets/idea-petersburg.jpg",
+    "alt": "Канал Грибоедова и Спас на Крови в Петербурге"
+  },
+  "Казань": {
+    "image_url": "/assets/idea-kazan.jpg",
+    "alt": "Мечеть Кул-Шариф в Казанском кремле"
+  },
+  "sochi_nature": {
+    "image_url": "/assets/directions/sochi_nature.jpg",
+    "alt": "Агурский водопад и лес в окрестностях Сочи",
+    "author": "Alexander V. Solomin",
+    "source": "https://commons.wikimedia.org/wiki/File:Upper_Agura_waterfall.JPG",
+    "license": "CC0",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "gelendzhik": {
+    "image_url": "/assets/directions/gelendzhik.jpg",
+    "alt": "Пейзаж и достопримечательности: Геленджик",
+    "author": "Alexxx1979",
+    "source": "https://commons.wikimedia.org/wiki/File:Gelendzhik_View_of_the_city_IMG_8367_1725.jpg",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "anapa": {
+    "image_url": "/assets/directions/anapa.jpg",
+    "alt": "Пейзаж и достопримечательности: Анапа",
+    "author": "\nThis photography was created by Artem Topchiy (user Art-top). Other photos see here\n\n\n This photograph was taken with a Canon PowerShot S2 IS",
+    "source": "https://commons.wikimedia.org/wiki/File:Anapa._Beach.JPG",
+    "license": "CC BY 3.0",
+    "license_url": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "kislovodsk": {
+    "image_url": "/assets/directions/kislovodsk.jpg",
+    "alt": "Пейзаж и достопримечательности: Кисловодск",
+    "author": "Vyacheslav Argenberg",
+    "source": "https://commons.wikimedia.org/wiki/File:Kislovodsk_National_Park,_Valley_of_Roses,_Kislovodsk,_Russia.jpg",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0"
+  },
+  "murmansk": {
+    "image_url": "/assets/directions/murmansk.jpg",
+    "alt": "Пейзаж и достопримечательности: Мурманск и Кольский полуостров",
+    "author": "Tom Thiel",
+    "source": "https://commons.wikimedia.org/wiki/File:Murmansk_(cropped).jpg",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "yaroslavl": {
+    "image_url": "/assets/directions/yaroslavl.jpg",
+    "alt": "Пейзаж и достопримечательности: Ярославль",
+    "author": "Allmyexesliveintexas22",
+    "source": "https://commons.wikimedia.org/wiki/File:Yaroslavl_Russia_Montage.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "vladimir": {
+    "image_url": "/assets/directions/vladimir.jpg",
+    "alt": "Пейзаж и достопримечательности: Владимир",
+    "author": "Vladimir-city",
+    "source": "https://commons.wikimedia.org/wiki/File:%D0%92%D0%BB%D0%B0%D0%B4%D0%B8%D0%BC%D0%B8%D1%80,_%D0%B2%D0%B8%D0%B4_%D0%BD%D0%B0_%D0%A3%D1%81%D0%BF%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D1%81%D0%BE%D0%B1%D0%BE%D1%80.JPG",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "nizhny": {
+    "image_url": "/assets/directions/nizhny.jpg",
+    "alt": "Пейзаж и достопримечательности: Нижний Новгород",
+    "author": "AlexTref871",
+    "source": "https://commons.wikimedia.org/wiki/File:Nizhny_Novgorod_2025-04-29_Minin_and_Pozharsky_square_01.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "kaliningrad": {
+    "image_url": "/assets/directions/kaliningrad.jpg",
+    "alt": "Пейзаж и достопримечательности: Калининград",
+    "author": "A.Savin",
+    "source": "https://commons.wikimedia.org/wiki/File:Kaliningrad_05-2017_img07_Fishery_Village.jpg",
+    "license": "FAL",
+    "license_url": "http://artlibre.org/licence/lal/en"
+  },
+  "moscow": {
+    "image_url": "/assets/directions/moscow.jpg",
+    "alt": "Пейзаж и достопримечательности: Москва",
+    "author": "U.S. Department of State",
+    "source": "https://commons.wikimedia.org/wiki/File:Saint_Basil%27s_Cathedral_and_the_Red_Square.jpg",
+    "license": "Public domain",
+    "license_url": ""
+  },
+  "minsk": {
+    "image_url": "/assets/directions/minsk.jpg",
+    "alt": "Пейзаж и достопримечательности: Минск",
+    "author": "Homoatrox",
+    "source": "https://commons.wikimedia.org/wiki/File:View_of_Minsk_(180819)_09.jpg",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "istanbul": {
+    "image_url": "/assets/directions/istanbul.jpg",
+    "alt": "Пейзаж и достопримечательности: Стамбул",
+    "author": "Hunanuk",
+    "source": "https://commons.wikimedia.org/wiki/File:Historical_peninsula_and_modern_skyline_of_Istanbul.jpg",
+    "license": "CC0",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "paris": {
+    "image_url": "/assets/directions/paris.jpg",
+    "alt": "Пейзаж и достопримечательности: Париж",
+    "author": "Yann Caradec from Paris, France",
+    "source": "https://commons.wikimedia.org/wiki/File:La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques,_Paris_ao%C3%BBt_2014_(2).jpg",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0"
+  },
+  "rome": {
+    "image_url": "/assets/directions/rome.jpg",
+    "alt": "Пейзаж и достопримечательности: Рим",
+    "author": "Diliff",
+    "source": "https://commons.wikimedia.org/wiki/File:Trevi_Fountain,_Rome,_Italy_2_-_May_2007.jpg",
+    "license": "CC BY 3.0",
+    "license_url": "https://creativecommons.org/licenses/by/3.0"
+  },
+  "venice": {
+    "image_url": "/assets/directions/venice.jpg",
+    "alt": "Пейзаж и достопримечательности: Венеция",
+    "author": "kallerna",
+    "source": "https://commons.wikimedia.org/wiki/File:Venezia_aerial_view.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+};
 function hotelGuests(s=state.trip_spec) {
  const t=s?.travellers||{};
  return [t.adults&&plural(t.adults,'взрослый','взрослых','взрослых'),t.children?.length&&plural(t.children.length,'ребёнок','ребёнка','детей')].filter(Boolean).join(' · ');
@@ -51,11 +209,12 @@ function renderHotelCheckout(){
  const nameLabel=node('label','Имя и фамилия гостя');nameLabel.htmlFor=name.id;nameLabel.append(name);guests.append(nameLabel);
  const consent=node('label',null,'checkout-consent'),check=node('input');check.type='checkbox';check.id='booking-consent';check.required=true;
  consent.append(check,node('span','Демонстрационный режим: без оплаты и реального бронирования.'));
- const blocked=h.journey?.checks.some(c=>c.blocking&&c.status!=='pass'&&!['budget','hotel_budget'].includes(c.code));
- const submit=node('button','Подтвердить поездку','primary');submit.type='submit';submit.dataset.mutation='';submit.dataset.blocked=String(!!blocked);submit.disabled=working||!!pending||!!blocked;
+ const supplierUnknown=c=>c.status==='unknown'&&['children','pets','cancellation','other','no_connections','no_night_travel'].includes(c.code);
+ const submit=node('button','Подтвердить поездку','primary');submit.type='submit';
  const over=hotelOverBudget(h),budgetAccept=node('input');budgetAccept.type='checkbox';budgetAccept.required=over;budgetAccept.id='budget-accept';
  const overLabel=node('label',null,'checkout-consent budget-overrun');overLabel.append(budgetAccept,node('span','Новая стоимость выше бюджета. Подтверждаю сумму '+money({amount_minor:tripAmount(h)})+'.'));
- form.append(dates);if(h.journey)form.append(tripOverview(h),transportChoices(h),journeyRoute(h),journeyChecks(h));form.append(guests,hotelTerms(h));if(over)form.append(overLabel);form.append(consent,submit);grid.append(form,bookingSummary(h,spec.dates));$('results').append(grid);
+ form.append(dates);if(h.journey)form.append(tripOverview(h),transportChoices(h),journeyRoute(h),journeyChecks(h));form.append(guests,hotelTerms(h));if(over)form.append(overLabel);if((h.journey?.checks||[]).some(supplierUnknown))form.append(node('p','Можно сохранить предварительный план. Неподтверждённые условия нужно уточнить у поставщиков перед бронированием.','context-note'));
+ form.append(consent,submit);grid.append(form,bookingSummary(h,spec.dates));$('results').append(grid);
  form.onsubmit=e=>{e.preventDefault();if(!spec.dates){editHotelStay('stay-in');return;}if(!form.reportValidity())return;act('confirm_hotel_booking',{check_in:spec.dates.start,guest_name:name.value.trim(),confirm_prototype:check.checked,accept_budget_overrun:over&&budgetAccept.checked});};
 }
 function renderHotelBooking(){
@@ -85,9 +244,28 @@ async function downloadHotelPlan(b,control){
  finally{if(control){control.disabled=false;control.textContent=label;control.removeAttribute('aria-busy');}}
 }
 function renderHotelDirections(){
- $('results').append(heading(['forest','nature'].includes(state.trip_spec?.travel_setting)?'Поближе к дикой природе':'Начнём с направления','Выберите место — даты, бюджет и пожелания сохранятся.','Есть идея'));
+ const nature=['forest','nature','mountains'].includes(state.trip_spec?.travel_setting);
+ $('results').append(heading(nature?'Природа и пейзажи':'Начнём с направления','Выберите место — даты, бюджет и пожелания сохранятся.','Есть идея'));
  const cards=node('div',null,'cards direction-cards');
- for(const d of state.destination_options){const card=node('article',null,'card direction-card'),visual=node('div',null,'direction-visual'),body=node('div',null,'card-body');const photo=directionPhotos[d.destination],img=node('img');img.src=d.image_url||photo?.image_url||images.B;img.alt=d.name;img.loading='eager';if(photo)img.title=photo.photo_name+' · Островок';visual.append(img);body.append(node('h3',d.name),node('p',d.reason),button('Выбрать '+d.name,()=>submitMessage('Выбираю '+d.name+', ищем в районе '+d.destination+'. Остальные пожелания сохрани.'),'primary',true));card.append(visual,body);cards.append(card)}
+ for(const d of state.destination_options){
+  const card=node('article',null,'card direction-card'),visual=node('div',null,'direction-visual'),body=node('div',null,'card-body');
+  const photo=directionPhotos[d.photo_key] || directionPhotos[d.id] || directionPhotos[d.destination];
+  const fallback=()=>{visual.replaceChildren(TravelWindow.art(d.scene||'road'));visual.setAttribute('role','img');visual.setAttribute('aria-label','Иллюстрация направления: '+d.name);};
+  if(photo){
+   const img=node('img');img.src=photo.image_url;img.alt=photo.alt;img.loading='eager';img.onerror=fallback;visual.append(img);
+  }else fallback();
+  body.append(node('h3',d.name),node('p',d.reason));
+  if(d.caveat)body.append(node('p',d.caveat,'direction-caveat'));
+  if(d.source_url){const link=node('a','О направлении','direction-credit');link.href=d.source_url;link.target='_blank';link.rel='noopener noreferrer';body.append(link);}
+  if(photo?.author){
+   const credit=node('small',null,'direction-credit'),source=node('a','Фото: '+photo.author),license=node('a',photo.license);
+   source.href=photo.source;license.href=photo.license_url;
+   for(const link of [source,license]){link.target='_blank';link.rel='noopener noreferrer';}
+   credit.append(source,document.createTextNode(' · '),license);body.append(credit);
+  }
+  body.append(button('Выбрать '+d.name,()=>submitMessage('Выбираю '+d.name+', ищем в районе '+d.destination+'. Остальные пожелания сохрани.'),'primary',true));
+  card.append(visual,body);cards.append(card);
+ }
  $('results').append(cards);
 }
 

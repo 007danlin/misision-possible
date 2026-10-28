@@ -4,7 +4,7 @@ const {chromium} = require(path.join(root, '.runtime/browser/node_modules/playwr
 (async () => {
   const browser = await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
   try {
-    const page = await browser.newPage();
+    const page = await browser.newPage({geolocation:{latitude:55.796127,longitude:49.106405},permissions:['geolocation']});
     const errors = [];
     page.on('pageerror', e => errors.push(e.message));
     let snapshot = {session_id:'a'.repeat(32),revision:0,status:'needs_input',search_mode:'hotels',trip_spec:{include_transport:true},hotel_options:[],destination_options:[],assistant_message:'Расскажите о поездке.'};
@@ -14,7 +14,7 @@ const {chromium} = require(path.join(root, '.runtime/browser/node_modules/playwr
         const body = route.request().postDataJSON();
         assert.equal(body.message, 'Отправляемся из Казань');
         await new Promise(resolve => {releaseTurn = resolve;});
-        snapshot = {...snapshot,revision:snapshot.revision+1,trip_spec:{origin:'Казань',include_transport:true,transfer_provider:'estimate',transport_mode:'auto',travel_setting:'any',budget_period:'stay',travellers:{adults:null,children:[]},hard_constraints:{no_connections:false,other:[]},hotel_preferences:{pool:null}},assistant_message:'Куда хотите поехать?'};
+        snapshot = {...snapshot,revision:snapshot.revision+1,trip_spec:{origin:'Казань',include_transport:true,transfer_provider:'estimate',transport_mode:'auto',travel_setting:'any',budget_period:'stay',travellers:{adults:null,children:[]},hard_constraints:{no_connections:false,other:[]},hotel_preferences:{pool:null}},destination_options:['Сочи','Санкт-Петербург','Казань'].map(name=>({id:name,name,destination:name,scene:'city',reason:'Вариант поездки'})),assistant_message:'Куда хотите поехать?'};
       }
       await route.fulfill({json:snapshot});
     });
@@ -32,7 +32,12 @@ const {chromium} = require(path.join(root, '.runtime/browser/node_modules/playwr
     await checkIdeas();
     for(let i=0;i<2;i++) {
       await page.getByRole('button',{name:'Изменить город отправления'}).click();
-      await page.locator('#origin-city').fill('Казань');
+      if(i===0) await page.locator('#origin-city').fill('Казань');
+      else {
+        await page.locator('#origin-city').fill('');
+        await page.getByRole('button',{name:'Определить моё местоположение'}).click();
+        await page.waitForFunction(() => document.querySelector('#origin-city').value==='Казань');
+      }
       const request = page.waitForRequest(r => r.url().endsWith('/turns'));
       await page.getByRole('button',{name:'Подтвердить город'}).click();
       await request;
@@ -61,7 +66,7 @@ const {chromium} = require(path.join(root, '.runtime/browser/node_modules/playwr
         }
       }
     }
-    await page.evaluate(() => {state.trip_spec.destination='Сочи';state.revision++;render();});
+    await page.evaluate(() => {state.trip_spec.destination='Сочи';state.destination_options=[];state.revision++;render();});
     assert.equal(await page.locator('.inspiration').count(),0);
     assert.match(await page.locator('#results').innerText(),/Уточним одну деталь/);
     await page.evaluate(() => {state.trip_spec={origin:'Казань',travel_setting:'nature'};render();});

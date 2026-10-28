@@ -13,23 +13,25 @@ function sourceInfo(h){
 function journeyCostText(h,key){
  const j=h.journey;
  if(!j)return key==='hotel'?money({amount_minor:h.quote?.total_minor}):'Не включено';
+ if(j.route_missing&&['transport','transfers'].includes(key))return 'Не рассчитано';
  if(key==='transfers'&&j.transport?.kind==='car')return 'Не нужен: едем на автомобиле';
- if(key==='fees'&&j.source_kind==='estimate'&&!j.breakdown.fees)return 'Уточняются, в сумму не включены';
+ if(key==='fees'&&!j.breakdown.fees)return '—';
  if(key==='transport'&&j.total_incomplete)return 'Стоимость билетов не указана';
  return money({amount_minor:j.breakdown[key]});
 }
 function journeyCost(h){
  const j=h.journey;if(!j)return node('div');
  const d=fold('Состав стоимости');
- for(const [key,value]of Object.entries(j.breakdown)){const row=node('div',null,'trip-cost-row');row.append(node('span',journeyNames[key]||key),node('strong',journeyCostText(h,key)));d.append(row);}
+ for(const [key,value]of Object.entries(j.breakdown)){if(key==='fees'&&!value)continue;const row=node('div',null,'trip-cost-row');row.append(node('span',journeyNames[key]||key),node('strong',journeyCostText(h,key)));d.append(row);}
  if(j.reserve_minor){const row=node('div',null,'trip-cost-row');row.append(node('span','Отдельно: резерв на личные расходы'),node('strong',money({amount_minor:j.reserve_minor})));d.append(row);}
- if(j.budget_minor)d.append(node('p','Остаток бюджета с учётом резерва: '+money({amount_minor:j.budget_minor-j.total_minor-j.reserve_minor}),'context-note'));
- for(const text of j.unknown_costs||[])d.append(node('p',text,'context-note'));
+ if(j.budget_minor)d.append(node('p',(j.route_missing?'Остаток после отеля и резерва, до расчёта дороги: ':'Остаток бюджета с учётом резерва: ')+money({amount_minor:j.budget_minor-j.total_minor-j.reserve_minor}),'context-note'));
+ for(const text of j.unknown_costs||[])if(!/сборы|доплаты объекта/i.test(text))d.append(node('p',text,'context-note'));
  return d;
 }
 function journeyRoute(h,opened=false){
  const j=h.journey;if(!j)return node('div');
  const d=fold('Дорога и трансферы');d.open=opened;
+ if(j.route_missing){d.append(node('p','В приложении пока нет расчёта дороги и трансферов для выбранных условий. Отели доступны на Островке; показанная сумма включает только проживание.','context-note'));return d;}
  d.append(node('p','Местное время · Москва (UTC+3)','context-note'));
  const list=node('ol',null,'trip-timeline');
  for(const [i,s]of j.segments.entries()){
@@ -82,7 +84,7 @@ function journeyComparison(hotels){
  const controls=node('div',null,'comparison-select'),hint=node('p','Выберите 2–3 варианта для сравнения.','context-note'),grid=node('div',null,'trip-comparison');
  const cheapest=Math.min(...hotels.map(tripAmount));
  for(const h of hotels){const item=node('article');item.append(node('h3',h.name),node('strong',money({amount_minor:tripAmount(h)})));
-  if(h.journey){item.append(node('p','Трансферы: '+journeyCostText(h,'transfers')),node('p',h.journey.transport?travelDuration(h.journey.transport.full_out_minutes)+' до отеля':'Дорога: '+h.journey.segments[0].duration_minutes+' мин.'),node('p',h.source_kind==='public'?'Отмена: тариф ещё не подтверждён':h.journey.cancellation_until?'Отмена до '+tripTime(h.journey.cancellation_until):'Без возврата'));}
+  if(h.journey){item.append(node('p','Трансферы: '+journeyCostText(h,'transfers')),node('p',h.journey.route_missing?'Дорога и трансферы не рассчитаны':h.journey.transport?travelDuration(h.journey.transport.full_out_minutes)+' до отеля':'Дорога: '+(h.journey.segments[0]?.duration_minutes??'—')+' мин.'),node('p',h.source_kind==='public'?'Отмена: тариф ещё не подтверждён':h.journey.cancellation_until?'Отмена до '+tripTime(h.journey.cancellation_until):'Без возврата'));}
   item.append(node('p',(h.quote?.breakfast?'С питанием':'Без питания')+(h.source_kind==='public'?' в расчёте':'')),node('p','До центра: '+(h.distance_m==null?'неизвестно':(h.distance_m/1000).toFixed(1)+' км')),node('p','Оценка '+(h.rating??'неизвестна')+(h.reviews?' · '+plural(h.reviews,'отзыв','отзыва','отзывов'):'')));
   const concerns=Object.entries(h.review_summary||{}).filter(([,s])=>s.negative_ids.length>=2).map(([t,s])=>t+': '+plural(s.negative_ids.length,'гость отметил','гостя отметили','гостей отметили')+' недостатки').join('; ');
   if(concerns)item.append(node('p',concerns,'context-note'));
@@ -103,7 +105,7 @@ function renderJourneyPreview(){
  if(tripBudget(p.previous_spec)||tripBudget(p.proposed_spec))rows.push(['Бюджет на поездку',amount(tripBudget(p.previous_spec)),amount(tripBudget(p.proposed_spec))]);
  if(hotelBudget(p.previous_spec)||hotelBudget(p.proposed_spec))rows.push(['Бюджет на отель',amount(hotelBudget(p.previous_spec))+(hotelBudget(p.previous_spec)?p.previous_spec.budget_period==='night'?' за ночь':' за проживание':''),amount(hotelBudget(p.proposed_spec))+(hotelBudget(p.proposed_spec)?p.proposed_spec.budget_period==='night'?' за ночь':' за проживание':'')]);
  if(p.previous_spec.expense_reserve||p.proposed_spec.expense_reserve)rows.push(['На личные расходы',amount(p.previous_spec.expense_reserve),amount(p.proposed_spec.expense_reserve)]);
- for(const k of ['hotel','transport','transfers','fees'])rows.push([journeyNames[k],journeyCostText(p.previous_hotel,k),journeyCostText(p.proposed_hotel,k)]);
+ for(const k of ['hotel','transport','transfers','fees'].filter(k=>k!=='fees'||p.previous_hotel.journey?.breakdown.fees||p.proposed_hotel.journey?.breakdown.fees))rows.push([journeyNames[k],journeyCostText(p.previous_hotel,k),journeyCostText(p.proposed_hotel,k)]);
  rows.push(['Итого',money({amount_minor:tripAmount(p.previous_hotel)}),money({amount_minor:tripAmount(p.proposed_hotel)})]);
  for(const row of rows){const tr=node('tr');row.forEach(v=>tr.append(node('td',v)));table.append(tr);}box.append(table,node('strong',signedMoney(p.price_delta)+' к прежней поездке'));
  box.append(journeyChecks(p.proposed_hotel),journeyRoute(p.proposed_hotel));

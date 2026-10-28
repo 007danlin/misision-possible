@@ -49,7 +49,8 @@ function addMessage(text, role) {
   bubble(text, role); saveConversation();
 }
 function assistantText(snapshot) {
-  return [...new Set([snapshot.assistant_message, ...(snapshot.questions || [])].filter(Boolean))].join('\n\n');
+  const message = snapshot.assistant_message || '';
+  return [...new Set([message, ...(snapshot.questions || []).filter(q => !message.includes(q))].filter(Boolean))].join('\n\n');
 }
 function restoreConversation() {
   let saved;
@@ -235,19 +236,23 @@ function renderSuggestions() {
   if (hotelMode) {
     if(working || pending) return;
     const spec=state.trip_spec||{},t=spec.travellers||{};
+    const question=state.status==='needs_input'?(state.questions?.[0]||state.assistant_message||''):'';
     const budgetTarget=spec.include_transport&&spec.budget_scope!=='hotel'?'на всю поездку':'на отель';
     let prompts=[];
     if(state.selected_hotel && state.status==='hotel_checkout') {
       $('suggestions').append(button('Даты и гости',()=>editHotelStay(),'suggestion'),button('Другой отель',()=>act('clear_hotel_selection'),'suggestion'));return;
     }
     if(state.status==='error')prompts=[['Повторить запрос',lastMessage],['Изменить пожелания','Хочу изменить ']];
-    else if(state.destination_options?.length)prompts=state.destination_options.map(d=>[d.name,'Выбираю '+d.name+', ищем в районе '+d.destination+'. Остальные пожелания сохрани.']);
+    else if(state.status==='needs_input'&&state.selection?.destination_suggestions?.length)prompts=state.selection.destination_suggestions.map(d=>[d.name,'Ищем отель: '+d.name+(d.country?', страна '+d.country:'')+'. Остальные условия сохрани.']);
+    else if(/из какого города|город отправления|откуда (?:вы )?(?:отправ|поед|ед)/i.test(question))prompts=[['Москва','Отправляемся из Москвы'],['Санкт-Петербург','Отправляемся из Санкт-Петербурга'],['Другой город','Отправляемся из ']];
+    else if(/точные даты|какие даты оставить/i.test(question))prompts=[['Указать даты','Хочу поехать с ']];
+    else if(state.destination_options?.length && !isHotelInspirationState())prompts=state.destination_options.map(d=>[d.name,'Выбираю '+d.name+', ищем в районе '+d.destination+'. Остальные пожелания сохрани.']);
     else if(isHotelInspirationState())prompts=[['На природу','Хочу на природу, в лес. Дикая природа.'],['К морю','В Сочи на 5 ночей, двое взрослых, до 40 тысяч рублей на отель. Хочу бассейн.'],['В город','В Казань на 3 ночи, двое взрослых, до 25 тысяч рублей на отель, не дальше 2 км от центра.']];
     else if(!t.adults)prompts=[['Один взрослый','1 взрослый'],['Двое взрослых','2 взрослых'],['С детьми','2 взрослых и ']];
     else if(t.children?.some(a=>a==null))prompts=[['Возраст '+t.children.length+' детей','Возраст детей: '],['Изменить число детей','Поедет ']];
     else if(!spec.dates&&!spec.stay_nights)prompts=[['3 ночи','На 3 ночи'],['5 ночей','На 5 ночей'],['Неделя','На 7 ночей']];
     else if(!spec.budget)prompts=[['До 30 000 ₽','Бюджет 30 тысяч рублей '+budgetTarget+' за весь отдых'],['До 50 000 ₽','Бюджет 50 тысяч рублей '+budgetTarget+' за весь отдых'],['Другая сумма','Бюджет '+budgetTarget+' — ']];
-    else if(state.status==='needs_input'&&spec.budget_scope==='whole_trip'&&!spec.expense_reserve)prompts=[['Без отдельного резерва','Резерв на личные расходы 0 рублей'],['Оставить 10 000 ₽','Резерв на личные расходы 10 тысяч рублей'],['Другая сумма','Резерв на личные расходы — ']];
+    else if(/сколько.*(?:оставить|резерв)/i.test(question)&&spec.budget_scope==='whole_trip'&&spec.expense_reserve==null)prompts=[['Без отдельного резерва','Резерв на личные расходы 0 рублей'],['Оставить 10 000 ₽','Резерв на личные расходы 10 тысяч рублей'],['Другая сумма','Резерв на личные расходы — ']];
     else if(state.status==='no_solution'){
       prompts=[['Изменить бюджет','Мой бюджет '+budgetTarget+' теперь '],['Другие даты','Хочу изменить даты на ']];
       if(spec.hotel_preferences?.pool)prompts.push(['Без бассейна','Бассейн больше не обязателен']);
@@ -576,9 +581,9 @@ function hotelCard(h) {
   body.append(hotelFacts(h), title, node('p', h.address, 'card-subtitle'));
   const features = node('div', null, 'hotel-amenities'); (h.amenities || []).slice(0,3).forEach(x=>features.append(node('span', x)));
   body.append(features, matchReasons(h), hotelPrice(h));
-  if(h.journey)body.append(node('p',h.journey.transport?.kind==='car'?'Отель + поездка на автомобиле':'Отель + дорога + оба трансфера','trip-card-route'));
+  if(h.journey)body.append(node('p',h.journey.route_missing?'Только проживание · дорога и трансферы не рассчитаны':h.journey.transport?.kind==='car'?'Отель + поездка на автомобиле':'Отель + дорога + оба трансфера','trip-card-route'));
   const actions = node('div', null, 'card-actions');
-  actions.append(button(h.journey?'Выбрать поездку':'Выбрать отель', () => act('select_hotel',{hotel_id:h.id}), 'primary', true));
+  actions.append(button(h.journey?.route_missing?'Посмотреть отель':h.journey?'Выбрать поездку':'Выбрать отель', () => h.journey?.route_missing?openDetail(h.id):act('select_hotel',{hotel_id:h.id}), 'primary', true));
   body.append(actions);card.append(hotelPhoto(h, false, openHotel), body);return card;
 }
 function renderHotels() {
@@ -606,7 +611,9 @@ function renderHotels() {
     const features = node('div', null, 'hotel-amenities'); (h.amenities || []).forEach(t=>features.append(node('span', t)));content.append(features);
     content.append(matchReasons(h),hotelContentPanel(h));
     if (h.unverified?.length) content.append(node('p', 'Нужно уточнить у отеля: '+h.unverified.join(', '), 'context-note'));
-    side.append(node('h2', h.journey?'Ваша поездка':'Ваше размещение'), node('p', state.trip_spec?.dates ? dateRange(state.trip_spec.dates) : plural(h.quote?.nights||0,'ночь','ночи','ночей'), 'detail-meta'), hotelPrice(h), button('Перейти к оформлению',()=>act('select_hotel',{hotel_id:h.id}),'primary',true));
+    side.append(node('h2', h.journey?'Ваша поездка':'Ваше размещение'), node('p', state.trip_spec?.dates ? dateRange(state.trip_spec.dates) : plural(h.quote?.nights||0,'ночь','ночи','ночей'), 'detail-meta'), hotelPrice(h));
+    if(h.journey?.route_missing)side.append(node('p','Полная стоимость поездки неизвестна. Можно продолжить подбор только проживания.','context-note'),button('Подобрать только отель',()=>{backToOptions();submitMessage('только отель, без дороги');},'primary',true));
+    else side.append(button('Перейти к оформлению',()=>act('select_hotel',{hotel_id:h.id}),'primary',true));
     if (!h.journey && state.trip_spec?.travellers?.children?.length) side.append(node('p', 'На сайте укажите взрослых и возраст каждого ребёнка.', 'context-note'));
 
     if(h.journey)side.append(tripOverview(h),journeyCost(h));
@@ -623,7 +630,8 @@ function renderHotels() {
   }
   if (state.status === 'error') return;
   if (state.status === 'no_solution') { $('results').append(stateBox('Давайте немного изменим условия', state.assistant_message, 'warning'));if(state.trip_spec?.excluded_hotel_ids?.length)$('results').append(button('Вернуть прежние варианты',()=>submitMessage('Верни прежние варианты'),'secondary',true));if(state.trip_spec?.include_transport)$('results').append(button('Продолжить только с отелем',()=>submitMessage('Только отель, без дороги'),'secondary',true)); return; }
-  if(state.destination_options?.length){renderHotelDirections();return;}
+  // Origin-only updates may return directions, but the start screen stays in place.
+  if(state.destination_options?.length && !isHotelInspirationState()){renderHotelDirections();return;}
   if (!isHotelInspirationState() && state.revision > 0 && state.status === 'needs_input') { const box=stateBox('Уточним одну деталь', state.assistant_message);if(state.trip_spec?.transport_owned&&!state.trip_spec.owned_transport)box.append(button('Ваши билеты',()=>ownedTicketsDialog(state.selected_hotel?.id),'primary',true));$('results').append(box); return; }
   if(lastMessage && !isHotelInspirationState()) { $('results').append(stateBox('Запрос сохранён', pending ? 'Связь прервалась. Нажмите «Проверить и повторить запрос» в чате — условия сохранятся.' : 'Продолжим в чате: уточните пожелания к поездке.')); return; }
   $('results').append(heading('Хорошая поездка начинается с идеи', 'Напишите, куда хочется. Соберём отель, дорогу и трансферы в один план.', 'Островок · О!План'));
@@ -642,7 +650,8 @@ function renderHotels() {
 function regionName(spec) {
   const destination = (spec.destination || '').toLowerCase();
   const region = {'стамбул':'Турция','минск':'Беларусь','париж':'Франция','рим':'Италия','венеция':'Италия'}[destination];
-  return region || spec.country || 'Россия';
+  const providerRegion=spec===state.trip_spec?(state.selected_hotel||state.hotel_options?.[0])?.destination_region:null;
+  return providerRegion?.countryName || spec.country || region || 'Страна не указана';
 }
 function matchReasons(h) {
   const list=node('ul',null,'match-reasons');
@@ -653,21 +662,20 @@ function hotelPrice(h) {
   const block=node('div',null,'hotel-price');
   if(!h.quote){block.append(node('p','Цены на Островке','hotel-price-note'));return block;}
   block.append(node('strong',(h.source_kind==='public'?'≈ ':'')+money({amount_minor:tripAmount(h)})));
-  if(h.journey){block.append(node('small',(h.journey.total_incomplete?'без стоимости ваших билетов':'за всю поездку')+' · '+hotelGuests()));if(h.journey.transport)block.append(node('small',h.journey.transport.label+' · '+(state.trip_spec?.origin||'Уточните отправление')+' → '+(state.trip_spec?.destination||'')));return block;}
+  if(h.journey){block.append(node('small',(h.journey.route_missing?'только проживание · дорога и трансферы не включены':h.journey.total_incomplete?'без стоимости ваших билетов':'за всю поездку')+' · '+hotelGuests()));if(h.journey.transport)block.append(node('small',h.journey.transport.label+' · '+(state.trip_spec?.origin||'Уточните отправление')+' → '+(state.trip_spec?.destination||'')));return block;}
   block.append(node('small',h.quote.nights ? 'за '+plural(h.quote.nights,'ночь','ночи','ночей')+' · '+plural(h.quote.rooms,'номер','номера','номеров') : 'за ночь · '+h.quote.rooms+' номер'+(h.quote.rooms===1?'':'а')));
   return block;
 }
 function editRegion() {
   if(working || pending)return;
-  const regions={'Россия':['Сортавала','Чемал','Осташков','Москва','Сочи','Санкт-Петербург','Казань','Ярославль','Владимир','Адлер','Анапа','Краснодар','Калининград','Нижний Новгород','Кисловодск','Геленджик','Мурманск'],'Турция':['Стамбул'],'Беларусь':['Минск'],'Франция':['Париж'],'Италия':['Рим','Венеция']};
   const d=node('dialog',null,'region-dialog'),form=node('form'),head=node('div',null,'dialog-heading');
   head.append(node('h2','Куда отправимся?'),button('×',()=>d.close(),'icon-button'));head.lastChild.setAttribute('aria-label','Закрыть');
-  const country=node('select'),city=node('select');country.setAttribute('aria-label','Страна');city.setAttribute('aria-label','Город');
-  for(const name of Object.keys(regions)){const o=node('option',name);o.value=name;country.append(o)}country.value=regions[regionName(state.trip_spec)] ? regionName(state.trip_spec) : 'Россия';
-  const update=()=>{city.replaceChildren();for(const name of regions[country.value]){const o=node('option',name);o.value=name;city.append(o)}if(regions[country.value].includes(state.trip_spec.destination))city.value=state.trip_spec.destination};country.onchange=update;update();
-  const cLabel=node('label','Страна'),cityLabel=node('label','Город');cLabel.append(country);cityLabel.append(city);
-  const submit=node('button','Обновить направление','primary');submit.type='submit';form.append(cLabel,cityLabel,node('p','Даты, бюджет и остальные пожелания сохранятся.','context-note'),submit);d.append(head,form);d.onclose=()=>d.remove();document.body.append(d);d.showModal();
-  form.onsubmit=e=>{e.preventDefault();d.close();submitMessage('Ищем отель: '+city.value+', страна '+country.value+'. Остальные условия сохрани.')};
+  const country=node('input'),city=node('input');country.setAttribute('aria-label','Страна');city.setAttribute('aria-label','Город или регион');
+  country.value=state.trip_spec?.country||'';country.placeholder='Необязательно';country.maxLength=100;
+  city.value=state.trip_spec?.destination||'';city.placeholder='Например, Ялта, Карелия или Париж';city.required=true;city.maxLength=160;
+  const cLabel=node('label','Страна, если нужно уточнить'),cityLabel=node('label','Город или регион');cLabel.append(country);cityLabel.append(city);
+  const submit=node('button','Обновить направление','primary');submit.type='submit';form.append(cityLabel,cLabel,node('p','Проверим направление в поиске Островка. Даты, бюджет и остальные пожелания сохранятся.','context-note'),submit);d.append(head,form);d.onclose=()=>d.remove();document.body.append(d);d.showModal();
+  form.onsubmit=e=>{e.preventDefault();if(!form.reportValidity()||!city.value.trim())return;d.close();submitMessage('Ищем отель: '+city.value.trim()+(country.value.trim()?', страна '+country.value.trim():'')+'. Остальные условия сохрани.')};
 }
 
 function globeIcon(){

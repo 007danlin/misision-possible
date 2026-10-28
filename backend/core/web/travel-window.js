@@ -1,7 +1,7 @@
 'use strict';
 // This renderer consumes actual server progress; time only changes the waiting hint.
 const TravelWindow = (() => {
-  let shell, timer, longTimer, active = 0, currentScene = 'road';
+  let shell, timer, longTimer, photoFlight, active = 0, currentScene = 'road';
   const el = (tag, cls, text) => { const e=document.createElement(tag);e.className=cls||'';if(text)e.textContent=text;return e; };
   const scenes = {
     sea: '<path fill="#badedb" d="M0 140h260v160H0z"/><path fill="#6fa8e8" d="M0 175q55-12 120 0t140 0v125H0z"/><g class="ow-boat"><path fill="#1c4acf" d="m105 169 55 0-12 13h-32z"/><path fill="#fff9e9" d="M134 122v42h-27z"/><path stroke="#2450a4" stroke-width="3" d="M135 118v53"/></g><path class="ow-glint" stroke="#fff9df" stroke-width="4" stroke-linecap="round" d="M62 206h35m36 20h25m-68 25h52"/>',
@@ -49,18 +49,19 @@ const TravelWindow = (() => {
       const chips=shell.querySelector('.ow-chips'),items=criteria(event.trip_spec),signature=JSON.stringify(items);
       if(chips.dataset.signature!==signature){chips.replaceChildren();items.forEach(t=>chips.append(el('span','chip',t)));chips.dataset.signature=signature;}
     }
-    const labels={understanding:'Учитываем ваши пожелания',understood:'Уточняем детали поездки',searching:'Ищем подходящие отели',comparing:'Сравниваем подходящие отели',complete:'Готовим результат'};
+    const labels={matching_directions:'Подбираем направления по вашим пожеланиям',understanding:'Учитываем ваши пожелания',understood:'Уточняем детали поездки',searching:'Ищем подходящие отели',comparing:'Сравниваем подходящие отели',complete:'Готовим результат'};
     if(event.stage==='comparing' && event.trip_spec?.budget)labels.comparing='Сравниваем варианты в вашем бюджете';
     if(labels[event.stage])shell.querySelector('.ow-status').textContent=shell.dataset.cheaper==='true' && ['understanding','searching'].includes(event.stage) ? 'Ищем варианты дешевле' : labels[event.stage];
     shell.dataset.stage=event.stage;
   }
   function start(host, oldResults, path, message='') {
-    stop();const version=++active;currentScene='road';
+    stop(true);const version=++active;currentScene='road';
     shell=el('section','travel-window'+(oldResults?' compact':''));shell.setAttribute('aria-label','Поиск отеля');shell.dataset.cheaper=String(oldResults&&/дешев|подешев/i.test(message));
     const copy=el('div','ow-copy'),status=el('p','ow-status',oldResults&&/дешев|подешев/i.test(message)?'Ищем варианты дешевле':'Посмотрим, где вам будет хорошо');status.setAttribute('role','status');
     copy.append(status,el('div','ow-chips'),el('p','ow-hint',''));
     shell.append(illustration('road',false),copy);
     if(oldResults)host.prepend(shell);else host.replaceChildren(shell);
+    photoFlight=TravelCards.mount(shell.querySelector('.ow-mark'));
     longTimer=setTimeout(()=>{if(shell)shell.querySelector('.ow-hint').textContent='Поиск ещё идёт — можно оставаться в чате';},25000);
     async function poll(){
       try{const r=await fetch(path,{credentials:'same-origin'});if(r.ok){const event=await r.json();if(version===active)update(event);}}catch{/* Final request owns retry UX. */}
@@ -69,7 +70,12 @@ const TravelWindow = (() => {
     timer=setTimeout(poll,600);
   }
   function capture(){if(!shell)return null;return {rect:shell.querySelector('.ow-ring').getBoundingClientRect(),scene:currentScene,compact:shell.classList.contains('compact')};}
-  function stop(){++active;clearTimeout(timer);clearTimeout(longTimer);shell?.remove();shell=null;}
+  function stop(immediate=false){
+    ++active;clearTimeout(timer);clearTimeout(longTimer);
+    const previous=shell,flight=photoFlight;shell=null;photoFlight=null;
+    const drained=flight?.stop(immediate);
+    if(immediate||!drained)previous?.remove();else drained.then(()=>previous?.remove());
+  }
   function finish(from,host) {
     stop();if(!from||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
     const cards=[...host.querySelectorAll('.hotel-card')];if(!cards.length)return;
@@ -88,10 +94,12 @@ const TravelWindow = (() => {
     anim.finished.finally(()=>{photo.style.visibility='';ghost.remove();});
   }
   async function prepare(hotels) {
-    if(!shell||!hotels?.length)return;
+    if(!shell)return;
+    const drained=photoFlight?.stop();
+    if(!hotels?.length){await drained;return;}
     const image=new Image();image.decoding='async';image.src=hotels[0].image_url;
     // Wait for a real photo, with a bounded CDN fallback; never hold results forever.
-    await Promise.race([image.decode().catch(()=>{}),new Promise(r=>setTimeout(r,1800))]);
+    await Promise.all([drained,Promise.race([image.decode().catch(()=>{}),new Promise(r=>setTimeout(r,1800))])]);
   }
   return {start,stop,capture,finish,art,illustration,prepare};
 })();

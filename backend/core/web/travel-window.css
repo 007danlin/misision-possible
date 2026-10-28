@@ -40,3 +40,11 @@
 @keyframes ow-water{0%,38%,60%,100%{opacity:.15;transform:translateX(-6px)}46%,52%{opacity:.85;transform:translateX(10px)}}
 @keyframes ow-leaf{0%,54%,75%,100%{transform:rotate(0)}60%{transform:rotate(-8deg)}67%{transform:rotate(4deg)}71%{transform:rotate(-2deg)}}
 @keyframes ow-flyby{0%,74%{opacity:0;transform:translate(-90px,22px)}76%{opacity:1}94%{opacity:1;transform:translate(210px,-25px)}96%,100%{opacity:0;transform:translate(240px,-28px)}}
+
+/* Independent decoration behind the original O; no changes to the mark or ring. */
+.travel-window{overflow:hidden}
+.ow-photo-layer{position:absolute;left:-280px;top:-65px;width:860px;height:430px;pointer-events:none;overflow:hidden;mask-size:100% 100%;mask-repeat:no-repeat;-webkit-mask-size:100% 100%;-webkit-mask-repeat:no-repeat;clip-path:inset(0 0 43px 0)}
+.ow-photo-card{position:absolute;left:410.5px;top:215px;width:140px;height:98px;object-fit:cover;border-radius:11px;box-shadow:0 5px 14px #17395424;will-change:transform,opacity}
+.compact .ow-photo-layer{clip-path:inset(0 280px 0 0)}
+@media(max-width:760px){.ow-photo-card{width:96px;height:67px;border-radius:8px}.ow-photo-layer{clip-path:inset(12px 182px 55px 182px)}.compact .ow-photo-layer{clip-path:inset(0 280px 0 0)}}
+@media(prefers-reduced-motion:reduce){.ow-photo-layer{display:none}}
