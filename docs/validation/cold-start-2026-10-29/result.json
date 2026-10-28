@@ -1,0 +1,45 @@
+{
+  "commit": "2799fe51bcf5c1566f7d56f08efd68445813e6f7",
+  "architecture": "linux/arm64",
+  "host": "Mac Docker Desktop, 8 GB Docker RAM",
+  "fresh_build_cache": true,
+  "fresh_model_volume": true,
+  "env_file": false,
+  "success": true,
+  "clone_complete_seconds": 4.873,
+  "build_started_seconds": 6.418,
+  "build_complete_seconds": 52.706,
+  "containers_started_seconds": 53.159,
+  "service_ready_seconds": 437.418,
+  "first_response": {
+    "ids": [
+      "karelia",
+      "altai",
+      "seliger"
+    ],
+    "answer": "По вашим пожеланиям можно рассмотреть: 1 — Карелия; 2 — Алтай; 3 — Селигер. Выберите направление — затем подберём размещение. Стоимость и возможность добраться ещё нужно проверить на ваши даты.",
+    "telemetry": {
+      "cost": null,
+      "first_useful_ms": 36503,
+      "model": "qwen3-4b-instruct",
+      "model_calls": 2,
+      "model_ms": 36383,
+      "prompt_version": "odin-request-9.7",
+      "provider": "llama_cpp",
+      "sources_ms": 0,
+      "tool_calls": [],
+      "total_ms": 36503,
+      "usage": {
+        "cached_tokens": 4568,
+        "completion_tokens": 70,
+        "evaluated_prompt_tokens": 188,
+        "generation_ms": 20396,
+        "prompt_ms": 15847,
+        "prompt_tokens": 4756,
+        "total_tokens": 4826
+      }
+    }
+  },
+  "first_useful_response_seconds": 473.981,
+  "main_containers_restored_seconds": 477.054
+}

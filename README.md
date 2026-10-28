@@ -13,10 +13,13 @@
 ```sh
 git clone https://github.com/ostrovok-hackathon-2026/misision-possible.git
 cd misision-possible
+git checkout submission
 docker compose up --build
 ```
 
 Откройте **http://localhost:8080**. При первом запуске автоматически скачивается модель (2,50 ГБ), затем выполняется прогрев. Страница показывает подготовку и открывает приложение после готовности. Веса сохраняются между запусками. Docker выбирает ARM64 на Apple Silicon и AMD64 на Intel/AMD.
+
+На проверенном Mac ARM64 холодный запуск актуального кода занял **7 мин 17 с до готовности**, **7 мин 54 с до первого ответа**, включая скачивание модели и сборку. Docker уже был установлен; это один замер, а не гарантия для другого компьютера. [Условия и логи](docs/validation/cold-start-2026-10-29/README.md).
 
 Локальной модели API-ключ не нужен. Для настройки можно скопировать `.env.example` в `.env`; пустые значения используют настройки по умолчанию. Для жюри предусмотрен `secrets.env.age` с необязательным токеном авиаперелётов — [инструкция расшифровки](docs/secrets.md).
 
@@ -99,4 +102,5 @@ Volumes: `trips` — поездки, `hotel-content` — кэш отелей, `m
 - [Источники данных и ограничения](docs/public-data-sources.md).
 - [Проверка CPU](docs/validation/docker-cpu-2026-10-27/README.md), [совместимость AMD64](docs/validation/amd64-2026-10-28/README.md).
 - [Проверка Linux AMD64 с defaults и реальным HTTP-сценарием](docs/validation/amd64-defaults-2026-10-28/README.md).
-- [Чистый запуск на Mac M4: 5 мин 25 с с загрузкой модели](docs/validation/jury-clean-2026-10-28/README.md).
+- [Холодный запуск текущего кода: 7 мин 17 с до готовности, 7 мин 54 с до ответа](docs/validation/cold-start-2026-10-29/README.md).
+- [Проверка подбора: 9/9 сценариев на реальной модели, 313 тестов](docs/validation/direction-diversity-2026-10-28/README.md).
