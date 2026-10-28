@@ -1,0 +1,75 @@
+{
+  "steps": [
+    {
+      "message": "Из Москвы в Сочи, 10–15 ноября 2026, двое взрослых. 120 тысяч рублей на дорогу, отель и оба трансфера. Без ночных рейсов, нужен бассейн.",
+      "status": "needs_input",
+      "elapsed_seconds": 11.665,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 11352,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 1,
+        "model_ms": 11300,
+        "prompt_version": "odin-request-9.6",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 11352,
+        "usage": {
+          "cached_tokens": 1963,
+          "completion_tokens": 69,
+          "evaluated_prompt_tokens": 142,
+          "generation_ms": 6935,
+          "prompt_ms": 4345,
+          "prompt_tokens": 2105,
+          "total_tokens": 2174
+        }
+      }
+    },
+    {
+      "message": "Резерв на личные расходы 0 рублей.",
+      "status": "choosing",
+      "elapsed_seconds": 13.975,
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 13199,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 0,
+        "model_ms": 0,
+        "prompt_version": "odin-request-9.6",
+        "provider": "llama_cpp",
+        "sources_ms": 13196,
+        "tool_calls": [
+          "ostrovok_public_search"
+        ],
+        "total_ms": 13199,
+        "usage": {}
+      }
+    }
+  ],
+  "errors": [],
+  "no_api_keys": true,
+  "startup_page_seen": true,
+  "download_counter_updates": true,
+  "automatic_entry": true,
+  "hotels": [
+    {
+      "name": "Спа-отель Грейс Арли",
+      "total_minor": 5090000,
+      "source_kind": "public"
+    },
+    {
+      "name": "Спа-отель Грейс Круиз",
+      "total_minor": 5040000,
+      "source_kind": "public"
+    },
+    {
+      "name": "Отель Грейс Глобал",
+      "total_minor": 6120000,
+      "source_kind": "public"
+    }
+  ],
+  "booking_id": "OP-51C401FD",
+  "pdf_bytes": 704268,
+  "success": true
+}

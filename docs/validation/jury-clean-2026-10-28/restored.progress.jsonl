@@ -1,0 +1,131 @@
+{"seconds": 0.037, "phase": "loading", "message": "Загружаем модель в память", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 1.111, "phase": "loading", "message": "Загружаем модель в память", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 2.117, "phase": "loading", "message": "Загружаем модель в память", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 3.126, "phase": "loading", "message": "Загружаем модель в память", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 4.14, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 5.146, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 6.151, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 7.159, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 8.164, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 9.169, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 10.173, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 11.257, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 12.261, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 13.265, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 14.269, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 15.278, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 16.285, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 17.289, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 18.295, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 19.303, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 20.307, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 21.4, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 22.408, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 23.416, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 24.42, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 25.429, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 26.436, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 27.443, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 28.452, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 29.457, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 30.464, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 31.552, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 32.555, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 33.56, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 34.563, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 35.571, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 36.578, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 37.583, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 38.591, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 39.601, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 40.607, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 41.696, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 42.701, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 43.71, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 44.716, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 45.722, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 46.729, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 47.738, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 48.743, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 49.754, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 50.761, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 51.863, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 52.872, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 53.881, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 54.887, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 55.892, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 56.9, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 57.909, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 58.915, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 59.921, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 60.929, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 62.019, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 63.027, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 64.035, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 65.042, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 66.049, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 67.056, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 68.063, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 69.071, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 70.075, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 71.08, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 72.164, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 73.173, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 74.179, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 75.189, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 76.196, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 77.204, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 78.209, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 79.214, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 80.224, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 81.228, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 82.354, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 83.36, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 84.368, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 85.378, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 86.387, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 87.397, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 88.403, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 89.412, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 90.419, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 91.428, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 92.529, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 93.554, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 94.562, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 95.57, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 96.577, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 97.588, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 98.594, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 99.602, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 100.61, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 101.617, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 102.712, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 103.719, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 104.726, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 105.735, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 106.744, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 107.753, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 108.765, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 109.773, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 110.782, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 111.789, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 112.887, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 113.891, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 114.901, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 115.905, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 116.91, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 117.917, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 118.927, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 119.931, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 120.94, "phase": "warmup", "message": "Прогреваем модель перед первым запросом", "ready": false, "downloaded_bytes": 2497281120, "total_bytes": 2497281120, "percent": 100, "attempt": 1}
+{"seconds": 121.946, "phase": "ready", "message": "Всё готово", "ready": true}
+{"seconds": 123.031, "phase": "ready", "message": "Всё готово", "ready": true}
+{"seconds": 124.044, "phase": "ready", "message": "Всё готово", "ready": true}
+{"seconds": 125.056, "phase": "ready", "message": "Всё готово", "ready": true}
+{"seconds": 126.067, "phase": "ready", "message": "Всё готово", "ready": true}
+{"seconds": 127.074, "phase": "ready", "message": "Всё готово", "ready": true}
+{"seconds": 128.087, "phase": "ready", "message": "Всё готово", "ready": true}
+{"seconds": 129.097, "phase": "ready", "message": "Всё готово", "ready": true}
+{"seconds": 130.105, "phase": "ready", "message": "Всё готово", "ready": true}
+{"seconds": 131.113, "phase": "ready", "message": "Всё готово", "ready": true}
+{"seconds": 132.121, "phase": "ready", "message": "Всё готово", "ready": true}

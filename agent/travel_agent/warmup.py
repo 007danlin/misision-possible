@@ -12,10 +12,10 @@ from .model import QwenModel, Settings
 
 def startup_timeout():
     try:
-        value = float(os.getenv("MODEL_WARMUP_TIMEOUT_SECONDS", "300"))
+        value = float(os.getenv("MODEL_WARMUP_TIMEOUT_SECONDS", "900"))
     except ValueError:
-        return 300.0
-    return value if 1 <= value <= 900 else 300.0
+        return 900.0
+    return value if 1 <= value <= 900 else 900.0
 
 
 async def warmup():

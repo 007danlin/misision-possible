@@ -49,4 +49,20 @@ class WarmupTests(unittest.IsolatedAsyncioTestCase):
                 self.subTest(value=value),
                 patch.dict(os.environ, {"MODEL_WARMUP_TIMEOUT_SECONDS": value}),
             ):
-                self.assertEqual(startup.startup_timeout(), 300)
+                self.assertEqual(startup.startup_timeout(), 900)
+
+    async def test_default_allows_slow_cpu_without_manual_environment(self):
+        calls = []
+
+        class Prefill:
+            settings = Settings(provider="llama_cpp")
+
+            async def extract(self, context, repair, timeout, *, prefill=False):
+                calls.append(timeout)
+                return "", {}
+
+        with patch.dict(os.environ, {"LLM_DIRECTION_SLOT": ""}):
+            os.environ.pop("MODEL_WARMUP_TIMEOUT_SECONDS", None)
+            with patch.object(startup, "QwenModel", return_value=Prefill()):
+                await startup.warmup()
+        self.assertEqual(calls, [900])

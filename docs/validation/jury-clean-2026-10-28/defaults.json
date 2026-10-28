@@ -1,0 +1,11 @@
+{
+  "same_defaults_with_or_without_env_example": true,
+  "no_env_or_runtime_in_clean_clone": true,
+  "local_model_without_keys": true,
+  "warmup_timeout_seconds": 900,
+  "platforms_explicitly_forced": {
+    "agent": null,
+    "app": null,
+    "model": null
+  }
+}

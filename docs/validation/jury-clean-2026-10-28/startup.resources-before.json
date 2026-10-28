@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-28T17:51:45.333997+00:00",
+  "host_os": "Darwin",
+  "host_arch": "arm64",
+  "cpu": "Apple M4",
+  "ram_bytes": "34359738368",
+  "swap": "vm.swapusage: total = 17408.00M  used = 15766.50M  free = 1641.50M  (encrypted)",
+  "virtual_memory": "Mach Virtual Memory Statistics: (page size of 16384 bytes)\nPages free:                                    16744.\nPages active:                                 782774.\nPages inactive:                               772140.\nPages speculative:                             22643.\nPages throttled:                                   0.\nPages wired down:                             259813.\nPages purgeable:                               48681.\n\"Translation faults\":                    10595850230.\nPages copy-on-write:                       210768361.\nPages zero filled:                       11278543186.\nPages reactivated:                        2585933958.\nPages purged:                              306247856.\nFile-backed pages:                            571001.\nAnonymous pages:                             1006556.\nPages stored in compressor:                   389763.\nPages occupied by compressor:                 190473.\nDecompressions:                           2818380901.\nCompressions:                             3177344235.\nPageins:                                   790167383.\nPageouts:                                    2015377.\nSwapins:                                   124351241.\nSwapouts:                                  146469228.",
+  "memory_pressure": "The system has 34359738368 (2097152 pages with a page size of 16384).\nSystem-wide memory free percentage: 77%",
+  "thermal": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded",
+  "docker": {
+    "Architecture": "aarch64",
+    "NCPU": 10,
+    "MemTotal": 8321712128,
+    "ServerVersion": "29.4.0",
+    "KernelVersion": "6.12.76-linuxkit"
+  }
+}

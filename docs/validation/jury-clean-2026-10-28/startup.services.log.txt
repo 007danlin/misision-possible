@@ -1,0 +1,143 @@
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Ожидаем завершения загрузки модели. Прогресс: http://localhost:8080
+agent-1  | Модель загружена. Начинаем подготовку первого ответа.
+agent-1  | {"warmup": "starting", "timeout_seconds": 900.0}
+agent-1  | INFO:httpx:HTTP Request: POST http://model:8082/v1/chat/completions "HTTP/1.1 200 OK"
+agent-1  | {"warmup": "directions"}
+agent-1  | INFO:httpx:HTTP Request: POST http://model:8082/v1/chat/completions "HTTP/1.1 200 OK"
+agent-1  | {"warmup": "ready", "seconds": 104.98, "usage": {"completion_tokens": 2, "prompt_tokens": 4358, "total_tokens": 4360, "prompt_ms": 104913, "generation_ms": 0, "cached_tokens": 0, "evaluated_prompt_tokens": 4358}}
+agent-1  | agent gRPC server running on :50051
+agent-1  | INFO:httpx:HTTP Request: POST http://model:8082/v1/chat/completions "HTTP/1.1 200 OK"
+agent-1  | INFO:root:agent_turn {"status": "needs_input", "error_code": null, "model": "qwen3-4b-instruct", "provider": "llama_cpp", "prompt_version": "odin-request-9.6", "model_calls": 1, "tool_calls": [], "first_useful_ms": 11352, "total_ms": 11352, "model_ms": 11300, "sources_ms": 0, "usage": {"completion_tokens": 69, "prompt_tokens": 2105, "total_tokens": 2174, "prompt_ms": 4345, "generation_ms": 6935, "cached_tokens": 1963, "evaluated_prompt_tokens": 142}, "cost": null}
+agent-1  | INFO:httpx:HTTP Request: GET https://routing.openstreetmap.de/routed-car/route/v1/driving/37.6173,55.7558;39.7231,43.5855?overview=false&steps=false "HTTP/1.1 200 OK"
+app-1    | 2026/10/28 17:52:32 core listening on :8080
+app-1    | 2026/10/28 17:52:32 О!План: откройте http://localhost:8080 — здесь виден прогресс подготовки модели
+model-1  | {"phase": "verify_weights", "model": "qwen3-4b-instruct"}
+model-1  | Проверяем наличие модели
+model-1  | Скачиваем модель 0.0% (0/2497 MB, 0.0 MB/s)
+model-1  | Скачиваем модель 0.0% (1/2497 MB, 1.9 MB/s)
+model-1  | Скачиваем модель 1.4% (36/2497 MB, 13.6 MB/s)
+model-1  | Скачиваем модель 2.1% (51/2497 MB, 11.0 MB/s)
+model-1  | Скачиваем модель 3.5% (87/2497 MB, 12.8 MB/s)
+model-1  | Скачиваем модель 4.8% (121/2497 MB, 13.7 MB/s)
+model-1  | Скачиваем модель 6.2% (155/2497 MB, 14.3 MB/s)
+model-1  | Скачиваем модель 7.7% (193/2497 MB, 15.0 MB/s)
+model-1  | Скачиваем модель 9.0% (225/2497 MB, 15.1 MB/s)
+model-1  | Скачиваем модель 10.4% (259/2497 MB, 15.2 MB/s)
+model-1  | Скачиваем модель 11.9% (297/2497 MB, 15.6 MB/s)
+model-1  | Скачиваем модель 13.5% (338/2497 MB, 16.1 MB/s)
+model-1  | Скачиваем модель 14.9% (373/2497 MB, 16.2 MB/s)
+model-1  | Скачиваем модель 16.4% (410/2497 MB, 16.3 MB/s)
+model-1  | Скачиваем модель 18.0% (449/2497 MB, 16.5 MB/s)
+model-1  | Скачиваем модель 19.7% (493/2497 MB, 16.8 MB/s)
+model-1  | Скачиваем модель 21.0% (524/2497 MB, 16.7 MB/s)
+model-1  | Скачиваем модель 22.5% (561/2497 MB, 16.8 MB/s)
+model-1  | Скачиваем модель 24.0% (599/2497 MB, 16.9 MB/s)
+model-1  | Скачиваем модель 25.6% (639/2497 MB, 17.1 MB/s)
+model-1  | Скачиваем модель 27.0% (675/2497 MB, 17.1 MB/s)
+model-1  | Скачиваем модель 28.3% (707/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 29.8% (743/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 31.0% (775/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 32.5% (813/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 34.1% (851/2497 MB, 17.1 MB/s)
+model-1  | Скачиваем модель 35.4% (884/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 36.5% (912/2497 MB, 16.9 MB/s)
+model-1  | Скачиваем модель 38.0% (949/2497 MB, 16.9 MB/s)
+model-1  | Скачиваем модель 39.5% (987/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 40.9% (1022/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 42.5% (1062/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 44.0% (1098/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 45.4% (1135/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 47.0% (1174/2497 MB, 17.1 MB/s)
+model-1  | Скачиваем модель 48.4% (1208/2497 MB, 17.1 MB/s)
+model-1  | Скачиваем модель 50.0% (1249/2497 MB, 17.1 MB/s)
+model-1  | Скачиваем модель 51.3% (1280/2497 MB, 17.1 MB/s)
+model-1  | Скачиваем модель 52.7% (1316/2497 MB, 17.1 MB/s)
+model-1  | Скачиваем модель 54.1% (1352/2497 MB, 17.1 MB/s)
+model-1  | Скачиваем модель 55.2% (1379/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 56.5% (1411/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 58.0% (1448/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 59.5% (1485/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 60.9% (1520/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 62.5% (1561/2497 MB, 17.1 MB/s)
+model-1  | Скачиваем модель 63.9% (1595/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 65.2% (1628/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 66.3% (1655/2497 MB, 16.9 MB/s)
+model-1  | Скачиваем модель 67.5% (1685/2497 MB, 16.9 MB/s)
+model-1  | Скачиваем модель 69.0% (1722/2497 MB, 16.9 MB/s)
+model-1  | Скачиваем модель 70.5% (1761/2497 MB, 16.9 MB/s)
+model-1  | Скачиваем модель 72.0% (1798/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 73.4% (1833/2497 MB, 16.9 MB/s)
+model-1  | Скачиваем модель 74.5% (1859/2497 MB, 16.9 MB/s)
+model-1  | Скачиваем модель 75.7% (1891/2497 MB, 16.8 MB/s)
+model-1  | Скачиваем модель 77.0% (1924/2497 MB, 16.8 MB/s)
+model-1  | Скачиваем модель 78.6% (1963/2497 MB, 16.9 MB/s)
+model-1  | Скачиваем модель 80.2% (2002/2497 MB, 16.9 MB/s)
+model-1  | Скачиваем модель 81.9% (2045/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 83.2% (2078/2497 MB, 16.9 MB/s)
+model-1  | Скачиваем модель 84.7% (2115/2497 MB, 17.0 MB/s)
+model-1  | Скачиваем модель 86.0% (2147/2497 MB, 16.9 MB/s)
+model-1  | Скачиваем модель 87.2% (2179/2497 MB, 16.9 MB/s)
+model-1  | Скачиваем модель 88.6% (2214/2497 MB, 16.9 MB/s)
+model-1  | Скачиваем модель 89.7% (2240/2497 MB, 16.8 MB/s)
+model-1  | Скачиваем модель 91.0% (2273/2497 MB, 16.8 MB/s)
+model-1  | Скачиваем модель 92.6% (2312/2497 MB, 16.8 MB/s)
+model-1  | Скачиваем модель 94.0% (2347/2497 MB, 16.8 MB/s)
+model-1  | Скачиваем модель 95.2% (2376/2497 MB, 16.8 MB/s)
+model-1  | Скачиваем модель 96.4% (2408/2497 MB, 16.8 MB/s)
+model-1  | Скачиваем модель 97.6% (2438/2497 MB, 16.7 MB/s)
+model-1  | Скачиваем модель 99.1% (2475/2497 MB, 16.7 MB/s)
+model-1  | Скачиваем модель 100.0% (2497/2497 MB, 16.7 MB/s)
+model-1  | Модель загружена, контрольная сумма совпала 100.0% (2497/2497 MB, 0.0 MB/s)
+model-1  | {"phase": "weights_ready", "source": "downloaded_and_verified", "seconds": 151.893}
+model-1  | Загружаем модель в память 100.0% (2497/2497 MB, 0.0 MB/s)
+model-1  | 0.00.006.531 W Setting 'enable_thinking' via --chat-template-kwargs is deprecated. Use --reasoning on / --reasoning off instead.
+model-1  | 0.00.006.666 I srv  llama_server: initializing ...
+model-1  | 0.00.006.677 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+model-1  | 0.00.006.957 W srv  llama_server: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+model-1  | 0.00.008.824 I srv    load_model: loading model '/models/Qwen3-4B-Instruct-2507-Q4_K_M.gguf'
+model-1  | 0.00.158.322 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+model-1  | 0.03.306.521 I cmn          init: llama threadpool init, n_threads = 4
+model-1  | 0.03.494.649 I srv    load_model: initializing, n_slots = 2, n_ctx_slot = 4096, kv_unified = 'false'
+model-1  | 0.03.494.711 W srv          init: --cache-idle-slots requires --cache-ram, disabling
+model-1  | 0.03.499.821 I srv  llama_server: model loaded
+model-1  | 0.03.499.828 I srv  llama_server: listening on http://0.0.0.0:8082
+model-1  | 0.04.987.443 I slot get_availabl: id  0 | task -1 | selected slot by id (0)
+model-1  | 0.04.987.693 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+model-1  | 0.13.199.483 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =    512, progress = 0.26, t =   8.21 s / 62.35 tokens per second
+model-1  | 0.23.297.767 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   1024, progress = 0.51, t =  18.31 s / 55.93 tokens per second
+model-1  | 0.34.934.818 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   1536, progress = 0.77, t =  29.95 s / 51.29 tokens per second
+model-1  | 0.47.263.648 I slot print_timing: id  0 | task 0 | prompt eval time =   42275.43 ms /  2002 tokens (   21.12 ms per token,    47.36 tokens per second)
+model-1  | 0.47.263.655 I slot print_timing: id  0 | task 0 |        eval time =       0.00 ms /     1 tokens (    0.00 ms per token,     0.00 tokens per second)
+model-1  | 0.47.263.656 I slot print_timing: id  0 | task 0 |       total time =   42275.44 ms /  2003 tokens
+model-1  | 0.47.263.657 I slot print_timing: id  0 | task 0 |    graphs reused =          8
+model-1  | 0.47.263.658 I slot print_timing: id  0 | task 0 |   graph reallocs =          0    /     0        (same size) / (changed size)
+model-1  | 0.47.263.805 I slot      release: id  0 | task 0 | stop processing: n_tokens = 2002, truncated = 0
+model-1  | 0.47.289.512 I slot get_availabl: id  1 | task -1 | selected slot by id (1)
+model-1  | 0.47.289.737 I slot launch_slot_: id  1 | task 5 | processing task, is_child = 0
+model-1  | 0.56.639.910 I slot print_timing: id  1 | task 5 | prompt processing, n_tokens =    512, progress = 0.22, t =   9.35 s / 54.76 tokens per second
+model-1  | 1.07.893.427 I slot print_timing: id  1 | task 5 | prompt processing, n_tokens =   1024, progress = 0.43, t =  20.60 s / 49.70 tokens per second
+model-1  | 1.21.481.076 I slot print_timing: id  1 | task 5 | prompt processing, n_tokens =   1536, progress = 0.65, t =  34.19 s / 44.92 tokens per second
+model-1  | 1.38.074.495 I slot print_timing: id  1 | task 5 | prompt processing, n_tokens =   2048, progress = 0.87, t =  50.78 s / 40.33 tokens per second
+model-1  | 1.49.927.822 I slot print_timing: id  1 | task 5 | prompt eval time =   62637.91 ms /  2356 tokens (   26.59 ms per token,    37.61 tokens per second)
+model-1  | 1.49.927.830 I slot print_timing: id  1 | task 5 |        eval time =       0.00 ms /     1 tokens (    0.00 ms per token,     0.00 tokens per second)
+model-1  | 1.49.927.831 I slot print_timing: id  1 | task 5 |       total time =   62637.91 ms /  2357 tokens
+model-1  | 1.49.927.831 I slot print_timing: id  1 | task 5 |    graphs reused =         17
+model-1  | 1.49.927.832 I slot print_timing: id  1 | task 5 |   graph reallocs =          0    /     0        (same size) / (changed size)
+model-1  | 1.49.927.996 I slot      release: id  1 | task 5 | stop processing: n_tokens = 2356, truncated = 0
+model-1  | 1.52.738.286 I slot get_availabl: id  0 | task -1 | selected slot by id (0)
+model-1  | 1.52.738.399 I slot launch_slot_: id  0 | task 11 | processing task, is_child = 0
+model-1  | 2.04.017.891 I slot print_timing: id  0 | task 11 | prompt eval time =    4344.95 ms /   142 tokens (   30.60 ms per token,    32.68 tokens per second)
+model-1  | 2.04.017.899 I slot print_timing: id  0 | task 11 |        eval time =    6934.52 ms /    69 tokens (  101.98 ms per token,     9.81 tokens per second)
+model-1  | 2.04.017.899 I slot print_timing: id  0 | task 11 |       total time =   11279.47 ms /   211 tokens
+model-1  | 2.04.017.900 I slot print_timing: id  0 | task 11 |    graphs reused =         84
+model-1  | 2.04.017.901 I slot print_timing: id  0 | task 11 |   graph reallocs =          0    /     0        (same size) / (changed size)
+model-1  | 2.04.018.052 I slot      release: id  0 | task 11 | stop processing: n_tokens = 2173, truncated = 0

@@ -39,7 +39,7 @@ Compose запускает `app` (Go Core и UI, порт 8080), `agent` (Python
 | `LLM_MODEL` | `qwen3-4b-instruct` | Имя модели |
 | `LLM_API_KEY` | пусто | Ключ внешнего провайдера, если используется |
 | `AGENT_TURN_TIMEOUT_SECONDS` | `90` | Предел ответа, секунды (1–300) |
-| `MODEL_WARMUP_TIMEOUT_SECONDS` | `300` | Предел прогрева, секунды |
+| `MODEL_WARMUP_TIMEOUT_SECONDS` | `900` | Предел прогрева для медленного CPU; готовность открывается сразу после завершения |
 | `MODEL_LOCK` | `docs/docker-runtime.json` | Версия и SHA-256 модели |
 | `MODEL_THREADS` | `4` | Потоки CPU |
 | `MODEL_CONTEXT` | `4096` | Контекст на слот модели |
@@ -85,3 +85,4 @@ Volumes: `trips` — поездки, `hotel-content` — кэш отелей, `m
 - [Запуск и диагностика](docs/runtime.md), [разработка и проверки](docs/development.md).
 - [Источники данных и ограничения](docs/public-data-sources.md).
 - [Проверка CPU](docs/validation/docker-cpu-2026-10-27/README.md), [совместимость AMD64](docs/validation/amd64-2026-10-28/README.md).
+- [Чистый запуск для жюри: 5 мин 25 с с загрузкой модели](docs/validation/jury-clean-2026-10-28/README.md).

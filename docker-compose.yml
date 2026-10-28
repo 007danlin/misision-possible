@@ -53,7 +53,7 @@ services:
       HOTEL_COMPACT_WIRE: "1"
       LLM_DIRECTION_SLOT: "1"
       MODEL_WARMUP: "1"
-      MODEL_WARMUP_TIMEOUT_SECONDS: ${MODEL_WARMUP_TIMEOUT_SECONDS:-300}
+      MODEL_WARMUP_TIMEOUT_SECONDS: ${MODEL_WARMUP_TIMEOUT_SECONDS:-900}
       WAIT_FOR_MODEL: "1"
     volumes:
       - hotel-content:/app/content-cache

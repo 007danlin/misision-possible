@@ -1,0 +1,135 @@
+diff --git a/.env.example b/.env.example
+index 464aa95..df5d9c5 100644
+--- a/.env.example
++++ b/.env.example
+@@ -34,7 +34,8 @@ MODEL_LOCK=
+ # Число CPU-потоков модели (по умолчанию 4).
+ MODEL_THREADS=
+ 
+-# Независимый предел первого прогрева при запуске (по умолчанию 300 с).
++# Независимый предел первого прогрева при запуске (по умолчанию 900 с).
++# Это предел ожидания для медленного CPU, а не обязательная задержка старта.
+ MODEL_WARMUP_TIMEOUT_SECONDS=
+ 
+ # Контекст на слот и буферы CPU-модели: 4096, 2, 0 MiB.
+diff --git a/README.md b/README.md
+index 8182579..8443af0 100644
+--- a/README.md
++++ b/README.md
+@@ -39,7 +39,7 @@ Compose запускает `app` (Go Core и UI, порт 8080), `agent` (Python
+ | `LLM_MODEL` | `qwen3-4b-instruct` | Имя модели |
+ | `LLM_API_KEY` | пусто | Ключ внешнего провайдера, если используется |
+ | `AGENT_TURN_TIMEOUT_SECONDS` | `90` | Предел ответа, секунды (1–300) |
+-| `MODEL_WARMUP_TIMEOUT_SECONDS` | `300` | Предел прогрева, секунды |
++| `MODEL_WARMUP_TIMEOUT_SECONDS` | `900` | Предел прогрева для медленного CPU; готовность открывается сразу после завершения |
+ | `MODEL_LOCK` | `docs/docker-runtime.json` | Версия и SHA-256 модели |
+ | `MODEL_THREADS` | `4` | Потоки CPU |
+ | `MODEL_CONTEXT` | `4096` | Контекст на слот модели |
+@@ -85,3 +85,4 @@ Volumes: `trips` — поездки, `hotel-content` — кэш отелей, `m
+ - [Запуск и диагностика](docs/runtime.md), [разработка и проверки](docs/development.md).
+ - [Источники данных и ограничения](docs/public-data-sources.md).
+ - [Проверка CPU](docs/validation/docker-cpu-2026-10-27/README.md), [совместимость AMD64](docs/validation/amd64-2026-10-28/README.md).
++- [Чистый запуск для жюри: 5 мин 25 с с загрузкой модели](docs/validation/jury-clean-2026-10-28/README.md).
+diff --git a/agent/tests/test_warmup.py b/agent/tests/test_warmup.py
+index 437bf60..10414e2 100644
+--- a/agent/tests/test_warmup.py
++++ b/agent/tests/test_warmup.py
+@@ -49,4 +49,20 @@ class WarmupTests(unittest.IsolatedAsyncioTestCase):
+                 self.subTest(value=value),
+                 patch.dict(os.environ, {"MODEL_WARMUP_TIMEOUT_SECONDS": value}),
+             ):
+-                self.assertEqual(startup.startup_timeout(), 300)
++                self.assertEqual(startup.startup_timeout(), 900)
++
++    async def test_default_allows_slow_cpu_without_manual_environment(self):
++        calls = []
++
++        class Prefill:
++            settings = Settings(provider="llama_cpp")
++
++            async def extract(self, context, repair, timeout, *, prefill=False):
++                calls.append(timeout)
++                return "", {}
++
++        with patch.dict(os.environ, {"LLM_DIRECTION_SLOT": ""}):
++            os.environ.pop("MODEL_WARMUP_TIMEOUT_SECONDS", None)
++            with patch.object(startup, "QwenModel", return_value=Prefill()):
++                await startup.warmup()
++        self.assertEqual(calls, [900])
+diff --git a/agent/travel_agent/warmup.py b/agent/travel_agent/warmup.py
+index c985f76..03d5a64 100644
+--- a/agent/travel_agent/warmup.py
++++ b/agent/travel_agent/warmup.py
+@@ -12,10 +12,10 @@ from .model import QwenModel, Settings
+ 
+ def startup_timeout():
+     try:
+-        value = float(os.getenv("MODEL_WARMUP_TIMEOUT_SECONDS", "300"))
++        value = float(os.getenv("MODEL_WARMUP_TIMEOUT_SECONDS", "900"))
+     except ValueError:
+-        return 300.0
+-    return value if 1 <= value <= 900 else 300.0
++        return 900.0
++    return value if 1 <= value <= 900 else 900.0
+ 
+ 
+ async def warmup():
+diff --git a/docker-compose.yml b/docker-compose.yml
+index 87450a1..87ad89b 100644
+--- a/docker-compose.yml
++++ b/docker-compose.yml
+@@ -53,7 +53,7 @@ services:
+       HOTEL_COMPACT_WIRE: "1"
+       LLM_DIRECTION_SLOT: "1"
+       MODEL_WARMUP: "1"
+-      MODEL_WARMUP_TIMEOUT_SECONDS: ${MODEL_WARMUP_TIMEOUT_SECONDS:-300}
++      MODEL_WARMUP_TIMEOUT_SECONDS: ${MODEL_WARMUP_TIMEOUT_SECONDS:-900}
+       WAIT_FOR_MODEL: "1"
+     volumes:
+       - hotel-content:/app/content-cache
+diff --git a/docs/runtime.md b/docs/runtime.md
+index 6f5e7ca..aa71a2c 100644
+--- a/docs/runtime.md
++++ b/docs/runtime.md
+@@ -11,12 +11,22 @@
+ 
+ `app` запускается одновременно с моделью, чтобы показывать подготовку. До готовности операции поездки возвращают 503. `/health` проверяет процесс, `/ready` — готовность полного пути. Агент открывает gRPC после прогрева.
+ 
++## Скачивание без ручной установки
++
++В обычном запуске не нужны `.env`, LLM API-ключ, Hugging Face account, Python, Go или установленный на компьютере llama.cpp. Docker собирает всё сам. Доступ к приватному командному репозиторию GitHub требуется до запуска; жюри получает его через организацию хакатона.
++
++Весовой файл загружается из публичного `unsloth/Qwen3-4B-Instruct-2507-GGUF` на Hugging Face. Revision, размер 2 497 281 120 байт и SHA-256 закреплены в `docs/docker-runtime.json`. Загрузчик проверяет хеш во время скачивания, сохраняет промежуточный файл и при сетевом обрыве автоматически повторяет запрос с докачкой (до пяти попыток за один запуск контейнера). Готовые веса остаются в Docker volume `models`; обычный перезапуск их не скачивает заново. Повреждённые веса не запускаются.
++
++Первой сборке также нужен доступ к Docker Hub, GitHub Releases, Ubuntu package mirrors, PyPI и Go module proxy. Штатная команда не обходит блокировки сети. При отключённом интернете или недоступном источнике срок установки гарантировать нельзя. На линии 20 Мбит/с одни веса потребуют не менее 16 мин 39 с; ориентир до 10 минут предполагает более быструю сеть и достаточную производительность CPU. Скачивание, сборка и прогрев входят в общее время установки.
++
+ ## Время и ресурсы
+ 
+ Проверенный режим: 4 общих ядра CPU, 5,75 GiB лимитов RAM на три сервиса, без GPU. Модель ограничена 5 GiB, агент — 512 MiB, Core — 256 MiB. Docker нужен запас до 6 GiB, операционной системе — дополнительная память.
+ 
+ На проверенном MacBook Air M4 холодная сборка с пустыми volumes заняла 3 мин 56 с, повторный запуск с сохранёнными весами — 1 мин 33 с. Скорость зависит от сети и компьютера; после перезапуска модели прогрев выполняется снова. [Исходные замеры](validation/docker-cpu-2026-10-27/README.md).
+ 
++Новый прогон из чистого клона с отдельным builder без build cache, без `.env` и готовых весов: 5 мин 12 с до `/ready`, 5 мин 25 с до всех healthy. Загрузка 2,50 ГБ прошла с первой попытки; после запуска в браузере проверены публичный поиск, учебное оформление и PDF. Изменение сетевой скорости влияет на общий результат. [Подробный отчёт](validation/jury-clean-2026-10-28/README.md).
++
+ Docker выбирает нативную архитектуру. Linux AMD64 также проверен через эмуляцию на Apple Silicon: штатный прогрев 300 с завершился таймаутом, повтор с увеличенными лимитами прошёл. Это проверка совместимости, а не замер скорости физического Intel/AMD. [Полный результат](validation/amd64-2026-10-28/README.md).
+ 
+ ## Диагностика
+@@ -27,14 +37,15 @@ docker compose logs app agent model
+ docker compose exec agent python -m travel_agent.model_check
+ ```
+ 
+-`model_check` делает настоящий запрос к модели. Если в логах `model_timeout`, для медленного компьютера добавьте в корневой `.env`:
++`model_check` делает настоящий запрос к модели. Первый прогрев автоматически допускает до 900 с на медленном CPU; создавать `.env` ради него не нужно. Это верхний предел ожидания, а не обязательная задержка: UI открывается сразу после готовности.
++
++Если уже при работе с запросами в логах появляется `model_timeout`, можно увеличить предел одного ответа в корневом `.env`:
+ 
+ ```dotenv
+-MODEL_WARMUP_TIMEOUT_SECONDS=900
+ AGENT_TURN_TIMEOUT_SECONDS=300
+ ```
+ 
+-Повторите `docker compose up --build`. Это верхние пределы ожидания прогрева и запроса; время скачивания в прогрев не входит. При повторной ошибке проверьте RAM и доступ к источнику весов по логам. Остальные настройки `.env` сохраните.
++Повторите `docker compose up --build`. Время скачивания в предел прогрева не входит. При повторной ошибке проверьте RAM и доступ к источнику весов по логам. Остальные настройки `.env` сохраните.
+ 
+ Для изменения настроек используйте `.env.example` как шаблон. В macOS/Linux: `cp .env.example .env`, в PowerShell: `Copy-Item .env.example .env`. Не перезаписывайте уже заполненный файл. Передача токена жюри описана в [secrets.md](secrets.md).
+ 

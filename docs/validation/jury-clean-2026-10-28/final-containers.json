@@ -1,0 +1,20 @@
+{
+  "app": {
+    "image_id": "sha256:29ead26a3d59a87d23d29e92d7ed862580ea3263bfb90a5513557f689fefdab8",
+    "oom_killed": false,
+    "restart_count": 0,
+    "health": "healthy"
+  },
+  "agent": {
+    "image_id": "sha256:992f65c7c1743ea0bd270a35c480c4ebfb61f71fd0f1b16120731cec7912ff34",
+    "oom_killed": false,
+    "restart_count": 0,
+    "health": "healthy"
+  },
+  "model": {
+    "image_id": "sha256:e95d04596c15e62eff7f92aa4e3cd14f23948729e4aa1f52bb190f4a1c70de41",
+    "oom_killed": false,
+    "restart_count": 0,
+    "health": "healthy"
+  }
+}

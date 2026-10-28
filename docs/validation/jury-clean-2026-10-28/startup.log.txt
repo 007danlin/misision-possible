@@ -1,0 +1,782 @@
+ Image oplan-jury-fresh-20261028-app Building 
+ Image oplan-jury-fresh-20261028-agent Building 
+ Image oplan-jury-fresh-20261028-model Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.62kB done
+#1 DONE 0.0s
+
+#2 [internal] booting buildkit
+#2 pulling image moby/buildkit:buildx-stable-1
+#2 pulling image moby/buildkit:buildx-stable-1 1.5s done
+#2 creating container buildx_buildkit_oplan-jury-fresh-202610280
+#2 creating container buildx_buildkit_oplan-jury-fresh-202610280 0.3s done
+#2 DONE 1.8s
+
+#3 [model internal] load build definition from Dockerfile
+#3 DONE 0.0s
+
+#4 [app internal] load build definition from Dockerfile
+#4 transferring dockerfile: 533B done
+#4 DONE 0.0s
+
+#3 [model internal] load build definition from Dockerfile
+#3 transferring dockerfile: 1.55kB done
+#3 DONE 0.0s
+
+#5 [agent internal] load build definition from Dockerfile
+#5 transferring dockerfile: 1.10kB done
+#5 DONE 0.0s
+
+#6 [agent internal] load metadata for docker.io/library/python:3.12-slim-bookworm@sha256:6dd8b6dab6b3adc7812bab69eca5dbdc1a5cc690ad28306d234ffb4ef8ac9753
+#6 ...
+
+#7 [model internal] load metadata for docker.io/library/ubuntu:24.04@sha256:24737cef17f4e22b1977df7d9a05e77c4e28b7da5b8911f8d8ccda136bf3573c
+#7 DONE 2.1s
+
+#8 [model internal] load .dockerignore
+#8 transferring context: 130B done
+#8 DONE 0.0s
+
+#9 [app internal] load metadata for docker.io/library/golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb
+#9 DONE 2.1s
+
+#6 [agent internal] load metadata for docker.io/library/python:3.12-slim-bookworm@sha256:6dd8b6dab6b3adc7812bab69eca5dbdc1a5cc690ad28306d234ffb4ef8ac9753
+#6 DONE 2.1s
+
+#10 [app internal] load metadata for docker.io/library/alpine:3.19@sha256:6baf43584bcb78f2e5847d1de515f23499913ac9f12bdf834811a3145eb11ca1
+#10 DONE 2.1s
+
+#11 [agent internal] load .dockerignore
+#11 transferring context: 119B done
+#11 DONE 0.0s
+
+#12 [model internal] load build context
+#12 transferring context: 9.62kB done
+#12 DONE 0.0s
+
+#13 [app internal] load .dockerignore
+#13 transferring context: 64B done
+#13 DONE 0.0s
+
+#14 [agent internal] load build context
+#14 transferring context: 570.20kB done
+#14 DONE 0.0s
+
+#15 [app builder 1/5] FROM docker.io/library/golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb
+#15 resolve docker.io/library/golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb 0.0s done
+#15 DONE 0.1s
+
+#16 [app stage-1 1/4] FROM docker.io/library/alpine:3.19@sha256:6baf43584bcb78f2e5847d1de515f23499913ac9f12bdf834811a3145eb11ca1
+#16 resolve docker.io/library/alpine:3.19@sha256:6baf43584bcb78f2e5847d1de515f23499913ac9f12bdf834811a3145eb11ca1 done
+#16 ...
+
+#17 [app internal] load build context
+#17 transferring context: 19.42MB 0.1s done
+#17 DONE 0.2s
+
+#18 [agent builder 1/8] FROM docker.io/library/python:3.12-slim-bookworm@sha256:6dd8b6dab6b3adc7812bab69eca5dbdc1a5cc690ad28306d234ffb4ef8ac9753
+#18 resolve docker.io/library/python:3.12-slim-bookworm@sha256:6dd8b6dab6b3adc7812bab69eca5dbdc1a5cc690ad28306d234ffb4ef8ac9753 0.0s done
+#18 sha256:e76aa3ab8b4f7d8b46a4a12aee591e2c1d8ead9f8780b9d00402b1e2a7858578 0B / 248B 0.2s
+#18 sha256:345760a5465eab5c2bbe8131041e0cf6af3b341d7fd07f01e02ec79ab9bf2a8c 0B / 3.81MB 0.2s
+#18 sha256:43bcf0683fbde38e93066b2d628134045b68c11e0b679c571192826eeba93063 0B / 13.61MB 0.2s
+#18 sha256:e76aa3ab8b4f7d8b46a4a12aee591e2c1d8ead9f8780b9d00402b1e2a7858578 248B / 248B 0.3s done
+#18 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 0B / 28.14MB 0.2s
+#18 sha256:345760a5465eab5c2bbe8131041e0cf6af3b341d7fd07f01e02ec79ab9bf2a8c 1.05MB / 3.81MB 0.9s
+#18 sha256:43bcf0683fbde38e93066b2d628134045b68c11e0b679c571192826eeba93063 1.05MB / 13.61MB 0.9s
+#18 sha256:345760a5465eab5c2bbe8131041e0cf6af3b341d7fd07f01e02ec79ab9bf2a8c 2.10MB / 3.81MB 1.2s
+#18 sha256:43bcf0683fbde38e93066b2d628134045b68c11e0b679c571192826eeba93063 2.10MB / 13.61MB 1.2s
+#18 sha256:345760a5465eab5c2bbe8131041e0cf6af3b341d7fd07f01e02ec79ab9bf2a8c 3.15MB / 3.81MB 1.5s
+#18 sha256:43bcf0683fbde38e93066b2d628134045b68c11e0b679c571192826eeba93063 3.15MB / 13.61MB 1.5s
+#18 sha256:43bcf0683fbde38e93066b2d628134045b68c11e0b679c571192826eeba93063 4.19MB / 13.61MB 1.7s
+#18 sha256:43bcf0683fbde38e93066b2d628134045b68c11e0b679c571192826eeba93063 5.24MB / 13.61MB 2.0s
+#18 sha256:43bcf0683fbde38e93066b2d628134045b68c11e0b679c571192826eeba93063 6.29MB / 13.61MB 2.4s
+#18 sha256:43bcf0683fbde38e93066b2d628134045b68c11e0b679c571192826eeba93063 7.34MB / 13.61MB 2.6s
+#18 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 2.10MB / 28.14MB 2.4s
+#18 sha256:345760a5465eab5c2bbe8131041e0cf6af3b341d7fd07f01e02ec79ab9bf2a8c 3.81MB / 3.81MB 2.9s done
+#18 sha256:43bcf0683fbde38e93066b2d628134045b68c11e0b679c571192826eeba93063 8.39MB / 13.61MB 2.9s
+#18 sha256:43bcf0683fbde38e93066b2d628134045b68c11e0b679c571192826eeba93063 9.44MB / 13.61MB 3.2s
+#18 sha256:43bcf0683fbde38e93066b2d628134045b68c11e0b679c571192826eeba93063 10.49MB / 13.61MB 3.6s
+#18 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 4.19MB / 28.14MB 3.3s
+#18 sha256:43bcf0683fbde38e93066b2d628134045b68c11e0b679c571192826eeba93063 11.53MB / 13.61MB 3.9s
+#18 sha256:43bcf0683fbde38e93066b2d628134045b68c11e0b679c571192826eeba93063 12.58MB / 13.61MB 4.2s
+#18 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 6.29MB / 28.14MB 4.1s
+#18 sha256:43bcf0683fbde38e93066b2d628134045b68c11e0b679c571192826eeba93063 13.61MB / 13.61MB 4.5s done
+#18 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 8.39MB / 28.14MB 4.7s
+#18 ...
+
+#16 [app stage-1 1/4] FROM docker.io/library/alpine:3.19@sha256:6baf43584bcb78f2e5847d1de515f23499913ac9f12bdf834811a3145eb11ca1
+#16 sha256:5711127a7748d32f5a69380c27daf1382f2c6674ea7a60d2a3e338818590fea1 3.36MB / 3.36MB 2.1s done
+#16 extracting sha256:5711127a7748d32f5a69380c27daf1382f2c6674ea7a60d2a3e338818590fea1 0.0s done
+#16 DONE 5.1s
+
+#18 [agent builder 1/8] FROM docker.io/library/python:3.12-slim-bookworm@sha256:6dd8b6dab6b3adc7812bab69eca5dbdc1a5cc690ad28306d234ffb4ef8ac9753
+#18 ...
+
+#19 [app stage-1 2/4] WORKDIR /app
+#19 DONE 0.1s
+
+#20 [app stage-1 3/4] RUN addgroup -g 10001 app && adduser -D -u 10001 -G app app     && mkdir -p /app/data/trips && chown -R app:app /app/data
+#20 DONE 0.1s
+
+#18 [agent builder 1/8] FROM docker.io/library/python:3.12-slim-bookworm@sha256:6dd8b6dab6b3adc7812bab69eca5dbdc1a5cc690ad28306d234ffb4ef8ac9753
+#18 ...
+
+#21 [model download 1/3] FROM docker.io/library/ubuntu:24.04@sha256:24737cef17f4e22b1977df7d9a05e77c4e28b7da5b8911f8d8ccda136bf3573c
+#21 resolve docker.io/library/ubuntu:24.04@sha256:24737cef17f4e22b1977df7d9a05e77c4e28b7da5b8911f8d8ccda136bf3573c 0.0s done
+#21 sha256:e2d2bb84d02254f4be480ca3c62f94fc12ac959c11b3ce5bd7da3f411b2b9607 28.94MB / 28.94MB 4.8s done
+#21 extracting sha256:e2d2bb84d02254f4be480ca3c62f94fc12ac959c11b3ce5bd7da3f411b2b9607 0.5s done
+#21 DONE 5.4s
+
+#18 [agent builder 1/8] FROM docker.io/library/python:3.12-slim-bookworm@sha256:6dd8b6dab6b3adc7812bab69eca5dbdc1a5cc690ad28306d234ffb4ef8ac9753
+#18 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 10.49MB / 28.14MB 5.1s
+#18 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 12.58MB / 28.14MB 5.6s
+#18 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 14.68MB / 28.14MB 6.2s
+#18 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 16.78MB / 28.14MB 6.8s
+#18 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 18.87MB / 28.14MB 7.1s
+#18 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 20.97MB / 28.14MB 7.5s
+#18 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 23.07MB / 28.14MB 7.8s
+#18 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 25.17MB / 28.14MB 8.3s
+#18 sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 28.14MB / 28.14MB 8.7s done
+#18 extracting sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9
+#18 extracting sha256:41b2195c355367079ebad200f9591fe3c2cb886c3b1e67abaaf2090dc11c04d9 0.3s done
+#18 extracting sha256:345760a5465eab5c2bbe8131041e0cf6af3b341d7fd07f01e02ec79ab9bf2a8c 0.1s done
+#18 extracting sha256:43bcf0683fbde38e93066b2d628134045b68c11e0b679c571192826eeba93063
+#18 extracting sha256:43bcf0683fbde38e93066b2d628134045b68c11e0b679c571192826eeba93063 0.1s done
+#18 extracting sha256:e76aa3ab8b4f7d8b46a4a12aee591e2c1d8ead9f8780b9d00402b1e2a7858578 done
+#18 DONE 9.6s
+
+#22 [agent builder 2/8] WORKDIR /app
+#22 DONE 0.2s
+
+#23 [agent builder 3/8] COPY pyproject.toml README.md constraints.txt ./
+#23 DONE 0.0s
+
+#24 [agent builder 4/8] COPY travel_agent ./travel_agent
+#24 DONE 0.0s
+
+#25 [agent builder 5/8] COPY proto ./proto
+#25 DONE 0.0s
+
+#26 [agent builder 6/8] RUN python -m venv /opt/venv
+#26 ...
+
+#15 [app builder 1/5] FROM docker.io/library/golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb
+#15 sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 32B / 32B 0.2s done
+#15 sha256:070112d392529aede516cb12dd04bbbf175fcab48c54121d76e09a5043ce92a1 126B / 126B 0.4s done
+#15 sha256:e2e7dba5c30798b9d70d746d9fb1606b744e5c3baa8015b51dad60cea99c045b 28.31MB / 67.72MB 5.3s
+#15 sha256:fcdc05aad5cf439d58eff6bbe6e136d87af146e3b7442a5c64928da3ae1b86a3 246.92kB / 246.92kB 0.3s done
+#15 sha256:d3531b7a4f217bdc3426c57bcff84c170f086f456a39689d4a615c6d026c4be0 4.19MB / 4.19MB 0.9s done
+#15 extracting sha256:d3531b7a4f217bdc3426c57bcff84c170f086f456a39689d4a615c6d026c4be0 0.0s done
+#15 extracting sha256:fcdc05aad5cf439d58eff6bbe6e136d87af146e3b7442a5c64928da3ae1b86a3 0.0s done
+#15 sha256:e2e7dba5c30798b9d70d746d9fb1606b744e5c3baa8015b51dad60cea99c045b 32.51MB / 67.72MB 5.7s
+#15 sha256:e2e7dba5c30798b9d70d746d9fb1606b744e5c3baa8015b51dad60cea99c045b 36.70MB / 67.72MB 6.3s
+#15 ...
+
+#26 [agent builder 6/8] RUN python -m venv /opt/venv
+#26 DONE 1.4s
+
+#15 [app builder 1/5] FROM docker.io/library/golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb
+#15 ...
+
+#27 [agent builder 7/8] RUN python -m pip install --no-cache-dir -c constraints.txt . grpcio-tools==1.80.0
+#27 0.187 Processing /app
+#27 0.188   Installing build dependencies: started
+#27 2.767   Installing build dependencies: finished with status 'done'
+#27 2.767   Getting requirements to build wheel: started
+#27 2.863   Getting requirements to build wheel: finished with status 'done'
+#27 2.864   Preparing metadata (pyproject.toml): started
+#27 3.079   Preparing metadata (pyproject.toml): finished with status 'done'
+#27 ...
+
+#28 [model stage-1 2/6] RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates python3 libgomp1 libcurl4t64     && rm -rf /var/lib/apt/lists/*     && groupadd -g 10001 model && useradd -u 10001 -g model -m model     && mkdir -p /models /startup && chown model:model /models /startup
+#28 0.413 Get:1 http://ports.ubuntu.com/ubuntu-ports noble InRelease [256 kB]
+#28 1.473 Get:2 http://ports.ubuntu.com/ubuntu-ports noble-updates InRelease [126 kB]
+#28 1.839 Get:3 http://ports.ubuntu.com/ubuntu-ports noble-backports InRelease [126 kB]
+#28 2.448 Get:4 http://ports.ubuntu.com/ubuntu-ports noble-security InRelease [126 kB]
+#28 2.910 Get:5 http://ports.ubuntu.com/ubuntu-ports noble/universe arm64 Packages [19.0 MB]
+#28 ...
+
+#29 [model download 2/3] RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates curl     && rm -rf /var/lib/apt/lists/*
+#29 0.413 Get:1 http://ports.ubuntu.com/ubuntu-ports noble InRelease [256 kB]
+#29 1.294 Get:2 http://ports.ubuntu.com/ubuntu-ports noble-updates InRelease [126 kB]
+#29 1.461 Get:3 http://ports.ubuntu.com/ubuntu-ports noble-backports InRelease [126 kB]
+#29 1.633 Get:4 http://ports.ubuntu.com/ubuntu-ports noble-security InRelease [126 kB]
+#29 1.859 Get:5 http://ports.ubuntu.com/ubuntu-ports noble/universe arm64 Packages [19.0 MB]
+#29 5.517 Get:6 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 Packages [1776 kB]
+#29 5.687 Get:7 http://ports.ubuntu.com/ubuntu-ports noble/multiverse arm64 Packages [274 kB]
+#29 5.698 Get:8 http://ports.ubuntu.com/ubuntu-ports noble/restricted arm64 Packages [113 kB]
+#29 5.714 Get:9 http://ports.ubuntu.com/ubuntu-ports noble-updates/universe arm64 Packages [2223 kB]
+#29 6.214 Get:10 http://ports.ubuntu.com/ubuntu-ports noble-updates/restricted arm64 Packages [3260 kB]
+#29 6.557 Get:11 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 Packages [1795 kB]
+#29 6.828 Get:12 http://ports.ubuntu.com/ubuntu-ports noble-updates/multiverse arm64 Packages [107 kB]
+#29 6.829 Get:13 http://ports.ubuntu.com/ubuntu-ports noble-backports/universe arm64 Packages [36.3 kB]
+#29 6.829 Get:14 http://ports.ubuntu.com/ubuntu-ports noble-backports/main arm64 Packages [49.0 kB]
+#29 6.830 Get:15 http://ports.ubuntu.com/ubuntu-ports noble-backports/multiverse arm64 Packages [669 B]
+#29 6.830 Get:16 http://ports.ubuntu.com/ubuntu-ports noble-security/universe arm64 Packages [1638 kB]
+#29 6.880 Get:17 http://ports.ubuntu.com/ubuntu-ports noble-security/multiverse arm64 Packages [99.1 kB]
+#29 6.885 Get:18 http://ports.ubuntu.com/ubuntu-ports noble-security/restricted arm64 Packages [3129 kB]
+#29 7.380 Get:19 http://ports.ubuntu.com/ubuntu-ports noble-security/main arm64 Packages [1476 kB]
+#29 7.519 Fetched 35.6 MB in 7s (4770 kB/s)
+#29 7.519 Reading package lists...
+#29 8.024 Reading package lists...
+#29 8.658 Building dependency tree...
+#29 8.782 Reading state information...
+#29 8.943 The following additional packages will be installed:
+#29 8.943   libbrotli1 libcurl4t64 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3
+#29 8.944   libkrb5support0 libldap2 libnghttp2-14 libpsl5t64 librtmp1 libsasl2-2
+#29 8.944   libsasl2-modules-db libssh-4 openssl
+#29 8.944 Suggested packages:
+#29 8.944   krb5-doc krb5-user
+#29 8.944 Recommended packages:
+#29 8.944   krb5-locales libldap-common publicsuffix libsasl2-modules
+#29 8.972 The following NEW packages will be installed:
+#29 8.972   ca-certificates curl libbrotli1 libcurl4t64 libgssapi-krb5-2 libk5crypto3
+#29 8.972   libkeyutils1 libkrb5-3 libkrb5support0 libldap2 libnghttp2-14 libpsl5t64
+#29 8.973   librtmp1 libsasl2-2 libsasl2-modules-db libssh-4 openssl
+#29 9.287 0 upgraded, 17 newly installed, 0 to remove and 0 not upgraded.
+#29 9.287 Need to get 3300 kB of archives.
+#29 9.287 After this operation, 8722 kB of additional disk space will be used.
+#29 9.287 Get:1 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 openssl arm64 3.0.13-0ubuntu3.16 [985 kB]
+#29 ...
+
+#27 [agent builder 7/8] RUN python -m pip install --no-cache-dir -c constraints.txt . grpcio-tools==1.80.0
+#27 4.220 Collecting grpcio-tools==1.80.0
+#27 4.564   Downloading grpcio_tools-1.80.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl.metadata (5.3 kB)
+#27 ...
+
+#15 [app builder 1/5] FROM docker.io/library/golang:1.27.3-alpine@sha256:d200d2dd76b03a99b52651fd1325aff7dcd35422c35c01bac56571b0507f3deb
+#15 sha256:e2e7dba5c30798b9d70d746d9fb1606b744e5c3baa8015b51dad60cea99c045b 67.72MB / 67.72MB 9.3s done
+#15 extracting sha256:e2e7dba5c30798b9d70d746d9fb1606b744e5c3baa8015b51dad60cea99c045b 1.7s done
+#15 extracting sha256:070112d392529aede516cb12dd04bbbf175fcab48c54121d76e09a5043ce92a1 done
+#15 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 done
+#15 DONE 15.9s
+
+#27 [agent builder 7/8] RUN python -m pip install --no-cache-dir -c constraints.txt . grpcio-tools==1.80.0
+#27 4.797 Collecting protobuf<7.0.0,>=6.31.1 (from grpcio-tools==1.80.0)
+#27 ...
+
+#30 [app builder 2/5] WORKDIR /core
+#30 DONE 0.2s
+
+#27 [agent builder 7/8] RUN python -m pip install --no-cache-dir -c constraints.txt . grpcio-tools==1.80.0
+#27 4.909   Downloading protobuf-6.33.6-cp39-abi3-manylinux2014_aarch64.whl.metadata (593 bytes)
+#27 ...
+
+#31 [app builder 3/5] COPY . .
+#31 DONE 0.0s
+
+#29 [model download 2/3] RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates curl     && rm -rf /var/lib/apt/lists/*
+#29 10.50 Get:2 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 ca-certificates all 20260816ubuntu0.24.04.1 [139 kB]
+#29 10.52 Get:3 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libkrb5support0 arm64 1.20.1-6ubuntu2.10 [35.4 kB]
+#29 10.57 Get:4 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libk5crypto3 arm64 1.20.1-6ubuntu2.10 [85.8 kB]
+#29 10.57 Get:5 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 libkeyutils1 arm64 1.6.3-3build1 [9654 B]
+#29 10.57 Get:6 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libkrb5-3 arm64 1.20.1-6ubuntu2.10 [350 kB]
+#29 10.66 Get:7 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libgssapi-krb5-2 arm64 1.20.1-6ubuntu2.10 [142 kB]
+#29 10.66 Get:8 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libnghttp2-14 arm64 1.59.0-1ubuntu0.4 [74.8 kB]
+#29 10.73 Get:9 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 libpsl5t64 arm64 0.21.2-1.1build1 [57.4 kB]
+#29 10.73 Get:10 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libbrotli1 arm64 1.1.0-2ubuntu0.1 [340 kB]
+#29 10.74 Get:11 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libsasl2-modules-db arm64 2.1.28+dfsg1-5ubuntu3.1 [21.6 kB]
+#29 10.74 Get:12 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libsasl2-2 arm64 2.1.28+dfsg1-5ubuntu3.1 [54.7 kB]
+#29 10.75 Get:13 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libldap2 arm64 2.6.10+dfsg-0ubuntu0.24.04.1 [196 kB]
+#29 10.77 Get:14 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 librtmp1 arm64 2.4+20151223.gitfa8646d.1-2build7 [57.8 kB]
+#29 10.78 Get:15 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libssh-4 arm64 0.10.6-2ubuntu0.5 [192 kB]
+#29 10.86 Get:16 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libcurl4t64 arm64 8.5.0-2ubuntu10.16 [337 kB]
+#29 10.88 Get:17 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 curl arm64 8.5.0-2ubuntu10.16 [222 kB]
+#29 10.98 debconf: delaying package configuration, since apt-utils is not installed
+#29 10.99 Fetched 3300 kB in 2s (1721 kB/s)
+#29 11.00 Selecting previously unselected package openssl.
+#29 11.00 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 4376 files and directories currently installed.)
+#29 11.00 Preparing to unpack .../00-openssl_3.0.13-0ubuntu3.16_arm64.deb ...
+#29 11.00 Unpacking openssl (3.0.13-0ubuntu3.16) ...
+#29 11.03 Selecting previously unselected package ca-certificates.
+#29 11.03 Preparing to unpack .../01-ca-certificates_20260816ubuntu0.24.04.1_all.deb ...
+#29 11.03 Unpacking ca-certificates (20260816ubuntu0.24.04.1) ...
+#29 11.05 Selecting previously unselected package libkrb5support0:arm64.
+#29 11.05 Preparing to unpack .../02-libkrb5support0_1.20.1-6ubuntu2.10_arm64.deb ...
+#29 11.05 Unpacking libkrb5support0:arm64 (1.20.1-6ubuntu2.10) ...
+#29 11.07 Selecting previously unselected package libk5crypto3:arm64.
+#29 11.07 Preparing to unpack .../03-libk5crypto3_1.20.1-6ubuntu2.10_arm64.deb ...
+#29 11.07 Unpacking libk5crypto3:arm64 (1.20.1-6ubuntu2.10) ...
+#29 11.08 Selecting previously unselected package libkeyutils1:arm64.
+#29 11.08 Preparing to unpack .../04-libkeyutils1_1.6.3-3build1_arm64.deb ...
+#29 11.08 Unpacking libkeyutils1:arm64 (1.6.3-3build1) ...
+#29 11.09 Selecting previously unselected package libkrb5-3:arm64.
+#29 11.09 Preparing to unpack .../05-libkrb5-3_1.20.1-6ubuntu2.10_arm64.deb ...
+#29 11.09 Unpacking libkrb5-3:arm64 (1.20.1-6ubuntu2.10) ...
+#29 11.11 Selecting previously unselected package libgssapi-krb5-2:arm64.
+#29 11.11 Preparing to unpack .../06-libgssapi-krb5-2_1.20.1-6ubuntu2.10_arm64.deb ...
+#29 11.11 Unpacking libgssapi-krb5-2:arm64 (1.20.1-6ubuntu2.10) ...
+#29 11.12 Selecting previously unselected package libnghttp2-14:arm64.
+#29 11.12 Preparing to unpack .../07-libnghttp2-14_1.59.0-1ubuntu0.4_arm64.deb ...
+#29 11.12 Unpacking libnghttp2-14:arm64 (1.59.0-1ubuntu0.4) ...
+#29 11.13 Selecting previously unselected package libpsl5t64:arm64.
+#29 11.14 Preparing to unpack .../08-libpsl5t64_0.21.2-1.1build1_arm64.deb ...
+#29 11.14 Unpacking libpsl5t64:arm64 (0.21.2-1.1build1) ...
+#29 11.14 Selecting previously unselected package libbrotli1:arm64.
+#29 11.14 Preparing to unpack .../09-libbrotli1_1.1.0-2ubuntu0.1_arm64.deb ...
+#29 11.15 Unpacking libbrotli1:arm64 (1.1.0-2ubuntu0.1) ...
+#29 11.16 Selecting previously unselected package libsasl2-modules-db:arm64.
+#29 11.16 Preparing to unpack .../10-libsasl2-modules-db_2.1.28+dfsg1-5ubuntu3.1_arm64.deb ...
+#29 11.16 Unpacking libsasl2-modules-db:arm64 (2.1.28+dfsg1-5ubuntu3.1) ...
+#29 11.17 Selecting previously unselected package libsasl2-2:arm64.
+#29 11.17 Preparing to unpack .../11-libsasl2-2_2.1.28+dfsg1-5ubuntu3.1_arm64.deb ...
+#29 11.17 Unpacking libsasl2-2:arm64 (2.1.28+dfsg1-5ubuntu3.1) ...
+#29 11.18 Selecting previously unselected package libldap2:arm64.
+#29 11.18 Preparing to unpack .../12-libldap2_2.6.10+dfsg-0ubuntu0.24.04.1_arm64.deb ...
+#29 11.18 Unpacking libldap2:arm64 (2.6.10+dfsg-0ubuntu0.24.04.1) ...
+#29 11.19 Selecting previously unselected package librtmp1:arm64.
+#29 11.19 Preparing to unpack .../13-librtmp1_2.4+20151223.gitfa8646d.1-2build7_arm64.deb ...
+#29 11.19 Unpacking librtmp1:arm64 (2.4+20151223.gitfa8646d.1-2build7) ...
+#29 11.20 Selecting previously unselected package libssh-4:arm64.
+#29 11.20 Preparing to unpack .../14-libssh-4_0.10.6-2ubuntu0.5_arm64.deb ...
+#29 11.20 Unpacking libssh-4:arm64 (0.10.6-2ubuntu0.5) ...
+#29 11.21 Selecting previously unselected package libcurl4t64:arm64.
+#29 11.21 Preparing to unpack .../15-libcurl4t64_8.5.0-2ubuntu10.16_arm64.deb ...
+#29 11.21 Unpacking libcurl4t64:arm64 (8.5.0-2ubuntu10.16) ...
+#29 11.22 Selecting previously unselected package curl.
+#29 11.22 Preparing to unpack .../16-curl_8.5.0-2ubuntu10.16_arm64.deb ...
+#29 11.22 Unpacking curl (8.5.0-2ubuntu10.16) ...
+#29 11.25 Setting up libkeyutils1:arm64 (1.6.3-3build1) ...
+#29 11.26 Setting up libbrotli1:arm64 (1.1.0-2ubuntu0.1) ...
+#29 11.26 Setting up libpsl5t64:arm64 (0.21.2-1.1build1) ...
+#29 11.26 Setting up libnghttp2-14:arm64 (1.59.0-1ubuntu0.4) ...
+#29 11.27 Setting up libkrb5support0:arm64 (1.20.1-6ubuntu2.10) ...
+#29 11.27 Setting up libsasl2-modules-db:arm64 (2.1.28+dfsg1-5ubuntu3.1) ...
+#29 11.27 Setting up librtmp1:arm64 (2.4+20151223.gitfa8646d.1-2build7) ...
+#29 11.28 Setting up libk5crypto3:arm64 (1.20.1-6ubuntu2.10) ...
+#29 11.28 Setting up libsasl2-2:arm64 (2.1.28+dfsg1-5ubuntu3.1) ...
+#29 11.28 Setting up libkrb5-3:arm64 (1.20.1-6ubuntu2.10) ...
+#29 11.29 Setting up openssl (3.0.13-0ubuntu3.16) ...
+#29 11.29 Setting up libldap2:arm64 (2.6.10+dfsg-0ubuntu0.24.04.1) ...
+#29 11.29 Setting up ca-certificates (20260816ubuntu0.24.04.1) ...
+#29 11.43 Updating certificates in /etc/ssl/certs...
+#29 11.57 120 added, 0 removed; done.
+#29 11.57 Setting up libgssapi-krb5-2:arm64 (1.20.1-6ubuntu2.10) ...
+#29 11.58 Setting up libssh-4:arm64 (0.10.6-2ubuntu0.5) ...
+#29 11.58 Setting up libcurl4t64:arm64 (8.5.0-2ubuntu10.16) ...
+#29 11.59 Setting up curl (8.5.0-2ubuntu10.16) ...
+#29 11.59 Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+#29 11.59 Processing triggers for ca-certificates (20260816ubuntu0.24.04.1) ...
+#29 11.60 Updating certificates in /etc/ssl/certs...
+#29 11.70 0 added, 0 removed; done.
+#29 11.70 Running hooks in /etc/ca-certificates/update.d...
+#29 11.70 done.
+#29 DONE 11.7s
+
+#32 [model download 3/3] RUN case "arm64" in       amd64) arch=x64; sha=b0bba21f5673f80f242c1a8f7c1380800f08b6eff6f32fd55eae9fe220690fdc ;;       arm64) arch=arm64; sha=f5a52789342647d39768efd14fed9fed2b4a826f5430d812c6778f6a8fd37e93 ;;       *) exit 1 ;;     esac     && curl -fL --retry 3 -o /tmp/runtime.tar.gz "https://github.com/ggml-org/llama.cpp/releases/download/b11853/llama-b11853-bin-ubuntu-${arch}.tar.gz"     && echo "$sha  /tmp/runtime.tar.gz" | sha256sum -c -     && mkdir /runtime && tar -xzf /tmp/runtime.tar.gz -C /runtime --strip-components=1
+#32 0.043   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+#32 0.043                                  Dload  Upload   Total   Spent    Left  Speed
+#32 0.043   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+#32 0.578   1 17.3M    1  239k    0     0   448k      0  0:00:39 --:--:--  0:00:39  448k 44 17.3M   44 7822k    0     0  4843k      0  0:00:03  0:00:01  0:00:02 7021k100 17.3M  100 17.3M    0     0  7301k      0  0:00:02  0:00:02 --:--:-- 9241k
+#32 2.478 /tmp/runtime.tar.gz: OK
+#32 DONE 2.8s
+
+#33 [app builder 4/5] RUN go mod download
+#33 DONE 3.7s
+
+#34 [app builder 5/5] RUN CGO_ENABLED=0 GOOS=linux go build -o core
+#34 DONE 5.4s
+
+#27 [agent builder 7/8] RUN python -m pip install --no-cache-dir -c constraints.txt . grpcio-tools==1.80.0
+#27 5.666 Collecting grpcio>=1.80.0 (from grpcio-tools==1.80.0)
+#27 5.942   Downloading grpcio-1.80.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl.metadata (3.8 kB)
+#27 6.115 Collecting setuptools>=77.0.1 (from grpcio-tools==1.80.0)
+#27 6.173   Downloading setuptools-84.2.1-py3-none-any.whl.metadata (6.6 kB)
+#27 6.345 Collecting pydantic==2.12.3 (from agent==0.2.0)
+#27 6.472   Downloading pydantic-2.12.3-py3-none-any.whl.metadata (87 kB)
+#27 6.676 Collecting httpx==0.28.1 (from agent==0.2.0)
+#27 6.770   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+#27 6.958 Collecting typing-extensions~=4.12 (from grpcio>=1.80.0->grpcio-tools==1.80.0)
+#27 7.031   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#27 7.136 Collecting anyio (from httpx==0.28.1->agent==0.2.0)
+#27 7.312   Downloading anyio-4.15.1-py3-none-any.whl.metadata (4.7 kB)
+#27 7.559 Collecting certifi (from httpx==0.28.1->agent==0.2.0)
+#27 7.697   Downloading certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+#27 8.520 Collecting httpcore==1.* (from httpx==0.28.1->agent==0.2.0)
+#27 8.576   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+#27 8.686 Collecting idna (from httpx==0.28.1->agent==0.2.0)
+#27 8.749   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+#27 8.813 Collecting annotated-types>=0.6.0 (from pydantic==2.12.3->agent==0.2.0)
+#27 8.876   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+#27 10.06 Collecting pydantic-core==2.41.4 (from pydantic==2.12.3->agent==0.2.0)
+#27 10.14   Downloading pydantic_core-2.41.4-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (7.3 kB)
+#27 10.25 Collecting typing-inspection>=0.4.2 (from pydantic==2.12.3->agent==0.2.0)
+#27 10.31   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+#27 10.39 Collecting h11>=0.16 (from httpcore==1.*->httpx==0.28.1->agent==0.2.0)
+#27 10.44   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+#27 10.61 Downloading grpcio_tools-1.80.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (2.6 MB)
+#27 13.85    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.6/2.6 MB 767.0 kB/s eta 0:00:00
+#27 13.91 Downloading grpcio-1.80.0-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.whl (6.6 MB)
+#27 ...
+
+#35 [app stage-1 4/4] COPY --from=builder /core/core .
+#35 DONE 0.0s
+
+#36 [app] exporting to oci image format
+#36 exporting layers
+#36 exporting layers 0.5s done
+#36 exporting manifest sha256:29ead26a3d59a87d23d29e92d7ed862580ea3263bfb90a5513557f689fefdab8
+#36 exporting manifest sha256:29ead26a3d59a87d23d29e92d7ed862580ea3263bfb90a5513557f689fefdab8 done
+#36 exporting config sha256:c7861777e1ffbf0ebbf977fedf8b64d20147ecfbcf6a0a3349568bbee753857f done
+#36 sending tarball
+#36 sending tarball 0.4s done
+#36 DONE 0.9s
+
+#37 importing to docker
+#37 DONE 0.0s
+
+#38 [app] resolving provenance for metadata file
+#38 DONE 0.0s
+
+#27 [agent builder 7/8] RUN python -m pip install --no-cache-dir -c constraints.txt . grpcio-tools==1.80.0
+#27 ...
+
+#28 [model stage-1 2/6] RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates python3 libgomp1 libcurl4t64     && rm -rf /var/lib/apt/lists/*     && groupadd -g 10001 model && useradd -u 10001 -g model -m model     && mkdir -p /models /startup && chown model:model /models /startup
+#28 24.04 Get:6 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 Packages [1776 kB]
+#28 24.79 Get:7 http://ports.ubuntu.com/ubuntu-ports noble/multiverse arm64 Packages [274 kB]
+#28 24.91 Get:8 http://ports.ubuntu.com/ubuntu-ports noble/restricted arm64 Packages [113 kB]
+#28 24.91 Get:9 http://ports.ubuntu.com/ubuntu-ports noble-updates/multiverse arm64 Packages [107 kB]
+#28 24.91 Get:10 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 Packages [1795 kB]
+#28 25.59 Get:11 http://ports.ubuntu.com/ubuntu-ports noble-updates/restricted arm64 Packages [3260 kB]
+#28 26.47 Get:12 http://ports.ubuntu.com/ubuntu-ports noble-updates/universe arm64 Packages [2223 kB]
+#28 27.17 Get:13 http://ports.ubuntu.com/ubuntu-ports noble-backports/multiverse arm64 Packages [669 B]
+#28 27.17 Get:14 http://ports.ubuntu.com/ubuntu-ports noble-backports/universe arm64 Packages [36.3 kB]
+#28 27.19 Get:15 http://ports.ubuntu.com/ubuntu-ports noble-backports/main arm64 Packages [49.0 kB]
+#28 27.19 Get:16 http://ports.ubuntu.com/ubuntu-ports noble-security/multiverse arm64 Packages [99.1 kB]
+#28 27.22 Get:17 http://ports.ubuntu.com/ubuntu-ports noble-security/universe arm64 Packages [1638 kB]
+#28 27.87 Get:18 http://ports.ubuntu.com/ubuntu-ports noble-security/main arm64 Packages [1476 kB]
+#28 28.28 Get:19 http://ports.ubuntu.com/ubuntu-ports noble-security/restricted arm64 Packages [3129 kB]
+#28 29.42 Fetched 35.6 MB in 29s (1213 kB/s)
+#28 29.42 Reading package lists...
+#28 29.84 Reading package lists...
+#28 30.24 Building dependency tree...
+#28 30.34 Reading state information...
+#28 30.46 The following additional packages will be installed:
+#28 30.46   libbrotli1 libexpat1 libgssapi-krb5-2 libk5crypto3 libkeyutils1 libkrb5-3
+#28 30.46   libkrb5support0 libldap2 libnghttp2-14 libpsl5t64 libpython3-stdlib
+#28 30.46   libpython3.12-minimal libpython3.12-stdlib libreadline8t64 librtmp1
+#28 30.46   libsasl2-2 libsasl2-modules-db libsqlite3-0 libssh-4 media-types netbase
+#28 30.46   openssl python3-minimal python3.12 python3.12-minimal readline-common tzdata
+#28 30.46 Suggested packages:
+#28 30.46   krb5-doc krb5-user python3-doc python3-tk python3-venv python3.12-venv
+#28 30.46   python3.12-doc binutils binfmt-support readline-doc
+#28 30.46 Recommended packages:
+#28 30.46   krb5-locales libldap-common publicsuffix libsasl2-modules
+#28 30.50 The following NEW packages will be installed:
+#28 30.50   ca-certificates libbrotli1 libcurl4t64 libexpat1 libgomp1 libgssapi-krb5-2
+#28 30.50   libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap2 libnghttp2-14
+#28 30.50   libpsl5t64 libpython3-stdlib libpython3.12-minimal libpython3.12-stdlib
+#28 30.50   libreadline8t64 librtmp1 libsasl2-2 libsasl2-modules-db libsqlite3-0
+#28 30.50   libssh-4 media-types netbase openssl python3 python3-minimal python3.12
+#28 30.50   python3.12-minimal readline-common tzdata
+#28 30.72 0 upgraded, 31 newly installed, 0 to remove and 0 not upgraded.
+#28 30.72 Need to get 10.4 MB of archives.
+#28 30.72 After this operation, 38.0 MB of additional disk space will be used.
+#28 30.72 Get:1 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libpython3.12-minimal arm64 3.12.3-1ubuntu0.17 [835 kB]
+#28 31.03 Get:2 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libexpat1 arm64 2.6.1-2ubuntu0.6 [89.8 kB]
+#28 31.04 Get:3 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 python3.12-minimal arm64 3.12.3-1ubuntu0.17 [2253 kB]
+#28 31.26 Get:4 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 python3-minimal arm64 3.12.3-0ubuntu2.1 [27.4 kB]
+#28 31.26 Get:5 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 media-types all 10.1.0 [27.5 kB]
+#28 31.26 Get:6 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 netbase all 6.4 [13.1 kB]
+#28 31.26 Get:7 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 tzdata all 2026e-0ubuntu0.24.04.1 [282 kB]
+#28 31.26 Get:8 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 readline-common all 8.2-4build1 [56.5 kB]
+#28 31.26 Get:9 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 libreadline8t64 arm64 8.2-4build1 [153 kB]
+#28 31.29 Get:10 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libsqlite3-0 arm64 3.45.1-1ubuntu2.8 [691 kB]
+#28 31.33 Get:11 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libpython3.12-stdlib arm64 3.12.3-1ubuntu0.17 [2039 kB]
+#28 31.45 Get:12 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 python3.12 arm64 3.12.3-1ubuntu0.17 [651 kB]
+#28 31.48 Get:13 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libpython3-stdlib arm64 3.12.3-0ubuntu2.1 [10.1 kB]
+#28 31.48 Get:14 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 python3 arm64 3.12.3-0ubuntu2.1 [23.0 kB]
+#28 31.48 Get:15 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 openssl arm64 3.0.13-0ubuntu3.16 [985 kB]
+#28 31.56 Get:16 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 ca-certificates all 20260816ubuntu0.24.04.1 [139 kB]
+#28 31.56 Get:17 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libkrb5support0 arm64 1.20.1-6ubuntu2.10 [35.4 kB]
+#28 31.56 Get:18 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libk5crypto3 arm64 1.20.1-6ubuntu2.10 [85.8 kB]
+#28 31.56 Get:19 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 libkeyutils1 arm64 1.6.3-3build1 [9654 B]
+#28 31.56 Get:20 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libkrb5-3 arm64 1.20.1-6ubuntu2.10 [350 kB]
+#28 31.57 Get:21 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libgssapi-krb5-2 arm64 1.20.1-6ubuntu2.10 [142 kB]
+#28 31.59 Get:22 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libnghttp2-14 arm64 1.59.0-1ubuntu0.4 [74.8 kB]
+#28 31.59 Get:23 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 libpsl5t64 arm64 0.21.2-1.1build1 [57.4 kB]
+#28 31.59 Get:24 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libbrotli1 arm64 1.1.0-2ubuntu0.1 [340 kB]
+#28 31.70 Get:25 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libsasl2-modules-db arm64 2.1.28+dfsg1-5ubuntu3.1 [21.6 kB]
+#28 31.70 Get:26 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libsasl2-2 arm64 2.1.28+dfsg1-5ubuntu3.1 [54.7 kB]
+#28 31.71 Get:27 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libldap2 arm64 2.6.10+dfsg-0ubuntu0.24.04.1 [196 kB]
+#28 31.71 Get:28 http://ports.ubuntu.com/ubuntu-ports noble/main arm64 librtmp1 arm64 2.4+20151223.gitfa8646d.1-2build7 [57.8 kB]
+#28 31.71 Get:29 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libssh-4 arm64 0.10.6-2ubuntu0.5 [192 kB]
+#28 31.71 Get:30 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libcurl4t64 arm64 8.5.0-2ubuntu10.16 [337 kB]
+#28 31.71 Get:31 http://ports.ubuntu.com/ubuntu-ports noble-updates/main arm64 libgomp1 arm64 14.2.0-4ubuntu2~24.04.1 [145 kB]
+#28 31.77 debconf: delaying package configuration, since apt-utils is not installed
+#28 31.78 Fetched 10.4 MB in 1s (8562 kB/s)
+#28 31.79 Selecting previously unselected package libpython3.12-minimal:arm64.
+#28 31.79 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 4376 files and directories currently installed.)
+#28 31.79 Preparing to unpack .../libpython3.12-minimal_3.12.3-1ubuntu0.17_arm64.deb ...
+#28 31.80 Unpacking libpython3.12-minimal:arm64 (3.12.3-1ubuntu0.17) ...
+#28 31.83 Selecting previously unselected package libexpat1:arm64.
+#28 31.83 Preparing to unpack .../libexpat1_2.6.1-2ubuntu0.6_arm64.deb ...
+#28 31.83 Unpacking libexpat1:arm64 (2.6.1-2ubuntu0.6) ...
+#28 31.84 Selecting previously unselected package python3.12-minimal.
+#28 31.84 Preparing to unpack .../python3.12-minimal_3.12.3-1ubuntu0.17_arm64.deb ...
+#28 31.84 Unpacking python3.12-minimal (3.12.3-1ubuntu0.17) ...
+#28 31.87 Setting up libpython3.12-minimal:arm64 (3.12.3-1ubuntu0.17) ...
+#28 31.88 Setting up libexpat1:arm64 (2.6.1-2ubuntu0.6) ...
+#28 31.88 Setting up python3.12-minimal (3.12.3-1ubuntu0.17) ...
+#28 32.20 Selecting previously unselected package python3-minimal.
+#28 32.20 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 4695 files and directories currently installed.)
+#28 32.20 Preparing to unpack .../0-python3-minimal_3.12.3-0ubuntu2.1_arm64.deb ...
+#28 32.20 Unpacking python3-minimal (3.12.3-0ubuntu2.1) ...
+#28 32.21 Selecting previously unselected package media-types.
+#28 32.21 Preparing to unpack .../1-media-types_10.1.0_all.deb ...
+#28 32.21 Unpacking media-types (10.1.0) ...
+#28 32.22 Selecting previously unselected package netbase.
+#28 32.22 Preparing to unpack .../2-netbase_6.4_all.deb ...
+#28 32.22 Unpacking netbase (6.4) ...
+#28 32.23 Selecting previously unselected package tzdata.
+#28 32.23 Preparing to unpack .../3-tzdata_2026e-0ubuntu0.24.04.1_all.deb ...
+#28 32.23 Unpacking tzdata (2026e-0ubuntu0.24.04.1) ...
+#28 32.26 Selecting previously unselected package readline-common.
+#28 32.26 Preparing to unpack .../4-readline-common_8.2-4build1_all.deb ...
+#28 32.26 Unpacking readline-common (8.2-4build1) ...
+#28 32.27 Selecting previously unselected package libreadline8t64:arm64.
+#28 32.27 Preparing to unpack .../5-libreadline8t64_8.2-4build1_arm64.deb ...
+#28 32.28 Adding 'diversion of /lib/aarch64-linux-gnu/libhistory.so.8 to /lib/aarch64-linux-gnu/libhistory.so.8.usr-is-merged by libreadline8t64'
+#28 32.28 Adding 'diversion of /lib/aarch64-linux-gnu/libhistory.so.8.2 to /lib/aarch64-linux-gnu/libhistory.so.8.2.usr-is-merged by libreadline8t64'
+#28 32.28 Adding 'diversion of /lib/aarch64-linux-gnu/libreadline.so.8 to /lib/aarch64-linux-gnu/libreadline.so.8.usr-is-merged by libreadline8t64'
+#28 32.28 Adding 'diversion of /lib/aarch64-linux-gnu/libreadline.so.8.2 to /lib/aarch64-linux-gnu/libreadline.so.8.2.usr-is-merged by libreadline8t64'
+#28 32.28 Unpacking libreadline8t64:arm64 (8.2-4build1) ...
+#28 32.29 Selecting previously unselected package libsqlite3-0:arm64.
+#28 32.29 Preparing to unpack .../6-libsqlite3-0_3.45.1-1ubuntu2.8_arm64.deb ...
+#28 32.29 Unpacking libsqlite3-0:arm64 (3.45.1-1ubuntu2.8) ...
+#28 32.31 Selecting previously unselected package libpython3.12-stdlib:arm64.
+#28 32.31 Preparing to unpack .../7-libpython3.12-stdlib_3.12.3-1ubuntu0.17_arm64.deb ...
+#28 32.31 Unpacking libpython3.12-stdlib:arm64 (3.12.3-1ubuntu0.17) ...
+#28 32.35 Selecting previously unselected package python3.12.
+#28 32.35 Preparing to unpack .../8-python3.12_3.12.3-1ubuntu0.17_arm64.deb ...
+#28 32.35 Unpacking python3.12 (3.12.3-1ubuntu0.17) ...
+#28 32.36 Selecting previously unselected package libpython3-stdlib:arm64.
+#28 32.36 Preparing to unpack .../9-libpython3-stdlib_3.12.3-0ubuntu2.1_arm64.deb ...
+#28 32.36 Unpacking libpython3-stdlib:arm64 (3.12.3-0ubuntu2.1) ...
+#28 32.37 Setting up python3-minimal (3.12.3-0ubuntu2.1) ...
+#28 32.43 Selecting previously unselected package python3.
+#28 32.43 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 5701 files and directories currently installed.)
+#28 32.43 Preparing to unpack .../00-python3_3.12.3-0ubuntu2.1_arm64.deb ...
+#28 32.43 Unpacking python3 (3.12.3-0ubuntu2.1) ...
+#28 32.44 Selecting previously unselected package openssl.
+#28 32.44 Preparing to unpack .../01-openssl_3.0.13-0ubuntu3.16_arm64.deb ...
+#28 32.44 Unpacking openssl (3.0.13-0ubuntu3.16) ...
+#28 32.46 Selecting previously unselected package ca-certificates.
+#28 32.46 Preparing to unpack .../02-ca-certificates_20260816ubuntu0.24.04.1_all.deb ...
+#28 32.46 Unpacking ca-certificates (20260816ubuntu0.24.04.1) ...
+#28 32.48 Selecting previously unselected package libkrb5support0:arm64.
+#28 32.48 Preparing to unpack .../03-libkrb5support0_1.20.1-6ubuntu2.10_arm64.deb ...
+#28 32.48 Unpacking libkrb5support0:arm64 (1.20.1-6ubuntu2.10) ...
+#28 32.49 Selecting previously unselected package libk5crypto3:arm64.
+#28 32.49 Preparing to unpack .../04-libk5crypto3_1.20.1-6ubuntu2.10_arm64.deb ...
+#28 32.49 Unpacking libk5crypto3:arm64 (1.20.1-6ubuntu2.10) ...
+#28 32.50 Selecting previously unselected package libkeyutils1:arm64.
+#28 32.50 Preparing to unpack .../05-libkeyutils1_1.6.3-3build1_arm64.deb ...
+#28 32.50 Unpacking libkeyutils1:arm64 (1.6.3-3build1) ...
+#28 32.51 Selecting previously unselected package libkrb5-3:arm64.
+#28 32.51 Preparing to unpack .../06-libkrb5-3_1.20.1-6ubuntu2.10_arm64.deb ...
+#28 32.51 Unpacking libkrb5-3:arm64 (1.20.1-6ubuntu2.10) ...
+#28 32.52 Selecting previously unselected package libgssapi-krb5-2:arm64.
+#28 32.52 Preparing to unpack .../07-libgssapi-krb5-2_1.20.1-6ubuntu2.10_arm64.deb ...
+#28 32.53 Unpacking libgssapi-krb5-2:arm64 (1.20.1-6ubuntu2.10) ...
+#28 32.54 Selecting previously unselected package libnghttp2-14:arm64.
+#28 32.54 Preparing to unpack .../08-libnghttp2-14_1.59.0-1ubuntu0.4_arm64.deb ...
+#28 32.54 Unpacking libnghttp2-14:arm64 (1.59.0-1ubuntu0.4) ...
+#28 32.55 Selecting previously unselected package libpsl5t64:arm64.
+#28 32.55 Preparing to unpack .../09-libpsl5t64_0.21.2-1.1build1_arm64.deb ...
+#28 32.55 Unpacking libpsl5t64:arm64 (0.21.2-1.1build1) ...
+#28 32.56 Selecting previously unselected package libbrotli1:arm64.
+#28 32.56 Preparing to unpack .../10-libbrotli1_1.1.0-2ubuntu0.1_arm64.deb ...
+#28 32.56 Unpacking libbrotli1:arm64 (1.1.0-2ubuntu0.1) ...
+#28 32.57 Selecting previously unselected package libsasl2-modules-db:arm64.
+#28 32.57 Preparing to unpack .../11-libsasl2-modules-db_2.1.28+dfsg1-5ubuntu3.1_arm64.deb ...
+#28 32.57 Unpacking libsasl2-modules-db:arm64 (2.1.28+dfsg1-5ubuntu3.1) ...
+#28 32.58 Selecting previously unselected package libsasl2-2:arm64.
+#28 32.58 Preparing to unpack .../12-libsasl2-2_2.1.28+dfsg1-5ubuntu3.1_arm64.deb ...
+#28 32.58 Unpacking libsasl2-2:arm64 (2.1.28+dfsg1-5ubuntu3.1) ...
+#28 32.59 Selecting previously unselected package libldap2:arm64.
+#28 32.59 Preparing to unpack .../13-libldap2_2.6.10+dfsg-0ubuntu0.24.04.1_arm64.deb ...
+#28 32.59 Unpacking libldap2:arm64 (2.6.10+dfsg-0ubuntu0.24.04.1) ...
+#28 32.60 Selecting previously unselected package librtmp1:arm64.
+#28 32.60 Preparing to unpack .../14-librtmp1_2.4+20151223.gitfa8646d.1-2build7_arm64.deb ...
+#28 32.60 Unpacking librtmp1:arm64 (2.4+20151223.gitfa8646d.1-2build7) ...
+#28 32.61 Selecting previously unselected package libssh-4:arm64.
+#28 32.61 Preparing to unpack .../15-libssh-4_0.10.6-2ubuntu0.5_arm64.deb ...
+#28 32.61 Unpacking libssh-4:arm64 (0.10.6-2ubuntu0.5) ...
+#28 32.62 Selecting previously unselected package libcurl4t64:arm64.
+#28 32.62 Preparing to unpack .../16-libcurl4t64_8.5.0-2ubuntu10.16_arm64.deb ...
+#28 32.62 Unpacking libcurl4t64:arm64 (8.5.0-2ubuntu10.16) ...
+#28 32.64 Selecting previously unselected package libgomp1:arm64.
+#28 32.64 Preparing to unpack .../17-libgomp1_14.2.0-4ubuntu2~24.04.1_arm64.deb ...
+#28 32.64 Unpacking libgomp1:arm64 (14.2.0-4ubuntu2~24.04.1) ...
+#28 32.65 Setting up media-types (10.1.0) ...
+#28 32.65 Setting up libkeyutils1:arm64 (1.6.3-3build1) ...
+#28 32.65 Setting up libbrotli1:arm64 (1.1.0-2ubuntu0.1) ...
+#28 32.66 Setting up libsqlite3-0:arm64 (3.45.1-1ubuntu2.8) ...
+#28 32.66 Setting up libpsl5t64:arm64 (0.21.2-1.1build1) ...
+#28 32.66 Setting up libnghttp2-14:arm64 (1.59.0-1ubuntu0.4) ...
+#28 32.67 Setting up libgomp1:arm64 (14.2.0-4ubuntu2~24.04.1) ...
+#28 32.67 Setting up libkrb5support0:arm64 (1.20.1-6ubuntu2.10) ...
+#28 32.67 Setting up libsasl2-modules-db:arm64 (2.1.28+dfsg1-5ubuntu3.1) ...
+#28 32.68 Setting up tzdata (2026e-0ubuntu0.24.04.1) ...
+#28 32.71 
+#28 32.71 Current default time zone: 'Etc/UTC'
+#28 32.71 Local time is now:      Wed Oct 28 17:52:27 UTC 2026.
+#28 32.71 Universal Time is now:  Wed Oct 28 17:52:27 UTC 2026.
+#28 32.71 Run 'dpkg-reconfigure tzdata' if you wish to change it.
+#28 32.71 
+#28 32.71 Setting up librtmp1:arm64 (2.4+20151223.gitfa8646d.1-2build7) ...
+#28 32.72 Setting up libk5crypto3:arm64 (1.20.1-6ubuntu2.10) ...
+#28 32.72 Setting up libsasl2-2:arm64 (2.1.28+dfsg1-5ubuntu3.1) ...
+#28 32.72 Setting up netbase (6.4) ...
+#28 32.73 Setting up libkrb5-3:arm64 (1.20.1-6ubuntu2.10) ...
+#28 32.73 Setting up openssl (3.0.13-0ubuntu3.16) ...
+#28 32.74 Setting up readline-common (8.2-4build1) ...
+#28 32.74 Setting up libldap2:arm64 (2.6.10+dfsg-0ubuntu0.24.04.1) ...
+#28 32.74 Setting up ca-certificates (20260816ubuntu0.24.04.1) ...
+#28 32.86 Updating certificates in /etc/ssl/certs...
+#28 32.99 120 added, 0 removed; done.
+#28 33.01 Setting up libgssapi-krb5-2:arm64 (1.20.1-6ubuntu2.10) ...
+#28 33.01 Setting up libssh-4:arm64 (0.10.6-2ubuntu0.5) ...
+#28 33.01 Setting up libreadline8t64:arm64 (8.2-4build1) ...
+#28 33.01 Setting up libpython3.12-stdlib:arm64 (3.12.3-1ubuntu0.17) ...
+#28 33.02 Setting up libcurl4t64:arm64 (8.5.0-2ubuntu10.16) ...
+#28 33.02 Setting up python3.12 (3.12.3-1ubuntu0.17) ...
+#28 33.40 Setting up libpython3-stdlib:arm64 (3.12.3-0ubuntu2.1) ...
+#28 33.40 Setting up python3 (3.12.3-0ubuntu2.1) ...
+#28 33.44 Processing triggers for libc-bin (2.39-0ubuntu8.9) ...
+#28 33.45 Processing triggers for ca-certificates (20260816ubuntu0.24.04.1) ...
+#28 33.45 Updating certificates in /etc/ssl/certs...
+#28 33.58 0 added, 0 removed; done.
+#28 33.58 Running hooks in /etc/ca-certificates/update.d...
+#28 ...
+
+#27 [agent builder 7/8] RUN python -m pip install --no-cache-dir -c constraints.txt . grpcio-tools==1.80.0
+#27 21.53    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.6/6.6 MB 853.9 kB/s eta 0:00:00
+#27 21.67 Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+#27 21.78 Downloading protobuf-6.33.6-cp39-abi3-manylinux2014_aarch64.whl (324 kB)
+#27 22.22 Downloading pydantic-2.12.3-py3-none-any.whl (462 kB)
+#27 22.73 Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+#27 22.87 Downloading pydantic_core-2.41.4-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (2.0 MB)
+#27 24.48    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 1.2 MB/s eta 0:00:00
+#27 24.54 Downloading setuptools-84.2.1-py3-none-any.whl (876 kB)
+#27 25.40    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 876.3/876.3 kB 968.9 kB/s eta 0:00:00
+#27 25.46 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+#27 25.65 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#27 25.81 Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+#27 25.88 Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+#27 26.04 Downloading idna-3.20-py3-none-any.whl (69 kB)
+#27 26.13 Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+#27 26.34 Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#27 26.35 Building wheels for collected packages: agent
+#27 26.35   Building wheel for agent (pyproject.toml): started
+#27 26.45   Building wheel for agent (pyproject.toml): finished with status 'done'
+#27 26.45   Created wheel for agent: filename=agent-0.2.0-py3-none-any.whl size=154020 sha256=156fd61569908ec61dfe7f263e222e912f4880dfd0b73105857afb06383dddf1
+#27 26.45   Stored in directory: /tmp/pip-ephem-wheel-cache-_9mtwohg/wheels/54/1b/b7/aa63e25c8f14f4f2ae7b04e6097bdecb770e455c5c1ee0a600
+#27 26.46 Successfully built agent
+#27 26.47 Installing collected packages: typing-extensions, setuptools, protobuf, idna, h11, certifi, annotated-types, typing-inspection, pydantic-core, httpcore, grpcio, anyio, pydantic, httpx, grpcio-tools, agent
+#27 27.24 Successfully installed agent-0.2.0 annotated-types-0.8.0 anyio-4.15.1 certifi-2026.10.23 grpcio-1.80.0 grpcio-tools-1.80.0 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.20 protobuf-6.33.6 pydantic-2.12.3 pydantic-core-2.41.4 setuptools-84.2.1 typing-extensions-4.16.0 typing-inspection-0.4.4
+#27 27.58 
+#27 27.58 [notice] A new release of pip is available: 25.0.1 -> 26.2.2
+#27 27.58 [notice] To update, run: pip install --upgrade pip
+#27 DONE 27.8s
+
+#28 [model stage-1 2/6] RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates python3 libgomp1 libcurl4t64     && rm -rf /var/lib/apt/lists/*     && groupadd -g 10001 model && useradd -u 10001 -g model -m model     && mkdir -p /models /startup && chown model:model /models /startup
+#28 33.58 done.
+#28 DONE 33.8s
+
+#39 [model stage-1 3/6] WORKDIR /runtime
+#39 DONE 0.0s
+
+#40 [model stage-1 4/6] COPY --from=download /runtime /runtime
+#40 DONE 0.0s
+
+#41 [agent builder 8/8] RUN python -m grpc_tools.protoc -I/app --python_out=/app --grpc_python_out=/app /app/proto/predict.proto
+#41 DONE 0.1s
+
+#42 [model stage-1 5/6] COPY docs/docker-runtime.json /runtime/model-lock.json
+#42 DONE 0.0s
+
+#43 [model stage-1 6/6] COPY infra/model/start.py /runtime/start.py
+#43 DONE 0.0s
+
+#44 [agent stage-1 3/7] COPY --from=builder /opt/venv /opt/venv
+#44 DONE 0.1s
+
+#45 [model] exporting to oci image format
+#45 exporting layers
+#45 ...
+
+#46 [agent stage-1 4/7] RUN python -m pip uninstall -y grpcio-tools setuptools pip     && useradd -u 10001 -m appuser     && mkdir -p /app/content-cache && chown appuser:appuser /app/content-cache
+#46 0.429 Found existing installation: grpcio-tools 1.80.0
+#46 0.430 Uninstalling grpcio-tools-1.80.0:
+#46 0.443   Successfully uninstalled grpcio-tools-1.80.0
+#46 0.445 Found existing installation: setuptools 84.2.1
+#46 0.453 Uninstalling setuptools-84.2.1:
+#46 0.524   Successfully uninstalled setuptools-84.2.1
+#46 0.528 Found existing installation: pip 25.0.1
+#46 0.540 Uninstalling pip-25.0.1:
+#46 0.625   Successfully uninstalled pip-25.0.1
+#46 DONE 0.7s
+
+#47 [agent stage-1 5/7] COPY --from=builder /app/proto ./proto
+#47 DONE 0.0s
+
+#48 [agent stage-1 6/7] COPY travel_agent ./travel_agent
+#48 DONE 0.0s
+
+#49 [agent stage-1 7/7] COPY main.py healthcheck.py bootstrap.py ./
+#49 DONE 0.0s
+
+#45 [model] exporting to oci image format
+#45 exporting layers 0.9s done
+#45 exporting manifest sha256:e95d04596c15e62eff7f92aa4e3cd14f23948729e4aa1f52bb190f4a1c70de41 0.0s done
+#45 exporting config sha256:6979b379133692fcf71d6088dff808a079859a022fd9fa5b2c0b61e36957d5ab done
+#45 sending tarball
+#45 sending tarball 1.0s done
+#45 DONE 1.9s
+
+#50 importing to docker
+#50 DONE 0.0s
+
+#51 [model] resolving provenance for metadata file
+#51 DONE 0.0s
+
+#52 [agent] exporting to oci image format
+#52 exporting layers 1.5s done
+#52 exporting manifest sha256:992f65c7c1743ea0bd270a35c480c4ebfb61f71fd0f1b16120731cec7912ff34
+#52 exporting manifest sha256:992f65c7c1743ea0bd270a35c480c4ebfb61f71fd0f1b16120731cec7912ff34 done
+#52 exporting config sha256:639cee1513326b5490f99d66691796b05b768d6a6dfca7915b44ef65b3b9dfd1 done
+#52 sending tarball 1.0s done
+#52 DONE 2.5s
+
+#53 importing to docker
+#53 DONE 0.0s
+
+#54 [agent] resolving provenance for metadata file
+#54 DONE 0.0s
+ Image oplan-jury-fresh-20261028-model Built 
+ Image oplan-jury-fresh-20261028-agent Built 
+ Image oplan-jury-fresh-20261028-app Built 
+ Network oplan-jury-fresh-20261028_default Creating 
+ Network oplan-jury-fresh-20261028_default Created 
+ Volume oplan-jury-fresh-20261028_trips Creating 
+ Volume oplan-jury-fresh-20261028_trips Created 
+ Volume oplan-jury-fresh-20261028_startup Creating 
+ Volume oplan-jury-fresh-20261028_startup Created 
+ Volume oplan-jury-fresh-20261028_hotel-content Creating 
+ Volume oplan-jury-fresh-20261028_hotel-content Created 
+ Volume oplan-jury-fresh-20261028_models Creating 
+ Volume oplan-jury-fresh-20261028_models Created 
+ Container oplan-jury-fresh-20261028-model-1 Creating 
+ Container oplan-jury-fresh-20261028-model-1 Created 
+ Container oplan-jury-fresh-20261028-agent-1 Creating 
+ Container oplan-jury-fresh-20261028-app-1 Creating 
+ Container oplan-jury-fresh-20261028-app-1 Created 
+ Container oplan-jury-fresh-20261028-agent-1 Created 
+ Container oplan-jury-fresh-20261028-model-1 Starting 
+ Container oplan-jury-fresh-20261028-model-1 Started 
+ Container oplan-jury-fresh-20261028-agent-1 Starting 
+ Container oplan-jury-fresh-20261028-app-1 Starting 
+ Container oplan-jury-fresh-20261028-agent-1 Started 
+ Container oplan-jury-fresh-20261028-app-1 Started 

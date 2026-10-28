@@ -1,0 +1,16 @@
+{
+  "clone_seconds": 5.014,
+  "checkout": "/private/tmp/oplan-jury-clean-20261028",
+  "base_commit": "3761ed41a8e38cd62068b9ee7452079d86dc9133",
+  "builder": "oplan-jury-fresh-20261028",
+  "project": "oplan-jury-fresh-20261028",
+  "env_file_present": false,
+  "local_patch_applied": [
+    ".env.example",
+    "README.md",
+    "agent/tests/test_warmup.py",
+    "agent/travel_agent/warmup.py",
+    "docker-compose.yml"
+  ],
+  "clone_access": "SSH using existing team access; unauthenticated HTTPS requires GitHub organization access"
+}

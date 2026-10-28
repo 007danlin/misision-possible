@@ -1,0 +1,15 @@
+{
+  "tracked_patch_files": [
+    ".env.example",
+    "README.md",
+    "agent/tests/test_warmup.py",
+    "agent/travel_agent/warmup.py",
+    "docker-compose.yml",
+    "docs/runtime.md"
+  ],
+  "runtime_sources_match_tested_images": true,
+  "no_build_steps_cached": true,
+  "readiness_within_600_seconds": true,
+  "all_healthy_within_600_seconds": true,
+  "browser_success": true
+}

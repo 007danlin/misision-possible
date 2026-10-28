@@ -1,0 +1,18 @@
+test_catalogue_prefill_requires_a_dedicated_slot (test_warmup.WarmupTests.test_catalogue_prefill_requires_a_dedicated_slot) ... {"warmup": "starting", "timeout_seconds": 900.0}
+{"warmup": "ready", "seconds": 0.0, "usage": {}}
+{"warmup": "starting", "timeout_seconds": 900.0}
+{"warmup": "directions"}
+{"warmup": "ready", "seconds": 0.081, "usage": {}}
+ok
+test_cold_prefill_has_its_own_budget (test_warmup.WarmupTests.test_cold_prefill_has_its_own_budget) ... {"warmup": "starting", "timeout_seconds": 3.0}
+{"warmup": "ready", "seconds": 1.053, "usage": {}}
+ok
+test_default_allows_slow_cpu_without_manual_environment (test_warmup.WarmupTests.test_default_allows_slow_cpu_without_manual_environment) ... {"warmup": "starting", "timeout_seconds": 900.0}
+{"warmup": "ready", "seconds": 0.0, "usage": {}}
+ok
+test_invalid_startup_timeout_uses_safe_default (test_warmup.WarmupTests.test_invalid_startup_timeout_uses_safe_default) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.147s
+
+OK
