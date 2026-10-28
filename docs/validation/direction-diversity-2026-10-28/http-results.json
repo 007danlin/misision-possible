@@ -1,0 +1,1411 @@
+{
+  "success": true,
+  "cases": [
+    {
+      "case": "luka_forest",
+      "messages": [
+        "Хочу на природу, в лес. Дикая природа.",
+        "Отправляемся из Москвы"
+      ],
+      "passed": true,
+      "allowed_ids": [
+        "altai",
+        "karelia",
+        "seliger",
+        "sochi_nature"
+      ],
+      "expected_count": [
+        2,
+        3
+      ],
+      "ids": [
+        "karelia",
+        "altai",
+        "seliger"
+      ],
+      "cards": [
+        {
+          "caveat": "Для уединения нужно выбирать окрестности, а не центр Сортавалы; доступность троп и лодочных маршрутов зависит от сезона.",
+          "destination": "Сортавала",
+          "id": "karelia",
+          "name": "Карелия",
+          "photo_key": "Сортавала",
+          "reason": "Сосновые леса и скалистые острова Ладожских шхер. Прогулки у озёр и по лесным берегам.",
+          "scene": "forest",
+          "source_url": "https://en.wikipedia.org/wiki/Ladoga_Skerries"
+        },
+        {
+          "caveat": "Сложность и сезонную доступность маршрутов нужно уточнять; размещение у троп не гарантировано.",
+          "destination": "Чемал",
+          "id": "altai",
+          "name": "Алтай",
+          "photo_key": "Чемал",
+          "reason": "Пешие маршруты и виды на слияние Чемала и Катуни.",
+          "scene": "mountains",
+          "source_url": "https://en.wikipedia.org/wiki/Chemal"
+        },
+        {
+          "caveat": "Для отдыха в лесу нужны окрестности Осташкова; уединение конкретного жилья проверяется отдельно.",
+          "destination": "Осташков",
+          "id": "seliger",
+          "name": "Селигер",
+          "photo_key": "Осташков",
+          "reason": "Прогулки у воды и загородный отдых.",
+          "scene": "forest",
+          "source_url": "https://en.wikipedia.org/wiki/Seliger"
+        }
+      ],
+      "answer": "По вашим пожеланиям можно рассмотреть: 1 — Карелия; 2 — Алтай; 3 — Селигер. Выберите направление — затем подберём размещение. Стоимость и возможность добраться ещё нужно проверить на ваши даты.",
+      "trip_spec": {
+        "budget": null,
+        "budget_period": "stay",
+        "budget_scope": null,
+        "checkin_date": null,
+        "country": null,
+        "dates": null,
+        "destination": null,
+        "duration_days": null,
+        "excluded_hotel_ids": [],
+        "expense_reserve": null,
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": null,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": false,
+        "locked_component_ids": [],
+        "locked_hotel_id": null,
+        "origin": "Москва",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "auto",
+        "transport_owned": false,
+        "travel_setting": "forest",
+        "travellers": {
+          "adults": null,
+          "children": []
+        },
+        "trip_budget": null
+      },
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 17554,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 2,
+        "model_ms": 17511,
+        "prompt_version": "odin-request-9.7",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 17554,
+        "usage": {
+          "cached_tokens": 4568,
+          "completion_tokens": 74,
+          "evaluated_prompt_tokens": 209,
+          "generation_ms": 7861,
+          "prompt_ms": 9594,
+          "prompt_tokens": 4777,
+          "total_tokens": 4851
+        }
+      },
+      "seconds": 17.586,
+      "steps": [
+        {
+          "method": "POST",
+          "route": "/api/sessions/",
+          "http_status": 200,
+          "seconds": 0.003,
+          "state": "needs_input",
+          "error_code": null
+        },
+        {
+          "method": "POST",
+          "route": "/api/sessions/27665983f46474485deb9febfffe3695/turns",
+          "http_status": 200,
+          "seconds": 0.015,
+          "state": "needs_input",
+          "error_code": null,
+          "telemetry": {
+            "cost": null,
+            "first_useful_ms": 9,
+            "model": "qwen3-4b-instruct",
+            "model_calls": 0,
+            "model_ms": 0,
+            "prompt_version": "odin-request-9.7",
+            "provider": "llama_cpp",
+            "sources_ms": 0,
+            "tool_calls": [],
+            "total_ms": 9,
+            "usage": {}
+          }
+        },
+        {
+          "method": "POST",
+          "route": "/api/sessions/27665983f46474485deb9febfffe3695/turns",
+          "http_status": 200,
+          "seconds": 17.562,
+          "state": "needs_input",
+          "error_code": null,
+          "telemetry": {
+            "cost": null,
+            "first_useful_ms": 17554,
+            "model": "qwen3-4b-instruct",
+            "model_calls": 2,
+            "model_ms": 17511,
+            "prompt_version": "odin-request-9.7",
+            "provider": "llama_cpp",
+            "sources_ms": 0,
+            "tool_calls": [],
+            "total_ms": 17554,
+            "usage": {
+              "cached_tokens": 4568,
+              "completion_tokens": 74,
+              "evaluated_prompt_tokens": 209,
+              "generation_ms": 7861,
+              "prompt_ms": 9594,
+              "prompt_tokens": 4777,
+              "total_tokens": 4851
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case": "forest_lakes",
+      "messages": [
+        "Из Казани хочется лесных прогулок и озёр. Предложи места для отдыха."
+      ],
+      "passed": true,
+      "allowed_ids": [
+        "altai",
+        "karelia",
+        "seliger",
+        "sochi_nature"
+      ],
+      "expected_count": [
+        2,
+        3
+      ],
+      "ids": [
+        "karelia",
+        "seliger"
+      ],
+      "cards": [
+        {
+          "caveat": "Для уединения нужно выбирать окрестности, а не центр Сортавалы; доступность троп и лодочных маршрутов зависит от сезона.",
+          "destination": "Сортавала",
+          "id": "karelia",
+          "name": "Карелия",
+          "photo_key": "Сортавала",
+          "reason": "Сосновые леса и скалистые острова Ладожских шхер. Прогулки у озёр и по лесным берегам.",
+          "scene": "forest",
+          "source_url": "https://en.wikipedia.org/wiki/Ladoga_Skerries"
+        },
+        {
+          "caveat": "Для отдыха в лесу нужны окрестности Осташкова; уединение конкретного жилья проверяется отдельно.",
+          "destination": "Осташков",
+          "id": "seliger",
+          "name": "Селигер",
+          "photo_key": "Осташков",
+          "reason": "Прогулки у воды и загородный отдых.",
+          "scene": "forest",
+          "source_url": "https://en.wikipedia.org/wiki/Seliger"
+        }
+      ],
+      "answer": "По вашим пожеланиям можно рассмотреть: 1 — Карелия; 2 — Селигер. Выберите направление — затем подберём размещение. Стоимость и возможность добраться ещё нужно проверить на ваши даты.",
+      "trip_spec": {
+        "budget": null,
+        "budget_period": "stay",
+        "budget_scope": null,
+        "checkin_date": null,
+        "country": null,
+        "dates": null,
+        "destination": null,
+        "duration_days": null,
+        "excluded_hotel_ids": [],
+        "expense_reserve": null,
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": null,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": false,
+        "locked_component_ids": [],
+        "locked_hotel_id": null,
+        "origin": "Казань",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "auto",
+        "transport_owned": false,
+        "travel_setting": "forest",
+        "travellers": {
+          "adults": null,
+          "children": []
+        },
+        "trip_budget": null
+      },
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 15909,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 2,
+        "model_ms": 15903,
+        "prompt_version": "odin-request-9.7",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 15909,
+        "usage": {
+          "cached_tokens": 4597,
+          "completion_tokens": 65,
+          "evaluated_prompt_tokens": 174,
+          "generation_ms": 6867,
+          "prompt_ms": 8974,
+          "prompt_tokens": 4771,
+          "total_tokens": 4836
+        }
+      },
+      "seconds": 15.931,
+      "steps": [
+        {
+          "method": "POST",
+          "route": "/api/sessions/",
+          "http_status": 200,
+          "seconds": 0.006,
+          "state": "needs_input",
+          "error_code": null
+        },
+        {
+          "method": "POST",
+          "route": "/api/sessions/7556495ead54911e6310c1d98eb8cc3a/turns",
+          "http_status": 200,
+          "seconds": 15.914,
+          "state": "needs_input",
+          "error_code": null,
+          "telemetry": {
+            "cost": null,
+            "first_useful_ms": 15909,
+            "model": "qwen3-4b-instruct",
+            "model_calls": 2,
+            "model_ms": 15903,
+            "prompt_version": "odin-request-9.7",
+            "provider": "llama_cpp",
+            "sources_ms": 0,
+            "tool_calls": [],
+            "total_ms": 15909,
+            "usage": {
+              "cached_tokens": 4597,
+              "completion_tokens": 65,
+              "evaluated_prompt_tokens": 174,
+              "generation_ms": 6867,
+              "prompt_ms": 8974,
+              "prompt_tokens": 4771,
+              "total_tokens": 4836
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case": "mountains",
+      "messages": [
+        "Из Москвы хочу горные пейзажи и пешие прогулки. Куда поехать?"
+      ],
+      "passed": true,
+      "allowed_ids": [
+        "altai",
+        "kislovodsk",
+        "sochi_nature"
+      ],
+      "expected_count": [
+        2,
+        3
+      ],
+      "ids": [
+        "altai",
+        "kislovodsk"
+      ],
+      "cards": [
+        {
+          "caveat": "Сложность и сезонную доступность маршрутов нужно уточнять; размещение у троп не гарантировано.",
+          "destination": "Чемал",
+          "id": "altai",
+          "name": "Алтай",
+          "photo_key": "Чемал",
+          "reason": "Пешие маршруты и виды на слияние Чемала и Катуни.",
+          "scene": "mountains",
+          "source_url": "https://en.wikipedia.org/wiki/Chemal"
+        },
+        {
+          "caveat": "Это благоустроенный курорт, а не дикая природа; лечебные процедуры и доступность прогулок проверяются отдельно.",
+          "destination": "Кисловодск",
+          "id": "kislovodsk",
+          "name": "Кисловодск",
+          "photo_key": "kislovodsk",
+          "reason": "Курортный парк и прогулочные маршруты.",
+          "scene": "mountains",
+          "source_url": "https://en.wikipedia.org/wiki/Kislovodsk"
+        }
+      ],
+      "answer": "По вашим пожеланиям можно рассмотреть: 1 — Алтай; 2 — Кисловодск. Выберите направление — затем подберём размещение. Стоимость и возможность добраться ещё нужно проверить на ваши даты.",
+      "trip_spec": {
+        "budget": null,
+        "budget_period": "stay",
+        "budget_scope": null,
+        "checkin_date": null,
+        "country": null,
+        "dates": null,
+        "destination": null,
+        "duration_days": null,
+        "excluded_hotel_ids": [],
+        "expense_reserve": null,
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": null,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": false,
+        "locked_component_ids": [],
+        "locked_hotel_id": null,
+        "origin": "Москва",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "auto",
+        "transport_owned": false,
+        "travel_setting": "mountains",
+        "travellers": {
+          "adults": null,
+          "children": []
+        },
+        "trip_budget": null
+      },
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 19724,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 3,
+        "model_ms": 19719,
+        "prompt_version": "odin-request-9.7",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 19724,
+        "usage": {
+          "cached_tokens": 7283,
+          "completion_tokens": 82,
+          "evaluated_prompt_tokens": 182,
+          "generation_ms": 8976,
+          "prompt_ms": 10645,
+          "prompt_tokens": 7465,
+          "total_tokens": 7547
+        }
+      },
+      "seconds": 19.745,
+      "steps": [
+        {
+          "method": "POST",
+          "route": "/api/sessions/",
+          "http_status": 200,
+          "seconds": 0.003,
+          "state": "needs_input",
+          "error_code": null
+        },
+        {
+          "method": "POST",
+          "route": "/api/sessions/2d558d39ee8cf0297684e33cf31ef12c/turns",
+          "http_status": 200,
+          "seconds": 19.731,
+          "state": "needs_input",
+          "error_code": null,
+          "telemetry": {
+            "cost": null,
+            "first_useful_ms": 19724,
+            "model": "qwen3-4b-instruct",
+            "model_calls": 3,
+            "model_ms": 19719,
+            "prompt_version": "odin-request-9.7",
+            "provider": "llama_cpp",
+            "sources_ms": 0,
+            "tool_calls": [],
+            "total_ms": 19724,
+            "usage": {
+              "cached_tokens": 7283,
+              "completion_tokens": 82,
+              "evaluated_prompt_tokens": 182,
+              "generation_ms": 8976,
+              "prompt_ms": 10645,
+              "prompt_tokens": 7465,
+              "total_tokens": 7547
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case": "sea",
+      "messages": [
+        "Из Москвы хочу к морю, гулять по берегу. Куда поехать?"
+      ],
+      "passed": true,
+      "allowed_ids": [
+        "anapa",
+        "gelendzhik",
+        "sochi"
+      ],
+      "expected_count": [
+        2,
+        3
+      ],
+      "ids": [
+        "sochi",
+        "gelendzhik"
+      ],
+      "cards": [
+        {
+          "caveat": "Купание зависит от сезона и состояния моря; городской курорт не означает уединение.",
+          "destination": "Сочи",
+          "id": "sochi",
+          "name": "Сочи",
+          "photo_key": "Сочи",
+          "reason": "Приморский город для прогулок и отдыха у моря.",
+          "scene": "sea",
+          "source_url": "https://en.wikipedia.org/wiki/Sochi"
+        },
+        {
+          "caveat": "Купание и работа сезонных объектов требуют проверки на даты поездки.",
+          "destination": "Геленджик",
+          "id": "gelendzhik",
+          "name": "Геленджик",
+          "photo_key": "gelendzhik",
+          "reason": "Прогулки вдоль моря.",
+          "scene": "sea",
+          "source_url": "https://en.wikipedia.org/wiki/Gelendzhik"
+        }
+      ],
+      "answer": "По вашим пожеланиям можно рассмотреть: 1 — Сочи; 2 — Геленджик. Выберите направление — затем подберём размещение. Стоимость и возможность добраться ещё нужно проверить на ваши даты.",
+      "trip_spec": {
+        "budget": null,
+        "budget_period": "stay",
+        "budget_scope": null,
+        "checkin_date": null,
+        "country": null,
+        "dates": null,
+        "destination": null,
+        "duration_days": null,
+        "excluded_hotel_ids": [],
+        "expense_reserve": null,
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": null,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": false,
+        "locked_component_ids": [],
+        "locked_hotel_id": null,
+        "origin": "Москва",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "auto",
+        "transport_owned": false,
+        "travel_setting": "sea",
+        "travellers": {
+          "adults": null,
+          "children": []
+        },
+        "trip_budget": null
+      },
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 19308,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 3,
+        "model_ms": 19299,
+        "prompt_version": "odin-request-9.7",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 19308,
+        "usage": {
+          "cached_tokens": 7284,
+          "completion_tokens": 90,
+          "evaluated_prompt_tokens": 170,
+          "generation_ms": 9275,
+          "prompt_ms": 9928,
+          "prompt_tokens": 7454,
+          "total_tokens": 7544
+        }
+      },
+      "seconds": 19.33,
+      "steps": [
+        {
+          "method": "POST",
+          "route": "/api/sessions/",
+          "http_status": 200,
+          "seconds": 0.004,
+          "state": "needs_input",
+          "error_code": null
+        },
+        {
+          "method": "POST",
+          "route": "/api/sessions/23cee47fa45fc78e07d22aee09866648/turns",
+          "http_status": 200,
+          "seconds": 19.315,
+          "state": "needs_input",
+          "error_code": null,
+          "telemetry": {
+            "cost": null,
+            "first_useful_ms": 19308,
+            "model": "qwen3-4b-instruct",
+            "model_calls": 3,
+            "model_ms": 19299,
+            "prompt_version": "odin-request-9.7",
+            "provider": "llama_cpp",
+            "sources_ms": 0,
+            "tool_calls": [],
+            "total_ms": 19308,
+            "usage": {
+              "cached_tokens": 7284,
+              "completion_tokens": 90,
+              "evaluated_prompt_tokens": 170,
+              "generation_ms": 9275,
+              "prompt_ms": 9928,
+              "prompt_tokens": 7454,
+              "total_tokens": 7544
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case": "nature",
+      "messages": [
+        "Из Москвы хочется отдохнуть на природе. Предложи направления."
+      ],
+      "passed": true,
+      "allowed_ids": [
+        "altai",
+        "karelia",
+        "kislovodsk",
+        "murmansk",
+        "seliger",
+        "sochi_nature"
+      ],
+      "expected_count": [
+        2,
+        3
+      ],
+      "ids": [
+        "karelia",
+        "altai",
+        "seliger"
+      ],
+      "cards": [
+        {
+          "caveat": "Для уединения нужно выбирать окрестности, а не центр Сортавалы; доступность троп и лодочных маршрутов зависит от сезона.",
+          "destination": "Сортавала",
+          "id": "karelia",
+          "name": "Карелия",
+          "photo_key": "Сортавала",
+          "reason": "Сосновые леса и скалистые острова Ладожских шхер. Прогулки у озёр и по лесным берегам.",
+          "scene": "forest",
+          "source_url": "https://en.wikipedia.org/wiki/Ladoga_Skerries"
+        },
+        {
+          "caveat": "Сложность и сезонную доступность маршрутов нужно уточнять; размещение у троп не гарантировано.",
+          "destination": "Чемал",
+          "id": "altai",
+          "name": "Алтай",
+          "photo_key": "Чемал",
+          "reason": "Пешие маршруты и виды на слияние Чемала и Катуни.",
+          "scene": "mountains",
+          "source_url": "https://en.wikipedia.org/wiki/Chemal"
+        },
+        {
+          "caveat": "Для отдыха в лесу нужны окрестности Осташкова; уединение конкретного жилья проверяется отдельно.",
+          "destination": "Осташков",
+          "id": "seliger",
+          "name": "Селигер",
+          "photo_key": "Осташков",
+          "reason": "Озеро Селигер, острова и лесные берега. Прогулки у воды и загородный отдых.",
+          "scene": "forest",
+          "source_url": "https://en.wikipedia.org/wiki/Seliger"
+        }
+      ],
+      "answer": "По вашим пожеланиям можно рассмотреть: 1 — Карелия; 2 — Алтай; 3 — Селигер. Выберите направление — затем подберём размещение. Стоимость и возможность добраться ещё нужно проверить на ваши даты.",
+      "trip_spec": {
+        "budget": null,
+        "budget_period": "stay",
+        "budget_scope": null,
+        "checkin_date": null,
+        "country": null,
+        "dates": null,
+        "destination": null,
+        "duration_days": null,
+        "excluded_hotel_ids": [],
+        "expense_reserve": null,
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": null,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": false,
+        "locked_component_ids": [],
+        "locked_hotel_id": null,
+        "origin": "Москва",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "auto",
+        "transport_owned": false,
+        "travel_setting": "nature",
+        "travellers": {
+          "adults": null,
+          "children": []
+        },
+        "trip_budget": null
+      },
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 13254,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 2,
+        "model_ms": 13246,
+        "prompt_version": "odin-request-9.7",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 13254,
+        "usage": {
+          "cached_tokens": 4656,
+          "completion_tokens": 72,
+          "evaluated_prompt_tokens": 116,
+          "generation_ms": 7338,
+          "prompt_ms": 5847,
+          "prompt_tokens": 4772,
+          "total_tokens": 4844
+        }
+      },
+      "seconds": 13.275,
+      "steps": [
+        {
+          "method": "POST",
+          "route": "/api/sessions/",
+          "http_status": 200,
+          "seconds": 0.004,
+          "state": "needs_input",
+          "error_code": null
+        },
+        {
+          "method": "POST",
+          "route": "/api/sessions/099a6264500f2fe95249f153cb91d98e/turns",
+          "http_status": 200,
+          "seconds": 13.262,
+          "state": "needs_input",
+          "error_code": null,
+          "telemetry": {
+            "cost": null,
+            "first_useful_ms": 13254,
+            "model": "qwen3-4b-instruct",
+            "model_calls": 2,
+            "model_ms": 13246,
+            "prompt_version": "odin-request-9.7",
+            "provider": "llama_cpp",
+            "sources_ms": 0,
+            "tool_calls": [],
+            "total_ms": 13254,
+            "usage": {
+              "cached_tokens": 4656,
+              "completion_tokens": 72,
+              "evaluated_prompt_tokens": 116,
+              "generation_ms": 7338,
+              "prompt_ms": 5847,
+              "prompt_tokens": 4772,
+              "total_tokens": 4844
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case": "city_walks",
+      "messages": [
+        "Из Москвы хочу поехать погулять по красивому городу. Предложи направления."
+      ],
+      "passed": true,
+      "allowed_ids": [
+        "kaliningrad",
+        "kazan",
+        "kislovodsk",
+        "murmansk",
+        "nizhny",
+        "petersburg",
+        "sochi",
+        "vladimir",
+        "yaroslavl"
+      ],
+      "expected_count": [
+        2,
+        3
+      ],
+      "ids": [
+        "petersburg",
+        "kazan",
+        "yaroslavl"
+      ],
+      "cards": [
+        {
+          "caveat": "Доступность музеев и билетов проверяется на даты поездки; это большой город.",
+          "destination": "Санкт-Петербург",
+          "id": "petersburg",
+          "name": "Петербург",
+          "photo_key": "Санкт-Петербург",
+          "reason": "Каналы и прогулки по набережным.",
+          "scene": "city",
+          "source_url": "https://en.wikipedia.org/wiki/Saint_Petersburg"
+        },
+        {
+          "caveat": "Это городское направление; лес и уединение в центре не предполагаются.",
+          "destination": "Казань",
+          "id": "kazan",
+          "name": "Казань",
+          "photo_key": "Казань",
+          "reason": "Татарская культура и городские достопримечательности.",
+          "scene": "city",
+          "source_url": "https://en.wikipedia.org/wiki/Kazan"
+        },
+        {
+          "caveat": "Это городская поездка, а не отдых в диком лесу.",
+          "destination": "Ярославль",
+          "id": "yaroslavl",
+          "name": "Ярославль",
+          "photo_key": "yaroslavl",
+          "reason": "Прогулки по набережной Волги.",
+          "scene": "city",
+          "source_url": "https://en.wikipedia.org/wiki/Yaroslavl"
+        }
+      ],
+      "answer": "По вашим пожеланиям можно рассмотреть: 1 — Петербург; 2 — Казань; 3 — Ярославль. Выберите направление — затем подберём размещение. Стоимость и возможность добраться ещё нужно проверить на ваши даты.",
+      "trip_spec": {
+        "budget": null,
+        "budget_period": "stay",
+        "budget_scope": null,
+        "checkin_date": null,
+        "country": null,
+        "dates": null,
+        "destination": null,
+        "duration_days": null,
+        "excluded_hotel_ids": [],
+        "expense_reserve": null,
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": null,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": false,
+        "locked_component_ids": [],
+        "locked_hotel_id": null,
+        "origin": "Москва",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "auto",
+        "transport_owned": false,
+        "travel_setting": "city",
+        "travellers": {
+          "adults": null,
+          "children": []
+        },
+        "trip_budget": null
+      },
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 20697,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 2,
+        "model_ms": 20681,
+        "prompt_version": "odin-request-9.7",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 20697,
+        "usage": {
+          "cached_tokens": 4656,
+          "completion_tokens": 112,
+          "evaluated_prompt_tokens": 165,
+          "generation_ms": 13104,
+          "prompt_ms": 7512,
+          "prompt_tokens": 4821,
+          "total_tokens": 4933
+        }
+      },
+      "seconds": 20.722,
+      "steps": [
+        {
+          "method": "POST",
+          "route": "/api/sessions/",
+          "http_status": 200,
+          "seconds": 0.006,
+          "state": "needs_input",
+          "error_code": null
+        },
+        {
+          "method": "POST",
+          "route": "/api/sessions/1b657dbd9a4672500c0d089fb41200b5/turns",
+          "http_status": 200,
+          "seconds": 20.705,
+          "state": "needs_input",
+          "error_code": null,
+          "telemetry": {
+            "cost": null,
+            "first_useful_ms": 20697,
+            "model": "qwen3-4b-instruct",
+            "model_calls": 2,
+            "model_ms": 20681,
+            "prompt_version": "odin-request-9.7",
+            "provider": "llama_cpp",
+            "sources_ms": 0,
+            "tool_calls": [],
+            "total_ms": 20697,
+            "usage": {
+              "cached_tokens": 4656,
+              "completion_tokens": 112,
+              "evaluated_prompt_tokens": 165,
+              "generation_ms": 13104,
+              "prompt_ms": 7512,
+              "prompt_tokens": 4821,
+              "total_tokens": 4933
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case": "exclusions",
+      "messages": [
+        "Из Москвы хочу в лес, но не на Алтай, не на Селигер и не в Сочи."
+      ],
+      "passed": true,
+      "allowed_ids": [
+        "karelia"
+      ],
+      "expected_count": [
+        1,
+        1
+      ],
+      "ids": [
+        "karelia"
+      ],
+      "cards": [
+        {
+          "caveat": "Для уединения нужно выбирать окрестности, а не центр Сортавалы; доступность троп и лодочных маршрутов зависит от сезона.",
+          "destination": "Сортавала",
+          "id": "karelia",
+          "name": "Карелия",
+          "photo_key": "Сортавала",
+          "reason": "Сосновые леса и скалистые острова Ладожских шхер. Прогулки у озёр и по лесным берегам.",
+          "scene": "forest",
+          "source_url": "https://en.wikipedia.org/wiki/Ladoga_Skerries"
+        }
+      ],
+      "answer": "По вашим пожеланиям можно рассмотреть: 1 — Карелия. Выберите направление — затем подберём размещение. Стоимость и возможность добраться ещё нужно проверить на ваши даты.",
+      "trip_spec": {
+        "budget": null,
+        "budget_period": "stay",
+        "budget_scope": null,
+        "checkin_date": null,
+        "country": null,
+        "dates": null,
+        "destination": null,
+        "duration_days": null,
+        "excluded_hotel_ids": [],
+        "expense_reserve": null,
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": null,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": false,
+        "locked_component_ids": [],
+        "locked_hotel_id": null,
+        "origin": "Москва",
+        "owned_transport": null,
+        "preferences": [
+          "из москвы хочу в лес, но не на алтай, не на селигер и не в сочи"
+        ],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "auto",
+        "transport_owned": false,
+        "travel_setting": "forest",
+        "travellers": {
+          "adults": null,
+          "children": []
+        },
+        "trip_budget": null
+      },
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 12610,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 2,
+        "model_ms": 12608,
+        "prompt_version": "odin-request-9.7",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 12610,
+        "usage": {
+          "cached_tokens": 4657,
+          "completion_tokens": 54,
+          "evaluated_prompt_tokens": 126,
+          "generation_ms": 5865,
+          "prompt_ms": 6679,
+          "prompt_tokens": 4783,
+          "total_tokens": 4837
+        }
+      },
+      "seconds": 12.63,
+      "steps": [
+        {
+          "method": "POST",
+          "route": "/api/sessions/",
+          "http_status": 200,
+          "seconds": 0.005,
+          "state": "needs_input",
+          "error_code": null
+        },
+        {
+          "method": "POST",
+          "route": "/api/sessions/69cbe3a3f99df0e065be3415d8a41ff8/turns",
+          "http_status": 200,
+          "seconds": 12.616,
+          "state": "needs_input",
+          "error_code": null,
+          "telemetry": {
+            "cost": null,
+            "first_useful_ms": 12610,
+            "model": "qwen3-4b-instruct",
+            "model_calls": 2,
+            "model_ms": 12608,
+            "prompt_version": "odin-request-9.7",
+            "provider": "llama_cpp",
+            "sources_ms": 0,
+            "tool_calls": [],
+            "total_ms": 12610,
+            "usage": {
+              "cached_tokens": 4657,
+              "completion_tokens": 54,
+              "evaluated_prompt_tokens": 126,
+              "generation_ms": 5865,
+              "prompt_ms": 6679,
+              "prompt_tokens": 4783,
+              "total_tokens": 4837
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case": "nearby",
+      "messages": [
+        "Из Москвы на два дня к озеру, без самолётов и дальней дороги."
+      ],
+      "passed": true,
+      "allowed_ids": [
+        "seliger"
+      ],
+      "expected_count": [
+        1,
+        1
+      ],
+      "ids": [
+        "seliger"
+      ],
+      "cards": [
+        {
+          "caveat": "Для отдыха в лесу нужны окрестности Осташкова; уединение конкретного жилья проверяется отдельно. От города Москва около 317 км по прямой; время в пути ещё не проверено.",
+          "destination": "Осташков",
+          "id": "seliger",
+          "name": "Селигер",
+          "photo_key": "Осташков",
+          "reason": "Прогулки у воды и загородный отдых.",
+          "scene": "forest",
+          "source_url": "https://en.wikipedia.org/wiki/Seliger"
+        }
+      ],
+      "answer": "Из предложенных совпадений это ближайшее по расстоянию. Сколько времени вы готовы провести в дороге в одну сторону?",
+      "trip_spec": {
+        "budget": null,
+        "budget_period": "stay",
+        "budget_scope": null,
+        "checkin_date": null,
+        "country": null,
+        "dates": null,
+        "destination": null,
+        "duration_days": 2,
+        "excluded_hotel_ids": [],
+        "expense_reserve": null,
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": null,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": false,
+        "locked_component_ids": [],
+        "locked_hotel_id": null,
+        "origin": "Москва",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "auto",
+        "transport_owned": false,
+        "travel_setting": "nature",
+        "travellers": {
+          "adults": null,
+          "children": []
+        },
+        "trip_budget": null
+      },
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 22000,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 2,
+        "model_ms": 21990,
+        "prompt_version": "odin-request-9.7",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 22000,
+        "usage": {
+          "cached_tokens": 4656,
+          "completion_tokens": 117,
+          "evaluated_prompt_tokens": 171,
+          "generation_ms": 13642,
+          "prompt_ms": 8286,
+          "prompt_tokens": 4827,
+          "total_tokens": 4944
+        }
+      },
+      "seconds": 22.021,
+      "steps": [
+        {
+          "method": "POST",
+          "route": "/api/sessions/",
+          "http_status": 200,
+          "seconds": 0.004,
+          "state": "needs_input",
+          "error_code": null
+        },
+        {
+          "method": "POST",
+          "route": "/api/sessions/d9a13836bacd199535aba7a26da83710/turns",
+          "http_status": 200,
+          "seconds": 22.008,
+          "state": "needs_input",
+          "error_code": null,
+          "telemetry": {
+            "cost": null,
+            "first_useful_ms": 22000,
+            "model": "qwen3-4b-instruct",
+            "model_calls": 2,
+            "model_ms": 21990,
+            "prompt_version": "odin-request-9.7",
+            "provider": "llama_cpp",
+            "sources_ms": 0,
+            "tool_calls": [],
+            "total_ms": 22000,
+            "usage": {
+              "cached_tokens": 4656,
+              "completion_tokens": 117,
+              "evaluated_prompt_tokens": 171,
+              "generation_ms": 13642,
+              "prompt_ms": 8286,
+              "prompt_tokens": 4827,
+              "total_tokens": 4944
+            }
+          }
+        }
+      ]
+    },
+    {
+      "case": "specific_culture",
+      "messages": [
+        "Из Москвы хочу посмотреть каналы и дворцы. Куда поехать?"
+      ],
+      "passed": true,
+      "allowed_ids": [
+        "petersburg"
+      ],
+      "expected_count": [
+        1,
+        1
+      ],
+      "ids": [
+        "petersburg"
+      ],
+      "cards": [
+        {
+          "caveat": "Доступность музеев и билетов проверяется на даты поездки; это большой город.",
+          "destination": "Санкт-Петербург",
+          "id": "petersburg",
+          "name": "Петербург",
+          "photo_key": "Санкт-Петербург",
+          "reason": "Каналы и прогулки по набережным.",
+          "scene": "city",
+          "source_url": "https://en.wikipedia.org/wiki/Saint_Petersburg"
+        }
+      ],
+      "answer": "По вашим пожеланиям можно рассмотреть: 1 — Петербург. Выберите направление — затем подберём размещение. Стоимость и возможность добраться ещё нужно проверить на ваши даты.",
+      "trip_spec": {
+        "budget": null,
+        "budget_period": "stay",
+        "budget_scope": null,
+        "checkin_date": null,
+        "country": null,
+        "dates": null,
+        "destination": null,
+        "duration_days": null,
+        "excluded_hotel_ids": [],
+        "expense_reserve": null,
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": null,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": false,
+        "locked_component_ids": [],
+        "locked_hotel_id": null,
+        "origin": "Москва",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "auto",
+        "transport_owned": false,
+        "travel_setting": "city",
+        "travellers": {
+          "adults": null,
+          "children": []
+        },
+        "trip_budget": null
+      },
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 12583,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 2,
+        "model_ms": 12567,
+        "prompt_version": "odin-request-9.7",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 12583,
+        "usage": {
+          "cached_tokens": 4656,
+          "completion_tokens": 52,
+          "evaluated_prompt_tokens": 155,
+          "generation_ms": 5338,
+          "prompt_ms": 7164,
+          "prompt_tokens": 4811,
+          "total_tokens": 4863
+        }
+      },
+      "seconds": 12.605,
+      "steps": [
+        {
+          "method": "POST",
+          "route": "/api/sessions/",
+          "http_status": 200,
+          "seconds": 0.006,
+          "state": "needs_input",
+          "error_code": null
+        },
+        {
+          "method": "POST",
+          "route": "/api/sessions/e7bd01793e070002c9fb68c7e7566802/turns",
+          "http_status": 200,
+          "seconds": 12.589,
+          "state": "needs_input",
+          "error_code": null,
+          "telemetry": {
+            "cost": null,
+            "first_useful_ms": 12583,
+            "model": "qwen3-4b-instruct",
+            "model_calls": 2,
+            "model_ms": 12567,
+            "prompt_version": "odin-request-9.7",
+            "provider": "llama_cpp",
+            "sources_ms": 0,
+            "tool_calls": [],
+            "total_ms": 12583,
+            "usage": {
+              "cached_tokens": 4656,
+              "completion_tokens": 52,
+              "evaluated_prompt_tokens": 155,
+              "generation_ms": 5338,
+              "prompt_ms": 7164,
+              "prompt_tokens": 4811,
+              "total_tokens": 4863
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

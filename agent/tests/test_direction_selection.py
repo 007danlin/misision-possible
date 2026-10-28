@@ -10,17 +10,34 @@ from travel_agent.inspiration import (
     direction_options,
     resolve_directions,
     direction_choice,
+    proximity_requested,
 )
 from travel_agent.model import ModelError, QwenModel, Settings
 from travel_agent.runner import run_turn
 from test_agent import FakeModel
 
 
-def selection(*ids):
-    return {"choices": [{"id": id, "facts": [0]} for id in ids], "question": "none"}
+def selection(*ids, scope=None):
+    result = {"choices": [{"id": id, "facts": [0]} for id in ids], "question": "none"}
+    if scope is not None:
+        result["scope"] = scope
+    return result
 
 
 class DirectionValidationTests(unittest.TestCase):
+    def test_long_journey_exclusion_requires_distance_context(self):
+        self.assertTrue(proximity_requested("На два дня, без самолётов и дальней дороги"))
+        self.assertFalse(proximity_requested("Хочу лесные прогулки и озёра"))
+
+    def test_short_journey_is_enforced_when_model_omits_quote(self):
+        spec = TripSpec(origin="Москва", travel_setting="forest")
+        cards, question = resolve_directions(
+            json.dumps(selection("seliger", "karelia") | {"nearby_quote": ""}),
+            direction_options(spec), message="К озеру, без дальней дороги", spec=spec,
+        )
+        self.assertEqual([d["id"] for d in cards], ["seliger"])
+        self.assertTrue(question)
+
     def test_setting_and_country_are_hard_boundaries_independent_of_transport(self):
         for setting in ("forest", "nature", "mountains", "sea", "city"):
             for include_transport in (False, True):
@@ -50,6 +67,7 @@ class DirectionValidationTests(unittest.TestCase):
             selection("invented"),
             selection("kazan"),
             selection("karelia", "karelia"),
+            selection("karelia", scope="unknown"),
             {"choices": [{"id": "karelia", "facts": [999]}], "question": "none"},
             {"choices": [{"id": "karelia", "facts": [-1]}], "question": "none"},
             {"choices": [{"id": "karelia", "facts": [True]}], "question": "none"},
@@ -110,7 +128,7 @@ class DirectionValidationTests(unittest.TestCase):
     def test_origin_quote_does_not_imply_a_nearby_trip(self):
         spec = TripSpec(origin='Казань', travel_setting='sea')
         pool = direction_options(spec)
-        for quote in ('Из Казани', 'Хочу к морю'):
+        for quote in ('Из Казани', 'Хочу к морю', 'к морю из Казани'):
             cards, question = resolve_directions(
                 json.dumps(selection('sochi','anapa') | {'nearby_quote':quote}), pool,
                 message='Хочу к морю. Из Казани', spec=spec,
@@ -151,6 +169,73 @@ class DirectionDialogueTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(
             result.selection["direction_options"], result.destination_options
         )
+
+    async def test_single_match_searches_remaining_candidates_with_same_wishes(self):
+        class RecordingModel(FakeModel):
+            async def extract(self, context, repair, timeout):
+                if context.get("alternative_search"):
+                    self.alternatives = context
+                return await super().extract(context, repair, timeout)
+
+        for setting, first, others in [
+            ("forest", "karelia", ["seliger", "altai"]),
+            ("sea", "anapa", ["gelendzhik", "sochi"]),
+            ("city", "kazan", ["yaroslavl", "nizhny"]),
+        ]:
+            with self.subTest(setting=setting):
+                model = RecordingModel({}, selection(first, scope="broad"), selection(*others))
+                state = State(search_mode="hotels", history=["Люблю прогулки"],
+                              trip_spec=TripSpec(origin="Москва", travel_setting=setting,
+                                                 preferences=["без перелётов"]))
+                turn = await run_turn(state, "Предложи направления", DemoTools(), model)
+                self.assertEqual([d["id"] for d in turn.destination_options], [first, *others])
+                self.assertEqual(model.calls, 3)
+                self.assertNotIn(first, {d["id"] for d in model.alternatives["candidates"]})
+                self.assertEqual(model.alternatives["trip_spec"]["preferences"], ["без перелётов"])
+                self.assertEqual(model.alternatives["history"], state.history)
+                self.assertIn(first, model.alternatives["previous_choices"])
+                self.assertTrue(all(d["country"] == "Россия" for d in model.alternatives["candidates"]))
+
+    async def test_no_padding_or_loss_of_valid_answer_when_alternatives_fail(self):
+        for alternative in [
+            {"choices": [], "question": "coverage"},
+            selection("karelia"),  # Duplicate is outside the remaining pool.
+            selection("atlantis"),
+            ModelError("model_timeout"),
+            TimeoutError(),
+        ]:
+            with self.subTest(alternative=str(alternative)):
+                model = FakeModel({}, selection("karelia", scope="broad"), alternative)
+                turn = await run_turn(State(search_mode="hotels", trip_spec=TripSpec(
+                    origin="Москва", travel_setting="forest")),
+                    "Предложи направления", DemoTools(), model)
+                self.assertEqual([d["id"] for d in turn.destination_options], ["karelia"])
+                self.assertEqual(model.calls, 3)
+
+    async def test_two_suitable_matches_do_not_trigger_an_extra_call(self):
+        model = FakeModel({}, selection("karelia", "seliger", scope="broad"))
+        turn = await run_turn(State(search_mode="hotels", trip_spec=TripSpec(
+            origin="Москва", travel_setting="forest")),
+            "Предложи направления", DemoTools(), model)
+        self.assertEqual(len(turn.destination_options), 2)
+        self.assertEqual(model.calls, 2)
+
+    async def test_nearly_exhausted_deadline_keeps_the_valid_first_match(self):
+        model = FakeModel({}, selection("karelia", scope="broad"))
+        turn = await run_turn(State(search_mode="hotels", trip_spec=TripSpec(
+            origin="Москва", travel_setting="forest")),
+            "Предложи направления", DemoTools(), model, timeout=0.5)
+        self.assertEqual([d["id"] for d in turn.destination_options], ["karelia"])
+        self.assertEqual(model.calls, 2)
+
+    async def test_constrained_or_nearby_requests_do_not_expand_the_shortlist(self):
+        for scope, message in [("constrained", "Хочу каналы и дворцы"),
+                               ("broad", "Не хочу дальней дороги")]:
+            model = FakeModel({}, selection("petersburg", scope=scope))
+            turn = await run_turn(State(search_mode="hotels", trip_spec=TripSpec(
+                origin="Москва", travel_setting="city")), message, DemoTools(), model)
+            self.assertEqual([d["id"] for d in turn.destination_options], ["petersburg"])
+            self.assertEqual(model.calls, 2)
 
     async def test_invalid_selection_never_falls_back_to_fixed_trio(self):
         model = FakeModel({}, selection("atlantis"))

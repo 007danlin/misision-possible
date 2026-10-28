@@ -465,6 +465,54 @@ async def run_turn(
                         metrics.model_ms += round((time.monotonic() - model_start) * 1000)
                     for key, value in usage.items():
                         metrics.usage[key] = metrics.usage.get(key, 0) + value
+                    # A valid single answer is not proof that no alternatives fit.
+                    # Give the model one bounded chance to compare the remaining
+                    # catalogue under exactly the same wishes. Never pad with IDs
+                    # chosen by code, and retain the valid first answer on failure.
+                    remaining_candidates = [
+                        d for d in candidates
+                        if d["id"] not in {item["id"] for item in directions}
+                    ]
+                    # Additional ideas must not silently expand a domestic
+                    # shortlist abroad when no other country was requested.
+                    selected_countries = {
+                        d["country"] for d in candidates
+                        if d["id"] in {item["id"] for item in directions}
+                    }
+                    if not spec.country and selected_countries == {"Россия"}:
+                        remaining_candidates = [d for d in remaining_candidates if d["country"] == "Россия"]
+                    remaining = budget - (time.monotonic() - start) - 1
+                    from .inspiration import proximity_requested
+
+                    short_travel = proximity_requested(" ".join([message, *state.history, *spec.preferences]))
+                    broad_request = json.loads(raw).get("scope") == "broad"
+                    if (broad_request and not short_travel and len(directions) == 1
+                            and not question and remaining_candidates and remaining > 1):
+                        alternative_context = direction_context(
+                            spec, message, state.history,
+                            [*state.selection.get("direction_options", []), *directions],
+                            remaining_candidates,
+                        )
+                        alternative_context["alternative_search"] = True
+                        metrics.model_calls += 1
+                        model_start = time.monotonic()
+                        try:
+                            async with asyncio.timeout(remaining):
+                                alternative_raw, alternative_usage = await model.extract(
+                                    alternative_context, None, remaining,
+                                )
+                            for key, value in alternative_usage.items():
+                                metrics.usage[key] = metrics.usage.get(key, 0) + value
+                            alternatives, alternative_question = resolve_directions(
+                                alternative_raw, remaining_candidates,
+                                message=message, spec=spec, history=state.history[-5:],
+                            )
+                            if alternatives and not alternative_question:
+                                directions = [*directions, *alternatives[:2]]
+                        except (ModelError, TimeoutError):
+                            pass
+                        finally:
+                            metrics.model_ms += round((time.monotonic() - model_start) * 1000)
                     return result(
                         "needs_input", question or inspiration_text(spec, directions),
                         questions=[question] if question else [],

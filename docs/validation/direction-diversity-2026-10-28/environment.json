@@ -1,0 +1,26 @@
+{
+  "model": "Qwen3-4B-Instruct-2507 Q4_K_M",
+  "provider": "llama_cpp",
+  "prompt_version": "odin-request-9.7",
+  "base_commit": "4834cd205c6cc5757931ec1e96f7104a4a917109",
+  "source_sha256": {
+    "agent/travel_agent/model.py": "a7ada2f650df3689c8cbdf3057774389db7a13f158a4a2928228d3094f1584b3",
+    "agent/travel_agent/inspiration.py": "e48d52cfb1f67d788cf096e3a6f06ca8dc09b13af6f470ff1a552625141be878",
+    "agent/travel_agent/runner.py": "e7a56fe7d6944206e6c7f8a0158ea6128007d39a3c31d32daaeaecf619b764e1",
+    "agent/travel_agent/grounding.py": "20a1c070caf35f0f1f49eaede23bf6112cec924c220c144fd4259b408f4b5454"
+  },
+  "runtime_sources_match": true,
+  "images": {
+    "agent": {
+      "image_id": "sha256:39c5b722f1779d34c7f956104e86b5e12937a3719068990ff07ad0b731f114a8",
+      "architecture": "arm64",
+      "os": "linux"
+    },
+    "model": {
+      "image_id": "sha256:07674b46c26c5586ccf3bb939ce3d33bc51bdb6131d0c032af704308dcd646df",
+      "architecture": "arm64",
+      "os": "linux"
+    }
+  },
+  "cold_start_measurement": false
+}

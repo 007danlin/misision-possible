@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 import httpx
 
 
-PROMPT_VERSION = "odin-request-9.6"
+PROMPT_VERSION = "odin-request-9.7"
 SYSTEM_PROMPT = """Extract ONLY the travel requirements explicitly stated in the NEW user message. Return one compact JSON object. Previous trip state is reference data, never a new request. Preserve all untouched requirements by omitting them.
 
 Allowed top-level fields (omit unknown/unchanged fields, never add null/defaults):
@@ -371,8 +371,17 @@ class QwenModel:
             ) + ('\nChoose ONLY IDs in eligible. Never use other catalogue entries. '
                  'Match the requested activities before considering distance. '
                  'A river embankment does not satisfy canals; churches do not satisfy palaces. '
-                 'Prefer the place whose facts support ALL requested themes. '
-                 'Do not favour a closer but weaker match unless the user requested short travel.')
+                 'Every selected place must satisfy ALL specific requested features, not merely one. '
+                 'Do not favour a closer but weaker match unless the user requested short travel. '
+                 'For broad wishes, select TWO OR THREE suitable eligible IDs, not just the best one. '
+                 'Compare all eligible candidates before stopping. Forest, nature, mountains, sea, '
+                 'or city walks alone are broad wishes. An origin-only follow-up keeps that broad wish. '
+                 'Return one only if the user constraints leave no suitable alternative; '
+                 'never violate exclusions or invent facts to fill the list. '
+                 'Before counting alternatives, classify scope from the ACTUAL wishes, not travel_setting. '
+                 'Specific combined features such as canals AND palaces are constrained, not general city walks. '
+                 'A place with palaces but no canals is NOT an alternative for that request. '
+                 'For constrained requests, return only fully matching places, even just one.')
             state.pop("candidates", None)
             proximity = proximity_requested(' '.join([
                 context['message'], *context.get('history', []),

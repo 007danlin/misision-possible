@@ -17,6 +17,18 @@ class GroundingTests(unittest.TestCase):
         fixed = ground_intent(i, message, old)
         return apply_intent(old, fixed, message), fixed
 
+    def test_short_destination_exclusions_survive_origin_followup(self):
+        from travel_agent.inspiration import direction_options
+        from travel_agent.grounding import rejected_destination
+
+        message = "Хочу в лес, но не на Алтай, не на Селигер и не в Сочи."
+        spec, _ = self.apply(message, {"travel_setting": "forest"}, previous=TripSpec())
+        self.assertTrue(spec.preferences)
+        spec, _ = self.apply("Из Москвы", {"origin": "Москва"}, previous=spec)
+        self.assertEqual([d["id"] for d in direction_options(spec)], ["karelia"])
+        for text in ("Не только на Алтай", "Хочу на Алтай, не в город", "На Алтай не самолётом"):
+            self.assertIsNone(rejected_destination(text, "Алтай"))
+
     def test_unrelated_restrictions_cannot_leak_from_defaults(self):
         s, _ = self.apply(
             "Требуется бесплатная отмена",

@@ -1,0 +1,253 @@
+[
+  {
+    "message": "Хочу на природу, в лес. Дикая природа.",
+    "response": {
+      "assistant_message": "Из какого города отправляетесь?",
+      "booking": null,
+      "change_preview": null,
+      "checkout_allowed": false,
+      "data_mode": "synthetic",
+      "destination_options": [],
+      "error_code": null,
+      "history": [
+        "Хочу на природу, в лес. Дикая природа."
+      ],
+      "hotel_options": [],
+      "journey_preview": null,
+      "journey_recovery": null,
+      "messages": [
+        {
+          "role": "user",
+          "text": "Хочу на природу, в лес. Дикая природа."
+        },
+        {
+          "role": "assistant",
+          "text": "Из какого города отправляетесь?"
+        }
+      ],
+      "options": [],
+      "questions": [
+        "Из какого города отправляетесь?"
+      ],
+      "request_id": "53f5f86fd8fbe2c721b6874bb05c2da9",
+      "revision": 1,
+      "schema_version": "0.2",
+      "search_mode": "hotels",
+      "search_title": "Хочу на природу, в лес. Дикая природа.",
+      "search_url": null,
+      "selected_hotel": null,
+      "selected_plan": null,
+      "selection": {
+        "pending_origin_request": "Хочу на природу, в лес. Дикая природа."
+      },
+      "session_id": "60d7dff4cee8c0a44789bc8e35ddb918",
+      "status": "needs_input",
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 18,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 0,
+        "model_ms": 0,
+        "prompt_version": "odin-request-9.6",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 18,
+        "usage": {}
+      },
+      "trip_spec": {
+        "budget": null,
+        "budget_period": "stay",
+        "budget_scope": null,
+        "checkin_date": null,
+        "country": null,
+        "dates": null,
+        "destination": null,
+        "duration_days": null,
+        "excluded_hotel_ids": [],
+        "expense_reserve": null,
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": null,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": false,
+        "locked_component_ids": [],
+        "locked_hotel_id": null,
+        "origin": null,
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "auto",
+        "transport_owned": false,
+        "travel_setting": "any",
+        "travellers": {
+          "adults": null,
+          "children": []
+        },
+        "trip_budget": null
+      }
+    }
+  },
+  {
+    "message": "Отправляемся из Москвы",
+    "response": {
+      "assistant_message": "По вашим пожеланиям можно рассмотреть: 1 — Карелия. Выберите направление — затем подберём размещение. Стоимость и возможность добраться ещё нужно проверить на ваши даты.",
+      "booking": null,
+      "change_preview": null,
+      "checkout_allowed": false,
+      "data_mode": "public_catalogue_demo_rates",
+      "destination_options": [
+        {
+          "caveat": "Для уединения нужно выбирать окрестности, а не центр Сортавалы; доступность троп и лодочных маршрутов зависит от сезона.",
+          "destination": "Сортавала",
+          "id": "karelia",
+          "name": "Карелия",
+          "photo_key": "Сортавала",
+          "reason": "Сосновые леса и скалистые острова Ладожских шхер.",
+          "scene": "forest",
+          "source_url": "https://en.wikipedia.org/wiki/Ladoga_Skerries"
+        }
+      ],
+      "error_code": null,
+      "history": [
+        "Хочу на природу, в лес. Дикая природа.",
+        "Отправляемся из Москвы"
+      ],
+      "hotel_options": [],
+      "journey_preview": null,
+      "journey_recovery": null,
+      "messages": [
+        {
+          "role": "user",
+          "text": "Хочу на природу, в лес. Дикая природа."
+        },
+        {
+          "role": "assistant",
+          "text": "Из какого города отправляетесь?"
+        },
+        {
+          "role": "user",
+          "text": "Отправляемся из Москвы"
+        },
+        {
+          "role": "assistant",
+          "text": "По вашим пожеланиям можно рассмотреть: 1 — Карелия. Выберите направление — затем подберём размещение. Стоимость и возможность добраться ещё нужно проверить на ваши даты."
+        }
+      ],
+      "options": [],
+      "questions": [],
+      "request_id": "c27263cc485cd87c1aa53679f4df73a6",
+      "revision": 2,
+      "schema_version": "0.2",
+      "search_mode": "hotels",
+      "search_title": "Хочу на природу, в лес. Дикая природа.",
+      "search_url": null,
+      "selected_hotel": null,
+      "selected_plan": null,
+      "selection": {
+        "direction_options": [
+          {
+            "caveat": "Для уединения нужно выбирать окрестности, а не центр Сортавалы; доступность троп и лодочных маршрутов зависит от сезона.",
+            "destination": "Сортавала",
+            "id": "karelia",
+            "name": "Карелия",
+            "photo_key": "Сортавала",
+            "reason": "Сосновые леса и скалистые острова Ладожских шхер.",
+            "scene": "forest",
+            "source_url": "https://en.wikipedia.org/wiki/Ladoga_Skerries"
+          }
+        ]
+      },
+      "session_id": "60d7dff4cee8c0a44789bc8e35ddb918",
+      "status": "needs_input",
+      "telemetry": {
+        "cost": null,
+        "first_useful_ms": 10790,
+        "model": "qwen3-4b-instruct",
+        "model_calls": 2,
+        "model_ms": 10754,
+        "prompt_version": "odin-request-9.6",
+        "provider": "llama_cpp",
+        "sources_ms": 0,
+        "tool_calls": [],
+        "total_ms": 10790,
+        "usage": {
+          "cached_tokens": 4162,
+          "completion_tokens": 47,
+          "evaluated_prompt_tokens": 209,
+          "generation_ms": 3557,
+          "prompt_ms": 7141,
+          "prompt_tokens": 4371,
+          "total_tokens": 4418
+        }
+      },
+      "trip_spec": {
+        "budget": null,
+        "budget_period": "stay",
+        "budget_scope": null,
+        "checkin_date": null,
+        "country": null,
+        "dates": null,
+        "destination": null,
+        "duration_days": null,
+        "excluded_hotel_ids": [],
+        "expense_reserve": null,
+        "hard_constraints": {
+          "free_cancellation": false,
+          "no_connections": false,
+          "no_night_flights": false,
+          "no_night_travel": false,
+          "other": [],
+          "pets": false
+        },
+        "hotel_budget": null,
+        "hotel_preferences": {
+          "breakfast": null,
+          "fitness": null,
+          "max_beach_m": null,
+          "max_center_m": null,
+          "min_rating": null,
+          "min_stars": null,
+          "parking": null,
+          "pool": null,
+          "spa": null
+        },
+        "include_transport": true,
+        "keep_hotel": false,
+        "locked_component_ids": [],
+        "locked_hotel_id": null,
+        "origin": "Москва",
+        "owned_transport": null,
+        "preferences": [],
+        "stay_nights": null,
+        "transfer_provider": "estimate",
+        "transport_mode": "auto",
+        "transport_owned": false,
+        "travel_setting": "forest",
+        "travellers": {
+          "adults": null,
+          "children": []
+        },
+        "trip_budget": null
+      }
+    }
+  }
+]
