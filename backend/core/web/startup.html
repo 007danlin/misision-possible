@@ -3,7 +3,7 @@
 <main><div class="brand">Островок · О!План</div><h1>Готовим помощника к работе</h1><p>Первый запуск занимает больше времени: скачиваем модель и подготавливаем её. Всё произойдёт автоматически.</p><ol><li id="step-download" class="active">Загрузка модели</li><li id="step-verify">Проверка и запуск</li><li id="step-warmup">Подготовка первого ответа</li></ol><div role="status" aria-live="polite"><div id="message">Подключаемся к сервисам…</div><progress id="bar" max="100" aria-label="Прогресс загрузки"></progress><div id="numbers"></div></div><p id="error" hidden></p><small>Можно оставить эту вкладку открытой — приложение появится само. Скачанная модель сохранится для следующих запусков.</small></main>
 <script>
 const $=id=>document.getElementById(id),started=Date.now();let failures=0,stopped=false;
-const rate=n=>(n/1e6).toLocaleString('ru-RU',{maximumFractionDigits:1}),mb=n=>(n/1e6).toLocaleString('ru-RU',{maximumFractionDigits:0}),elapsed=()=>Math.floor((Date.now()-started)/60000)+' мин '+Math.floor((Date.now()-started)/1000%60)+' с';
+const rate=n=>(n/1e6).toLocaleString('ru-RU',{maximumFractionDigits:1}),gb=n=>(n/1e9).toLocaleString('ru-RU',{minimumFractionDigits:2,maximumFractionDigits:2}),elapsed=()=>Math.floor((Date.now()-started)/60000)+' мин '+Math.floor((Date.now()-started)/1000%60)+' с';
 async function poll(){
  if(stopped)return;
  try{const response=await fetch('/api/runtime/status',{cache:'no-store',signal:AbortSignal.timeout(5000)});if(!response.ok)throw Error('status');const s=await response.json();failures=0;
@@ -11,8 +11,14 @@ async function poll(){
  $('message').textContent=s.message||'Подготавливаем сервисы';
  const phase=s.phase,index=phase==='warmup'?2:['verifying','loading','weights_ready'].includes(phase)?1:0;
  ['download','verify','warmup'].forEach((name,i)=>{$('step-'+name).className=i<index?'done':i===index?'active':''});
- if(['downloading','verifying'].includes(phase)&&s.total_bytes){$('bar').value=s.percent||0;$('numbers').textContent=(s.percent||0).toFixed(1)+'% · '+mb(s.downloaded_bytes||0)+' / '+mb(s.total_bytes)+' МБ'+(s.bytes_per_second>0?' · '+rate(s.bytes_per_second)+' МБ/с':'')+' · '+elapsed()}
- else{$('bar').removeAttribute('value');$('numbers').textContent='Прошло '+elapsed()}
+ const total=Number(s.total_bytes),received=Math.max(0,Number(s.downloaded_bytes)||0),hasTotal=Number.isFinite(total)&&total>0;
+ const percent=hasTotal?Math.min(100,received/total*100):null,measuring=['downloading','retrying','verifying'].includes(phase);
+ $('bar').setAttribute('aria-label',phase==='verifying'?'Прогресс проверки модели':measuring?'Прогресс скачивания модели':'Подготовка модели');
+ if(measuring&&hasTotal)$('bar').value=percent;else $('bar').removeAttribute('value');
+ if(hasTotal){
+  const label=phase==='verifying'?'Проверено':received>=total?'Модель скачана':'Скачано';
+  $('numbers').textContent=label+': '+percent.toLocaleString('ru-RU',{maximumFractionDigits:1})+'% · '+gb(Math.min(received,total))+' / '+gb(total)+' ГБ'+(phase==='downloading'&&s.bytes_per_second>0?' · '+rate(s.bytes_per_second)+' МБ/с':'');
+ }else $('numbers').textContent=received>0?'Скачано: '+gb(received)+' ГБ · общий объём уточняется':'Прошло '+elapsed();
  $('error').hidden=phase!=='error';$('error').textContent='Не удалось загрузить модель. Автоматические повторы включены. Если ошибка сохраняется, подробности: docker compose logs model.';
  }catch(e){failures++;$('message').textContent=failures>2?'Связь с сервисами прервалась. Пробуем подключиться снова…':'Подключаемся к сервисам…';$('bar').removeAttribute('value')}
  setTimeout(poll,2000)

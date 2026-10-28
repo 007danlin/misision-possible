@@ -18,12 +18,16 @@ const run=promisify(execFile),sleep=ms=>new Promise(r=>setTimeout(r,ms));
   for(let i=0;i<50;i++){try{await fetch('http://127.0.0.1:'+port+'/health');break}catch{await sleep(100)}}
   browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
   const p=await browser.newPage({viewport:{width:1440,height:900}}),errors=[];p.on('pageerror',e=>errors.push(e.message));
-  await p.goto('http://127.0.0.1:'+port+'/plan.html');await p.getByText(/21.7%/).waitFor();assert.equal(await p.locator('progress').getAttribute('value'),'21.73');
+  await p.goto('http://127.0.0.1:'+port+'/plan.html');await p.getByText(/21,7% · 1,23 \/ 5,68 ГБ/).waitFor();assert.ok(Math.abs(Number(await p.locator('progress').getAttribute('value'))-21.733)<.01);
+  await p.reload();await p.getByText(/21,7% · 1,23 \/ 5,68 ГБ/).waitFor();
   assert.equal((await p.request.post('http://127.0.0.1:'+port+'/api/sessions/',{data:{}})).status(),503);
   await p.screenshot({path:path.join(out,'download-desktop.png')});await p.setViewportSize({width:390,height:844});await p.screenshot({path:path.join(out,'download-mobile.png')});assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
-  fs.writeFileSync(status,JSON.stringify({phase:'loading',message:'Загружаем модель в память'}));await p.getByText('Загружаем модель в память').waitFor();assert.equal(await p.locator('progress').getAttribute('value'),null);
-  healthy=true;await p.locator('#send').waitFor();assert.equal(await p.title(),'О!План — ваша поездка с Островком');assert.deepEqual(errors,[]);
-  fs.writeFileSync(path.join(out,'report.json'),JSON.stringify({passed:true,fixture:true,checks:['download bytes and percent','mobile layout','trip API blocked before readiness','loading phase indeterminate','automatic navigation after model and agent readiness','no JS errors']},null,2));
+  fs.writeFileSync(status,JSON.stringify({phase:'downloading',message:'Скачиваем модель',downloaded_bytes:1234567890}));await p.getByText('Скачано: 1,23 ГБ · общий объём уточняется').waitFor();assert.equal(await p.locator('progress').getAttribute('value'),null);
+  fs.writeFileSync(status,JSON.stringify({phase:'verifying',message:'Проверяем целостность модели',downloaded_bytes:2500000000,total_bytes:5000000000}));await p.getByText('Проверено: 50% · 2,50 / 5,00 ГБ').waitFor();
+  fs.writeFileSync(status,JSON.stringify({phase:'loading',message:'Загружаем модель в память',downloaded_bytes:2500000000,total_bytes:2500000000}));await p.getByText('Загружаем модель в память').waitFor();assert.equal(await p.locator('progress').getAttribute('value'),null);await p.getByText('Модель скачана: 100% · 2,50 / 2,50 ГБ').waitFor();
+  await p.reload();await p.getByText('Модель скачана: 100% · 2,50 / 2,50 ГБ').waitFor();
+  healthy=true;await p.locator('#send').waitFor();assert.equal(await p.title(),'О!План — ваша поездка с Островком');await p.reload();await p.locator('#send').waitFor();assert.equal(await p.getByRole('heading',{name:'Готовим помощника к работе'}).count(),0);assert.deepEqual(errors,[]);
+  fs.writeFileSync(path.join(out,'report.json'),JSON.stringify({passed:true,fixture:true,checks:['download percent and decimal GB','unknown total indeterminate','verification separate from download','cached bytes retained during loading','refresh during download and loading','refresh after automatic navigation','mobile layout','trip API blocked before readiness','loading phase indeterminate','automatic navigation after model and agent readiness','no JS errors']},null,2));
   console.log('PASS startup UI: real Core, health fixtures, live progress, API guard, mobile, automatic navigation');
  }finally{if(browser)await browser.close();if(core)core.kill('SIGTERM');python.kill('SIGTERM');if(model)await new Promise(r=>model.close(r));fs.rmSync(tmp,{recursive:true,force:true})}
 })().catch(e=>{console.error(e);process.exitCode=1});

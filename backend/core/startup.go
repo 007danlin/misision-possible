@@ -63,7 +63,7 @@ func (s *API) startupHandler(next http.Handler) http.Handler {
 		}
 		current.Phase = "warmup"
 		current.Message = "Прогреваем модель перед первым запросом"
-		current.Percent = 0
+		// Byte progress describes the weights, not inference warmup readiness.
 		current.BytesPerSecond = 0
 		check, cancel := context.WithTimeout(ctx, time.Second)
 		defer cancel()

@@ -1,0 +1,43 @@
+{
+  "mocked": false,
+  "phases": [
+    {
+      "seconds": 2.97,
+      "phase": "loading",
+      "message": "Загружаем модель в память",
+      "ready": false,
+      "downloaded_bytes": 2497281120,
+      "total_bytes": 2497281120,
+      "percent": 100,
+      "attempt": 1
+    },
+    {
+      "seconds": 28.214,
+      "phase": "warmup",
+      "message": "Прогреваем модель перед первым запросом",
+      "ready": false,
+      "downloaded_bytes": 2497281120,
+      "total_bytes": 2497281120,
+      "attempt": 1
+    },
+    {
+      "seconds": 121.206,
+      "phase": "ready",
+      "message": "Всё готово",
+      "ready": true
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "real cached model size in GB",
+    "mobile has no overflow",
+    "reload during startup",
+    "automatic entry into real application",
+    "two reloads after readiness",
+    "saved booking, route and total survive container restart and reload",
+    "PDF after restart",
+    "direct entry in another tab"
+  ],
+  "ready_seconds": 121.292,
+  "passed": true
+}

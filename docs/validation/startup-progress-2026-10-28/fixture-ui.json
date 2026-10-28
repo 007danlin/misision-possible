@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "fixture": true,
+  "checks": [
+    "download percent and decimal GB",
+    "unknown total indeterminate",
+    "verification separate from download",
+    "cached bytes retained during loading",
+    "refresh during download and loading",
+    "refresh after automatic navigation",
+    "mobile layout",
+    "trip API blocked before readiness",
+    "loading phase indeterminate",
+    "automatic navigation after model and agent readiness",
+    "no JS errors"
+  ]
+}

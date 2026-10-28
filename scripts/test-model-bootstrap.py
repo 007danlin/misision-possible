@@ -51,6 +51,16 @@ class BootstrapTests(unittest.TestCase):
         self.path.with_suffix('.gguf.verified.json').write_text('broken')
         self.assertTrue(b.verified(self.path, self.model))
 
+    def test_cached_weights_report_full_size_after_restart(self):
+        self.path.write_bytes(self.data)
+        with patch.object(b.urllib.request, 'urlopen', side_effect=AssertionError('no download for cached model')):
+            self.assertEqual(b.ensure_weights(self.path, self.lock), 'verified_cache')
+        status = json.loads(Path(os.environ['MODEL_STATUS_FILE']).read_text())
+        self.assertEqual(status['phase'], 'weights_ready')
+        self.assertEqual(status['downloaded_bytes'], len(self.data))
+        self.assertEqual(status['total_bytes'], len(self.data))
+        self.assertEqual(status['percent'], 100)
+
     def test_download_verified_during_stream_and_atomically_promoted(self):
         with patch.object(b.urllib.request, 'urlopen', return_value=Response(self.data)), patch.object(b, 'hash_file', side_effect=AssertionError('do not reread download')):
             self.assertEqual(b.ensure_weights(self.path, self.lock), 'downloaded_and_verified')
@@ -89,6 +99,27 @@ class BootstrapTests(unittest.TestCase):
         with patch.object(b.urllib.request, 'urlopen', side_effect=AssertionError('no network needed')):
             b.ensure_weights(self.path, self.lock)
         self.assertEqual(self.path.read_bytes(), self.data)
+        status = json.loads(Path(os.environ['MODEL_STATUS_FILE']).read_text())
+        self.assertEqual(status['phase'], 'weights_ready')
+        self.assertEqual(status['percent'], 100)
+
+    def test_loading_keeps_completed_download_size(self):
+        self.path.write_bytes(self.data)
+        original_read = Path.read_text
+        def read(path, *args, **kwargs):
+            if str(path) == '/runtime/model-lock.json':
+                return json.dumps(self.lock)
+            return original_read(path, *args, **kwargs)
+        # Point main at the existing test model without touching real /models.
+        self.lock['model_files'][0]['file'] = str(self.path)
+        with patch.object(Path, 'read_text', read), patch.object(b.os, 'execv') as execute:
+            b.main()
+        execute.assert_called_once()
+        status = json.loads(Path(os.environ['MODEL_STATUS_FILE']).read_text())
+        self.assertEqual(status['phase'], 'loading')
+        self.assertEqual(status['downloaded_bytes'], len(self.data))
+        self.assertEqual(status['total_bytes'], len(self.data))
+        self.assertEqual(status['percent'], 100)
 
     def test_network_failure_is_bounded_and_reports_error(self):
         with patch.object(b.urllib.request, 'urlopen', side_effect=OSError('offline')) as request, patch.object(b.time, 'sleep'):

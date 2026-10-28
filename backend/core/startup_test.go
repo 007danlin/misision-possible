@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	pb "core/proto"
+	"encoding/json"
 	"errors"
 	"google.golang.org/grpc"
 	"net/http"
@@ -101,5 +102,26 @@ func TestHealthyAgentDoesNotHideUnavailableModel(t *testing.T) {
 	api.Handler().ServeHTTP(r, httptest.NewRequest("GET", "/ready", nil))
 	if r.Code != 503 || !strings.Contains(r.Body.String(), `"ready":false`) {
 		t.Fatalf("unavailable model accepted: %d %s", r.Code, r.Body.String())
+	}
+}
+
+func TestWarmupPreservesDownloadedBytesWithoutClaimingReadiness(t *testing.T) {
+	file := filepath.Join(t.TempDir(), "model.json")
+	if err := os.WriteFile(file, []byte(`{"phase":"loading","downloaded_bytes":2500000000,"total_bytes":2500000000,"percent":100}`), 0600); err != nil {
+		t.Fatal(err)
+	}
+	t.Setenv("MODEL_STATUS_FILE", file)
+	model := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { w.WriteHeader(200) }))
+	defer model.Close()
+	t.Setenv("MODEL_HEALTH_URL", model.URL)
+	api := NewAPI("", &http.Client{}, &startupAgent{})
+	r := httptest.NewRecorder()
+	api.Handler().ServeHTTP(r, httptest.NewRequest("GET", "/api/runtime/status", nil))
+	var status startupStatus
+	if err := json.Unmarshal(r.Body.Bytes(), &status); err != nil {
+		t.Fatal(err)
+	}
+	if status.Ready || status.Phase != "warmup" || status.Downloaded != 2500000000 || status.Total != 2500000000 || status.Percent != 100 {
+		t.Fatalf("lost download progress or premature readiness: %+v", status)
 	}
 }

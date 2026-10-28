@@ -67,7 +67,7 @@ def hash_file(path, total):
 def ensure_weights(target, lock):
     model = lock['model_files'][0]
     if verified(target, model):
-        report('weights_ready', 'Модель найдена в кэше, повторное скачивание не нужно')
+        report('weights_ready', 'Модель найдена в кэше, повторное скачивание не нужно', model['size_bytes'], model['size_bytes'])
         return 'verified_cache'
     url = ('https://huggingface.co/' + lock['quantization_repository'] + '/resolve/'
            + lock['model_revision'] + '/' + model['file'])
@@ -85,6 +85,7 @@ def ensure_weights(target, lock):
             if digest.hexdigest() == model['sha256']:
                 part.replace(target)
                 mark_verified(target, model)
+                report('weights_ready', 'Модель загружена, контрольная сумма совпала', total, total)
                 return 'downloaded_and_verified'
             part.unlink()
             offset = 0
@@ -143,7 +144,7 @@ def main():
         report('error', 'Не удалось подготовить модель. Подробности в docker compose logs model.')
         raise
     print(json.dumps({'phase':'weights_ready','source':source,'seconds':round(time.monotonic()-started,3)}), flush=True)
-    report('loading', 'Загружаем модель в память')
+    report('loading', 'Загружаем модель в память', target.stat().st_size, lock['model_files'][0]['size_bytes'])
     threads = str(max(1, int(os.getenv('MODEL_THREADS', '4'))))
     os.execv('/runtime/llama-server', [
         'llama-server', '-m', str(target), '--host', '0.0.0.0', '--port', '8082',
